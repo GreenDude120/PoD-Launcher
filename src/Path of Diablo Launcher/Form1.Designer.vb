@@ -31,13 +31,14 @@ Partial Class Form1
         Me.servercrcTxt = New System.Windows.Forms.TextBox()
         Me.playBtn = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.runasChk = New System.Windows.Forms.CheckBox()
         Me.aspectChk = New System.Windows.Forms.CheckBox()
         Me.dfxChk = New System.Windows.Forms.CheckBox()
         Me.nsChk = New System.Windows.Forms.CheckBox()
         Me.skipChk = New System.Windows.Forms.CheckBox()
         Me.wChk = New System.Windows.Forms.CheckBox()
         Me.setgatewayBtn = New System.Windows.Forms.Button()
-        Me.runasChk = New System.Windows.Forms.CheckBox()
+        Me.setgateway2Btn = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -102,7 +103,7 @@ Partial Class Form1
         'playBtn
         '
         Me.playBtn.Enabled = False
-        Me.playBtn.Location = New System.Drawing.Point(12, 269)
+        Me.playBtn.Location = New System.Drawing.Point(12, 311)
         Me.playBtn.Name = "playBtn"
         Me.playBtn.Size = New System.Drawing.Size(164, 75)
         Me.playBtn.TabIndex = 1
@@ -123,6 +124,18 @@ Partial Class Form1
         Me.GroupBox3.TabIndex = 4
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Launch Flags"
+        '
+        'runasChk
+        '
+        Me.runasChk.AutoSize = True
+        Me.runasChk.Checked = True
+        Me.runasChk.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.runasChk.Location = New System.Drawing.Point(6, 136)
+        Me.runasChk.Name = "runasChk"
+        Me.runasChk.Size = New System.Drawing.Size(111, 17)
+        Me.runasChk.TabIndex = 5
+        Me.runasChk.Text = "Run D2 as admin."
+        Me.runasChk.UseVisualStyleBackColor = True
         '
         'aspectChk
         '
@@ -157,6 +170,8 @@ Partial Class Form1
         'skipChk
         '
         Me.skipChk.AutoSize = True
+        Me.skipChk.Checked = True
+        Me.skipChk.CheckState = System.Windows.Forms.CheckState.Checked
         Me.skipChk.Location = New System.Drawing.Point(6, 43)
         Me.skipChk.Name = "skipChk"
         Me.skipChk.Size = New System.Drawing.Size(78, 17)
@@ -167,6 +182,8 @@ Partial Class Form1
         'wChk
         '
         Me.wChk.AutoSize = True
+        Me.wChk.Checked = True
+        Me.wChk.CheckState = System.Windows.Forms.CheckState.Checked
         Me.wChk.Location = New System.Drawing.Point(6, 19)
         Me.wChk.Name = "wChk"
         Me.wChk.Size = New System.Drawing.Size(111, 17)
@@ -179,26 +196,27 @@ Partial Class Form1
         Me.setgatewayBtn.Enabled = False
         Me.setgatewayBtn.Location = New System.Drawing.Point(12, 190)
         Me.setgatewayBtn.Name = "setgatewayBtn"
-        Me.setgatewayBtn.Size = New System.Drawing.Size(164, 73)
+        Me.setgatewayBtn.Size = New System.Drawing.Size(164, 55)
         Me.setgatewayBtn.TabIndex = 5
         Me.setgatewayBtn.Text = "Gateway Already Set"
         Me.setgatewayBtn.UseVisualStyleBackColor = True
         '
-        'runasChk
+        'setgateway2Btn
         '
-        Me.runasChk.AutoSize = True
-        Me.runasChk.Location = New System.Drawing.Point(6, 136)
-        Me.runasChk.Name = "runasChk"
-        Me.runasChk.Size = New System.Drawing.Size(111, 17)
-        Me.runasChk.TabIndex = 5
-        Me.runasChk.Text = "Run D2 as admin."
-        Me.runasChk.UseVisualStyleBackColor = True
+        Me.setgateway2Btn.Enabled = False
+        Me.setgateway2Btn.Location = New System.Drawing.Point(12, 251)
+        Me.setgateway2Btn.Name = "setgateway2Btn"
+        Me.setgateway2Btn.Size = New System.Drawing.Size(164, 54)
+        Me.setgateway2Btn.TabIndex = 6
+        Me.setgateway2Btn.Text = "Gateway Already Set"
+        Me.setgateway2Btn.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(363, 353)
+        Me.ClientSize = New System.Drawing.Size(363, 393)
+        Me.Controls.Add(Me.setgateway2Btn)
         Me.Controls.Add(Me.setgatewayBtn)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.playBtn)
@@ -237,5 +255,5 @@ Partial Class Form1
     Friend WithEvents setgatewayBtn As System.Windows.Forms.Button
     Friend WithEvents patchPrgBr As System.Windows.Forms.ProgressBar
     Friend WithEvents runasChk As System.Windows.Forms.CheckBox
-
+    Friend WithEvents setgateway2Btn As System.Windows.Forms.Button
 End Class
