@@ -39,7 +39,8 @@ Partial Class Form1
         Me.wChk = New System.Windows.Forms.CheckBox()
         Me.setgatewayBtn = New System.Windows.Forms.Button()
         Me.setgateway2Btn = New System.Windows.Forms.Button()
-        Me.DEP = New System.Windows.Forms.Button()
+        Me.DEP_Only = New System.Windows.Forms.Button()
+        Me.DEP_and_XP_SP2 = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -212,21 +213,31 @@ Partial Class Form1
         Me.setgateway2Btn.Text = "Gateway Already Set"
         Me.setgateway2Btn.UseVisualStyleBackColor = True
         '
-        'DEP
+        'DEP_Only
         '
-        Me.DEP.Location = New System.Drawing.Point(182, 350)
-        Me.DEP.Name = "DEP"
-        Me.DEP.Size = New System.Drawing.Size(75, 23)
-        Me.DEP.TabIndex = 7
-        Me.DEP.Text = "DEP"
-        Me.DEP.UseVisualStyleBackColor = True
+        Me.DEP_Only.Location = New System.Drawing.Point(182, 350)
+        Me.DEP_Only.Name = "DEP_Only"
+        Me.DEP_Only.Size = New System.Drawing.Size(75, 23)
+        Me.DEP_Only.TabIndex = 7
+        Me.DEP_Only.Text = "DEP-Only"
+        Me.DEP_Only.UseVisualStyleBackColor = True
+        '
+        'DEP_and_XP_SP2
+        '
+        Me.DEP_and_XP_SP2.Location = New System.Drawing.Point(278, 350)
+        Me.DEP_and_XP_SP2.Name = "DEP_and_XP_SP2"
+        Me.DEP_and_XP_SP2.Size = New System.Drawing.Size(75, 23)
+        Me.DEP_and_XP_SP2.TabIndex = 8
+        Me.DEP_and_XP_SP2.Text = "DEP.XPSP2"
+        Me.DEP_and_XP_SP2.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(363, 393)
-        Me.Controls.Add(Me.DEP)
+        Me.Controls.Add(Me.DEP_and_XP_SP2)
+        Me.Controls.Add(Me.DEP_Only)
         Me.Controls.Add(Me.setgateway2Btn)
         Me.Controls.Add(Me.setgatewayBtn)
         Me.Controls.Add(Me.GroupBox3)
@@ -267,5 +278,6 @@ Partial Class Form1
     Friend WithEvents patchPrgBr As System.Windows.Forms.ProgressBar
     Friend WithEvents runasChk As System.Windows.Forms.CheckBox
     Friend WithEvents setgateway2Btn As System.Windows.Forms.Button
-    Friend WithEvents DEP As Button
+    Friend WithEvents DEP_Only As Button
+    Friend WithEvents DEP_and_XP_SP2 As Button
 End Class
