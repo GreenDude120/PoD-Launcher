@@ -422,7 +422,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DEP_Click(sender As Object, e As EventArgs) Handles DEP.Click
+    Private Sub DEP_Only_Click(sender As Object, e As EventArgs) Handles DEP_Only.Click
         Try
             Dim wDEP As New StreamWriter(installPath & "000aaaDEP.bat")
             wDEP.WriteLine("@ECHO OFF")
@@ -431,17 +431,36 @@ Public Class Form1
             wDEP.WriteLine("ECHO %mypath%")
             wDEP.WriteLine("ECHO Enabling DEP exception")
             wDEP.WriteLine("call bcdedit.exe /set {current} nx OptOut && color 0A && echo DEP policy changed to allow exceptions || color 0C && echo RUN AS ADMIN")
-            wDEP.WriteLine("call REG ADD ""HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"" /t REG_SZ /d DisableNXShowUI /v ""%mypath% ")
+            wDEP.WriteLine("call REG ADD ""HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"" /t REG_SZ /d ""~ DisableNXShowUI"" /f /v ""%mypath% ")
             wDEP.WriteLine("PAUSE")
             wDEP.WriteLine("EXIT")
             wDEP.Close()
             MsgBox("When you click OK you will be sent to your Diablo II folder" & vbCrLf & vbCrLf & "Right click on 000aaaDEP.bat and run as admin, the text should come out green, a restart might be required")
             Process.Start(installPath)
         Catch ex As Exception
-            MsgBox("DEP fix generation fatal error")
+            MsgBox("Error generating fix file, it's probably open")
         End Try
 
+    End Sub
 
+    Private Sub DEP_and_XP_SP2_Click(sender As Object, e As EventArgs) Handles DEP_and_XP_SP2.Click
+        Try
+            Dim wDEP As New StreamWriter(installPath & "000aaaDEP+XP_SP2.bat")
+            wDEP.WriteLine("@ECHO OFF")
+            wDEP.WriteLine("ECHO %~dp0")
+            wDEP.WriteLine("set ""mypath=%~dp0%Diablo II.exe""")
+            wDEP.WriteLine("ECHO %mypath%")
+            wDEP.WriteLine("ECHO Enabling DEP exception")
+            wDEP.WriteLine("call bcdedit.exe /set {current} nx OptOut && color 0A && echo DEP policy changed to allow exceptions || color 0C && echo RUN AS ADMIN")
+            wDEP.WriteLine("call REG ADD ""HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"" /t REG_SZ /d ""~ RUNASADMIN WINXPSP2 DisableNXShowUI"" /f /v ""%mypath% ")
+            wDEP.WriteLine("PAUSE")
+            wDEP.WriteLine("EXIT")
+            wDEP.Close()
+            MsgBox("When you click OK you will be sent to your Diablo II folder" & vbCrLf & vbCrLf & "Right click on 000aaaDEP+XP_SP2.bat and run as admin, the text should come out green, a restart might be required")
+            Process.Start(installPath)
+        Catch ex As Exception
+            MsgBox("Error generating fix file, it's probably open")
+        End Try
 
     End Sub
 
