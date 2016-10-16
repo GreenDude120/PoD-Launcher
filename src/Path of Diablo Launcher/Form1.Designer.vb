@@ -38,11 +38,15 @@ Partial Class Form1
         Me.skipChk = New System.Windows.Forms.CheckBox()
         Me.wChk = New System.Windows.Forms.CheckBox()
         Me.setgatewayBtn = New System.Windows.Forms.Button()
-        Me.setgateway2Btn = New System.Windows.Forms.Button()
         Me.DEP_Only = New System.Windows.Forms.Button()
         Me.DEP_and_XP_SP2 = New System.Windows.Forms.Button()
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -60,9 +64,8 @@ Partial Class Form1
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.patchPrgBr)
         Me.GroupBox1.Controls.Add(Me.localcrcTxt)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 119)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 377)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(164, 60)
         Me.GroupBox1.TabIndex = 1
@@ -71,11 +74,10 @@ Partial Class Form1
         '
         'patchPrgBr
         '
-        Me.patchPrgBr.Location = New System.Drawing.Point(12, 24)
+        Me.patchPrgBr.Location = New System.Drawing.Point(12, 443)
         Me.patchPrgBr.Name = "patchPrgBr"
-        Me.patchPrgBr.Size = New System.Drawing.Size(140, 20)
+        Me.patchPrgBr.Size = New System.Drawing.Size(492, 32)
         Me.patchPrgBr.TabIndex = 2
-        Me.patchPrgBr.Visible = False
         '
         'localcrcTxt
         '
@@ -88,7 +90,7 @@ Partial Class Form1
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.servercrcTxt)
-        Me.GroupBox2.Location = New System.Drawing.Point(182, 119)
+        Me.GroupBox2.Location = New System.Drawing.Point(182, 377)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(171, 60)
         Me.GroupBox2.TabIndex = 2
@@ -107,9 +109,9 @@ Partial Class Form1
         'playBtn
         '
         Me.playBtn.Enabled = False
-        Me.playBtn.Location = New System.Drawing.Point(12, 311)
+        Me.playBtn.Location = New System.Drawing.Point(510, 406)
         Me.playBtn.Name = "playBtn"
-        Me.playBtn.Size = New System.Drawing.Size(164, 75)
+        Me.playBtn.Size = New System.Drawing.Size(164, 79)
         Me.playBtn.TabIndex = 1
         Me.playBtn.Text = "Checking for Update"
         Me.playBtn.UseVisualStyleBackColor = True
@@ -122,7 +124,7 @@ Partial Class Form1
         Me.GroupBox3.Controls.Add(Me.nsChk)
         Me.GroupBox3.Controls.Add(Me.skipChk)
         Me.GroupBox3.Controls.Add(Me.wChk)
-        Me.GroupBox3.Location = New System.Drawing.Point(182, 185)
+        Me.GroupBox3.Location = New System.Drawing.Point(196, 133)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(171, 159)
         Me.GroupBox3.TabIndex = 4
@@ -198,26 +200,16 @@ Partial Class Form1
         'setgatewayBtn
         '
         Me.setgatewayBtn.Enabled = False
-        Me.setgatewayBtn.Location = New System.Drawing.Point(12, 190)
+        Me.setgatewayBtn.Location = New System.Drawing.Point(12, 133)
         Me.setgatewayBtn.Name = "setgatewayBtn"
         Me.setgatewayBtn.Size = New System.Drawing.Size(164, 55)
         Me.setgatewayBtn.TabIndex = 5
         Me.setgatewayBtn.Text = "Gateway Already Set"
         Me.setgatewayBtn.UseVisualStyleBackColor = True
         '
-        'setgateway2Btn
-        '
-        Me.setgateway2Btn.Enabled = False
-        Me.setgateway2Btn.Location = New System.Drawing.Point(12, 251)
-        Me.setgateway2Btn.Name = "setgateway2Btn"
-        Me.setgateway2Btn.Size = New System.Drawing.Size(164, 54)
-        Me.setgateway2Btn.TabIndex = 6
-        Me.setgateway2Btn.Text = "Gateway Already Set"
-        Me.setgateway2Btn.UseVisualStyleBackColor = True
-        '
         'DEP_Only
         '
-        Me.DEP_Only.Location = New System.Drawing.Point(182, 350)
+        Me.DEP_Only.Location = New System.Drawing.Point(196, 298)
         Me.DEP_Only.Name = "DEP_Only"
         Me.DEP_Only.Size = New System.Drawing.Size(75, 23)
         Me.DEP_Only.TabIndex = 7
@@ -226,7 +218,7 @@ Partial Class Form1
         '
         'DEP_and_XP_SP2
         '
-        Me.DEP_and_XP_SP2.Location = New System.Drawing.Point(278, 350)
+        Me.DEP_and_XP_SP2.Location = New System.Drawing.Point(277, 298)
         Me.DEP_and_XP_SP2.Name = "DEP_and_XP_SP2"
         Me.DEP_and_XP_SP2.Size = New System.Drawing.Size(75, 23)
         Me.DEP_and_XP_SP2.TabIndex = 8
@@ -237,7 +229,7 @@ Partial Class Form1
         '
         Me.WebBrowser1.AllowNavigation = False
         Me.WebBrowser1.IsWebBrowserContextMenuEnabled = False
-        Me.WebBrowser1.Location = New System.Drawing.Point(359, 0)
+        Me.WebBrowser1.Location = New System.Drawing.Point(363, 0)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser1.Name = "WebBrowser1"
         Me.WebBrowser1.ScriptErrorsSuppressed = True
@@ -250,22 +242,72 @@ Partial Class Form1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Courier New", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(323, 378)
+        Me.Label1.Location = New System.Drawing.Point(361, 401)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(30, 12)
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "podL4"
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(24, 218)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(140, 23)
+        Me.Button1.TabIndex = 11
+        Me.Button1.Text = "Donate"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(24, 244)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(140, 23)
+        Me.Button2.TabIndex = 12
+        Me.Button2.Text = "Forums"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(24, 271)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(140, 23)
+        Me.Button3.TabIndex = 13
+        Me.Button3.Text = "Wiki"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(24, 326)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(140, 23)
+        Me.Button4.TabIndex = 14
+        Me.Button4.Text = "Server List"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(24, 298)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(140, 23)
+        Me.Button5.TabIndex = 15
+        Me.Button5.Text = "Rules"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(683, 399)
+        Me.ClientSize = New System.Drawing.Size(688, 487)
+        Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.patchPrgBr)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.WebBrowser1)
         Me.Controls.Add(Me.DEP_and_XP_SP2)
         Me.Controls.Add(Me.DEP_Only)
-        Me.Controls.Add(Me.setgateway2Btn)
         Me.Controls.Add(Me.setgatewayBtn)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.playBtn)
@@ -305,9 +347,13 @@ Partial Class Form1
     Friend WithEvents setgatewayBtn As System.Windows.Forms.Button
     Friend WithEvents patchPrgBr As System.Windows.Forms.ProgressBar
     Friend WithEvents runasChk As System.Windows.Forms.CheckBox
-    Friend WithEvents setgateway2Btn As System.Windows.Forms.Button
     Friend WithEvents DEP_Only As Button
     Friend WithEvents DEP_and_XP_SP2 As Button
     Friend WithEvents WebBrowser1 As WebBrowser
     Friend WithEvents Label1 As Label
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button5 As Button
 End Class
