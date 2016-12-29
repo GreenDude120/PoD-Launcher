@@ -61,26 +61,38 @@ Public Class Form1
 
             If savedwChk = "True" Then
                 wChk.Checked = True
+            Else
+                wChk.Checked = False
             End If
 
             If savedskipChk = "True" Then
                 skipChk.Checked = True
+            Else
+                skipChk.Checked = False
             End If
 
             If savednsChk = "True" Then
                 nsChk.Checked = True
+            Else
+                nsChk.Checked = False
             End If
 
             If saveddfxChk = "True" Then
                 dfxChk.Checked = True
+            Else
+                dfxChk.Checked = False
             End If
 
             If savedaspectChk = "True" Then
                 aspectChk.Checked = True
+            Else
+                aspectChk.Checked = False
             End If
 
             If savedrunasChk = "True" Then
                 runasChk.Checked = True
+            Else
+                runasChk.Checked = False
             End If
 
         End If
@@ -91,22 +103,28 @@ Public Class Form1
             My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", defaultGatewayValues)
 
         End If
-        'NA
+        'Main IP
         If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", Nothing) Is Nothing Then
 
             Dim currentGateway = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", Nothing)
 
-            If Not currentGateway = "play.pathofdiablo.com" Then
+            If Not currentGateway = "r.pathofdiablo.com" Then
                 setgatewayBtn.Enabled = True
                 setgatewayBtn.Text = "Set Gateway"
+                CustomGatewayTextBox.Text = currentGateway
+                setgatewayBtnCustom.Enabled = True
             Else
                 setgatewayBtn.Enabled = True
                 setgatewayBtn.Text = "Remove Gateway"
+                setgatewayBtnCustom.Text = "Set Gateway"
+                setgatewayBtnCustom.Enabled = True
+                CustomGatewayTextBox.Text = currentGateway
             End If
 
         Else
 
             setgatewayBtn.Enabled = True
+            setgatewayBtnCustom.Enabled = True
             setgatewayBtn.Text = "Set Gateway"
 
         End If
@@ -184,20 +202,22 @@ Public Class Form1
 
             setgatewayBtn.Text = "Remove Gateway"
 
+            setgatewayBtnCustom.Text = "Set Gateway"
+
             Dim gatewayValues = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
 
             If gatewayValues(0).GetType().FullName.Equals("System.Byte") Then
 
                 My.Computer.Registry.CurrentUser.DeleteSubKey("Software\Battle.net\Configuration")
 
-                Dim newGatewayValues() As String = {"1009", "05", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe", "6", "play.pathofdiablo.com", "Path of Diablo"}
+                Dim newGatewayValues() As String = {"1009", "05", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe", "6", "r.pathofdiablo.com", "Path of Diablo"}
 
                 My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", newGatewayValues)
 
             Else
 
                 Array.Resize(gatewayValues, gatewayValues.Length + 1)
-                gatewayValues(gatewayValues.Length - 1) = "play.pathofdiablo.com"
+                gatewayValues(gatewayValues.Length - 1) = "r.pathofdiablo.com"
 
                 Array.Resize(gatewayValues, gatewayValues.Length + 1)
                 gatewayValues(gatewayValues.Length - 1) = "6"
@@ -213,7 +233,7 @@ Public Class Form1
 
             End If
 
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", "play.pathofdiablo.com")
+            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", "r.pathofdiablo.com")
 
         Else
 
@@ -411,5 +431,58 @@ Public Class Form1
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         System.Diagnostics.Process.Start("http://pathofdiablo.com/servers")
+    End Sub
+
+    Private Sub setgatewayBtnCustom_Click(sender As Object, e As EventArgs) Handles setgatewayBtnCustom.Click
+
+        If setgatewayBtnCustom.Text = "Set Gateway" Then
+
+            setgatewayBtn.Text = "Set Gateway"
+
+            setgatewayBtnCustom.Text = "Remove Gateway"
+
+            Dim gatewayValues = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
+
+            If gatewayValues(0).GetType().FullName.Equals("System.Byte") Then
+
+                My.Computer.Registry.CurrentUser.DeleteSubKey("Software\Battle.net\Configuration")
+
+                Dim newGatewayValues() As String = {"1009", "05", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe", "6", CustomGatewayTextBox.Text, "Path of Diablo"}
+
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", newGatewayValues)
+
+            Else
+
+                Array.Resize(gatewayValues, gatewayValues.Length + 1)
+                gatewayValues(gatewayValues.Length - 1) = CustomGatewayTextBox.Text
+
+                Array.Resize(gatewayValues, gatewayValues.Length + 1)
+                gatewayValues(gatewayValues.Length - 1) = "6"
+
+                Array.Resize(gatewayValues, gatewayValues.Length + 1)
+                gatewayValues(gatewayValues.Length - 1) = "Path of Diablo"
+
+                gatewayValues(1) = "05"
+
+                My.Computer.Registry.CurrentUser.DeleteSubKey("Software\Battle.net\Configuration")
+
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", gatewayValues)
+
+            End If
+
+            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", CustomGatewayTextBox.Text)
+
+        Else
+
+            setgatewayBtnCustom.Text = "Set Gateway"
+
+            Dim defaultGatewayValues() As String = {"1009", "01", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe"}
+            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", defaultGatewayValues)
+
+            My.Computer.Registry.CurrentUser.OpenSubKey("Software\Blizzard Entertainment\Diablo II", True).DeleteValue("BNETIP")
+
+        End If
+
+
     End Sub
 End Class
