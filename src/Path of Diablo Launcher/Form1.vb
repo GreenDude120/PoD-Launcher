@@ -314,7 +314,7 @@ Public Class Form1
     Public Declare Function GetProcAddress Lib "kernel32" (
         ByVal hModule As Integer, ByVal lpProcName As String) As Integer
 
-    Private Declare Function GetModuleHandle Lib "Kernel32" Alias "GetModuleHandleA" (
+    Public Declare Function GetModuleHandle Lib "Kernel32" Alias "GetModuleHandleA" (
         ByVal lpModuleName As String) As Integer
 
     Public Declare Function VirtualAllocEx Lib "kernel32" (
@@ -348,9 +348,48 @@ Public Class Form1
     Public Declare Function CloseHandle Lib "kernel32" Alias "CloseHandle" (
         ByVal hObject As Integer) As Integer
 
-    Declare Function WaitForSingleObject Lib "kernel32.dll" (
+    Public Declare Function WaitForSingleObject Lib "kernel32.dll" (
         ByVal hHandle As Integer,
         ByVal dwMilliseconds As Integer) As Integer
+
+    Public Declare Function GetCurrentProcess Lib "kernel32.dll" () As Integer
+
+    Public Declare Function OpenProcessToken Lib "advapi32.dll" (
+        ByVal ProcessHandle As Integer,
+        ByVal DesiredAcess As Integer,
+        ByRef TokenHandle As Integer) As Integer
+
+    Structure LUID
+        Public LowPart As UInt32
+        Public HighPart As Integer
+    End Structure
+
+    Structure TOKEN_PRIVILEGES
+        Public PrivilegeCount As Integer
+        Public TheLuid As LUID
+        Public Attributes As Integer
+    End Structure
+
+    Public Declare Function LookupPrivilegeValue Lib "advapi32.dll" Alias "LookupPrivilegeValueA" (
+        ByVal lpSystemName As String,
+        ByVal lpName As String,
+        ByRef lpLuid As LUID) As Integer
+
+    Public Declare Function AdjustTokenPrivileges Lib "advapi32.dll" (
+        ByVal TokenHandle As Integer,
+        ByVal DisableAllPrivileges As Boolean,
+        ByRef NewState As TOKEN_PRIVILEGES,
+         BufferLength As Integer,
+        ByRef PreviousState As Integer,
+        ByRef ReturnLength As Integer) As Integer
+
+    Public Declare Function MessageBox Lib "user32.dll" Alias "MessageBoxA" (
+        ByVal hWnd As Integer,
+        ByVal lpText As String,
+        ByVal lpCaption As String,
+        ByVal uType As Integer) As Integer
+
+
 
     Const INFINITE = &HFFFF
 
@@ -453,32 +492,84 @@ Public Class Form1
                 p.WaitForExit()                     'wait for "diablo II.exe" finish running game.exe
                 System.Threading.Thread.Sleep(5000)   'security wait for the window to build up
 
-                Dim x As Process() = Process.GetProcesses()
-                For Each current As Process In x
-                    If String.IsNullOrEmpty(current.MainWindowTitle) Then
-                        Continue For
+                Dim sucess As Integer = 1
+
+                'get debug privileges
+                Dim hToken As Integer
+                Dim sedebugnameValue As LUID
+                Dim tkp As New TOKEN_PRIVILEGES
+                If OpenProcessToken(GetCurrentProcess(), &H20 Or &H8, hToken) <> 0 Then
+                    If LookupPrivilegeValue(vbNullString, "SeDebugPrivilege", sedebugnameValue) <> 0 Then
+                        tkp.PrivilegeCount = 1
+                        tkp.TheLuid = sedebugnameValue
+                        tkp.Attributes = &H2
+                        If AdjustTokenPrivileges(hToken, False, tkp, System.Runtime.InteropServices.Marshal.SizeOf(tkp), 0, 0) <> 0 Then
+                            'null
+                        Else
+                            MessageBox(0, "Error Code: 8" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
+                            sucess = 0
+                        End If
+                    Else
+                        MessageBox(0, "Error Code: 7" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
+                        sucess = 0
                     End If
-                    If String.Compare("Diablo II", current.MainWindowTitle, True) = 0 Then
-                        Dim hProc As Integer = OpenProcess(&HF0000 Or &H100000 Or &HFFFF, False, current.Id)
-                        Dim hKernel32 As Integer = GetModuleHandle("Kernel32.dll")
-                        Dim lpLoadLibraryA As Integer = GetProcAddress(hKernel32, "LoadLibraryA")
-                        Dim wPath As String = installPath & "pod.dll"
-                        Dim lpRemoteString As Integer = VirtualAllocEx(hProc, 0, Len(wPath), &H2000 Or &H1000, &H4)
-                        WriteProcessMemory(hProc, lpRemoteString, wPath, wPath.Length, 0)
-                        Dim hThread As Integer = CreateRemoteThread(hProc, 0, 0, lpLoadLibraryA, lpRemoteString, 0, 0)
-                        WaitForSingleObject(hThread, INFINITE)
-                    End If
-                Next
+                Else
+                    MessageBox(0, "Error Code: 6" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
+                    sucess = 0
+                End If
+                CloseHandle(hToken)
+
+                If sucess = 1 Then
+                    Dim x As Process() = Process.GetProcesses()
+                    For Each current As Process In x
+                        If String.IsNullOrEmpty(current.MainWindowTitle) Then
+                            Continue For
+                        End If
+                        If String.Compare("Diablo II", current.MainWindowTitle, True) = 0 Then
+                            Dim hProc As Integer = OpenProcess(&HF0000 Or &H100000 Or &HFFFF, False, current.Id)
+                            If hProc <> 0 Then
+                                Dim hKernel32 As Integer = GetModuleHandle("Kernel32.dll")
+                                If hKernel32 <> 0 Then
+                                    Dim lpLoadLibraryA As Integer = GetProcAddress(hKernel32, "LoadLibraryA")
+                                    If lpLoadLibraryA <> 0 Then
+                                        Dim wPath As String = installPath & "pod.dll"
+                                        Dim lpRemoteString As Integer = VirtualAllocEx(hProc, 0, Len(wPath), &H2000 Or &H1000, &H4)
+                                        If lpRemoteString <> 0 Then
+                                            Dim writeReturn As Integer = WriteProcessMemory(hProc, lpRemoteString, wPath, wPath.Length, 0)
+                                            If writeReturn <> 0 Then
+                                                Dim hThread As Integer = CreateRemoteThread(hProc, 0, 0, lpLoadLibraryA, lpRemoteString, 0, 0)
+                                                WaitForSingleObject(hThread, INFINITE)
+                                            Else
+                                                MessageBox(0, "Error Code: 5" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
+                                                sucess = 0
+                                            End If
+                                        Else
+                                            MessageBox(0, "Error Code: 4" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
+                                            sucess = 0
+                                        End If
+                                    Else
+                                        MessageBox(0, "Error Code: 3" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
+                                        sucess = 0
+                                    End If
+                                Else
+                                    MessageBox(0, "Error Code: 2" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
+                                    sucess = 0
+                                End If
+                            Else
+                                MessageBox(0, "Error Code: 1" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
+                                sucess = 0
+                            End If
+                            Exit For
+                        End If
+                    Next
+                End If
+
 
                 End
 
             Else
                 End
             End If
-
-
-
-
 
         End If
 
