@@ -58,6 +58,8 @@ Public Class Form1
             Dim saveddfxChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "dfxChk", Nothing)
             Dim savedaspectChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "aspectChk", Nothing)
             Dim savedrunasChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "runasChk", Nothing)
+            Dim savedtxtChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "txtChk", Nothing)
+            Dim saveddirectChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "directChk", Nothing)
 
             If savedwChk = "True" Then
                 wChk.Checked = True
@@ -89,6 +91,18 @@ Public Class Form1
                 aspectChk.Checked = False
             End If
 
+            If savedtxtChk = "True" Then
+                txtcbox.Checked = True
+            Else
+                txtcbox.Checked = False
+            End If
+
+            If saveddirectChk = "True" Then
+                directcbox.Checked = True
+            Else
+                directcbox.Checked = False
+            End If
+
             If savedrunasChk = "True" Then
                 runasChk.Checked = True
             Else
@@ -108,7 +122,7 @@ Public Class Form1
 
             Dim currentGateway = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", Nothing)
 
-            If Not currentGateway = "r.pathofdiablo.com" Then
+            If Not currentGateway = "s.pathofdiablo.com" Then
                 setgatewayBtn.Enabled = True
                 setgatewayBtn.Text = "Set Gateway"
                 CustomGatewayTextBox.Text = currentGateway
@@ -195,6 +209,20 @@ Public Class Form1
 
         End If
 
+        Dim launchervonline As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/launcherversion"
+        Dim wclient As WebClient = New WebClient()
+        Dim wreader As StreamReader = New StreamReader(wclient.OpenRead(launchervonline))
+        Dim launchervonlinetxt As Integer
+        launchervonlinetxt = wreader.ReadToEnd
+
+        If Int(podlauncherlocalv.Text) = launchervonlinetxt Then
+
+            'launcher is up-to-date
+
+        Else
+            MsgBox("A new version of the Path of Diablo Launcher is available. Please uninstall this current version and download the updated version.")
+            System.Diagnostics.Process.Start("http://pathofdiablo.com/wiki/index.php/Download")
+        End If
     End Sub
     Private Sub setgatewayBtn_Click(sender As Object, e As EventArgs) Handles setgatewayBtn.Click
 
@@ -210,14 +238,14 @@ Public Class Form1
 
                 My.Computer.Registry.CurrentUser.DeleteSubKey("Software\Battle.net\Configuration")
 
-                Dim newGatewayValues() As String = {"1009", "05", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe", "6", "r.pathofdiablo.com", "Path of Diablo"}
+                Dim newGatewayValues() As String = {"1009", "05", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe", "6", "s.pathofdiablo.com", "Path of Diablo"}
 
                 My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", newGatewayValues)
 
             Else
 
                 Array.Resize(gatewayValues, gatewayValues.Length + 1)
-                gatewayValues(gatewayValues.Length - 1) = "r.pathofdiablo.com"
+                gatewayValues(gatewayValues.Length - 1) = "s.pathofdiablo.com"
 
                 Array.Resize(gatewayValues, gatewayValues.Length + 1)
                 gatewayValues(gatewayValues.Length - 1) = "6"
@@ -233,7 +261,7 @@ Public Class Form1
 
             End If
 
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", "r.pathofdiablo.com")
+            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", "s.pathofdiablo.com")
 
         Else
 
@@ -283,7 +311,48 @@ Public Class Form1
 
     End Sub
 
+    Public Declare Function GetProcAddress Lib "kernel32" (
+        ByVal hModule As Integer, ByVal lpProcName As String) As Integer
 
+    Private Declare Function GetModuleHandle Lib "Kernel32" Alias "GetModuleHandleA" (
+        ByVal lpModuleName As String) As Integer
+
+    Public Declare Function VirtualAllocEx Lib "kernel32" (
+        ByVal hProcess As Integer,
+        ByVal lpAddress As Integer,
+        ByVal dwSize As Integer,
+        ByVal flAllocationType As Integer,
+        ByVal flProtect As Integer) As Integer
+
+    Public Declare Function OpenProcess Lib "kernel32" (
+        ByVal dwDesiredAccess As Integer,
+        ByVal bInheritHandle As Integer,
+        ByVal dwProcessId As Integer) As Integer
+
+    Public Declare Function WriteProcessMemory Lib "kernel32" (
+        ByVal hProcess As Integer,
+        ByVal lpBaseAddress As Integer,
+        ByVal lpBuffer As String,
+        ByVal nSize As Integer,
+        ByRef lpNumberOfBytesWritten As Integer) As Integer
+
+    Public Declare Function CreateRemoteThread Lib "kernel32" (
+        ByVal hProcess As Integer,
+        ByVal lpThreadAttributes As Integer,
+        ByVal dwStackSize As Integer,
+        ByVal lpStartAddress As Integer,
+        ByVal lpParameter As Integer,
+        ByVal dwCreationFlags As Integer,
+        ByRef lpThreadId As Integer) As Integer
+
+    Public Declare Function CloseHandle Lib "kernel32" Alias "CloseHandle" (
+        ByVal hObject As Integer) As Integer
+
+    Declare Function WaitForSingleObject Lib "kernel32.dll" (
+        ByVal hHandle As Integer,
+        ByVal dwMilliseconds As Integer) As Integer
+
+    Const INFINITE = &HFFFF
 
     Private Sub playBtn_Click(sender As Object, e As EventArgs) Handles playBtn.Click
 
@@ -347,6 +416,20 @@ Public Class Form1
                 My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "dfxChk", "False")
             End If
 
+            If directcbox.Checked = True Then
+                d2.Arguments = d2.Arguments & "-direct "
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "directChk", "True")
+            Else
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "directChk", "False")
+            End If
+
+            If txtcbox.Checked = True Then
+                d2.Arguments = d2.Arguments & "-txt "
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "txtChk", "True")
+            Else
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "txtChk", "False")
+            End If
+
             If aspectChk.Checked = True Then
                 d2.Arguments = d2.Arguments & "-nofixaspect "
                 My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "aspectChk", "True")
@@ -361,11 +444,41 @@ Public Class Form1
                 My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "runasChk", "False")
             End If
 
+            Me.Hide()                           'hide window, so that it doesn't look like it doesn't respond anymore
+            Dim p As New Process
+            p.StartInfo = d2
+            p.Start()
+
+            If qoladdoncbox.Checked = True Then
+                p.WaitForExit()                     'wait for "diablo II.exe" finish running game.exe
+                System.Threading.Thread.Sleep(5000)   'security wait for the window to build up
+
+                Dim x As Process() = Process.GetProcesses()
+                For Each current As Process In x
+                    If String.IsNullOrEmpty(current.MainWindowTitle) Then
+                        Continue For
+                    End If
+                    If String.Compare("Diablo II", current.MainWindowTitle, True) = 0 Then
+                        Dim hProc As Integer = OpenProcess(&HF0000 Or &H100000 Or &HFFFF, False, current.Id)
+                        Dim hKernel32 As Integer = GetModuleHandle("Kernel32.dll")
+                        Dim lpLoadLibraryA As Integer = GetProcAddress(hKernel32, "LoadLibraryA")
+                        Dim wPath As String = installPath & "pod.dll"
+                        Dim lpRemoteString As Integer = VirtualAllocEx(hProc, 0, Len(wPath), &H2000 Or &H1000, &H4)
+                        WriteProcessMemory(hProc, lpRemoteString, wPath, wPath.Length, 0)
+                        Dim hThread As Integer = CreateRemoteThread(hProc, 0, 0, lpLoadLibraryA, lpRemoteString, 0, 0)
+                        WaitForSingleObject(hThread, INFINITE)
+                    End If
+                Next
+
+                End
+
+            Else
+                End
+            End If
 
 
-            Process.Start(d2)
 
-            End
+
 
         End If
 
@@ -485,4 +598,45 @@ Public Class Form1
 
 
     End Sub
+
+    Private Sub viewmorecfg_Click(sender As Object, e As EventArgs) Handles viewmorecfg.Click
+
+        System.Diagnostics.Process.Start("http://pathofdiablo.com/filters")
+
+    End Sub
+
+    Private Sub downloadcfg_Click(sender As Object, e As EventArgs) Handles downloadcfg.Click
+
+        Dim downloadfilter As WebClient = New WebClient
+        downloadfilter.DownloadFileAsync(New Uri(lootfilterurl.Text), installPath & "item.filter")
+        MsgBox("item.filter was overwrote by " & lootfilterurl.Text)
+    End Sub
+
+    Private Sub resetcfg_Click(sender As Object, e As EventArgs) Handles resetcfg.Click
+        Dim resetfilter As WebClient = New WebClient
+        resetfilter.DownloadFileAsync(New Uri("http://pathofdiablo.com/item.filter"), installPath & "item.filter")
+        MsgBox("item.filter was overwrote by http://pathofdiablo.com/item.filter")
+    End Sub
+
+    Private Sub injecttimer_Tick(sender As Object, e As EventArgs)
+        Dim podqol As New ProcessStartInfo
+        podqol.FileName = installPath & "podqol.exe"
+        podqol.Arguments = ""
+        podqol.UseShellExecute = True
+        injecttimer.Stop()
+        Process.Start(podqol)
+        End
+    End Sub
+
+    Private Sub injecttimer_Tick_1(sender As Object, e As EventArgs) Handles injecttimer.Tick
+        Dim podqol As New ProcessStartInfo
+        podqol.FileName = installPath & "podqol.exe"
+        podqol.Arguments = ""
+        podqol.UseShellExecute = True
+        injecttimer.Stop()
+        Process.Start(podqol)
+        End
+    End Sub
+
+
 End Class

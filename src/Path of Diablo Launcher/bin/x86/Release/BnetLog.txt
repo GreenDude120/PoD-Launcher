@@ -1,7 +1,6 @@
-6/18 14:59:55.002  Connecting to Battle.net...
-6/18 14:59:55.002      querying gateway na.pathofdiablo.com
-6/18 14:59:55.253      searching for the fastest server
-6/18 14:59:55.481      Connected to server 173.214.173.56
-6/18 14:59:55.491      accessing accounts
-6/18 14:59:56.555      Checking for the latest version
-6/18 14:59:57.022      Connected to Battle.net
+1/8 07:29:00.363  Connecting to Battle.net...
+1/8 07:29:00.363      querying gateway r.pathofdiablo.com
+1/8 07:29:00.604      searching for the fastest server
+1/8 07:29:00.888      Connected to server 178.32.250.35
+1/8 07:29:00.898      accessing accounts
+1/8 07:29:01.498      Checking for the latest version
