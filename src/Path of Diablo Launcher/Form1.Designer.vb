@@ -22,7 +22,6 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -40,7 +39,6 @@ Partial Class Form1
         Me.skipChk = New System.Windows.Forms.CheckBox()
         Me.wChk = New System.Windows.Forms.CheckBox()
         Me.txtcbox = New System.Windows.Forms.CheckBox()
-        Me.setgatewayBtn = New System.Windows.Forms.Button()
         Me.DEP_Only = New System.Windows.Forms.Button()
         Me.DEP_and_XP_SP2 = New System.Windows.Forms.Button()
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
@@ -50,10 +48,11 @@ Partial Class Form1
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
-        Me.setgatewayBtnCustom = New System.Windows.Forms.Button()
         Me.CustomGatewayTextBox = New System.Windows.Forms.TextBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.setGatewayBtn = New System.Windows.Forms.Button()
+        Me.radioMain = New System.Windows.Forms.RadioButton()
+        Me.radioCustom = New System.Windows.Forms.RadioButton()
         Me.qoladdoncbox = New System.Windows.Forms.CheckBox()
         Me.downloadcfg = New System.Windows.Forms.Button()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
@@ -61,8 +60,8 @@ Partial Class Form1
         Me.resetcfg = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lootfilterurl = New System.Windows.Forms.TextBox()
-        Me.injecttimer = New System.Windows.Forms.Timer(Me.components)
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.resoreDefaultGatewaysBtn = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -143,9 +142,9 @@ Partial Class Form1
         Me.GroupBox3.Controls.Add(Me.nsChk)
         Me.GroupBox3.Controls.Add(Me.skipChk)
         Me.GroupBox3.Controls.Add(Me.wChk)
-        Me.GroupBox3.Location = New System.Drawing.Point(196, 195)
+        Me.GroupBox3.Location = New System.Drawing.Point(196, 217)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(171, 183)
+        Me.GroupBox3.Size = New System.Drawing.Size(157, 183)
         Me.GroupBox3.TabIndex = 4
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Launch Flags"
@@ -229,7 +228,7 @@ Partial Class Form1
         'txtcbox
         '
         Me.txtcbox.AutoSize = True
-        Me.txtcbox.Location = New System.Drawing.Point(136, 383)
+        Me.txtcbox.Location = New System.Drawing.Point(136, 405)
         Me.txtcbox.Name = "txtcbox"
         Me.txtcbox.Size = New System.Drawing.Size(40, 17)
         Me.txtcbox.TabIndex = 7
@@ -237,19 +236,9 @@ Partial Class Form1
         Me.txtcbox.UseVisualStyleBackColor = True
         Me.txtcbox.Visible = False
         '
-        'setgatewayBtn
-        '
-        Me.setgatewayBtn.Enabled = False
-        Me.setgatewayBtn.Location = New System.Drawing.Point(12, 138)
-        Me.setgatewayBtn.Name = "setgatewayBtn"
-        Me.setgatewayBtn.Size = New System.Drawing.Size(164, 56)
-        Me.setgatewayBtn.TabIndex = 5
-        Me.setgatewayBtn.Text = "Gateway Already Set"
-        Me.setgatewayBtn.UseVisualStyleBackColor = True
-        '
         'DEP_Only
         '
-        Me.DEP_Only.Location = New System.Drawing.Point(202, 386)
+        Me.DEP_Only.Location = New System.Drawing.Point(202, 408)
         Me.DEP_Only.Name = "DEP_Only"
         Me.DEP_Only.Size = New System.Drawing.Size(65, 23)
         Me.DEP_Only.TabIndex = 7
@@ -258,7 +247,7 @@ Partial Class Form1
         '
         'DEP_and_XP_SP2
         '
-        Me.DEP_and_XP_SP2.Location = New System.Drawing.Point(51, 383)
+        Me.DEP_and_XP_SP2.Location = New System.Drawing.Point(51, 405)
         Me.DEP_and_XP_SP2.Name = "DEP_and_XP_SP2"
         Me.DEP_and_XP_SP2.Size = New System.Drawing.Size(65, 23)
         Me.DEP_and_XP_SP2.TabIndex = 8
@@ -283,7 +272,7 @@ Partial Class Form1
         '
         Me.podlauncherlocalv.AutoSize = True
         Me.podlauncherlocalv.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.podlauncherlocalv.Location = New System.Drawing.Point(347, 394)
+        Me.podlauncherlocalv.Location = New System.Drawing.Point(347, 416)
         Me.podlauncherlocalv.Name = "podlauncherlocalv"
         Me.podlauncherlocalv.Size = New System.Drawing.Size(13, 13)
         Me.podlauncherlocalv.TabIndex = 10
@@ -291,7 +280,7 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(24, 218)
+        Me.Button1.Location = New System.Drawing.Point(24, 240)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(140, 23)
         Me.Button1.TabIndex = 11
@@ -300,7 +289,7 @@ Partial Class Form1
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(24, 244)
+        Me.Button2.Location = New System.Drawing.Point(24, 266)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(140, 23)
         Me.Button2.TabIndex = 12
@@ -309,7 +298,7 @@ Partial Class Form1
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(24, 271)
+        Me.Button3.Location = New System.Drawing.Point(24, 293)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(140, 23)
         Me.Button3.TabIndex = 13
@@ -318,7 +307,7 @@ Partial Class Form1
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(24, 326)
+        Me.Button4.Location = New System.Drawing.Point(24, 348)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(140, 23)
         Me.Button4.TabIndex = 14
@@ -327,49 +316,65 @@ Partial Class Form1
         '
         'Button5
         '
-        Me.Button5.Location = New System.Drawing.Point(24, 298)
+        Me.Button5.Location = New System.Drawing.Point(24, 320)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(140, 23)
         Me.Button5.TabIndex = 15
         Me.Button5.Text = "Rules"
         Me.Button5.UseVisualStyleBackColor = True
         '
-        'setgatewayBtnCustom
-        '
-        Me.setgatewayBtnCustom.Enabled = False
-        Me.setgatewayBtnCustom.Location = New System.Drawing.Point(13, 44)
-        Me.setgatewayBtnCustom.Name = "setgatewayBtnCustom"
-        Me.setgatewayBtnCustom.Size = New System.Drawing.Size(143, 21)
-        Me.setgatewayBtnCustom.TabIndex = 16
-        Me.setgatewayBtnCustom.Text = "Gateway Already Set"
-        Me.setgatewayBtnCustom.UseVisualStyleBackColor = True
-        '
         'CustomGatewayTextBox
         '
-        Me.CustomGatewayTextBox.Location = New System.Drawing.Point(13, 19)
+        Me.CustomGatewayTextBox.Location = New System.Drawing.Point(178, 66)
         Me.CustomGatewayTextBox.Name = "CustomGatewayTextBox"
         Me.CustomGatewayTextBox.Size = New System.Drawing.Size(143, 20)
         Me.CustomGatewayTextBox.TabIndex = 17
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.resoreDefaultGatewaysBtn)
+        Me.GroupBox4.Controls.Add(Me.setGatewayBtn)
+        Me.GroupBox4.Controls.Add(Me.radioMain)
+        Me.GroupBox4.Controls.Add(Me.radioCustom)
         Me.GroupBox4.Controls.Add(Me.CustomGatewayTextBox)
-        Me.GroupBox4.Controls.Add(Me.setgatewayBtnCustom)
-        Me.GroupBox4.Location = New System.Drawing.Point(197, 119)
+        Me.GroupBox4.Location = New System.Drawing.Point(24, 119)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(170, 71)
+        Me.GroupBox4.Size = New System.Drawing.Size(329, 92)
         Me.GroupBox4.TabIndex = 19
         Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Custom Gateway"
+        Me.GroupBox4.Text = "Gateway"
         '
-        'Label2
+        'setGatewayBtn
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(9, 122)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(75, 13)
-        Me.Label2.TabIndex = 6
-        Me.Label2.Text = "Main Gateway"
+        Me.setGatewayBtn.Location = New System.Drawing.Point(7, 20)
+        Me.setGatewayBtn.Name = "setGatewayBtn"
+        Me.setGatewayBtn.Size = New System.Drawing.Size(165, 41)
+        Me.setGatewayBtn.TabIndex = 21
+        Me.setGatewayBtn.Text = "Set Gateway"
+        Me.setGatewayBtn.UseVisualStyleBackColor = True
+        '
+        'radioMain
+        '
+        Me.radioMain.AutoSize = True
+        Me.radioMain.Location = New System.Drawing.Point(178, 19)
+        Me.radioMain.Name = "radioMain"
+        Me.radioMain.Size = New System.Drawing.Size(115, 17)
+        Me.radioMain.TabIndex = 20
+        Me.radioMain.TabStop = True
+        Me.radioMain.Text = "Use Main Gateway"
+        Me.radioMain.UseVisualStyleBackColor = True
+        '
+        'radioCustom
+        '
+        Me.radioCustom.AutoSize = True
+        Me.radioCustom.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.radioCustom.Location = New System.Drawing.Point(178, 44)
+        Me.radioCustom.Name = "radioCustom"
+        Me.radioCustom.Size = New System.Drawing.Size(127, 17)
+        Me.radioCustom.TabIndex = 19
+        Me.radioCustom.TabStop = True
+        Me.radioCustom.Text = "Use Custom Gateway"
+        Me.radioCustom.UseVisualStyleBackColor = True
         '
         'qoladdoncbox
         '
@@ -443,18 +448,23 @@ Partial Class Form1
         Me.lootfilterurl.TabIndex = 22
         Me.lootfilterurl.Text = "example http://pathofdiablo.com/item.filter"
         '
-        'injecttimer
-        '
-        Me.injecttimer.Interval = 5000
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(314, 394)
+        Me.Label1.Location = New System.Drawing.Point(314, 416)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(31, 13)
         Me.Label1.TabIndex = 23
         Me.Label1.Text = "podL"
+        '
+        'resoreDefaultGatewaysBtn
+        '
+        Me.resoreDefaultGatewaysBtn.Location = New System.Drawing.Point(7, 64)
+        Me.resoreDefaultGatewaysBtn.Name = "resoreDefaultGatewaysBtn"
+        Me.resoreDefaultGatewaysBtn.Size = New System.Drawing.Size(165, 23)
+        Me.resoreDefaultGatewaysBtn.TabIndex = 22
+        Me.resoreDefaultGatewaysBtn.Text = "Restore Default Gateways"
+        Me.resoreDefaultGatewaysBtn.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -466,7 +476,6 @@ Partial Class Form1
         Me.Controls.Add(Me.txtcbox)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.qoladdoncbox)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.WebBrowser1)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.Button5)
@@ -477,7 +486,6 @@ Partial Class Form1
         Me.Controls.Add(Me.patchPrgBr)
         Me.Controls.Add(Me.DEP_and_XP_SP2)
         Me.Controls.Add(Me.DEP_Only)
-        Me.Controls.Add(Me.setgatewayBtn)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.playBtn)
         Me.Controls.Add(Me.GroupBox2)
@@ -521,7 +529,6 @@ Partial Class Form1
     Friend WithEvents directChk As System.Windows.Forms.CheckBox
     Friend WithEvents skipChk As System.Windows.Forms.CheckBox
     Friend WithEvents wChk As System.Windows.Forms.CheckBox
-    Friend WithEvents setgatewayBtn As System.Windows.Forms.Button
     Friend WithEvents patchPrgBr As System.Windows.Forms.ProgressBar
     Friend WithEvents runasChk As System.Windows.Forms.CheckBox
     Friend WithEvents DEP_Only As Button
@@ -533,10 +540,8 @@ Partial Class Form1
     Friend WithEvents Button3 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
-    Friend WithEvents setgatewayBtnCustom As Button
     Friend WithEvents CustomGatewayTextBox As TextBox
     Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents Label2 As Label
     Friend WithEvents qoladdoncbox As CheckBox
     Friend WithEvents downloadcfg As Button
     Friend WithEvents GroupBox5 As GroupBox
@@ -544,6 +549,9 @@ Partial Class Form1
     Friend WithEvents resetcfg As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents lootfilterurl As TextBox
-    Friend WithEvents injecttimer As Timer
     Friend WithEvents Label1 As Label
+    Friend WithEvents setGatewayBtn As Button
+    Friend WithEvents radioMain As RadioButton
+    Friend WithEvents radioCustom As RadioButton
+    Friend WithEvents resoreDefaultGatewaysBtn As Button
 End Class
