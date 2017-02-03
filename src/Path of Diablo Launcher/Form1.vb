@@ -208,6 +208,8 @@ Public Class Form1
 
         playBtn.BringToFront()
 
+        handleSetCurrentGateway()
+
         Dim launchervonline As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/launcherversion"
         Dim wclient As WebClient = New WebClient()
         Dim wreader As StreamReader = New StreamReader(wclient.OpenRead(launchervonline))
@@ -635,6 +637,8 @@ Public Class Form1
 
         My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", "s.pathofdiablo.com")
 
+        handleSetCurrentGateway()
+
     End Sub
 
     Private Sub resoreDefaultGatewaysBtn_Click(sender As Object, e As EventArgs) Handles resoreDefaultGatewaysBtn.Click
@@ -642,7 +646,41 @@ Public Class Form1
         Dim defaultGatewayValues() As String = {"1009", "01", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe"}
         My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", defaultGatewayValues)
 
-        My.Computer.Registry.CurrentUser.OpenSubKey("Software\Blizzard Entertainment\Diablo II", True).DeleteValue("BNETIP")
+        If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", Nothing) Is Nothing Then
+            My.Computer.Registry.CurrentUser.OpenSubKey("Software\Blizzard Entertainment\Diablo II", True).DeleteValue("BNETIP")
+        End If
+
+
+        handleSetCurrentGateway()
+
+    End Sub
+
+    Private Sub radioCustom_CheckedChanged(sender As Object, e As EventArgs) Handles radioCustom.CheckedChanged
+
+        If radioCustom.Checked = True Then
+            CustomGatewayTextBox.Enabled = True
+        Else
+            CustomGatewayTextBox.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub handleSetCurrentGateway()
+
+        If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing) Is Nothing Then
+
+            Dim gatewayValues() As String = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
+
+            Dim currentRealm As Integer = CInt(gatewayValues(1)) - 1
+
+            If gatewayValues.Length > (2 + currentRealm * 3) Then
+
+                Dim currentRealmAddress As String = gatewayValues(2 + currentRealm * 3)
+                CustomGatewayTextBox.Text = currentRealmAddress
+
+            End If
+
+        End If
 
     End Sub
 
