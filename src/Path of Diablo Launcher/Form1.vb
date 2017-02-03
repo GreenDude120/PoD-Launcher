@@ -171,6 +171,13 @@ Public Class Form1
                 End If
             End If
 
+            'disable qol stuff if not on 1.13d
+            If Not d2version = "1, 0, 13, 64" Then
+                qoladdoncbox.Checked = False
+                qoladdoncbox.Enabled = False
+                qoladdoncbox.Text = "QoL Features (1.13d only)"
+            End If
+
             localcrcTxt.Text = localCRC
 
             Dim address As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/currentpatch"
@@ -198,6 +205,8 @@ Public Class Form1
             playBtn.Text = "No D2 Installation Found"
 
         End If
+
+        playBtn.BringToFront()
 
         Dim launchervonline As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/launcherversion"
         Dim wclient As WebClient = New WebClient()
