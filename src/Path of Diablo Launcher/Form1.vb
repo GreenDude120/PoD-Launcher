@@ -61,6 +61,7 @@ Public Class Form1
             Dim savedtxtChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "txtChk", Nothing)
             Dim saveddirectChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "directChk", Nothing)
             Dim savedMainGtw = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "mainGtw", Nothing)
+            Dim savedQolChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "qolChk", Nothing)
 
             If savedwChk = "True" Then
                 wChk.Checked = True
@@ -116,6 +117,12 @@ Public Class Form1
             Else
                 radioMain.Checked = True
                 radioCustom.Checked = False
+            End If
+
+            If savedQolChk = "True" Then
+                qoladdoncbox.Checked = True
+            Else
+                qoladdoncbox.Checked = False
             End If
 
         End If
@@ -416,6 +423,12 @@ Public Class Form1
                 My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "mainGtw", "True")
             Else
                 My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "mainGtw", "False")
+            End If
+
+            If qoladdoncbox.Checked = True Then
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "qolChk", "True")
+            Else
+                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "qolChk", "False")
             End If
 
             Me.Hide()                           'hide window, so that it doesn't look like it doesn't respond anymore
