@@ -21,3 +21,4 @@ C:\Users\David\Documents\GitHub\PoD-Launcher\src\Path of Diablo Launcher\obj\x86
 C:\Users\David\Documents\GitHub\PoD-Launcher\src\Path of Diablo Launcher\obj\x86\Release\Path_of_Diablo_Launcher.Resources.resources
 C:\Users\David\Documents\GitHub\PoD-Launcher\src\Path of Diablo Launcher\obj\x86\Release\Path_of_Diablo_Launcher.UpdateD2.resources
 C:\Users\David\Documents\GitHub\PoD-Launcher\src\Path of Diablo Launcher\obj\x86\Release\Path of Diablo Launcher.vbproj.GenerateResource.Cache
+C:\Users\Danny\Desktop\Path of Diablo\PoD-Launcher\src\Path of Diablo Launcher\obj\x86\Release\Path of Diablo Launcher.vbprojResolveAssemblyReference.cache
