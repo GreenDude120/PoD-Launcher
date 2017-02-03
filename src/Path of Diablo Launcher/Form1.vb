@@ -669,16 +669,23 @@ Public Class Form1
 
         If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing) Is Nothing Then
 
-            Dim gatewayValues() As String = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
+            Dim testMe = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
+            If testMe.GetType() Is GetType(String()) Then
 
-            Dim currentRealm As Integer = CInt(gatewayValues(1)) - 1
+                Dim gatewayValues() As String = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
 
-            If gatewayValues.Length > (2 + currentRealm * 3) Then
+                Dim currentRealm As Integer = CInt(gatewayValues(1)) - 1
 
-                Dim currentRealmAddress As String = gatewayValues(2 + currentRealm * 3)
-                CustomGatewayTextBox.Text = currentRealmAddress
+                If gatewayValues.Length > (2 + currentRealm * 3) Then
+
+                    Dim currentRealmAddress As String = gatewayValues(2 + currentRealm * 3)
+                    CustomGatewayTextBox.Text = currentRealmAddress
+
+                End If
 
             End If
+
+
 
         End If
 
