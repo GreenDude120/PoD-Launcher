@@ -50,6 +50,7 @@ Partial Class Form1
         Me.Button5 = New System.Windows.Forms.Button()
         Me.CustomGatewayTextBox = New System.Windows.Forms.TextBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.resoreDefaultGatewaysBtn = New System.Windows.Forms.Button()
         Me.setGatewayBtn = New System.Windows.Forms.Button()
         Me.radioMain = New System.Windows.Forms.RadioButton()
         Me.radioCustom = New System.Windows.Forms.RadioButton()
@@ -61,7 +62,6 @@ Partial Class Form1
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lootfilterurl = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.resoreDefaultGatewaysBtn = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -344,6 +344,15 @@ Partial Class Form1
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Gateway"
         '
+        'resoreDefaultGatewaysBtn
+        '
+        Me.resoreDefaultGatewaysBtn.Location = New System.Drawing.Point(7, 64)
+        Me.resoreDefaultGatewaysBtn.Name = "resoreDefaultGatewaysBtn"
+        Me.resoreDefaultGatewaysBtn.Size = New System.Drawing.Size(165, 23)
+        Me.resoreDefaultGatewaysBtn.TabIndex = 22
+        Me.resoreDefaultGatewaysBtn.Text = "Restore Default Gateways"
+        Me.resoreDefaultGatewaysBtn.UseVisualStyleBackColor = True
+        '
         'setGatewayBtn
         '
         Me.setGatewayBtn.Location = New System.Drawing.Point(7, 20)
@@ -381,7 +390,7 @@ Partial Class Form1
         Me.qoladdoncbox.AutoSize = True
         Me.qoladdoncbox.Checked = True
         Me.qoladdoncbox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.qoladdoncbox.Location = New System.Drawing.Point(414, 496)
+        Me.qoladdoncbox.Location = New System.Drawing.Point(364, 496)
         Me.qoladdoncbox.Name = "qoladdoncbox"
         Me.qoladdoncbox.Size = New System.Drawing.Size(90, 17)
         Me.qoladdoncbox.TabIndex = 20
@@ -456,15 +465,6 @@ Partial Class Form1
         Me.Label1.Size = New System.Drawing.Size(31, 13)
         Me.Label1.TabIndex = 23
         Me.Label1.Text = "podL"
-        '
-        'resoreDefaultGatewaysBtn
-        '
-        Me.resoreDefaultGatewaysBtn.Location = New System.Drawing.Point(7, 64)
-        Me.resoreDefaultGatewaysBtn.Name = "resoreDefaultGatewaysBtn"
-        Me.resoreDefaultGatewaysBtn.Size = New System.Drawing.Size(165, 23)
-        Me.resoreDefaultGatewaysBtn.TabIndex = 22
-        Me.resoreDefaultGatewaysBtn.Text = "Restore Default Gateways"
-        Me.resoreDefaultGatewaysBtn.UseVisualStyleBackColor = True
         '
         'Form1
         '
