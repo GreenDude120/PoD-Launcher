@@ -276,7 +276,7 @@ Partial Class Form1
         Me.podlauncherlocalv.Name = "podlauncherlocalv"
         Me.podlauncherlocalv.Size = New System.Drawing.Size(13, 13)
         Me.podlauncherlocalv.TabIndex = 10
-        Me.podlauncherlocalv.Text = "8"
+        Me.podlauncherlocalv.Text = "9"
         '
         'Button1
         '
