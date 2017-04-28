@@ -442,7 +442,15 @@ Public Class Form1
                 My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "qolChk", "False")
             End If
 
-            Me.Hide()                           'hide window, so that it doesn't look like it doesn't respond anymore
+            If radioMain.Checked Then
+                If String.Compare("s.pathofdiablo.com", CustomGatewayTextBox.Text, True) <> 0 Then
+                    'show error message and don't start the game
+                    MessageBox(0, "Choose a gateway option and click ""Set Gateway""" + Environment.NewLine + "After that you can start the game and start playing online.", "QoL-Features", &H30 Or &H10000)
+                    Return
+                End If
+            End If
+
+                Me.Hide()                           'hide window, so that it doesn't look like it doesn't respond anymore
             Dim p As New Process
             p.StartInfo = d2
             p.Start()
@@ -465,7 +473,7 @@ Public Class Form1
                         If AdjustTokenPrivileges(hToken, False, tkp, System.Runtime.InteropServices.Marshal.SizeOf(tkp), 0, 0) <> 0 Then
                             'null
                         Else
-                            MessageBox(0, "Error Code: 8" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
+                            MessageBox(0, "Error Code:  8" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
                             sucess = 0
                         End If
                     Else
@@ -515,7 +523,7 @@ Public Class Form1
                                     sucess = 0
                                 End If
                             Else
-                                MessageBox(0, "Error Code: 1" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
+                                MessageBox(0, "Error Code: 1" + Environment.NewLine + "Please run the Path of Diablo Launcher as Admin" + Environment.NewLine + "or run podqol.exe after the game has started", "QoL-Features", &H30 Or &H10000)
                                 sucess = 0
                             End If
                             Exit For
@@ -626,16 +634,16 @@ Public Class Form1
         If radioMain.Checked Then
 
             newGatewayValues = {"1009", "05", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe", "s.pathofdiablo.com", "6", "Path of Diablo"}
+            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", "s.pathofdiablo.com")
 
         Else
 
             newGatewayValues = {"1009", "05", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe", CustomGatewayTextBox.Text, "6", "Path of Diablo"}
+            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", CustomGatewayTextBox.Text)
 
         End If
 
         My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", newGatewayValues)
-
-        My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", "s.pathofdiablo.com")
 
         handleSetCurrentGateway()
 
