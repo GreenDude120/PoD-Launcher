@@ -272,11 +272,11 @@ Partial Class Form1
         '
         Me.podlauncherlocalv.AutoSize = True
         Me.podlauncherlocalv.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.podlauncherlocalv.Location = New System.Drawing.Point(343, 416)
+        Me.podlauncherlocalv.Location = New System.Drawing.Point(347, 416)
         Me.podlauncherlocalv.Name = "podlauncherlocalv"
-        Me.podlauncherlocalv.Size = New System.Drawing.Size(19, 13)
+        Me.podlauncherlocalv.Size = New System.Drawing.Size(13, 13)
         Me.podlauncherlocalv.TabIndex = 10
-        Me.podlauncherlocalv.Text = "10"
+        Me.podlauncherlocalv.Text = "9"
         '
         'Button1
         '
