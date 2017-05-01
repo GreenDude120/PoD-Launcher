@@ -113,9 +113,11 @@ Public Class Form1
             If savedMainGtw = "False" Then
                 radioMain.Checked = False
                 radioCustom.Checked = True
+                CustomGatewayTextBox.Enabled = True
             Else
                 radioMain.Checked = True
                 radioCustom.Checked = False
+                CustomGatewayTextBox.Enabled = False
             End If
 
             If savedQolChk = "True" Then
@@ -133,71 +135,66 @@ Public Class Form1
 
         End If
 
-        If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "InstallPath", Nothing) Is Nothing Then
+        If Not System.IO.File.Exists("Game.exe") Then
+            MsgBox("Game.exe not found. Are you sure you installed the launcher into a D2 installation?")
+            End
+        End If
 
-            Dim localCRC = GetCRC32("patch_d2.mpq")
+        Dim localCRC = GetCRC32("patch_d2.mpq")
 
-            Dim d2version = FileVersionInfo.GetVersionInfo("Game.exe").FileVersion
+        Dim d2version = FileVersionInfo.GetVersionInfo("Game.exe").FileVersion
 
-            If Not d2version = "1, 0, 13, 60" Then
-                If Not d2version = "1, 0, 13, 64" Then
-                    Dim updatedialog As New UpdateD2()
+        If Not d2version = "1, 0, 13, 60" Then
+            If Not d2version = "1, 0, 13, 64" Then
+                Dim updatedialog As New UpdateD2()
 
-                    If updatedialog.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
+                If updatedialog.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
 
-                        updatedialog.Dispose()
+                    updatedialog.Dispose()
 
-                        Dim gameproc() As Process
-                        Dim updatecomplete As Boolean = False
+                    Dim gameproc() As Process
+                    Dim updatecomplete As Boolean = False
 
-                        While updatecomplete = False
-                            gameproc = Process.GetProcessesByName("Diablo II")
-                            If gameproc.Count > 0 Then
-                                gameproc(0).Kill()
-                                updatecomplete = True
-                            End If
-                        End While
+                    While updatecomplete = False
+                        gameproc = Process.GetProcessesByName("Diablo II")
+                        If gameproc.Count > 0 Then
+                            gameproc(0).Kill()
+                            updatecomplete = True
+                        End If
+                    End While
 
-                    Else
+                Else
 
-                        End
+                    End
 
-                    End If
                 End If
             End If
+        End If
 
-            'disable qol stuff if not on 1.13d
-            If Not d2version = "1, 0, 13, 64" Then
-                qoladdoncbox.Checked = False
-                qoladdoncbox.Enabled = False
-                qoladdoncbox.Text = "QoL Features (1.13d only)"
-            End If
+        'disable qol stuff if not on 1.13d
+        If Not d2version = "1, 0, 13, 64" Then
+            qoladdoncbox.Checked = False
+            qoladdoncbox.Enabled = False
+            qoladdoncbox.Text = "QoL Features (1.13d only)"
+        End If
 
-            localcrcTxt.Text = localCRC
+        localcrcTxt.Text = localCRC
 
-            Dim address As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/currentpatch"
-            Dim client As WebClient = New WebClient()
-            Dim reader As StreamReader = New StreamReader(client.OpenRead(address))
-            servercrcTxt.Text = reader.ReadToEnd
+        Dim address As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/currentpatch"
+        Dim client As WebClient = New WebClient()
+        Dim reader As StreamReader = New StreamReader(client.OpenRead(address))
+        servercrcTxt.Text = reader.ReadToEnd
 
-            If servercrcTxt.Text = localcrcTxt.Text Then
+        If servercrcTxt.Text = localcrcTxt.Text Then
 
-                playBtn.Enabled = True
-                playBtn.Text = "PLAY"
-
-            Else
-
-                playBtn.Enabled = True
-                playBtn.Text = "Update Available"
-                updateAvailable = True
-
-            End If
+            playBtn.Enabled = True
+            playBtn.Text = "PLAY"
 
         Else
 
-            setGatewayBtn.Enabled = False
-            playBtn.Enabled = False
-            playBtn.Text = "No D2 Installation Found"
+            playBtn.Enabled = True
+            playBtn.Text = "Update Available"
+            updateAvailable = True
 
         End If
 
@@ -211,7 +208,7 @@ Public Class Form1
         Dim launchervonlinetxt As Integer
         launchervonlinetxt = wreader.ReadToEnd
 
-        If Int(podlauncherlocalv.Text) = launchervonlinetxt Then
+        If Int(podlauncherlocalv.Text) >= launchervonlinetxt Then
 
             'launcher is up-to-date
 
@@ -287,8 +284,28 @@ Public Class Form1
 
             If qoladdoncbox.Checked Then
                 d2.FileName = "poddiablo.exe"
+                If Not System.IO.File.Exists("poddiablo.exe") Then
+                    MsgBox("poddiablo.exe not found. Please reinstall!")
+                    End
+                End If
+                If Not System.IO.File.Exists("pod.exe") Then
+                    MsgBox("pod.exe not found. Please reinstall!")
+                    End
+                End If
+                If Not System.IO.File.Exists("pod.dll") Then
+                    MsgBox("pod.dll.exe not found. Please reinstall!")
+                    End
+                End If
             Else
                 d2.FileName = "Diablo II.exe"
+                If Not System.IO.File.Exists("Game.exe") Then
+                    MsgBox("Game.exe not found. Are you sure you installed the launcher into a D2 installation?")
+                    End
+                End If
+                If Not System.IO.File.Exists("Diablo II.exe") Then
+                    MsgBox("Diablo II.exe not found. Are you sure you installed the launcher into a D2 installation?")
+                    End
+                End If
             End If
 
             d2.Arguments = ""

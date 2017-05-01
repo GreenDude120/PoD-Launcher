@@ -325,6 +325,7 @@ Partial Class Form1
         '
         'CustomGatewayTextBox
         '
+        Me.CustomGatewayTextBox.Enabled = False
         Me.CustomGatewayTextBox.Location = New System.Drawing.Point(178, 66)
         Me.CustomGatewayTextBox.Name = "CustomGatewayTextBox"
         Me.CustomGatewayTextBox.Size = New System.Drawing.Size(143, 20)
