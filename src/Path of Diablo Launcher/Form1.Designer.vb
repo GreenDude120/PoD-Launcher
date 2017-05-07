@@ -244,6 +244,7 @@ Partial Class Form1
         Me.DEP_Only.TabIndex = 7
         Me.DEP_Only.Text = "DEP Fix"
         Me.DEP_Only.UseVisualStyleBackColor = True
+        Me.DEP_Only.Visible = False
         '
         'DEP_and_XP_SP2
         '

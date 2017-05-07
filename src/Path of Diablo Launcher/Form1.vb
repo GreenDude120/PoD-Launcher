@@ -283,8 +283,6 @@ Public Class Form1
             Dim d2 As New ProcessStartInfo
 
             If qoladdoncbox.Checked Then
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\poddiablo.exe", "WINXPSP3")
-
                 d2.FileName = "poddiablo.exe"
                 If Not System.IO.File.Exists("poddiablo.exe") Then
                     MsgBox("poddiablo.exe not found. Please reinstall!")
@@ -309,6 +307,13 @@ Public Class Form1
                     End
                 End If
             End If
+            Try
+                My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ RUNASADMIN WINXPSP3 DisableNXShowUI")
+            Catch ex As Exception
+                MsgBox("You don't have the required admin rights. Run the launcher as admin and try again!")
+                End
+            End Try
+
 
             d2.Arguments = ""
 
