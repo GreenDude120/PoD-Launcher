@@ -4,7 +4,6 @@ Imports System.Net
 Public Class Form1
 
     Dim updateAvailable As Boolean = False
-    Dim installPath As String
 
     Public Function GetCRC32(ByVal sFileName As String) As String
         Try
@@ -114,9 +113,11 @@ Public Class Form1
             If savedMainGtw = "False" Then
                 radioMain.Checked = False
                 radioCustom.Checked = True
+                CustomGatewayTextBox.Enabled = True
             Else
                 radioMain.Checked = True
                 radioCustom.Checked = False
+                CustomGatewayTextBox.Enabled = False
             End If
 
             If savedQolChk = "True" Then
@@ -134,75 +135,66 @@ Public Class Form1
 
         End If
 
-        If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "InstallPath", Nothing) Is Nothing Then
+        If Not System.IO.File.Exists("Game.exe") Then
+            MsgBox("Game.exe not found. Are you sure you installed the launcher into a D2 installation?")
+            End
+        End If
 
-            installPath = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "InstallPath", Nothing)
+        Dim localCRC = GetCRC32("patch_d2.mpq")
 
-            installPath = installPath.TrimEnd("\") & "\"
+        Dim d2version = FileVersionInfo.GetVersionInfo("Game.exe").FileVersion
 
-            Dim localCRC = GetCRC32(installPath & "patch_d2.mpq")
+        If Not d2version = "1, 0, 13, 60" Then
+            If Not d2version = "1, 0, 13, 64" Then
+                Dim updatedialog As New UpdateD2()
 
-            Dim d2version = FileVersionInfo.GetVersionInfo(installPath & "Game.exe").FileVersion
+                If updatedialog.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
 
-            If Not d2version = "1, 0, 13, 60" Then
-                If Not d2version = "1, 0, 13, 64" Then
-                    Dim updatedialog As New UpdateD2()
+                    updatedialog.Dispose()
 
-                    If updatedialog.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
+                    Dim gameproc() As Process
+                    Dim updatecomplete As Boolean = False
 
-                        updatedialog.Dispose()
+                    While updatecomplete = False
+                        gameproc = Process.GetProcessesByName("Diablo II")
+                        If gameproc.Count > 0 Then
+                            gameproc(0).Kill()
+                            updatecomplete = True
+                        End If
+                    End While
 
-                        Dim gameproc() As Process
-                        Dim updatecomplete As Boolean = False
+                Else
 
-                        While updatecomplete = False
-                            gameproc = Process.GetProcessesByName("Diablo II")
-                            If gameproc.Count > 0 Then
-                                gameproc(0).Kill()
-                                updatecomplete = True
-                            End If
-                        End While
+                    End
 
-                    Else
-
-                        End
-
-                    End If
                 End If
             End If
+        End If
 
-            'disable qol stuff if not on 1.13d
-            If Not d2version = "1, 0, 13, 64" Then
-                qoladdoncbox.Checked = False
-                qoladdoncbox.Enabled = False
-                qoladdoncbox.Text = "QoL Features (1.13d only)"
-            End If
+        'disable qol stuff if not on 1.13d
+        If Not d2version = "1, 0, 13, 64" Then
+            qoladdoncbox.Checked = False
+            qoladdoncbox.Enabled = False
+            qoladdoncbox.Text = "QoL Features (1.13d only)"
+        End If
 
-            localcrcTxt.Text = localCRC
+        localcrcTxt.Text = localCRC
 
-            Dim address As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/currentpatch"
-            Dim client As WebClient = New WebClient()
-            Dim reader As StreamReader = New StreamReader(client.OpenRead(address))
-            servercrcTxt.Text = reader.ReadToEnd
+        Dim address As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/currentpatch"
+        Dim client As WebClient = New WebClient()
+        Dim reader As StreamReader = New StreamReader(client.OpenRead(address))
+        servercrcTxt.Text = reader.ReadToEnd
 
-            If servercrcTxt.Text = localcrcTxt.Text Then
+        If servercrcTxt.Text = localcrcTxt.Text Then
 
-                playBtn.Enabled = True
-                playBtn.Text = "PLAY"
-
-            Else
-
-                playBtn.Enabled = True
-                playBtn.Text = "Update Available"
-                updateAvailable = True
-
-            End If
+            playBtn.Enabled = True
+            playBtn.Text = "PLAY"
 
         Else
 
-            setgatewayBtn.Enabled = False
-            playBtn.Enabled = False
-            playBtn.Text = "No D2 Installation Found"
+            playBtn.Enabled = True
+            playBtn.Text = "Update Available"
+            updateAvailable = True
 
         End If
 
@@ -216,7 +208,7 @@ Public Class Form1
         Dim launchervonlinetxt As Integer
         launchervonlinetxt = wreader.ReadToEnd
 
-        If Int(podlauncherlocalv.Text) = launchervonlinetxt Then
+        If Int(podlauncherlocalv.Text) >= launchervonlinetxt Then
 
             'launcher is up-to-date
 
@@ -239,7 +231,7 @@ Public Class Form1
         patchPrgBr.Visible = False
         localcrcTxt.Visible = True
 
-        Dim localCRC = GetCRC32(installPath & "patch_d2.mpq")
+        Dim localCRC = GetCRC32("patch_d2.mpq")
 
         localcrcTxt.Text = localCRC
 
@@ -258,88 +250,6 @@ Public Class Form1
 
     End Sub
 
-    Public Declare Function GetProcAddress Lib "kernel32" (
-        ByVal hModule As Integer, ByVal lpProcName As String) As Integer
-
-    Public Declare Function GetModuleHandle Lib "Kernel32" Alias "GetModuleHandleA" (
-        ByVal lpModuleName As String) As Integer
-
-    Public Declare Function VirtualAllocEx Lib "kernel32" (
-        ByVal hProcess As Integer,
-        ByVal lpAddress As Integer,
-        ByVal dwSize As Integer,
-        ByVal flAllocationType As Integer,
-        ByVal flProtect As Integer) As Integer
-
-    Public Declare Function OpenProcess Lib "kernel32" (
-        ByVal dwDesiredAccess As Integer,
-        ByVal bInheritHandle As Integer,
-        ByVal dwProcessId As Integer) As Integer
-
-    Public Declare Function WriteProcessMemory Lib "kernel32" (
-        ByVal hProcess As Integer,
-        ByVal lpBaseAddress As Integer,
-        ByVal lpBuffer As String,
-        ByVal nSize As Integer,
-        ByRef lpNumberOfBytesWritten As Integer) As Integer
-
-    Public Declare Function CreateRemoteThread Lib "kernel32" (
-        ByVal hProcess As Integer,
-        ByVal lpThreadAttributes As Integer,
-        ByVal dwStackSize As Integer,
-        ByVal lpStartAddress As Integer,
-        ByVal lpParameter As Integer,
-        ByVal dwCreationFlags As Integer,
-        ByRef lpThreadId As Integer) As Integer
-
-    Public Declare Function CloseHandle Lib "kernel32" Alias "CloseHandle" (
-        ByVal hObject As Integer) As Integer
-
-    Public Declare Function WaitForSingleObject Lib "kernel32.dll" (
-        ByVal hHandle As Integer,
-        ByVal dwMilliseconds As Integer) As Integer
-
-    Public Declare Function GetCurrentProcess Lib "kernel32.dll" () As Integer
-
-    Public Declare Function OpenProcessToken Lib "advapi32.dll" (
-        ByVal ProcessHandle As Integer,
-        ByVal DesiredAcess As Integer,
-        ByRef TokenHandle As Integer) As Integer
-
-    Structure LUID
-        Public LowPart As UInt32
-        Public HighPart As Integer
-    End Structure
-
-    Structure TOKEN_PRIVILEGES
-        Public PrivilegeCount As Integer
-        Public TheLuid As LUID
-        Public Attributes As Integer
-    End Structure
-
-    Public Declare Function LookupPrivilegeValue Lib "advapi32.dll" Alias "LookupPrivilegeValueA" (
-        ByVal lpSystemName As String,
-        ByVal lpName As String,
-        ByRef lpLuid As LUID) As Integer
-
-    Public Declare Function AdjustTokenPrivileges Lib "advapi32.dll" (
-        ByVal TokenHandle As Integer,
-        ByVal DisableAllPrivileges As Boolean,
-        ByRef NewState As TOKEN_PRIVILEGES,
-         BufferLength As Integer,
-        ByRef PreviousState As Integer,
-        ByRef ReturnLength As Integer) As Integer
-
-    Public Declare Function MessageBox Lib "user32.dll" Alias "MessageBoxA" (
-        ByVal hWnd As Integer,
-        ByVal lpText As String,
-        ByVal lpCaption As String,
-        ByVal uType As Integer) As Integer
-
-
-
-    Const INFINITE = &HFFFF
-
     Private Sub playBtn_Click(sender As Object, e As EventArgs) Handles playBtn.Click
 
         If updateAvailable = True Then
@@ -347,13 +257,13 @@ Public Class Form1
             localcrcTxt.Visible = False
             patchPrgBr.Visible = True
 
-            If System.IO.File.Exists(installPath & "patch_d2.mpq.bak") = True Then
+            If System.IO.File.Exists("patch_d2.mpq.bak") = True Then
 
-                System.IO.File.Delete(installPath & "patch_d2.mpq.bak")
+                System.IO.File.Delete("patch_d2.mpq.bak")
 
             End If
 
-            My.Computer.FileSystem.RenameFile(installPath & "patch_d2.mpq", "patch_d2.mpq.bak")
+            My.Computer.FileSystem.RenameFile("patch_d2.mpq", "patch_d2.mpq.bak")
 
             Dim patchclient As WebClient = New WebClient
 
@@ -361,17 +271,56 @@ Public Class Form1
 
             AddHandler patchclient.DownloadFileCompleted, AddressOf patchclient_DownloadCompleted
 
-            patchclient.DownloadFileAsync(New Uri("https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/patch_d2.mpq"), installPath & "patch_d2.mpq")
+            Dim patchlinkfile As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/patch_d2"
+            Dim wclient As WebClient = New WebClient()
+            Dim wreader As StreamReader = New StreamReader(wclient.OpenRead(patchlinkfile))
+            Dim patchlink As String
+            patchlink = wreader.ReadToEnd
+
+            patchclient.DownloadFileAsync(New Uri(patchlink), "patch_d2.mpq")
 
             playBtn.Text = "Update in Progress"
 
-            playBtn.Enabled = False
 
+            playBtn.Enabled = False
 
         Else
 
             Dim d2 As New ProcessStartInfo
-            d2.FileName = installPath & "Diablo II.exe"
+
+            If qoladdoncbox.Checked Then
+                d2.FileName = "poddiablo.exe"
+                If Not System.IO.File.Exists("poddiablo.exe") Then
+                    MsgBox("poddiablo.exe not found. Please reinstall!")
+                    End
+                End If
+                If Not System.IO.File.Exists("pod.exe") Then
+                    MsgBox("pod.exe not found. Please reinstall!")
+                    End
+                End If
+                If Not System.IO.File.Exists("pod.dll") Then
+                    MsgBox("pod.dll.exe not found. Please reinstall!")
+                    End
+                End If
+            Else
+                d2.FileName = "Diablo II.exe"
+                If Not System.IO.File.Exists("Game.exe") Then
+                    MsgBox("Game.exe not found. Are you sure you installed the launcher into a D2 installation?")
+                    End
+                End If
+                If Not System.IO.File.Exists("Diablo II.exe") Then
+                    MsgBox("Diablo II.exe not found. Are you sure you installed the launcher into a D2 installation?")
+                    End
+                End If
+            End If
+            Try
+                My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ RUNASADMIN WINXPSP3 DisableNXShowUI")
+            Catch ex As Exception
+                MsgBox("You don't have the required admin rights. Run the launcher as admin and try again!")
+                End
+            End Try
+
+
             d2.Arguments = ""
 
             If wChk.Checked = True Then
@@ -445,98 +394,17 @@ Public Class Form1
             If radioMain.Checked Then
                 If String.Compare("s.pathofdiablo.com", CustomGatewayTextBox.Text, True) <> 0 Then
                     'show error message and don't start the game
-                    MessageBox(0, "Choose a gateway option and click ""Set Gateway""" + Environment.NewLine + "After that you can start the game and start playing online.", "QoL-Features", &H30 Or &H10000)
+                    MsgBox("Choose a gateway option and click ""Set Gateway""" + Environment.NewLine + "After that you can start the game and start playing online.")
                     Return
                 End If
             End If
 
-                Me.Hide()                           'hide window, so that it doesn't look like it doesn't respond anymore
+            Me.Hide()                           'hide window, so that it doesn't look like it doesn't respond anymore
             Dim p As New Process
             p.StartInfo = d2
             p.Start()
 
-            If qoladdoncbox.Checked = True Then
-                p.WaitForExit()                     'wait for "diablo II.exe" finish running game.exe
-                System.Threading.Thread.Sleep(5000)   'security wait for the window to build up
-
-                Dim sucess As Integer = 1
-
-                'get debug privileges
-                Dim hToken As Integer
-                Dim sedebugnameValue As LUID
-                Dim tkp As New TOKEN_PRIVILEGES
-                If OpenProcessToken(GetCurrentProcess(), &H20 Or &H8, hToken) <> 0 Then
-                    If LookupPrivilegeValue(vbNullString, "SeDebugPrivilege", sedebugnameValue) <> 0 Then
-                        tkp.PrivilegeCount = 1
-                        tkp.TheLuid = sedebugnameValue
-                        tkp.Attributes = &H2
-                        If AdjustTokenPrivileges(hToken, False, tkp, System.Runtime.InteropServices.Marshal.SizeOf(tkp), 0, 0) <> 0 Then
-                            'null
-                        Else
-                            MessageBox(0, "Error Code:  8" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
-                            sucess = 0
-                        End If
-                    Else
-                        MessageBox(0, "Error Code: 7" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
-                        sucess = 0
-                    End If
-                Else
-                    MessageBox(0, "Error Code: 6" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
-                    sucess = 0
-                End If
-                CloseHandle(hToken)
-
-                If sucess = 1 Then
-                    Dim x As Process() = Process.GetProcesses()
-                    For Each current As Process In x
-                        If String.IsNullOrEmpty(current.MainWindowTitle) Then
-                            Continue For
-                        End If
-                        If String.Compare("Diablo II", current.MainWindowTitle, True) = 0 Then
-                            Dim hProc As Integer = OpenProcess(&HF0000 Or &H100000 Or &HFFFF, False, current.Id)
-                            If hProc <> 0 Then
-                                Dim hKernel32 As Integer = GetModuleHandle("Kernel32.dll")
-                                If hKernel32 <> 0 Then
-                                    Dim lpLoadLibraryA As Integer = GetProcAddress(hKernel32, "LoadLibraryA")
-                                    If lpLoadLibraryA <> 0 Then
-                                        Dim wPath As String = installPath & "pod.dll"
-                                        Dim lpRemoteString As Integer = VirtualAllocEx(hProc, 0, Len(wPath), &H2000 Or &H1000, &H4)
-                                        If lpRemoteString <> 0 Then
-                                            Dim writeReturn As Integer = WriteProcessMemory(hProc, lpRemoteString, wPath, wPath.Length, 0)
-                                            If writeReturn <> 0 Then
-                                                Dim hThread As Integer = CreateRemoteThread(hProc, 0, 0, lpLoadLibraryA, lpRemoteString, 0, 0)
-                                                WaitForSingleObject(hThread, INFINITE)
-                                            Else
-                                                MessageBox(0, "Error Code: 5" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
-                                                sucess = 0
-                                            End If
-                                        Else
-                                            MessageBox(0, "Error Code: 4" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
-                                            sucess = 0
-                                        End If
-                                    Else
-                                        MessageBox(0, "Error Code: 3" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
-                                        sucess = 0
-                                    End If
-                                Else
-                                    MessageBox(0, "Error Code: 2" + Environment.NewLine + "Please file a bug report" + Environment.NewLine + "Until it is fixed, please try running podqol.exe every time you start the game", "QoL-Features", &H30 Or &H10000)
-                                    sucess = 0
-                                End If
-                            Else
-                                MessageBox(0, "Error Code: 1" + Environment.NewLine + "Please run the Path of Diablo Launcher as Admin" + Environment.NewLine + "or run podqol.exe after the game has started", "QoL-Features", &H30 Or &H10000)
-                                sucess = 0
-                            End If
-                            Exit For
-                        End If
-                    Next
-                End If
-
-
-                End
-
-            Else
-                End
-            End If
+            End
 
         End If
 
@@ -544,7 +412,7 @@ Public Class Form1
 
     Private Sub DEP_Only_Click(sender As Object, e As EventArgs) Handles DEP_Only.Click
         Try
-            Dim wDEP As New StreamWriter(installPath & "000aaaDEP.bat")
+            Dim wDEP As New StreamWriter("000aaaDEP.bat")
             wDEP.WriteLine("@ECHO OFF")
             wDEP.WriteLine("ECHO %~dp0")
             wDEP.WriteLine("set ""mypath=%~dp0%Diablo II.exe""")
@@ -556,7 +424,7 @@ Public Class Form1
             wDEP.WriteLine("EXIT")
             wDEP.Close()
             MsgBox("When you click OK you will be sent to your Diablo II folder" & vbCrLf & vbCrLf & "Right click on 000aaaDEP.bat and run as admin, the text should come out green, a restart might be required")
-            Process.Start(installPath)
+            Process.Start(".")
         Catch ex As Exception
             MsgBox("Error generating fix file, it's probably open")
         End Try
@@ -565,7 +433,7 @@ Public Class Form1
 
     Private Sub DEP_and_XP_SP2_Click(sender As Object, e As EventArgs) Handles DEP_and_XP_SP2.Click
         Try
-            Dim wDEP As New StreamWriter(installPath & "000aaaDEP+XP_SP2.bat")
+            Dim wDEP As New StreamWriter("000aaaDEP+XP_SP2.bat")
             wDEP.WriteLine("@ECHO OFF")
             wDEP.WriteLine("ECHO %~dp0")
             wDEP.WriteLine("set ""mypath=%~dp0%Diablo II.exe""")
@@ -577,7 +445,7 @@ Public Class Form1
             wDEP.WriteLine("EXIT")
             wDEP.Close()
             MsgBox("When you click OK you will be sent to your Diablo II folder" & vbCrLf & vbCrLf & "Right click on 000aaaDEP+XP_SP2.bat and run as admin, the text should come out green, a restart might be required")
-            Process.Start(installPath)
+            Process.Start(".")
         Catch ex As Exception
             MsgBox("Error generating fix file, it's probably open")
         End Try
@@ -613,13 +481,13 @@ Public Class Form1
     Private Sub downloadcfg_Click(sender As Object, e As EventArgs) Handles downloadcfg.Click
 
         Dim downloadfilter As WebClient = New WebClient
-        downloadfilter.DownloadFileAsync(New Uri(lootfilterurl.Text), installPath & "item.filter")
+        downloadfilter.DownloadFileAsync(New Uri(lootfilterurl.Text), "item.filter")
         MsgBox("item.filter was overwrote by " & lootfilterurl.Text)
     End Sub
 
     Private Sub resetcfg_Click(sender As Object, e As EventArgs) Handles resetcfg.Click
         Dim resetfilter As WebClient = New WebClient
-        resetfilter.DownloadFileAsync(New Uri("http://pathofdiablo.com/item.filter"), installPath & "item.filter")
+        resetfilter.DownloadFileAsync(New Uri("http://pathofdiablo.com/item.filter"), "item.filter")
         MsgBox("item.filter was overwrote by http://pathofdiablo.com/item.filter")
     End Sub
 
@@ -675,27 +543,33 @@ Public Class Form1
 
     Private Sub handleSetCurrentGateway()
 
-        If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing) Is Nothing Then
+        Try
 
-            Dim testMe = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
-            If testMe.GetType() Is GetType(String()) Then
+            If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing) Is Nothing Then
 
-                Dim gatewayValues() As String = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
+                Dim testMe = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
+                If testMe.GetType() Is GetType(String()) Then
 
-                Dim currentRealm As Integer = CInt(gatewayValues(1)) - 1
+                    Dim gatewayValues() As String = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
 
-                If gatewayValues.Length > (2 + currentRealm * 3) Then
+                    Dim currentRealm As Integer = CInt(gatewayValues(1)) - 1
 
-                    Dim currentRealmAddress As String = gatewayValues(2 + currentRealm * 3)
-                    CustomGatewayTextBox.Text = currentRealmAddress
+                    If gatewayValues.Length > (2 + currentRealm * 3) Then
+
+                        Dim currentRealmAddress As String = gatewayValues(2 + currentRealm * 3)
+                        CustomGatewayTextBox.Text = currentRealmAddress
+
+                    End If
 
                 End If
 
+
+
             End If
 
-
-
-        End If
+        Catch ex As Exception
+            Return
+        End Try
 
     End Sub
 
