@@ -271,7 +271,13 @@ Public Class Form1
 
             AddHandler patchclient.DownloadFileCompleted, AddressOf patchclient_DownloadCompleted
 
-            patchclient.DownloadFileAsync(New Uri("https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/patch_d2.mpq"), "patch_d2.mpq")
+            Dim patchlinkfile As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/patch_d2"
+            Dim wclient As WebClient = New WebClient()
+            Dim wreader As StreamReader = New StreamReader(wclient.OpenRead(patchlinkfile))
+            Dim patchlink As String
+            patchlink = wreader.ReadToEnd
+
+            patchclient.DownloadFileAsync(New Uri(patchlink), "patch_d2.mpq")
 
             playBtn.Text = "Update in Progress"
 
