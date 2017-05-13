@@ -183,7 +183,7 @@ Public Class Form1
         Dim address As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/currentpatch"
         Dim client As WebClient = New WebClient()
         Dim reader As StreamReader = New StreamReader(client.OpenRead(address))
-        servercrcTxt.Text = reader.ReadToEnd
+        servercrcTxt.Text = reader.ReadLine.Trim
 
         If servercrcTxt.Text = localcrcTxt.Text Then
 
@@ -206,7 +206,7 @@ Public Class Form1
         Dim wclient As WebClient = New WebClient()
         Dim wreader As StreamReader = New StreamReader(wclient.OpenRead(launchervonline))
         Dim launchervonlinetxt As Integer
-        launchervonlinetxt = wreader.ReadToEnd
+        launchervonlinetxt = wreader.ReadLine.Trim
 
         If Int(podlauncherlocalv.Text) >= launchervonlinetxt Then
 
@@ -263,7 +263,9 @@ Public Class Form1
 
             End If
 
-            My.Computer.FileSystem.RenameFile("patch_d2.mpq", "patch_d2.mpq.bak")
+            If System.IO.File.Exists("patch_d2.mpq") Then
+                My.Computer.FileSystem.RenameFile("patch_d2.mpq", "patch_d2.mpq.bak")
+            End If
 
             Dim patchclient As WebClient = New WebClient
 
@@ -275,7 +277,7 @@ Public Class Form1
             Dim wclient As WebClient = New WebClient()
             Dim wreader As StreamReader = New StreamReader(wclient.OpenRead(patchlinkfile))
             Dim patchlink As String
-            patchlink = wreader.ReadToEnd
+            patchlink = wreader.ReadLine
 
             patchclient.DownloadFileAsync(New Uri(patchlink), "patch_d2.mpq")
 
