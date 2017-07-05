@@ -53,11 +53,10 @@ Public Class Form1
         radioCustom.Checked = Not My.Settings.radioGateWay
         CustomGatewayTextBox.Enabled = Not My.Settings.radioGateWay
 
-        If My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing) Is Nothing Then
-
-            Dim defaultGatewayValues() As String = {"1009", "01", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe"}
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", defaultGatewayValues)
-
+        'if we can't retrieve the current gateway, then restore the default gateways
+        If Not HandleSetCurrentGateway() Then
+            RestoreDefaultGateways()
+            HandleSetCurrentGateway()
         End If
 
         If Not System.IO.File.Exists("Game.exe") Then
@@ -124,8 +123,6 @@ Public Class Form1
         End If
 
         playBtn.BringToFront()
-
-        handleSetCurrentGateway()
 
         Dim launchervonline As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/launcherversion"
         Dim wclient As WebClient = New WebClient()
@@ -404,21 +401,15 @@ Public Class Form1
 
         My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", newGatewayValues)
 
-        handleSetCurrentGateway()
+        HandleSetCurrentGateway()
 
     End Sub
 
     Private Sub resoreDefaultGatewaysBtn_Click(sender As Object, e As EventArgs) Handles resoreDefaultGatewaysBtn.Click
 
-        Dim defaultGatewayValues() As String = {"1009", "01", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe"}
-        My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", defaultGatewayValues)
+        RestoreDefaultGateways()
 
-        If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", Nothing) Is Nothing Then
-            My.Computer.Registry.CurrentUser.OpenSubKey("Software\Blizzard Entertainment\Diablo II", True).DeleteValue("BNETIP")
-        End If
-
-
-        handleSetCurrentGateway()
+        HandleSetCurrentGateway()
 
     End Sub
 
@@ -428,7 +419,18 @@ Public Class Form1
 
     End Sub
 
-    Private Sub handleSetCurrentGateway()
+    Private Sub RestoreDefaultGateways()
+
+        Dim defaultGatewayValues() As String = {"1009", "01", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe"}
+        My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", defaultGatewayValues)
+
+        If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", Nothing) Is Nothing Then
+            My.Computer.Registry.CurrentUser.OpenSubKey("Software\Blizzard Entertainment\Diablo II", True).DeleteValue("BNETIP")
+        End If
+
+    End Sub
+
+    Private Function HandleSetCurrentGateway() As Boolean
 
         Try
 
@@ -445,19 +447,22 @@ Public Class Form1
 
                         Dim currentRealmAddress As String = gatewayValues(2 + currentRealm * 3)
                         CustomGatewayTextBox.Text = currentRealmAddress
-
+                    Else
+                        Return False
                     End If
-
+                Else
+                    Return False
                 End If
 
-
-
+            Else
+                Return False
             End If
 
         Catch ex As Exception
-            Return
+            Return False
         End Try
 
-    End Sub
+        Return True
+    End Function
 
 End Class
