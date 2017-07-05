@@ -49,84 +49,9 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "wChk", Nothing) Is Nothing Then
-
-            Dim savedwChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "wChk", Nothing)
-            Dim savedskipChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "skipChk", Nothing)
-            Dim savednsChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "nsChk", Nothing)
-            Dim saveddfxChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "dfxChk", Nothing)
-            Dim savedaspectChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "aspectChk", Nothing)
-            Dim savedrunasChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "runasChk", Nothing)
-            Dim savedtxtChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "txtChk", Nothing)
-            Dim saveddirectChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "directChk", Nothing)
-            Dim savedMainGtw = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "mainGtw", Nothing)
-            Dim savedQolChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "qolChk", Nothing)
-
-            If savedwChk = "True" Then
-                wChk.Checked = True
-            Else
-                wChk.Checked = False
-            End If
-
-            If savedskipChk = "True" Then
-                skipChk.Checked = True
-            Else
-                skipChk.Checked = False
-            End If
-
-            If savednsChk = "True" Then
-                nsChk.Checked = True
-            Else
-                nsChk.Checked = False
-            End If
-
-            If saveddfxChk = "True" Then
-                dfxChk.Checked = True
-            Else
-                dfxChk.Checked = False
-            End If
-
-            If savedaspectChk = "True" Then
-                aspectChk.Checked = True
-            Else
-                aspectChk.Checked = False
-            End If
-
-            If savedtxtChk = "True" Then
-                txtcbox.Checked = True
-            Else
-                txtcbox.Checked = False
-            End If
-
-            If saveddirectChk = "True" Then
-                directcbox.Checked = True
-            Else
-                directcbox.Checked = False
-            End If
-
-            If savedrunasChk = "True" Then
-                runasChk.Checked = True
-            Else
-                runasChk.Checked = False
-            End If
-
-            If savedMainGtw = "False" Then
-                radioMain.Checked = False
-                radioCustom.Checked = True
-                CustomGatewayTextBox.Enabled = True
-            Else
-                radioMain.Checked = True
-                radioCustom.Checked = False
-                CustomGatewayTextBox.Enabled = False
-            End If
-
-            If savedQolChk = "True" Then
-                qoladdoncbox.Checked = True
-            Else
-                qoladdoncbox.Checked = False
-            End If
-
-        End If
+        'data binding doesn't work for multiple radio buttons, that's why we need to do it by hand
+        radioCustom.Checked = Not My.Settings.radioGateWay
+        CustomGatewayTextBox.Enabled = Not My.Settings.radioGateWay
 
         If My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing) Is Nothing Then
 
@@ -294,32 +219,32 @@ Public Class Form1
                 d2.FileName = "poddiablo.exe"
                 If Not System.IO.File.Exists("poddiablo.exe") Then
                     MsgBox("poddiablo.exe not found. Please reinstall!")
-                    End
+                    Me.Close()
                 End If
                 If Not System.IO.File.Exists("pod.exe") Then
                     MsgBox("pod.exe not found. Please reinstall!")
-                    End
+                    Me.Close()
                 End If
                 If Not System.IO.File.Exists("pod.dll") Then
                     MsgBox("pod.dll.exe not found. Please reinstall!")
-                    End
+                    Me.Close()
                 End If
             Else
                 d2.FileName = "Diablo II.exe"
                 If Not System.IO.File.Exists("Game.exe") Then
                     MsgBox("Game.exe not found. Are you sure you installed the launcher into a D2 installation?")
-                    End
+                    Me.Close()
                 End If
                 If Not System.IO.File.Exists("Diablo II.exe") Then
                     MsgBox("Diablo II.exe not found. Are you sure you installed the launcher into a D2 installation?")
-                    End
+                    Me.Close()
                 End If
             End If
             Try
                 My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ RUNASADMIN WINXPSP3 DisableNXShowUI")
             Catch ex As Exception
                 MsgBox("You don't have the required admin rights. Run the launcher as admin and try again!")
-                End
+                Me.Close()
             End Try
 
 
@@ -327,70 +252,34 @@ Public Class Form1
 
             If wChk.Checked = True Then
                 d2.Arguments = d2.Arguments & "-w "
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "wChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "wChk", "False")
             End If
 
             If skipChk.Checked = True Then
                 d2.Arguments = d2.Arguments & "-skiptobnet "
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "skipChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "skipChk", "False")
             End If
 
             If nsChk.Checked = True Then
                 d2.Arguments = d2.Arguments & "-ns "
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "nsChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "nsChk", "False")
             End If
 
             If dfxChk.Checked = True Then
                 d2.Arguments = d2.Arguments & "-3dfx "
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "dfxChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "dfxChk", "False")
             End If
 
             If directcbox.Checked = True Then
                 d2.Arguments = d2.Arguments & "-direct "
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "directChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "directChk", "False")
             End If
 
             If txtcbox.Checked = True Then
                 d2.Arguments = d2.Arguments & "-txt "
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "txtChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "txtChk", "False")
             End If
 
             If aspectChk.Checked = True Then
                 d2.Arguments = d2.Arguments & "-nofixaspect "
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "aspectChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "aspectChk", "False")
             End If
 
             If runasChk.Checked = True Then
                 d2.Verb = "runas"
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "runasChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "runasChk", "False")
-            End If
-
-            If radioMain.Checked = True Then
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "mainGtw", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "mainGtw", "False")
-            End If
-
-            If qoladdoncbox.Checked = True Then
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "qolChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "qolChk", "False")
             End If
 
             If radioMain.Checked Then
@@ -406,7 +295,7 @@ Public Class Form1
             p.StartInfo = d2
             p.Start()
 
-            End
+            Me.Close()
 
         End If
 
@@ -535,11 +424,7 @@ Public Class Form1
 
     Private Sub radioCustom_CheckedChanged(sender As Object, e As EventArgs) Handles radioCustom.CheckedChanged
 
-        If radioCustom.Checked = True Then
-            CustomGatewayTextBox.Enabled = True
-        Else
-            CustomGatewayTextBox.Enabled = False
-        End If
+        CustomGatewayTextBox.Enabled = radioCustom.Checked
 
     End Sub
 
