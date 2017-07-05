@@ -95,13 +95,6 @@ Public Class Form1
             End If
         End If
 
-        'disable qol stuff if not on 1.13d
-        If Not d2version = "1, 0, 13, 64" Then
-            qoladdoncbox.Checked = False
-            qoladdoncbox.Enabled = False
-            qoladdoncbox.Text = "QoL Features (1.13d only)"
-        End If
-
         localcrcTxt.Text = localCRC
 
         Dim address As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/currentpatch"
@@ -212,33 +205,17 @@ Public Class Form1
 
             Dim d2 As New ProcessStartInfo
 
-            If qoladdoncbox.Checked Then
-                d2.FileName = "poddiablo.exe"
-                If Not System.IO.File.Exists("poddiablo.exe") Then
-                    MsgBox("poddiablo.exe not found. Please reinstall!")
-                    Me.Close()
-                End If
-                If Not System.IO.File.Exists("pod.exe") Then
-                    MsgBox("pod.exe not found. Please reinstall!")
-                    Me.Close()
-                End If
-                If Not System.IO.File.Exists("pod.dll") Then
-                    MsgBox("pod.dll.exe not found. Please reinstall!")
-                    Me.Close()
-                End If
-            Else
-                d2.FileName = "Diablo II.exe"
-                If Not System.IO.File.Exists("Game.exe") Then
-                    MsgBox("Game.exe not found. Are you sure you installed the launcher into a D2 installation?")
-                    Me.Close()
-                End If
-                If Not System.IO.File.Exists("Diablo II.exe") Then
-                    MsgBox("Diablo II.exe not found. Are you sure you installed the launcher into a D2 installation?")
-                    Me.Close()
-                End If
+            d2.FileName = "Diablo II.exe"
+            If Not System.IO.File.Exists("Game.exe") Then
+                MsgBox("Game.exe not found. Are you sure you installed the launcher into a D2 installation?")
+                Me.Close()
+            End If
+            If Not System.IO.File.Exists("Diablo II.exe") Then
+                MsgBox("Diablo II.exe not found. Are you sure you installed the launcher into a D2 installation?")
+                Me.Close()
             End If
             Try
-                My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ RUNASADMIN WINXPSP3 DisableNXShowUI")
+                My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ DisableNXShowUI")
             Catch ex As Exception
                 MsgBox("You don't have the required admin rights. Run the launcher as admin and try again!")
                 Me.Close()
