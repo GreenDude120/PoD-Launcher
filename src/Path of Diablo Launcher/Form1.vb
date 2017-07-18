@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Threading
 
 Public Class Form1
 
@@ -131,6 +132,9 @@ Public Class Form1
             MsgBox("A new version of the Path of Diablo Launcher is available. Please uninstall this current version and download the updated version.")
             System.Diagnostics.Process.Start("http://pathofdiablo.com/wiki/index.php/Download")
         End If
+
+        'Dim thread As New Thread(AddressOf UpdaterThread)
+        'Thread.Start()
     End Sub
 
     Private Sub patchclient_ProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs)
@@ -338,9 +342,7 @@ Public Class Form1
     End Sub
 
     Private Sub viewmorecfg_Click(sender As Object, e As EventArgs) Handles viewmorecfg.Click
-
         System.Diagnostics.Process.Start("http://pathofdiablo.com/filters")
-
     End Sub
 
     Private Sub downloadcfg_Click(sender As Object, e As EventArgs) Handles downloadcfg.Click
@@ -441,5 +443,30 @@ Public Class Form1
 
         Return True
     End Function
+
+    Delegate Sub SetEnabledDelegate(ByVal ctrl As Control, ByVal bool As Boolean)
+    Private Sub SetEnabled(ByVal ctrl As Control, ByVal bool As Boolean)
+        If ctrl.InvokeRequired Then
+            ctrl.Invoke(New SetEnabledDelegate(AddressOf SetEnabled), {ctrl, bool})
+            Return
+        End If
+        ctrl.Enabled = bool
+    End Sub
+
+    Delegate Sub SetTextDelegate(ByVal ctrl As Control, ByVal text As String)
+    Private Sub SetText(ByVal ctrl As Control, ByVal text As String)
+        If ctrl.InvokeRequired Then
+            ctrl.Invoke(New SetTextDelegate(AddressOf SetText), {ctrl, text})
+            Return
+        End If
+        ctrl.Text = text
+    End Sub
+
+    Private Sub UpdaterThread()
+
+        'playBtn.Enabled = False
+        playBtn.Text = "Hello, World!"
+
+    End Sub
 
 End Class
