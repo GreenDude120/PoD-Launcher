@@ -50,16 +50,6 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        'data binding doesn't work for multiple radio buttons, that's why we need to do it by hand
-        radioCustom.Checked = Not My.Settings.radioGateWay
-        CustomGatewayTextBox.Enabled = Not My.Settings.radioGateWay
-
-        'if we can't retrieve the current gateway, then restore the default gateways
-        If Not HandleSetCurrentGateway() Then
-            RestoreDefaultGateways()
-            HandleSetCurrentGateway()
-        End If
-
         If Not System.IO.File.Exists("Game.exe") Then
             MsgBox("Game.exe not found. Are you sure you installed the launcher into a D2 installation?")
             End
@@ -96,25 +86,25 @@ Public Class Form1
             End If
         End If
 
-        localcrcTxt.Text = localCRC
+        'localcrcTxt.Text = localCRC
 
         Dim address As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/currentpatch"
         Dim client As WebClient = New WebClient()
         Dim reader As StreamReader = New StreamReader(client.OpenRead(address))
-        servercrcTxt.Text = reader.ReadLine.Trim
+        'servercrcTxt.Text = reader.ReadLine.Trim
 
-        If servercrcTxt.Text = localcrcTxt.Text Then
+        'If servercrcTxt.Text = localcrcTxt.Text Then
 
-            playBtn.Enabled = True
+        playBtn.Enabled = True
             playBtn.Text = "PLAY"
 
-        Else
+        'Else
 
-            playBtn.Enabled = True
+        playBtn.Enabled = True
             playBtn.Text = "Update Available"
             updateAvailable = True
 
-        End If
+        'End If
 
         playBtn.BringToFront()
 
@@ -133,8 +123,9 @@ Public Class Form1
             System.Diagnostics.Process.Start("http://pathofdiablo.com/wiki/index.php/Download")
         End If
 
-        'Dim thread As New Thread(AddressOf UpdaterThread)
-        'Thread.Start()
+        Dim thread As New Thread(AddressOf UpdaterThread)
+        thread.IsBackground = True
+        thread.Start()
     End Sub
 
     Private Sub patchclient_ProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs)
@@ -142,30 +133,30 @@ Public Class Form1
         Dim totalBytes As Double = Double.Parse(e.TotalBytesToReceive.ToString())
         Dim percentage As Double = bytesIn / totalBytes * 100
 
-        patchPrgBr.Value = Int32.Parse(Math.Truncate(percentage).ToString())
+        'patchPrgBr.Value = Int32.Parse(Math.Truncate(percentage).ToString())
     End Sub
 
     Private Sub patchclient_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
 
-        patchPrgBr.Visible = False
-        localcrcTxt.Visible = True
+        'patchPrgBr.Visible = False
+        'localcrcTxt.Visible = True
 
         Dim localCRC = GetCRC32("patch_d2.mpq")
 
-        localcrcTxt.Text = localCRC
+        'localcrcTxt.Text = localCRC
 
-        If servercrcTxt.Text = localcrcTxt.Text Then
+        'If servercrcTxt.Text = localcrcTxt.Text Then
 
-            updateAvailable = False
+        updateAvailable = False
             playBtn.Enabled = True
             playBtn.Text = "PLAY"
 
-        Else
+        'Else
 
-            playBtn.Enabled = False
+        playBtn.Enabled = False
             playBtn.Text = "Patch Failed"
 
-        End If
+        'End If
 
     End Sub
 
@@ -173,8 +164,8 @@ Public Class Form1
 
         If updateAvailable = True Then
 
-            localcrcTxt.Visible = False
-            patchPrgBr.Visible = True
+            'localcrcTxt.Visible = False
+            'patchPrgBr.Visible = True
 
             If System.IO.File.Exists("patch_d2.mpq.bak") = True Then
 
@@ -256,18 +247,6 @@ Public Class Form1
                 d2.Arguments = d2.Arguments & "-nofixaspect "
             End If
 
-            If runasChk.Checked = True Then
-                d2.Verb = "runas"
-            End If
-
-            If radioMain.Checked Then
-                If String.Compare("s.pathofdiablo.com", CustomGatewayTextBox.Text, True) <> 0 Then
-                    'show error message and don't start the game
-                    MsgBox("Choose a gateway option and click ""Set Gateway""" + Environment.NewLine + "After that you can start the game and start playing online.")
-                    Return
-                End If
-            End If
-
             Me.Hide()                           'hide window, so that it doesn't look like it doesn't respond anymore
             Dim p As New Process
             p.StartInfo = d2
@@ -279,7 +258,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DEP_Only_Click(sender As Object, e As EventArgs) Handles DEP_Only.Click
+    Private Sub DEP_Only_Click(sender As Object, e As EventArgs)
         Try
             Dim wDEP As New StreamWriter("000aaaDEP.bat")
             wDEP.WriteLine("@ECHO OFF")
@@ -300,7 +279,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DEP_and_XP_SP2_Click(sender As Object, e As EventArgs) Handles DEP_and_XP_SP2.Click
+    Private Sub DEP_and_XP_SP2_Click(sender As Object, e As EventArgs)
         Try
             Dim wDEP As New StreamWriter("000aaaDEP+XP_SP2.bat")
             wDEP.WriteLine("@ECHO OFF")
@@ -358,92 +337,6 @@ Public Class Form1
         MsgBox("item.filter was overwrote by http://pathofdiablo.com/item.filter")
     End Sub
 
-    Private Sub setGatewayBtn_Click(sender As Object, e As EventArgs) Handles setGatewayBtn.Click
-
-        Dim gatewayValues = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
-
-        My.Computer.Registry.CurrentUser.DeleteSubKey("Software\Battle.net\Configuration")
-
-        Dim newGatewayValues() As String
-
-        If radioMain.Checked Then
-
-            newGatewayValues = {"1009", "05", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe", "s.pathofdiablo.com", "6", "Path of Diablo"}
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", "s.pathofdiablo.com")
-
-        Else
-
-            newGatewayValues = {"1009", "05", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe", CustomGatewayTextBox.Text, "6", "Path of Diablo"}
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", CustomGatewayTextBox.Text)
-
-        End If
-
-        My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", newGatewayValues)
-
-        HandleSetCurrentGateway()
-
-    End Sub
-
-    Private Sub resoreDefaultGatewaysBtn_Click(sender As Object, e As EventArgs) Handles resoreDefaultGatewaysBtn.Click
-
-        RestoreDefaultGateways()
-
-        HandleSetCurrentGateway()
-
-    End Sub
-
-    Private Sub radioCustom_CheckedChanged(sender As Object, e As EventArgs) Handles radioCustom.CheckedChanged
-
-        CustomGatewayTextBox.Enabled = radioCustom.Checked
-
-    End Sub
-
-    Private Sub RestoreDefaultGateways()
-
-        Dim defaultGatewayValues() As String = {"1009", "01", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe"}
-        My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", defaultGatewayValues)
-
-        If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", Nothing) Is Nothing Then
-            My.Computer.Registry.CurrentUser.OpenSubKey("Software\Blizzard Entertainment\Diablo II", True).DeleteValue("BNETIP")
-        End If
-
-    End Sub
-
-    Private Function HandleSetCurrentGateway() As Boolean
-
-        Try
-
-            If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing) Is Nothing Then
-
-                Dim testMe = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
-                If testMe.GetType() Is GetType(String()) Then
-
-                    Dim gatewayValues() As String = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
-
-                    Dim currentRealm As Integer = CInt(gatewayValues(1)) - 1
-
-                    If gatewayValues.Length > (2 + currentRealm * 3) Then
-
-                        Dim currentRealmAddress As String = gatewayValues(2 + currentRealm * 3)
-                        CustomGatewayTextBox.Text = currentRealmAddress
-                    Else
-                        Return False
-                    End If
-                Else
-                    Return False
-                End If
-
-            Else
-                Return False
-            End If
-
-        Catch ex As Exception
-            Return False
-        End Try
-
-        Return True
-    End Function
-
     Delegate Sub SetEnabledDelegate(ByVal ctrl As Control, ByVal bool As Boolean)
     Private Sub SetEnabled(ByVal ctrl As Control, ByVal bool As Boolean)
         If ctrl.InvokeRequired Then
@@ -462,10 +355,31 @@ Public Class Form1
         ctrl.Text = text
     End Sub
 
+    Delegate Sub LogDelegate(ByVal text As String)
+    Private Sub Log(ByVal text As String)
+        If LogBox.InvokeRequired Then
+            LogBox.Invoke(New LogDelegate(AddressOf Log), {text})
+            Return
+        End If
+        LogBox.Items.Add(text)
+        'highlight last added item
+        LogBox.SelectedIndex = LogBox.Items.Count - 1
+        'LogBox.ClearSelected()
+    End Sub
+
     Private Sub UpdaterThread()
+
+        Log("Searching for updates...")
+
+        Do
+            Log("well...")
+            Thread.Sleep(500)
+        Loop
 
         'playBtn.Enabled = False
         playBtn.Text = "Hello, World!"
+
+        Thread.Sleep(30000)
 
     End Sub
 
