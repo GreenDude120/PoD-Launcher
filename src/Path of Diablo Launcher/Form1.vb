@@ -361,7 +361,8 @@ Public Class Form1
             LogBox.Invoke(New LogDelegate(AddressOf Log), {text})
             Return
         End If
-        LogBox.Items.Add(text)
+        Dim newText As String = "[" & TimeOfDay.ToString("HH:mm:ss") & "] " & text
+        LogBox.Items.Add(newText)
         'highlight last added item
         LogBox.SelectedIndex = LogBox.Items.Count - 1
         'LogBox.ClearSelected()
