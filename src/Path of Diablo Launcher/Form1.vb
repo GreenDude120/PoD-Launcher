@@ -70,260 +70,104 @@ Public Class Form1
             End Try
         Next
 
-
-
-
-
-
-        If Not System.IO.File.Exists("Game.exe") Then
-            MsgBox("Game.exe not found. Are you sure you installed the launcher into a D2 installation?")
-            End
-        End If
-
-        Dim localCRC = GetCRC32("patch_d2.mpq")
-
-        Dim d2version = FileVersionInfo.GetVersionInfo("Game.exe").FileVersion
-
-        If Not d2version = "1, 0, 13, 60" Then
-            If Not d2version = "1, 0, 13, 64" Then
-                Dim updatedialog As New UpdateD2()
-
-                If updatedialog.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
-
-                    updatedialog.Dispose()
-
-                    Dim gameproc() As Process
-                    Dim updatecomplete As Boolean = False
-
-                    While updatecomplete = False
-                        gameproc = Process.GetProcessesByName("Diablo II")
-                        If gameproc.Count > 0 Then
-                            gameproc(0).Kill()
-                            updatecomplete = True
-                        End If
-                    End While
-
-                Else
-
-                    End
-
-                End If
-            End If
-        End If
-
-        'localcrcTxt.Text = localCRC
-
-        Dim address As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/currentpatch"
-        Dim client As WebClient = New WebClient()
-        Dim reader As StreamReader = New StreamReader(client.OpenRead(address))
-        'servercrcTxt.Text = reader.ReadLine.Trim
-
-        'If servercrcTxt.Text = localcrcTxt.Text Then
-
-        playBtn.Enabled = True
-            playBtn.Text = "PLAY"
-
-        'Else
-
-        playBtn.Enabled = True
-            playBtn.Text = "Update Available"
-            updateAvailable = True
-
-        'End If
-
-        playBtn.BringToFront()
-
-        Dim launchervonline As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/launcherversion"
-        Dim wclient As WebClient = New WebClient()
-        Dim wreader As StreamReader = New StreamReader(wclient.OpenRead(launchervonline))
-        Dim launchervonlinetxt As Integer
-        launchervonlinetxt = wreader.ReadLine.Trim
-
-        If Int(podlauncherlocalv.Text) >= launchervonlinetxt Then
-
-            'launcher is up-to-date
-
-        Else
-            MsgBox("A new version of the Path of Diablo Launcher is available. Please uninstall this current version and download the updated version.")
-            System.Diagnostics.Process.Start("http://pathofdiablo.com/wiki/index.php/Download")
-        End If
-
         Dim thread As New Thread(AddressOf UpdaterThread)
         thread.IsBackground = True
         thread.Start()
     End Sub
 
-    Private Sub patchclient_ProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs)
-        Dim bytesIn As Double = Double.Parse(e.BytesReceived.ToString())
-        Dim totalBytes As Double = Double.Parse(e.TotalBytesToReceive.ToString())
-        Dim percentage As Double = bytesIn / totalBytes * 100
-
-        'patchPrgBr.Value = Int32.Parse(Math.Truncate(percentage).ToString())
-    End Sub
-
-    Private Sub patchclient_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
-
-        'patchPrgBr.Visible = False
-        'localcrcTxt.Visible = True
-
-        Dim localCRC = GetCRC32("patch_d2.mpq")
-
-        'localcrcTxt.Text = localCRC
-
-        'If servercrcTxt.Text = localcrcTxt.Text Then
-
-        updateAvailable = False
-            playBtn.Enabled = True
-            playBtn.Text = "PLAY"
-
-        'Else
-
-        playBtn.Enabled = False
-            playBtn.Text = "Patch Failed"
-
-        'End If
-
-    End Sub
-
     Private Sub playBtn_Click(sender As Object, e As EventArgs) Handles playBtn.Click
 
-        If updateAvailable = True Then
+        Dim d2 As New ProcessStartInfo
 
-            'localcrcTxt.Visible = False
-            'patchPrgBr.Visible = True
-
-            If System.IO.File.Exists("patch_d2.mpq.bak") = True Then
-
-                System.IO.File.Delete("patch_d2.mpq.bak")
-
-            End If
-
-            If System.IO.File.Exists("patch_d2.mpq") Then
-                My.Computer.FileSystem.RenameFile("patch_d2.mpq", "patch_d2.mpq.bak")
-            End If
-
-            Dim patchclient As WebClient = New WebClient
-
-            AddHandler patchclient.DownloadProgressChanged, AddressOf patchclient_ProgressChanged
-
-            AddHandler patchclient.DownloadFileCompleted, AddressOf patchclient_DownloadCompleted
-
-            Dim patchlinkfile As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/patch_d2"
-            Dim wclient As WebClient = New WebClient()
-            Dim wreader As StreamReader = New StreamReader(wclient.OpenRead(patchlinkfile))
-            Dim patchlink As String
-            patchlink = wreader.ReadLine
-
-            patchclient.DownloadFileAsync(New Uri(patchlink), "patch_d2.mpq")
-
-            playBtn.Text = "Update in Progress"
-
-
-            playBtn.Enabled = False
-
-        Else
-
-            Dim d2 As New ProcessStartInfo
-
-            d2.FileName = "Diablo II.exe"
-            If Not System.IO.File.Exists("Game.exe") Then
-                MsgBox("Game.exe not found. Are you sure you installed the launcher into a D2 installation?")
-                Me.Close()
-            End If
-            If Not System.IO.File.Exists("Diablo II.exe") Then
-                MsgBox("Diablo II.exe not found. Are you sure you installed the launcher into a D2 installation?")
-                Me.Close()
-            End If
-            Try
-                My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ DisableNXShowUI")
-            Catch ex As Exception
-                MsgBox("You don't have the required admin rights. Run the launcher as admin and try again!")
-                Me.Close()
-            End Try
-
-
-            d2.Arguments = ""
-
-            If wChk.Checked = True Then
-                d2.Arguments = d2.Arguments & "-w "
-            End If
-
-            If skipChk.Checked = True Then
-                d2.Arguments = d2.Arguments & "-skiptobnet "
-            End If
-
-            If nsChk.Checked = True Then
-                d2.Arguments = d2.Arguments & "-ns "
-            End If
-
-            If dfxChk.Checked = True Then
-                d2.Arguments = d2.Arguments & "-3dfx "
-            End If
-
-            If directcbox.Checked = True Then
-                d2.Arguments = d2.Arguments & "-direct "
-            End If
-
-            If txtcbox.Checked = True Then
-                d2.Arguments = d2.Arguments & "-txt "
-            End If
-
-            If aspectChk.Checked = True Then
-                d2.Arguments = d2.Arguments & "-nofixaspect "
-            End If
-
-            Me.Hide()                           'hide window, so that it doesn't look like it doesn't respond anymore
-            Dim p As New Process
-            p.StartInfo = d2
-            p.Start()
-
+        d2.FileName = "Diablo II.exe"
+        Try
+            My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ DisableNXShowUI RUNASADMIN")
+        Catch ex As Exception
+            MsgBox("You don't have the required admin rights. Run the launcher as admin and try again!")
             Me.Close()
+        End Try
 
+
+        d2.Arguments = ""
+
+        If wChk.Checked = True Then
+            d2.Arguments = d2.Arguments & "-w "
         End If
 
-    End Sub
+        If skipChk.Checked = True Then
+            d2.Arguments = d2.Arguments & "-skiptobnet "
+        End If
 
-    Private Sub DEP_Only_Click(sender As Object, e As EventArgs)
-        Try
-            Dim wDEP As New StreamWriter("000aaaDEP.bat")
-            wDEP.WriteLine("@ECHO OFF")
-            wDEP.WriteLine("ECHO %~dp0")
-            wDEP.WriteLine("set ""mypath=%~dp0%Diablo II.exe""")
-            wDEP.WriteLine("ECHO %mypath%")
-            wDEP.WriteLine("ECHO Enabling DEP exception")
-            wDEP.WriteLine("call bcdedit.exe /set {current} nx OptOut && color 0A && echo DEP policy changed to allow exceptions || color 0C && echo RUN AS ADMIN")
-            wDEP.WriteLine("call REG ADD ""HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"" /t REG_SZ /d ""~ DisableNXShowUI"" /f /v ""%mypath% ")
-            wDEP.WriteLine("PAUSE")
-            wDEP.WriteLine("EXIT")
-            wDEP.Close()
-            MsgBox("When you click OK you will be sent to your Diablo II folder" & vbCrLf & vbCrLf & "Right click on 000aaaDEP.bat and run as admin, the text should come out green, a restart might be required")
-            Process.Start(".")
-        Catch ex As Exception
-            MsgBox("Error generating fix file, it's probably open")
-        End Try
+        If nsChk.Checked = True Then
+            d2.Arguments = d2.Arguments & "-ns "
+        End If
 
-    End Sub
+        If dfxChk.Checked = True Then
+            d2.Arguments = d2.Arguments & "-3dfx "
+        End If
 
-    Private Sub DEP_and_XP_SP2_Click(sender As Object, e As EventArgs)
-        Try
-            Dim wDEP As New StreamWriter("000aaaDEP+XP_SP2.bat")
-            wDEP.WriteLine("@ECHO OFF")
-            wDEP.WriteLine("ECHO %~dp0")
-            wDEP.WriteLine("set ""mypath=%~dp0%Diablo II.exe""")
-            wDEP.WriteLine("ECHO %mypath%")
-            wDEP.WriteLine("ECHO Enabling DEP exception")
-            wDEP.WriteLine("call bcdedit.exe /set {current} nx OptOut && color 0A && echo DEP policy changed to allow exceptions || color 0C && echo RUN AS ADMIN")
-            wDEP.WriteLine("call REG ADD ""HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"" /t REG_SZ /d ""~ RUNASADMIN WINXPSP2 DisableNXShowUI"" /f /v ""%mypath% ")
-            wDEP.WriteLine("PAUSE")
-            wDEP.WriteLine("EXIT")
-            wDEP.Close()
-            MsgBox("When you click OK you will be sent to your Diablo II folder" & vbCrLf & vbCrLf & "Right click on 000aaaDEP+XP_SP2.bat and run as admin, the text should come out green, a restart might be required")
-            Process.Start(".")
-        Catch ex As Exception
-            MsgBox("Error generating fix file, it's probably open")
-        End Try
+        If directcbox.Checked = True Then
+            d2.Arguments = d2.Arguments & "-direct "
+        End If
+
+        If txtcbox.Checked = True Then
+            d2.Arguments = d2.Arguments & "-txt "
+        End If
+
+        If aspectChk.Checked = True Then
+            d2.Arguments = d2.Arguments & "-nofixaspect "
+        End If
+
+        Me.Hide()                           'hide window, so that it doesn't look like it doesn't respond anymore
+        Dim p As New Process
+        p.StartInfo = d2
+        p.Start()
+
+        Me.Close()
 
     End Sub
+
+    'Private Sub DEP_Only_Click(sender As Object, e As EventArgs)
+    '    Try
+    '        Dim wDEP As New StreamWriter("000aaaDEP.bat")
+    '        wDEP.WriteLine("@ECHO OFF")
+    '        wDEP.WriteLine("ECHO %~dp0")
+    '        wDEP.WriteLine("set ""mypath=%~dp0%Diablo II.exe""")
+    '        wDEP.WriteLine("ECHO %mypath%")
+    '        wDEP.WriteLine("ECHO Enabling DEP exception")
+    '        wDEP.WriteLine("call bcdedit.exe /set {current} nx OptOut && color 0A && echo DEP policy changed to allow exceptions || color 0C && echo RUN AS ADMIN")
+    '        wDEP.WriteLine("call REG ADD ""HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"" /t REG_SZ /d ""~ DisableNXShowUI"" /f /v ""%mypath% ")
+    '        wDEP.WriteLine("PAUSE")
+    '        wDEP.WriteLine("EXIT")
+    '        wDEP.Close()
+    '        MsgBox("When you click OK you will be sent to your Diablo II folder" & vbCrLf & vbCrLf & "Right click on 000aaaDEP.bat and run as admin, the text should come out green, a restart might be required")
+    '        Process.Start(".")
+    '    Catch ex As Exception
+    '        MsgBox("Error generating fix file, it's probably open")
+    '    End Try
+
+    'End Sub
+
+    'Private Sub DEP_and_XP_SP2_Click(sender As Object, e As EventArgs)
+    '    Try
+    '        Dim wDEP As New StreamWriter("000aaaDEP+XP_SP2.bat")
+    '        wDEP.WriteLine("@ECHO OFF")
+    '        wDEP.WriteLine("ECHO %~dp0")
+    '        wDEP.WriteLine("set ""mypath=%~dp0%Diablo II.exe""")
+    '        wDEP.WriteLine("ECHO %mypath%")
+    '        wDEP.WriteLine("ECHO Enabling DEP exception")
+    '        wDEP.WriteLine("call bcdedit.exe /set {current} nx OptOut && color 0A && echo DEP policy changed to allow exceptions || color 0C && echo RUN AS ADMIN")
+    '        wDEP.WriteLine("call REG ADD ""HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"" /t REG_SZ /d ""~ RUNASADMIN WINXPSP2 DisableNXShowUI"" /f /v ""%mypath% ")
+    '        wDEP.WriteLine("PAUSE")
+    '        wDEP.WriteLine("EXIT")
+    '        wDEP.Close()
+    '        MsgBox("When you click OK you will be sent to your Diablo II folder" & vbCrLf & vbCrLf & "Right click on 000aaaDEP+XP_SP2.bat and run as admin, the text should come out green, a restart might be required")
+    '        Process.Start(".")
+    '    Catch ex As Exception
+    '        MsgBox("Error generating fix file, it's probably open")
+    '    End Try
+
+    'End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         System.Diagnostics.Process.Start("http://pathofdiablo.com/donate")
@@ -391,6 +235,33 @@ Public Class Form1
         'highlight last added item
         LogBox.SelectedIndex = LogBox.Items.Count - 1
         'LogBox.ClearSelected()
+    End Sub
+
+    Delegate Sub SetProgressDelegate(ByVal progress As Integer)
+    Private Sub SetProgress(ByVal progress As Integer)
+        If ProgressBar.InvokeRequired Then
+            ProgressBar.Invoke(New SetProgressDelegate(AddressOf SetProgress), {progress})
+            Return
+        End If
+        ProgressBar.Value = progress
+    End Sub
+
+
+
+    Private Sub Downloads_ProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs)
+        Dim bytesIn As Double = Double.Parse(e.BytesReceived.ToString())
+        Dim totalBytes As Double = Double.Parse(e.TotalBytesToReceive.ToString())
+        Dim percentage As Double = bytesIn / totalBytes * 100
+
+        SetProgress(Int32.Parse(Math.Truncate(percentage).ToString()))
+    End Sub
+
+    Private Sub Downloads_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
+        SetProgress(0)
+        SyncLock e.UserState
+            'release block
+            Monitor.Pulse(e.UserState)
+        End SyncLock
     End Sub
 
     Private Sub UpdaterThread()
@@ -474,11 +345,18 @@ Public Class Form1
                                         End If
 
                                         Dim link As String = reader.ReadInnerXml()
-                                        Log("Attempting to download file " & name & " from " & link)
+                                        Log("Downloading file " & name & " from " & link)
 
                                         dl = New WebClient()
+                                        AddHandler dl.DownloadProgressChanged, AddressOf Downloads_ProgressChanged
+                                        AddHandler dl.DownloadFileCompleted, AddressOf Downloads_DownloadCompleted
+
                                         Try
-                                            dl.DownloadFile(link, name)
+                                            Dim myLock As Object = New Object()
+                                            SyncLock myLock
+                                                dl.DownloadFileAsync(New Uri(link), name, myLock)
+                                                Monitor.Wait(myLock)
+                                            End SyncLock
                                         Catch ex As Exception
                                             Log("An error occured while downloading file " & name & " from " & link)
                                             Continue While
@@ -513,7 +391,7 @@ Public Class Form1
 
         reader.Close()
 
-        Log("Finished checking " & nUpdates & " file(s) for updates.")
+        Log("Finished checking " & nUpdates & " file(s) for updates")
 
         'restart if needed
         If restartRequired Then
