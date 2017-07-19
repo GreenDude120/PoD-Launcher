@@ -50,6 +50,31 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        'check and create needed directories
+        If Not My.Computer.FileSystem.DirectoryExists("./tmp") Then
+            My.Computer.FileSystem.CreateDirectory("./tmp")
+        End If
+        If Not My.Computer.FileSystem.DirectoryExists("./config") Then
+            My.Computer.FileSystem.CreateDirectory("./config")
+        End If
+        If Not My.Computer.FileSystem.DirectoryExists("./filter") Then
+            My.Computer.FileSystem.CreateDirectory("./filter")
+        End If
+
+        'clear "tmp" on load
+        For Each file As String In My.Computer.FileSystem.GetFiles("./tmp/", FileIO.SearchOption.SearchAllSubDirectories, "*.*")
+            Try
+                My.Computer.FileSystem.DeleteFile(file, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.DeletePermanently)
+            Catch ex As Exception
+                'do nothing, just continue
+            End Try
+        Next
+
+
+
+
+
+
         If Not System.IO.File.Exists("Game.exe") Then
             MsgBox("Game.exe not found. Are you sure you installed the launcher into a D2 installation?")
             End
