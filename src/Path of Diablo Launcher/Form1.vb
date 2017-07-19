@@ -370,17 +370,134 @@ Public Class Form1
 
     Private Sub UpdaterThread()
 
+        SetEnabled(playBtn, False)
+        SetText(playBtn, "Updating...")
         Log("Searching for updates...")
 
-        Do
-            Log("well...")
-            Thread.Sleep(500)
+        Dim file As String = "./tmp/files.xml"
+
+        Dim xmlLink As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/files.xml"
+        Dim dl As WebClient = New WebClient()
+        Try
+            dl.DownloadFile(xmlLink, file)
+        Catch ex As Exception
+            SetText(playBtn, "Error!")
+            Log("An error occured checking for updates. Please try again later.")
+            Exit Sub
+        End Try
+
+        Dim reader As Xml.XmlTextReader = New Xml.XmlTextReader(file)
+
+        Dim restartRequired As Boolean = False
+        Dim nUpdates As Integer = 0
+
+        Do While reader.Read()
+            Select Case reader.NodeType
+                Case Xml.XmlNodeType.Element
+                    If reader.Name.Equals("file") Then
+                        Dim name As String = ""
+                        Dim crc As String = ""
+                        Dim restart As Boolean = False
+
+                        'read name and crc (ignore all other attributes)
+                        If reader.AttributeCount > 0 Then
+                            While reader.MoveToNextAttribute
+                                If reader.Name.Equals("name") Then
+                                    name = reader.Value
+                                ElseIf reader.Name.Equals("crc") Then
+                                    crc = reader.Value
+                                ElseIf reader.Name.Equals("restartRequired") Then
+                                    If reader.Value.Equals("true") Then
+                                        restart = True
+                                    End If
+                                End If
+                            End While
+                        End If
+
+                        If name.Equals("") Then
+                            Log("Malformed " & file & ". Notifiy GreenDude!")
+                            Exit Sub
+                        End If
+
+                        Dim uptodate As Boolean = False
+
+                        'crc = "" -> only check if file exists, don't actually check the crc
+                        If crc.Equals("") Then
+                            If IO.File.Exists(name) Then
+                                Log("File " & name & " already exists, no need to download again.")
+                                uptodate = True
+                            End If
+                        End If
+
+                        'no need to update if file has same crc as the servers file
+                        Dim localCrc As String = GetCRC32(name)
+                        If crc.Equals(localCrc) And Not uptodate Then
+                            Log("File " & name & " is up-to-date")
+                            uptodate = True
+                        End If
+
+                        'read links
+                        While reader.Read()
+                            Select Case reader.NodeType
+                                Case Xml.XmlNodeType.Element
+                                    If Not uptodate Then
+                                        If IO.File.Exists(name) Then
+                                            Try
+                                                IO.File.Move(name, "./tmp/" & name)
+                                            Catch ex As Exception
+                                            End Try
+                                        End If
+
+                                        Dim link As String = reader.ReadInnerXml()
+                                        Log("Attempting to download file " & name & " from " & link)
+
+                                        dl = New WebClient()
+                                        Try
+                                            dl.DownloadFile(link, name)
+                                        Catch ex As Exception
+                                            Log("An error occured while downloading file " & name & " from " & link)
+                                            Continue While
+                                        End Try
+                                        Log("Successfully downloaded file " & name & " from " & link)
+
+                                        localCrc = GetCRC32(name)
+                                        If Not crc.Equals(localCrc) Then
+                                            Log("Checksum of downloaded file (" & name & ") from " & link & " doesn't match the specified checksum. Please try again later.")
+                                            Exit Sub
+                                        End If
+
+                                        uptodate = True
+                                        If restart Then
+                                            restartRequired = True
+                                        End If
+                                    End If
+                                Case Xml.XmlNodeType.EndElement
+                                    Exit While
+                            End Select
+                        End While
+
+                        nUpdates = nUpdates + 1
+                        If Not uptodate Then
+                            Log("An error occured while updating file " & name & ". Please restart and try again.")
+                            Exit Sub
+                        End If
+                    End If
+
+            End Select
         Loop
 
-        'playBtn.Enabled = False
-        playBtn.Text = "Hello, World!"
+        reader.Close()
 
-        Thread.Sleep(30000)
+        Log("Finished checking " & nUpdates & " file(s) for updates.")
+
+        'restart if needed
+        If restartRequired Then
+            MsgBox("An updated file requires the Launcher to restart to function correctly. Restarting Now!")
+            Application.Restart()
+        End If
+
+        SetText(playBtn, "Play")
+        SetEnabled(playBtn, True)
 
     End Sub
 
