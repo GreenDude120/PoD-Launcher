@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Threading
 
 Public Class Form1
 
@@ -49,92 +50,6 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "wChk", Nothing) Is Nothing Then
-
-            Dim savedwChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "wChk", Nothing)
-            Dim savedskipChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "skipChk", Nothing)
-            Dim savednsChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "nsChk", Nothing)
-            Dim saveddfxChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "dfxChk", Nothing)
-            Dim savedaspectChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "aspectChk", Nothing)
-            Dim savedrunasChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "runasChk", Nothing)
-            Dim savedtxtChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "txtChk", Nothing)
-            Dim saveddirectChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "directChk", Nothing)
-            Dim savedMainGtw = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "mainGtw", Nothing)
-            Dim savedQolChk = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "qolChk", Nothing)
-
-            If savedwChk = "True" Then
-                wChk.Checked = True
-            Else
-                wChk.Checked = False
-            End If
-
-            If savedskipChk = "True" Then
-                skipChk.Checked = True
-            Else
-                skipChk.Checked = False
-            End If
-
-            If savednsChk = "True" Then
-                nsChk.Checked = True
-            Else
-                nsChk.Checked = False
-            End If
-
-            If saveddfxChk = "True" Then
-                dfxChk.Checked = True
-            Else
-                dfxChk.Checked = False
-            End If
-
-            If savedaspectChk = "True" Then
-                aspectChk.Checked = True
-            Else
-                aspectChk.Checked = False
-            End If
-
-            If savedtxtChk = "True" Then
-                txtcbox.Checked = True
-            Else
-                txtcbox.Checked = False
-            End If
-
-            If saveddirectChk = "True" Then
-                directcbox.Checked = True
-            Else
-                directcbox.Checked = False
-            End If
-
-            If savedrunasChk = "True" Then
-                runasChk.Checked = True
-            Else
-                runasChk.Checked = False
-            End If
-
-            If savedMainGtw = "False" Then
-                radioMain.Checked = False
-                radioCustom.Checked = True
-                CustomGatewayTextBox.Enabled = True
-            Else
-                radioMain.Checked = True
-                radioCustom.Checked = False
-                CustomGatewayTextBox.Enabled = False
-            End If
-
-            If savedQolChk = "True" Then
-                qoladdoncbox.Checked = True
-            Else
-                qoladdoncbox.Checked = False
-            End If
-
-        End If
-
-        If My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing) Is Nothing Then
-
-            Dim defaultGatewayValues() As String = {"1009", "01", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe"}
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", defaultGatewayValues)
-
-        End If
-
         If Not System.IO.File.Exists("Game.exe") Then
             MsgBox("Game.exe not found. Are you sure you installed the launcher into a D2 installation?")
             End
@@ -171,42 +86,33 @@ Public Class Form1
             End If
         End If
 
-        'disable qol stuff if not on 1.13d
-        If Not d2version = "1, 0, 13, 64" Then
-            qoladdoncbox.Checked = False
-            qoladdoncbox.Enabled = False
-            qoladdoncbox.Text = "QoL Features (1.13d only)"
-        End If
-
-        localcrcTxt.Text = localCRC
+        'localcrcTxt.Text = localCRC
 
         Dim address As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/currentpatch"
         Dim client As WebClient = New WebClient()
         Dim reader As StreamReader = New StreamReader(client.OpenRead(address))
-        servercrcTxt.Text = reader.ReadToEnd
+        'servercrcTxt.Text = reader.ReadLine.Trim
 
-        If servercrcTxt.Text = localcrcTxt.Text Then
+        'If servercrcTxt.Text = localcrcTxt.Text Then
 
-            playBtn.Enabled = True
+        playBtn.Enabled = True
             playBtn.Text = "PLAY"
 
-        Else
+        'Else
 
-            playBtn.Enabled = True
+        playBtn.Enabled = True
             playBtn.Text = "Update Available"
             updateAvailable = True
 
-        End If
+        'End If
 
         playBtn.BringToFront()
-
-        handleSetCurrentGateway()
 
         Dim launchervonline As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/launcherversion"
         Dim wclient As WebClient = New WebClient()
         Dim wreader As StreamReader = New StreamReader(wclient.OpenRead(launchervonline))
         Dim launchervonlinetxt As Integer
-        launchervonlinetxt = wreader.ReadToEnd
+        launchervonlinetxt = wreader.ReadLine.Trim
 
         If Int(podlauncherlocalv.Text) >= launchervonlinetxt Then
 
@@ -216,6 +122,10 @@ Public Class Form1
             MsgBox("A new version of the Path of Diablo Launcher is available. Please uninstall this current version and download the updated version.")
             System.Diagnostics.Process.Start("http://pathofdiablo.com/wiki/index.php/Download")
         End If
+
+        Dim thread As New Thread(AddressOf UpdaterThread)
+        thread.IsBackground = True
+        thread.Start()
     End Sub
 
     Private Sub patchclient_ProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs)
@@ -223,30 +133,30 @@ Public Class Form1
         Dim totalBytes As Double = Double.Parse(e.TotalBytesToReceive.ToString())
         Dim percentage As Double = bytesIn / totalBytes * 100
 
-        patchPrgBr.Value = Int32.Parse(Math.Truncate(percentage).ToString())
+        'patchPrgBr.Value = Int32.Parse(Math.Truncate(percentage).ToString())
     End Sub
 
     Private Sub patchclient_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
 
-        patchPrgBr.Visible = False
-        localcrcTxt.Visible = True
+        'patchPrgBr.Visible = False
+        'localcrcTxt.Visible = True
 
         Dim localCRC = GetCRC32("patch_d2.mpq")
 
-        localcrcTxt.Text = localCRC
+        'localcrcTxt.Text = localCRC
 
-        If servercrcTxt.Text = localcrcTxt.Text Then
+        'If servercrcTxt.Text = localcrcTxt.Text Then
 
-            updateAvailable = False
+        updateAvailable = False
             playBtn.Enabled = True
             playBtn.Text = "PLAY"
 
-        Else
+        'Else
 
-            playBtn.Enabled = False
+        playBtn.Enabled = False
             playBtn.Text = "Patch Failed"
 
-        End If
+        'End If
 
     End Sub
 
@@ -254,8 +164,8 @@ Public Class Form1
 
         If updateAvailable = True Then
 
-            localcrcTxt.Visible = False
-            patchPrgBr.Visible = True
+            'localcrcTxt.Visible = False
+            'patchPrgBr.Visible = True
 
             If System.IO.File.Exists("patch_d2.mpq.bak") = True Then
 
@@ -263,7 +173,9 @@ Public Class Form1
 
             End If
 
-            My.Computer.FileSystem.RenameFile("patch_d2.mpq", "patch_d2.mpq.bak")
+            If System.IO.File.Exists("patch_d2.mpq") Then
+                My.Computer.FileSystem.RenameFile("patch_d2.mpq", "patch_d2.mpq.bak")
+            End If
 
             Dim patchclient As WebClient = New WebClient
 
@@ -275,7 +187,7 @@ Public Class Form1
             Dim wclient As WebClient = New WebClient()
             Dim wreader As StreamReader = New StreamReader(wclient.OpenRead(patchlinkfile))
             Dim patchlink As String
-            patchlink = wreader.ReadToEnd
+            patchlink = wreader.ReadLine
 
             patchclient.DownloadFileAsync(New Uri(patchlink), "patch_d2.mpq")
 
@@ -288,36 +200,20 @@ Public Class Form1
 
             Dim d2 As New ProcessStartInfo
 
-            If qoladdoncbox.Checked Then
-                d2.FileName = "poddiablo.exe"
-                If Not System.IO.File.Exists("poddiablo.exe") Then
-                    MsgBox("poddiablo.exe not found. Please reinstall!")
-                    End
-                End If
-                If Not System.IO.File.Exists("pod.exe") Then
-                    MsgBox("pod.exe not found. Please reinstall!")
-                    End
-                End If
-                If Not System.IO.File.Exists("pod.dll") Then
-                    MsgBox("pod.dll.exe not found. Please reinstall!")
-                    End
-                End If
-            Else
-                d2.FileName = "Diablo II.exe"
-                If Not System.IO.File.Exists("Game.exe") Then
-                    MsgBox("Game.exe not found. Are you sure you installed the launcher into a D2 installation?")
-                    End
-                End If
-                If Not System.IO.File.Exists("Diablo II.exe") Then
-                    MsgBox("Diablo II.exe not found. Are you sure you installed the launcher into a D2 installation?")
-                    End
-                End If
+            d2.FileName = "Diablo II.exe"
+            If Not System.IO.File.Exists("Game.exe") Then
+                MsgBox("Game.exe not found. Are you sure you installed the launcher into a D2 installation?")
+                Me.Close()
+            End If
+            If Not System.IO.File.Exists("Diablo II.exe") Then
+                MsgBox("Diablo II.exe not found. Are you sure you installed the launcher into a D2 installation?")
+                Me.Close()
             End If
             Try
-                My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ RUNASADMIN WINXPSP3 DisableNXShowUI")
+                My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ DisableNXShowUI")
             Catch ex As Exception
                 MsgBox("You don't have the required admin rights. Run the launcher as admin and try again!")
-                End
+                Me.Close()
             End Try
 
 
@@ -325,78 +221,30 @@ Public Class Form1
 
             If wChk.Checked = True Then
                 d2.Arguments = d2.Arguments & "-w "
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "wChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "wChk", "False")
             End If
 
             If skipChk.Checked = True Then
                 d2.Arguments = d2.Arguments & "-skiptobnet "
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "skipChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "skipChk", "False")
             End If
 
             If nsChk.Checked = True Then
                 d2.Arguments = d2.Arguments & "-ns "
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "nsChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "nsChk", "False")
             End If
 
             If dfxChk.Checked = True Then
                 d2.Arguments = d2.Arguments & "-3dfx "
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "dfxChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "dfxChk", "False")
             End If
 
             If directcbox.Checked = True Then
                 d2.Arguments = d2.Arguments & "-direct "
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "directChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "directChk", "False")
             End If
 
             If txtcbox.Checked = True Then
                 d2.Arguments = d2.Arguments & "-txt "
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "txtChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "txtChk", "False")
             End If
 
             If aspectChk.Checked = True Then
                 d2.Arguments = d2.Arguments & "-nofixaspect "
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "aspectChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "aspectChk", "False")
-            End If
-
-            If runasChk.Checked = True Then
-                d2.Verb = "runas"
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "runasChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "runasChk", "False")
-            End If
-
-            If radioMain.Checked = True Then
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "mainGtw", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "mainGtw", "False")
-            End If
-
-            If qoladdoncbox.Checked = True Then
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "qolChk", "True")
-            Else
-                My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\PoDLauncher", "qolChk", "False")
-            End If
-
-            If radioMain.Checked Then
-                If String.Compare("s.pathofdiablo.com", CustomGatewayTextBox.Text, True) <> 0 Then
-                    'show error message and don't start the game
-                    MsgBox("Choose a gateway option and click ""Set Gateway""" + Environment.NewLine + "After that you can start the game and start playing online.")
-                    Return
-                End If
             End If
 
             Me.Hide()                           'hide window, so that it doesn't look like it doesn't respond anymore
@@ -404,13 +252,13 @@ Public Class Form1
             p.StartInfo = d2
             p.Start()
 
-            End
+            Me.Close()
 
         End If
 
     End Sub
 
-    Private Sub DEP_Only_Click(sender As Object, e As EventArgs) Handles DEP_Only.Click
+    Private Sub DEP_Only_Click(sender As Object, e As EventArgs)
         Try
             Dim wDEP As New StreamWriter("000aaaDEP.bat")
             wDEP.WriteLine("@ECHO OFF")
@@ -431,7 +279,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DEP_and_XP_SP2_Click(sender As Object, e As EventArgs) Handles DEP_and_XP_SP2.Click
+    Private Sub DEP_and_XP_SP2_Click(sender As Object, e As EventArgs)
         Try
             Dim wDEP As New StreamWriter("000aaaDEP+XP_SP2.bat")
             wDEP.WriteLine("@ECHO OFF")
@@ -473,9 +321,7 @@ Public Class Form1
     End Sub
 
     Private Sub viewmorecfg_Click(sender As Object, e As EventArgs) Handles viewmorecfg.Click
-
         System.Diagnostics.Process.Start("http://pathofdiablo.com/filters")
-
     End Sub
 
     Private Sub downloadcfg_Click(sender As Object, e As EventArgs) Handles downloadcfg.Click
@@ -491,85 +337,167 @@ Public Class Form1
         MsgBox("item.filter was overwrote by http://pathofdiablo.com/item.filter")
     End Sub
 
-    Private Sub setGatewayBtn_Click(sender As Object, e As EventArgs) Handles setGatewayBtn.Click
-
-        Dim gatewayValues = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
-
-        My.Computer.Registry.CurrentUser.DeleteSubKey("Software\Battle.net\Configuration")
-
-        Dim newGatewayValues() As String
-
-        If radioMain.Checked Then
-
-            newGatewayValues = {"1009", "05", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe", "s.pathofdiablo.com", "6", "Path of Diablo"}
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", "s.pathofdiablo.com")
-
-        Else
-
-            newGatewayValues = {"1009", "05", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe", CustomGatewayTextBox.Text, "6", "Path of Diablo"}
-            My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", CustomGatewayTextBox.Text)
-
+    Delegate Sub SetEnabledDelegate(ByVal ctrl As Control, ByVal bool As Boolean)
+    Private Sub SetEnabled(ByVal ctrl As Control, ByVal bool As Boolean)
+        If ctrl.InvokeRequired Then
+            ctrl.Invoke(New SetEnabledDelegate(AddressOf SetEnabled), {ctrl, bool})
+            Return
         End If
-
-        My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", newGatewayValues)
-
-        handleSetCurrentGateway()
-
+        ctrl.Enabled = bool
     End Sub
 
-    Private Sub resoreDefaultGatewaysBtn_Click(sender As Object, e As EventArgs) Handles resoreDefaultGatewaysBtn.Click
-
-        Dim defaultGatewayValues() As String = {"1009", "01", "uswest.battle.net", "8", "U.S.West", "useast.battle.net", "6", "U.S.East", "asia.battle.net", "-9", "Asia", "europe.battle.net", "-1", "Europe"}
-        My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", defaultGatewayValues)
-
-        If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Blizzard Entertainment\Diablo II", "BNETIP", Nothing) Is Nothing Then
-            My.Computer.Registry.CurrentUser.OpenSubKey("Software\Blizzard Entertainment\Diablo II", True).DeleteValue("BNETIP")
+    Delegate Sub SetTextDelegate(ByVal ctrl As Control, ByVal text As String)
+    Private Sub SetText(ByVal ctrl As Control, ByVal text As String)
+        If ctrl.InvokeRequired Then
+            ctrl.Invoke(New SetTextDelegate(AddressOf SetText), {ctrl, text})
+            Return
         End If
-
-
-        handleSetCurrentGateway()
-
+        ctrl.Text = text
     End Sub
 
-    Private Sub radioCustom_CheckedChanged(sender As Object, e As EventArgs) Handles radioCustom.CheckedChanged
-
-        If radioCustom.Checked = True Then
-            CustomGatewayTextBox.Enabled = True
-        Else
-            CustomGatewayTextBox.Enabled = False
+    Delegate Sub LogDelegate(ByVal text As String)
+    Private Sub Log(ByVal text As String)
+        If LogBox.InvokeRequired Then
+            LogBox.Invoke(New LogDelegate(AddressOf Log), {text})
+            Return
         End If
-
+        Dim newText As String = "[" & TimeOfDay.ToString("HH:mm:ss") & "] " & text
+        LogBox.Items.Add(newText)
+        'highlight last added item
+        LogBox.SelectedIndex = LogBox.Items.Count - 1
+        'LogBox.ClearSelected()
     End Sub
 
-    Private Sub handleSetCurrentGateway()
+    Private Sub UpdaterThread()
 
+        SetEnabled(playBtn, False)
+        SetText(playBtn, "Updating...")
+        Log("Searching for updates...")
+
+        Dim file As String = "./tmp/files.xml"
+
+        Dim xmlLink As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/files.xml"
+        Dim dl As WebClient = New WebClient()
         Try
+            dl.DownloadFile(xmlLink, file)
+        Catch ex As Exception
+            SetText(playBtn, "Error!")
+            Log("An error occured checking for updates. Please try again later.")
+            Exit Sub
+        End Try
 
-            If Not My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing) Is Nothing Then
+        Dim reader As Xml.XmlTextReader = New Xml.XmlTextReader(file)
 
-                Dim testMe = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
-                If testMe.GetType() Is GetType(String()) Then
+        Dim restartRequired As Boolean = False
+        Dim nUpdates As Integer = 0
 
-                    Dim gatewayValues() As String = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Battle.net\Configuration", "Diablo II Battle.net gateways", Nothing)
+        Do While reader.Read()
+            Select Case reader.NodeType
+                Case Xml.XmlNodeType.Element
+                    If reader.Name.Equals("file") Then
+                        Dim name As String = ""
+                        Dim crc As String = ""
+                        Dim restart As Boolean = False
 
-                    Dim currentRealm As Integer = CInt(gatewayValues(1)) - 1
+                        'read name and crc (ignore all other attributes)
+                        If reader.AttributeCount > 0 Then
+                            While reader.MoveToNextAttribute
+                                If reader.Name.Equals("name") Then
+                                    name = reader.Value
+                                ElseIf reader.Name.Equals("crc") Then
+                                    crc = reader.Value
+                                ElseIf reader.Name.Equals("restartRequired") Then
+                                    If reader.Value.Equals("true") Then
+                                        restart = True
+                                    End If
+                                End If
+                            End While
+                        End If
 
-                    If gatewayValues.Length > (2 + currentRealm * 3) Then
+                        If name.Equals("") Then
+                            Log("Malformed " & file & ". Notifiy GreenDude!")
+                            Exit Sub
+                        End If
 
-                        Dim currentRealmAddress As String = gatewayValues(2 + currentRealm * 3)
-                        CustomGatewayTextBox.Text = currentRealmAddress
+                        Dim uptodate As Boolean = False
 
+                        'crc = "" -> only check if file exists, don't actually check the crc
+                        If crc.Equals("") Then
+                            If IO.File.Exists(name) Then
+                                Log("File " & name & " already exists, no need to download again.")
+                                uptodate = True
+                            End If
+                        End If
+
+                        'no need to update if file has same crc as the servers file
+                        Dim localCrc As String = GetCRC32(name)
+                        If crc.Equals(localCrc) And Not uptodate Then
+                            Log("File " & name & " is up-to-date")
+                            uptodate = True
+                        End If
+
+                        'read links
+                        While reader.Read()
+                            Select Case reader.NodeType
+                                Case Xml.XmlNodeType.Element
+                                    If Not uptodate Then
+                                        If IO.File.Exists(name) Then
+                                            Try
+                                                IO.File.Move(name, "./tmp/" & name)
+                                            Catch ex As Exception
+                                            End Try
+                                        End If
+
+                                        Dim link As String = reader.ReadInnerXml()
+                                        Log("Attempting to download file " & name & " from " & link)
+
+                                        dl = New WebClient()
+                                        Try
+                                            dl.DownloadFile(link, name)
+                                        Catch ex As Exception
+                                            Log("An error occured while downloading file " & name & " from " & link)
+                                            Continue While
+                                        End Try
+                                        Log("Successfully downloaded file " & name & " from " & link)
+
+                                        localCrc = GetCRC32(name)
+                                        If Not crc.Equals(localCrc) Then
+                                            Log("Checksum of downloaded file (" & name & ") from " & link & " doesn't match the specified checksum. Please try again later.")
+                                            Exit Sub
+                                        End If
+
+                                        uptodate = True
+                                        If restart Then
+                                            restartRequired = True
+                                        End If
+                                    End If
+                                Case Xml.XmlNodeType.EndElement
+                                    Exit While
+                            End Select
+                        End While
+
+                        nUpdates = nUpdates + 1
+                        If Not uptodate Then
+                            Log("An error occured while updating file " & name & ". Please restart and try again.")
+                            Exit Sub
+                        End If
                     End If
 
-                End If
+            End Select
+        Loop
 
+        reader.Close()
 
+        Log("Finished checking " & nUpdates & " file(s) for updates.")
 
-            End If
+        'restart if needed
+        If restartRequired Then
+            MsgBox("An updated file requires the Launcher to restart to function correctly. Restarting Now!")
+            Application.Restart()
+        End If
 
-        Catch ex As Exception
-            Return
-        End Try
+        SetText(playBtn, "Play")
+        SetEnabled(playBtn, True)
 
     End Sub
 
