@@ -70,6 +70,15 @@ Public Class Form1
             End Try
         Next
 
+        'show/hide advanced options
+        If advancedChk.Checked Then
+            txtcbox.Visible = True
+            directcbox.Visible = True
+        Else
+            txtcbox.Visible = False
+            directcbox.Visible = False
+        End If
+
         Dim thread As New Thread(AddressOf UpdaterThread)
         thread.IsBackground = True
         thread.Start()
@@ -194,16 +203,40 @@ Public Class Form1
     End Sub
 
     Private Sub downloadcfg_Click(sender As Object, e As EventArgs) Handles downloadcfg.Click
-
-        Dim downloadfilter As WebClient = New WebClient
-        downloadfilter.DownloadFileAsync(New Uri(lootfilterurl.Text), "item.filter")
-        MsgBox("item.filter was overwrote by " & lootfilterurl.Text)
+        Dim thread As New Thread(AddressOf LootFilterDownloaderThread)
+        thread.IsBackground = True
+        thread.Start()
     End Sub
 
-    Private Sub resetcfg_Click(sender As Object, e As EventArgs) Handles resetcfg.Click
-        Dim resetfilter As WebClient = New WebClient
-        resetfilter.DownloadFileAsync(New Uri("http://pathofdiablo.com/item.filter"), "item.filter")
-        MsgBox("item.filter was overwrote by http://pathofdiablo.com/item.filter")
+    Private Sub LootFilterDownloaderThread()
+        If lootfilterurl.Text.Equals("") Then
+            Log("Please enter a url where the loot filter will be downloaded from.")
+            Exit Sub
+        End If
+        If lootfiltername.Text.Equals("") Then
+            Log("Please give the loot filter to be downloaded a name.")
+            Exit Sub
+        End If
+
+        SetEnabled(playBtn, False)
+        SetEnabled(downloadcfg, False)
+
+        Dim name As String = lootfiltername.Text
+        Dim url As String = lootfilterurl.Text
+
+        Log("Downloading " & name & " from " & url)
+
+        Try
+            Dim dl As WebClient = New WebClient()
+            dl.DownloadFile(url, "./filter/" & name)
+
+            Log("Successfully downloaded loot filter " & name & " from " & url)
+        Catch ex As Exception
+            Log("An error occured while downloading loot filter " & name & " from " & url)
+        End Try
+
+        SetEnabled(playBtn, True)
+        SetEnabled(downloadcfg, True)
     End Sub
 
     Delegate Sub SetEnabledDelegate(ByVal ctrl As Control, ByVal bool As Boolean)
@@ -267,6 +300,7 @@ Public Class Form1
     Private Sub UpdaterThread()
 
         SetEnabled(playBtn, False)
+        SetEnabled(downloadcfg, False)
         SetText(playBtn, "Updating...")
         Log("Searching for updates...")
 
@@ -401,7 +435,17 @@ Public Class Form1
 
         SetText(playBtn, "Play")
         SetEnabled(playBtn, True)
+        SetEnabled(downloadcfg, True)
 
     End Sub
 
+    Private Sub advancedChk_CheckedChanged(sender As Object, e As EventArgs) Handles advancedChk.CheckedChanged
+        If advancedChk.Checked Then
+            txtcbox.Visible = True
+            directcbox.Visible = True
+        Else
+            txtcbox.Visible = False
+            directcbox.Visible = False
+        End If
+    End Sub
 End Class
