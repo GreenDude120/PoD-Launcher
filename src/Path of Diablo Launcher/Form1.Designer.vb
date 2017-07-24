@@ -181,7 +181,6 @@ Partial Class Form1
         '
         'WebBrowser1
         '
-        Me.WebBrowser1.AllowNavigation = False
         Me.WebBrowser1.IsWebBrowserContextMenuEnabled = False
         Me.WebBrowser1.Location = New System.Drawing.Point(363, 0)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
@@ -190,7 +189,7 @@ Partial Class Form1
         Me.WebBrowser1.ScrollBarsEnabled = False
         Me.WebBrowser1.Size = New System.Drawing.Size(326, 400)
         Me.WebBrowser1.TabIndex = 9
-        Me.WebBrowser1.Url = New System.Uri("http://pathofdiablo.com/news/index.htm", System.UriKind.Absolute)
+        Me.WebBrowser1.Url = New System.Uri("https://pathofdiablo.com/p/?getnewsembed", System.UriKind.Absolute)
         '
         'podlauncherlocalv
         '
