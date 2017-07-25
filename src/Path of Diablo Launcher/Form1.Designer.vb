@@ -27,14 +27,6 @@ Partial Class Form1
         Me.playBtn = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.skipChk = New System.Windows.Forms.CheckBox()
-        Me.aspectChk = New System.Windows.Forms.CheckBox()
-        Me.nsChk = New System.Windows.Forms.CheckBox()
-        Me.dfxChk = New System.Windows.Forms.CheckBox()
-        Me.directcbox = New System.Windows.Forms.CheckBox()
-        Me.wChk = New System.Windows.Forms.CheckBox()
-        Me.advancedChk = New System.Windows.Forms.CheckBox()
-        Me.txtcbox = New System.Windows.Forms.CheckBox()
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -43,6 +35,7 @@ Partial Class Form1
         Me.Button5 = New System.Windows.Forms.Button()
         Me.downloadcfg = New System.Windows.Forms.Button()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.filterlibBtn = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lootfilterurl = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -50,8 +43,16 @@ Partial Class Form1
         Me.ProgressBar = New System.Windows.Forms.ProgressBar()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.filterlibBtn = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.actChk = New System.Windows.Forms.CheckBox()
+        Me.skipChk = New System.Windows.Forms.CheckBox()
+        Me.aspectChk = New System.Windows.Forms.CheckBox()
+        Me.dfxChk = New System.Windows.Forms.CheckBox()
+        Me.wChk = New System.Windows.Forms.CheckBox()
+        Me.directcbox = New System.Windows.Forms.CheckBox()
+        Me.txtcbox = New System.Windows.Forms.CheckBox()
+        Me.advancedChk = New System.Windows.Forms.CheckBox()
+        Me.nsChk = New System.Windows.Forms.CheckBox()
         Me.GroupBox3.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -84,17 +85,19 @@ Partial Class Form1
         '
         'TableLayoutPanel1
         '
-        Me.TableLayoutPanel1.ColumnCount = 2
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.ColumnCount = 3
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel1.Controls.Add(Me.skipChk, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.aspectChk, 0, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.nsChk, 0, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.dfxChk, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.directcbox, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.wChk, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.advancedChk, 1, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtcbox, 1, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.directcbox, 2, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtcbox, 2, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.advancedChk, 2, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.nsChk, 1, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.actChk, 1, 2)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(6, 19)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 4
@@ -104,114 +107,6 @@ Partial Class Form1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(356, 92)
         Me.TableLayoutPanel1.TabIndex = 31
-        '
-        'skipChk
-        '
-        Me.skipChk.AutoSize = True
-        Me.skipChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxSkipToBnet
-        Me.skipChk.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.skipChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSkipToBnet", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.skipChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.skipChk.Location = New System.Drawing.Point(181, 3)
-        Me.skipChk.Name = "skipChk"
-        Me.skipChk.Size = New System.Drawing.Size(78, 17)
-        Me.skipChk.TabIndex = 1
-        Me.skipChk.Text = "-skiptobnet"
-        Me.skipChk.UseVisualStyleBackColor = True
-        '
-        'aspectChk
-        '
-        Me.aspectChk.AutoSize = True
-        Me.aspectChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxNoFixAspect
-        Me.aspectChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxNoFixAspect", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.aspectChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.aspectChk.Location = New System.Drawing.Point(3, 49)
-        Me.aspectChk.Name = "aspectChk"
-        Me.aspectChk.Size = New System.Drawing.Size(83, 17)
-        Me.aspectChk.TabIndex = 4
-        Me.aspectChk.Text = "-nofixaspect"
-        Me.aspectChk.UseVisualStyleBackColor = True
-        '
-        'nsChk
-        '
-        Me.nsChk.AutoSize = True
-        Me.nsChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxNs
-        Me.nsChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxNs", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.nsChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.nsChk.Location = New System.Drawing.Point(3, 72)
-        Me.nsChk.Name = "nsChk"
-        Me.nsChk.Size = New System.Drawing.Size(93, 17)
-        Me.nsChk.TabIndex = 2
-        Me.nsChk.Text = "-ns (no sound)"
-        Me.nsChk.UseVisualStyleBackColor = True
-        '
-        'dfxChk
-        '
-        Me.dfxChk.AutoSize = True
-        Me.dfxChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkbox3dfx
-        Me.dfxChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkbox3dfx", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.dfxChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.dfxChk.Location = New System.Drawing.Point(3, 26)
-        Me.dfxChk.Name = "dfxChk"
-        Me.dfxChk.Size = New System.Drawing.Size(143, 17)
-        Me.dfxChk.TabIndex = 3
-        Me.dfxChk.Text = "-3dfx (glide wrapper only)"
-        Me.dfxChk.UseVisualStyleBackColor = True
-        '
-        'directcbox
-        '
-        Me.directcbox.AutoSize = True
-        Me.directcbox.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxDirect
-        Me.directcbox.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxDirect", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.directcbox.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.directcbox.Location = New System.Drawing.Point(181, 26)
-        Me.directcbox.Name = "directcbox"
-        Me.directcbox.Size = New System.Drawing.Size(55, 17)
-        Me.directcbox.TabIndex = 6
-        Me.directcbox.Text = "-direct"
-        Me.directcbox.UseVisualStyleBackColor = True
-        Me.directcbox.Visible = False
-        '
-        'wChk
-        '
-        Me.wChk.AutoSize = True
-        Me.wChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
-        Me.wChk.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.wChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxW", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.wChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.wChk.Location = New System.Drawing.Point(3, 3)
-        Me.wChk.Name = "wChk"
-        Me.wChk.Size = New System.Drawing.Size(111, 17)
-        Me.wChk.TabIndex = 0
-        Me.wChk.Text = "-w (window mode)"
-        Me.wChk.UseVisualStyleBackColor = True
-        '
-        'advancedChk
-        '
-        Me.advancedChk.AutoSize = True
-        Me.advancedChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxAdvanced
-        Me.advancedChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxAdvanced", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.advancedChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.advancedChk.Location = New System.Drawing.Point(181, 72)
-        Me.advancedChk.Name = "advancedChk"
-        Me.advancedChk.Size = New System.Drawing.Size(75, 17)
-        Me.advancedChk.TabIndex = 8
-        Me.advancedChk.Text = "Advanced"
-        Me.advancedChk.UseVisualStyleBackColor = True
-        '
-        'txtcbox
-        '
-        Me.txtcbox.AutoSize = True
-        Me.txtcbox.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxTxt
-        Me.txtcbox.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxTxt", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.txtcbox.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtcbox.Location = New System.Drawing.Point(181, 49)
-        Me.txtcbox.Name = "txtcbox"
-        Me.txtcbox.Size = New System.Drawing.Size(40, 17)
-        Me.txtcbox.TabIndex = 7
-        Me.txtcbox.Text = "-txt"
-        Me.txtcbox.UseVisualStyleBackColor = True
-        Me.txtcbox.Visible = False
         '
         'WebBrowser1
         '
@@ -310,6 +205,20 @@ Partial Class Form1
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Loot Filter"
         '
+        'filterlibBtn
+        '
+        Me.filterlibBtn.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.filterlibBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.filterlibBtn.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.filterlibBtn.Location = New System.Drawing.Point(337, 15)
+        Me.filterlibBtn.Name = "filterlibBtn"
+        Me.filterlibBtn.Size = New System.Drawing.Size(25, 25)
+        Me.filterlibBtn.TabIndex = 24
+        Me.filterlibBtn.Text = "+"
+        Me.ToolTip1.SetToolTip(Me.filterlibBtn, "Opens up a new tab in your internet browser" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for you to browse the filter library" &
+        ".")
+        Me.filterlibBtn.UseVisualStyleBackColor = True
+        '
         'Label3
         '
         Me.Label3.AutoSize = True
@@ -385,19 +294,136 @@ Partial Class Form1
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
-        'filterlibBtn
+        'actChk
         '
-        Me.filterlibBtn.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.filterlibBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.filterlibBtn.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.filterlibBtn.Location = New System.Drawing.Point(337, 15)
-        Me.filterlibBtn.Name = "filterlibBtn"
-        Me.filterlibBtn.Size = New System.Drawing.Size(25, 25)
-        Me.filterlibBtn.TabIndex = 24
-        Me.filterlibBtn.Text = "+"
-        Me.ToolTip1.SetToolTip(Me.filterlibBtn, "Opens up a new tab in your internet browser" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for you to browse the filter library" &
-        ".")
-        Me.filterlibBtn.UseVisualStyleBackColor = True
+        Me.actChk.AutoSize = True
+        Me.actChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxAct
+        Me.actChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxAct", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.actChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.actChk.Location = New System.Drawing.Point(121, 49)
+        Me.actChk.Name = "actChk"
+        Me.actChk.Size = New System.Drawing.Size(50, 17)
+        Me.actChk.TabIndex = 9
+        Me.actChk.Text = "-act5"
+        Me.ToolTip1.SetToolTip(Me.actChk, "Only works in singleplayer." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Makes you newly created character start in act 5" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "wi" &
+        "th experience, stat and skill points.")
+        Me.actChk.UseVisualStyleBackColor = True
+        '
+        'skipChk
+        '
+        Me.skipChk.AutoSize = True
+        Me.skipChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxSkipToBnet
+        Me.skipChk.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.skipChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSkipToBnet", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.skipChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.skipChk.Location = New System.Drawing.Point(121, 3)
+        Me.skipChk.Name = "skipChk"
+        Me.skipChk.Size = New System.Drawing.Size(78, 17)
+        Me.skipChk.TabIndex = 1
+        Me.skipChk.Text = "-skiptobnet"
+        Me.ToolTip1.SetToolTip(Me.skipChk, "Starts the game and directly connects to Battle.Net.")
+        Me.skipChk.UseVisualStyleBackColor = True
+        '
+        'aspectChk
+        '
+        Me.aspectChk.AutoSize = True
+        Me.aspectChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxNoFixAspect
+        Me.aspectChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxNoFixAspect", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.aspectChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.aspectChk.Location = New System.Drawing.Point(3, 49)
+        Me.aspectChk.Name = "aspectChk"
+        Me.aspectChk.Size = New System.Drawing.Size(83, 17)
+        Me.aspectChk.TabIndex = 4
+        Me.aspectChk.Text = "-nofixaspect"
+        Me.ToolTip1.SetToolTip(Me.aspectChk, "Allows you to stretch the game to any size in windowed mode," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "instead of keeing t" &
+        "he 4:3 aspect ration.")
+        Me.aspectChk.UseVisualStyleBackColor = True
+        '
+        'dfxChk
+        '
+        Me.dfxChk.AutoSize = True
+        Me.dfxChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkbox3dfx
+        Me.dfxChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkbox3dfx", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.dfxChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.dfxChk.Location = New System.Drawing.Point(3, 26)
+        Me.dfxChk.Name = "dfxChk"
+        Me.dfxChk.Size = New System.Drawing.Size(49, 17)
+        Me.dfxChk.TabIndex = 3
+        Me.dfxChk.Text = "-3dfx"
+        Me.ToolTip1.SetToolTip(Me.dfxChk, "VideoMode: Glide" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Checks if you have the glide wrapper installed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If not, the la" &
+        "uncher will download it for you.")
+        Me.dfxChk.UseVisualStyleBackColor = True
+        '
+        'wChk
+        '
+        Me.wChk.AutoSize = True
+        Me.wChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
+        Me.wChk.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.wChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxW", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.wChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.wChk.Location = New System.Drawing.Point(3, 3)
+        Me.wChk.Name = "wChk"
+        Me.wChk.Size = New System.Drawing.Size(37, 17)
+        Me.wChk.TabIndex = 0
+        Me.wChk.Text = "-w"
+        Me.ToolTip1.SetToolTip(Me.wChk, "Run the game in windowed mode.")
+        Me.wChk.UseVisualStyleBackColor = True
+        '
+        'directcbox
+        '
+        Me.directcbox.AutoSize = True
+        Me.directcbox.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxDirect
+        Me.directcbox.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxDirect", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.directcbox.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.directcbox.Location = New System.Drawing.Point(239, 26)
+        Me.directcbox.Name = "directcbox"
+        Me.directcbox.Size = New System.Drawing.Size(55, 17)
+        Me.directcbox.TabIndex = 6
+        Me.directcbox.Text = "-direct"
+        Me.directcbox.UseVisualStyleBackColor = True
+        Me.directcbox.Visible = False
+        '
+        'txtcbox
+        '
+        Me.txtcbox.AutoSize = True
+        Me.txtcbox.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxTxt
+        Me.txtcbox.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxTxt", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.txtcbox.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.txtcbox.Location = New System.Drawing.Point(239, 49)
+        Me.txtcbox.Name = "txtcbox"
+        Me.txtcbox.Size = New System.Drawing.Size(40, 17)
+        Me.txtcbox.TabIndex = 7
+        Me.txtcbox.Text = "-txt"
+        Me.txtcbox.UseVisualStyleBackColor = True
+        Me.txtcbox.Visible = False
+        '
+        'advancedChk
+        '
+        Me.advancedChk.AutoSize = True
+        Me.advancedChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxAdvanced
+        Me.advancedChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxAdvanced", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.advancedChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.advancedChk.Location = New System.Drawing.Point(239, 3)
+        Me.advancedChk.Name = "advancedChk"
+        Me.advancedChk.Size = New System.Drawing.Size(75, 17)
+        Me.advancedChk.TabIndex = 8
+        Me.advancedChk.Text = "Advanced"
+        Me.ToolTip1.SetToolTip(Me.advancedChk, "Shows advanced options." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Use at your own risk.")
+        Me.advancedChk.UseVisualStyleBackColor = True
+        '
+        'nsChk
+        '
+        Me.nsChk.AutoSize = True
+        Me.nsChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxNs
+        Me.nsChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxNs", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.nsChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.nsChk.Location = New System.Drawing.Point(121, 26)
+        Me.nsChk.Name = "nsChk"
+        Me.nsChk.Size = New System.Drawing.Size(40, 17)
+        Me.nsChk.TabIndex = 2
+        Me.nsChk.Text = "-ns"
+        Me.ToolTip1.SetToolTip(Me.nsChk, "Disables in game sound.")
+        Me.nsChk.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -459,4 +485,5 @@ Partial Class Form1
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents filterlibBtn As Button
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents actChk As CheckBox
 End Class
