@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.playBtn = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -50,6 +51,7 @@ Partial Class Form1
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.filterlibBtn = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox3.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -393,6 +395,8 @@ Partial Class Form1
         Me.filterlibBtn.Size = New System.Drawing.Size(25, 25)
         Me.filterlibBtn.TabIndex = 24
         Me.filterlibBtn.Text = "+"
+        Me.ToolTip1.SetToolTip(Me.filterlibBtn, "Opens up a new tab in your internet browser" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for you to browse the filter library" &
+        ".")
         Me.filterlibBtn.UseVisualStyleBackColor = True
         '
         'Form1
@@ -454,4 +458,5 @@ Partial Class Form1
     Friend WithEvents advancedChk As CheckBox
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents filterlibBtn As Button
+    Friend WithEvents ToolTip1 As ToolTip
 End Class
