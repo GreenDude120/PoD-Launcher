@@ -23,7 +23,6 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.playBtn = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -44,31 +43,20 @@ Partial Class Form1
         Me.downloadcfg = New System.Windows.Forms.Button()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.viewmorecfg = New System.Windows.Forms.Button()
         Me.lootfilterurl = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.LogBox = New System.Windows.Forms.ListBox()
         Me.ProgressBar = New System.Windows.Forms.ProgressBar()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.lootfiltername = New System.Windows.Forms.TextBox()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.filterlibBtn = New System.Windows.Forms.Button()
         Me.GroupBox3.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.banner
-        Me.PictureBox1.Location = New System.Drawing.Point(627, 12)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(368, 113)
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
         '
         'playBtn
         '
@@ -85,7 +73,7 @@ Partial Class Form1
         '
         Me.GroupBox3.Controls.Add(Me.TableLayoutPanel1)
         Me.GroupBox3.ForeColor = System.Drawing.Color.White
-        Me.GroupBox3.Location = New System.Drawing.Point(627, 130)
+        Me.GroupBox3.Location = New System.Drawing.Point(627, 155)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(368, 117)
         Me.GroupBox3.TabIndex = 4
@@ -226,11 +214,11 @@ Partial Class Form1
         'WebBrowser1
         '
         Me.WebBrowser1.IsWebBrowserContextMenuEnabled = False
-        Me.WebBrowser1.Location = New System.Drawing.Point(12, 12)
+        Me.WebBrowser1.Location = New System.Drawing.Point(12, 155)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser1.Name = "WebBrowser1"
         Me.WebBrowser1.ScriptErrorsSuppressed = True
-        Me.WebBrowser1.Size = New System.Drawing.Size(609, 421)
+        Me.WebBrowser1.Size = New System.Drawing.Size(609, 278)
         Me.WebBrowser1.TabIndex = 9
         Me.WebBrowser1.Url = New System.Uri("https://pathofdiablo.com/p/?getnewsembed", System.UriKind.Absolute)
         '
@@ -299,25 +287,23 @@ Partial Class Form1
         Me.downloadcfg.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.downloadcfg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.downloadcfg.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.downloadcfg.Location = New System.Drawing.Point(241, 46)
+        Me.downloadcfg.Location = New System.Drawing.Point(241, 15)
         Me.downloadcfg.Name = "downloadcfg"
-        Me.downloadcfg.Size = New System.Drawing.Size(121, 25)
+        Me.downloadcfg.Size = New System.Drawing.Size(90, 25)
         Me.downloadcfg.TabIndex = 21
         Me.downloadcfg.Text = "Download"
         Me.downloadcfg.UseVisualStyleBackColor = True
         '
         'GroupBox5
         '
-        Me.GroupBox5.Controls.Add(Me.lootfiltername)
-        Me.GroupBox5.Controls.Add(Me.Label2)
+        Me.GroupBox5.Controls.Add(Me.filterlibBtn)
         Me.GroupBox5.Controls.Add(Me.Label3)
-        Me.GroupBox5.Controls.Add(Me.viewmorecfg)
         Me.GroupBox5.Controls.Add(Me.lootfilterurl)
         Me.GroupBox5.Controls.Add(Me.downloadcfg)
         Me.GroupBox5.ForeColor = System.Drawing.Color.White
-        Me.GroupBox5.Location = New System.Drawing.Point(627, 250)
+        Me.GroupBox5.Location = New System.Drawing.Point(627, 278)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(368, 80)
+        Me.GroupBox5.Size = New System.Drawing.Size(368, 49)
         Me.GroupBox5.TabIndex = 22
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Loot Filter"
@@ -330,19 +316,6 @@ Partial Class Form1
         Me.Label3.Size = New System.Drawing.Size(32, 13)
         Me.Label3.TabIndex = 23
         Me.Label3.Text = "URL:"
-        '
-        'viewmorecfg
-        '
-        Me.viewmorecfg.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.viewmorecfg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.viewmorecfg.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.viewmorecfg.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.viewmorecfg.Location = New System.Drawing.Point(241, 15)
-        Me.viewmorecfg.Name = "viewmorecfg"
-        Me.viewmorecfg.Size = New System.Drawing.Size(121, 25)
-        Me.viewmorecfg.TabIndex = 25
-        Me.viewmorecfg.Text = "Browse Filter Library"
-        Me.viewmorecfg.UseVisualStyleBackColor = True
         '
         'lootfilterurl
         '
@@ -388,7 +361,6 @@ Partial Class Form1
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.Button4)
         Me.Panel1.Controls.Add(Me.Button5)
         Me.Panel1.Controls.Add(Me.playBtn)
@@ -401,35 +373,27 @@ Partial Class Form1
         Me.Panel1.Size = New System.Drawing.Size(984, 87)
         Me.Panel1.TabIndex = 28
         '
-        'Label1
+        'PictureBox1
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Label1.Location = New System.Drawing.Point(781, 45)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(25, 13)
-        Me.Label1.TabIndex = 27
-        Me.Label1.Text = "v11"
+        Me.PictureBox1.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.banner2
+        Me.PictureBox1.Location = New System.Drawing.Point(12, 12)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(983, 137)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox1.TabIndex = 0
+        Me.PictureBox1.TabStop = False
         '
-        'Label2
+        'filterlibBtn
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 52)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(38, 13)
-        Me.Label2.TabIndex = 26
-        Me.Label2.Text = "Name:"
-        '
-        'lootfiltername
-        '
-        Me.lootfiltername.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(62, Byte), Integer))
-        Me.lootfiltername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lootfiltername.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.lootfiltername.Location = New System.Drawing.Point(44, 50)
-        Me.lootfiltername.Name = "lootfiltername"
-        Me.lootfiltername.Size = New System.Drawing.Size(191, 20)
-        Me.lootfiltername.TabIndex = 27
-        Me.lootfiltername.Text = "item.filter"
+        Me.filterlibBtn.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.filterlibBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.filterlibBtn.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.filterlibBtn.Location = New System.Drawing.Point(337, 15)
+        Me.filterlibBtn.Name = "filterlibBtn"
+        Me.filterlibBtn.Size = New System.Drawing.Size(25, 25)
+        Me.filterlibBtn.TabIndex = 24
+        Me.filterlibBtn.Text = "+"
+        Me.filterlibBtn.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -450,7 +414,6 @@ Partial Class Form1
         Me.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Path of Diablo Launcher"
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox3.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
@@ -458,7 +421,7 @@ Partial Class Form1
         Me.GroupBox5.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -482,7 +445,6 @@ Partial Class Form1
     Friend WithEvents Button5 As Button
     Friend WithEvents downloadcfg As Button
     Friend WithEvents GroupBox5 As GroupBox
-    Friend WithEvents viewmorecfg As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents lootfilterurl As TextBox
     Friend WithEvents GroupBox1 As GroupBox
@@ -491,7 +453,5 @@ Partial Class Form1
     Friend WithEvents Panel1 As Panel
     Friend WithEvents advancedChk As CheckBox
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents Label1 As Label
-    Friend WithEvents lootfiltername As TextBox
-    Friend WithEvents Label2 As Label
+    Friend WithEvents filterlibBtn As Button
 End Class

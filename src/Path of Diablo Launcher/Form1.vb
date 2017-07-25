@@ -79,6 +79,8 @@ Public Class Form1
             directcbox.Visible = False
         End If
 
+        Log("Welcome to the Path of Diablo Launcher v11")
+
         Dim thread As New Thread(AddressOf UpdaterThread)
         thread.IsBackground = True
         thread.Start()
@@ -88,7 +90,7 @@ Public Class Form1
 
         Dim d2 As New ProcessStartInfo
 
-        d2.FileName = "Diablo II.exe"
+        d2.FileName = "Game.exe"
         Try
             My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ DisableNXShowUI RUNASADMIN")
         Catch ex As Exception
@@ -178,6 +180,10 @@ Public Class Form1
 
     'End Sub
 
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        System.Diagnostics.Process.Start("https://pathofdiablo.com/p/")
+    End Sub
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         System.Diagnostics.Process.Start("http://pathofdiablo.com/donate")
     End Sub
@@ -198,7 +204,7 @@ Public Class Form1
         System.Diagnostics.Process.Start("http://pathofdiablo.com/servers")
     End Sub
 
-    Private Sub viewmorecfg_Click(sender As Object, e As EventArgs) Handles viewmorecfg.Click
+    Private Sub filterlibBtn_Click(sender As Object, e As EventArgs) Handles filterlibBtn.Click
         System.Diagnostics.Process.Start("http://pathofdiablo.com/filters")
     End Sub
 
@@ -213,15 +219,15 @@ Public Class Form1
             Log("Please enter a url where the loot filter will be downloaded from.")
             Exit Sub
         End If
-        If lootfiltername.Text.Equals("") Then
-            Log("Please give the loot filter to be downloaded a name.")
-            Exit Sub
-        End If
+        'If lootfiltername.Text.Equals("") Then
+        '    Log("Please give the loot filter to be downloaded a name.")
+        '    Exit Sub
+        'End If
 
         SetEnabled(playBtn, False)
         SetEnabled(downloadcfg, False)
 
-        Dim name As String = lootfiltername.Text
+        Dim name As String = "item.filter"      'lootfiltername.Text
         Dim url As String = lootfilterurl.Text
 
         Log("Downloading " & name & " from " & url)
@@ -448,4 +454,5 @@ Public Class Form1
             directcbox.Visible = False
         End If
     End Sub
+
 End Class
