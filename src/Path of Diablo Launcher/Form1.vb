@@ -72,10 +72,8 @@ Public Class Form1
 
         'show/hide advanced options
         If advancedChk.Checked Then
-            txtcbox.Visible = True
             directcbox.Visible = True
         Else
-            txtcbox.Visible = False
             directcbox.Visible = False
         End If
 
@@ -119,10 +117,6 @@ Public Class Form1
 
         If directcbox.Checked = True Then
             d2.Arguments = d2.Arguments & "-direct "
-        End If
-
-        If txtcbox.Checked = True Then
-            d2.Arguments = d2.Arguments & "-txt "
         End If
 
         If aspectChk.Checked = True Then
@@ -447,10 +441,8 @@ Public Class Form1
 
     Private Sub advancedChk_CheckedChanged(sender As Object, e As EventArgs) Handles advancedChk.CheckedChanged
         If advancedChk.Checked Then
-            txtcbox.Visible = True
             directcbox.Visible = True
         Else
-            txtcbox.Visible = False
             directcbox.Visible = False
         End If
     End Sub

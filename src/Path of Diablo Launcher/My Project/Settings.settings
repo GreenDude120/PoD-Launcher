@@ -20,9 +20,6 @@
     <Setting Name="chkboxDirect" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="chkboxTxt" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="chkboxAdvanced" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
