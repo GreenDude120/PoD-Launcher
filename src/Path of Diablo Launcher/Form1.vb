@@ -74,11 +74,9 @@ Public Class Form1
         If advancedChk.Checked Then
             txtcbox.Visible = True
             directcbox.Visible = True
-            actChk.Visible = True
         Else
             txtcbox.Visible = False
             directcbox.Visible = False
-            actChk.Visible = False
         End If
 
         Log("Welcome to the Path of Diablo Launcher v11")
@@ -129,10 +127,6 @@ Public Class Form1
 
         If aspectChk.Checked = True Then
             d2.Arguments = d2.Arguments & "-nofixaspect "
-        End If
-
-        If actChk.Checked = True Then
-            d2.Arguments = d2.Arguments & "-act5 "
         End If
 
         Me.Hide()                           'hide window, so that it doesn't look like it doesn't respond anymore
@@ -455,11 +449,9 @@ Public Class Form1
         If advancedChk.Checked Then
             txtcbox.Visible = True
             directcbox.Visible = True
-            actChk.Visible = True
         Else
             txtcbox.Visible = False
             directcbox.Visible = False
-            actChk.Visible = False
         End If
     End Sub
 

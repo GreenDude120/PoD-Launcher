@@ -26,8 +26,5 @@
     <Setting Name="chkboxAdvanced" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="chkboxAct" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
   </Settings>
 </SettingsFile>
