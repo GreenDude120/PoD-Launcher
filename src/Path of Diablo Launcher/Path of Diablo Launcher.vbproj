@@ -175,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\banner2.png" />
     <None Include="Resources\banner.png" />
   </ItemGroup>
   <ItemGroup>

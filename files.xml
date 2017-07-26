@@ -3,4 +3,56 @@
 	<file name="patch_d2.mpq" crc="1815CB12">
 		<link>https://github.com/GreenDude120/PoD-Launcher/releases/download/1/patch_d2.mpq</link>
 	</file>
+	
+	<file name="D2Client.dll" crc="EAABD1BB">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Client.dll</link>
+	</file>
+	<file name="D2CMP.dll" crc="BBD202E2">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2CMP.dll</link>
+	</file>
+	<file name="D2Common.dll" crc="6B3D9AB3">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Common.dll</link>
+	</file>
+	<file name="D2DDraw.dll" crc="7E0B4D39">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2DDraw.dll</link>
+	</file>
+	<file name="D2Direct3D.dll" crc="1F7A2A57">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Direct3D.dll</link>
+	</file>
+	<file name="D2Game.dll" crc="DC1A5A2B">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Game.dll</link>
+	</file>
+	<file name="D2Gdi.dll" crc="160627C2">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Gdi.dll</link>
+	</file>
+	<file name="D2Glide.dll" crc="D7D481A3">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Glide.dll</link>
+	</file>
+	<file name="D2Lang.dll" crc="48EB7ED0">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Lang.dll</link>
+	</file>
+	<file name="D2Launch.dll" crc="394806ED">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Launch.dll</link>
+	</file>
+	<file name="D2MCPClient.dll" crc="82000E02">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2MCPClient.dll</link>
+	</file>
+	<file name="D2Multi.dll" crc="3CE07ED6">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Multi.dll</link>
+	</file>
+	<file name="D2Net.dll" crc="565E0370">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Net.dll</link>
+	</file>
+	<file name="D2Sound.dll" crc="82699D49">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2sound.dll</link>
+	</file>
+	<file name="D2Win.dll" crc="279F3311">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Win.dll</link>
+	</file>
+	<file name="Storm.dll" crc="BDB6784E">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/Storm.dll</link>
+	</file>
+	<file name="Bnclient.dll" crc="49E0C339">
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/Bnclient.dll</link>
+	</file>
 </filelist>
