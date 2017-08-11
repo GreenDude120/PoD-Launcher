@@ -1,10 +1,13 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Threading
+Imports System.Diagnostics
 
 Public Class Form1
 
     Dim updateAvailable As Boolean = False
+
+    Dim stopwatch As Stopwatch = New Stopwatch()
 
     Public Function GetCRC32(ByVal sFileName As String) As String
         Try
@@ -279,18 +282,20 @@ Public Class Form1
         ProgressBar.Value = progress
     End Sub
 
-
-
     Private Sub Downloads_ProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs)
         Dim bytesIn As Double = Double.Parse(e.BytesReceived.ToString())
         Dim totalBytes As Double = Double.Parse(e.TotalBytesToReceive.ToString())
         Dim percentage As Double = bytesIn / totalBytes * 100
+
+        SetText(dlInfo, String.Format("Downloading at {0} kb/s", (e.BytesReceived / 1024D / stopwatch.Elapsed.TotalSeconds).ToString("0.00")))
 
         SetProgress(Int32.Parse(Math.Truncate(percentage).ToString()))
     End Sub
 
     Private Sub Downloads_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
         SetProgress(0)
+        stopwatch.Reset()
+        SetText(dlInfo, "")
         SyncLock e.UserState
             'release block
             Monitor.Pulse(e.UserState)
@@ -388,6 +393,7 @@ Public Class Form1
                                         Try
                                             Dim myLock As Object = New Object()
                                             SyncLock myLock
+                                                stopwatch.Start()
                                                 dl.DownloadFileAsync(New Uri(link), name, myLock)
                                                 Monitor.Wait(myLock)
                                             End SyncLock
