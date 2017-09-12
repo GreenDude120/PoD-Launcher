@@ -359,7 +359,19 @@ Public Class Form1
                             Select Case reader.NodeType
                                 Case Xml.XmlNodeType.Element
 
-                                    Dim link As String = reader.ReadInnerXml()
+                                    Dim link As NamedLink = New NamedLink
+                                    'read attributes
+                                    If reader.AttributeCount > 0 Then
+                                        While reader.MoveToNextAttribute
+                                            If reader.Name.Equals("name") Then
+                                                link.Name = reader.Value
+                                            End If
+                                        End While
+
+                                        reader.MoveToContent()
+                                    End If
+
+                                    link.Link = reader.ReadInnerXml()
                                     dlme.AddLink(link)
 
                                 Case Xml.XmlNodeType.EndElement
@@ -432,23 +444,26 @@ Public Class Form1
                 End Try
             End If
 
-            For Each link As String In file.Links
+            For Each link As NamedLink In file.Links
                 If file.ShowDialog Then
                     LinkChooser.Links.Items.Clear()
 
-                    For Each l As String In file.Links
-                        LinkChooser.Links.Items.Add(l)
+                    For Each l As NamedLink In file.Links
+                        If Not l.Name Is Nothing Then
+                            LinkChooser.Links.Items.Add(l.Name)
+                        Else
+                            LinkChooser.Links.Items.Add(l.Link)
+                        End If
                     Next
 
                     LinkChooser.Links.SelectedIndex = 0
-                    LinkChooser.File.Text = "File: " & file.Name
 
                     LinkChooser.ShowDialog()
 
-                    link = LinkChooser.Links.Items.Item(LinkChooser.Links.SelectedIndex)
+                    link = file.Links.ElementAt(LinkChooser.Links.SelectedIndex)
                 End If
 
-                Log("Downloading file " & file.Name & " from " & link)
+                Log("Downloading file " & file.Name & " from " & link.Link)
 
                 Dim dl As WebClient = New WebClient()
                 AddHandler dl.DownloadProgressChanged, AddressOf Downloads_ProgressChanged
@@ -458,18 +473,18 @@ Public Class Form1
                     Dim myLock As Object = New Object()
                     SyncLock myLock
                         stopwatch.Start()
-                        dl.DownloadFileAsync(New Uri(link), file.Name, myLock)
+                        dl.DownloadFileAsync(New Uri(link.Link), file.Name, myLock)
                         Monitor.Wait(myLock)
                     End SyncLock
                 Catch ex As Exception
-                    Log("An error occured while downloading file " & file.Name & " from " & link)
+                    Log("An error occured while downloading file " & file.Name & " from " & link.Link)
                     Continue For
                 End Try
-                Log("Successfully downloaded file " & file.Name & " from " & link)
+                Log("Successfully downloaded file " & file.Name & " from " & link.Link)
 
                 localCrc = GetCRC32(file.Name)
                 If Not file.Crc.Equals("-1") And Not file.Crc.Equals(localCrc) Then
-                    Log("Checksum of downloaded file (" & file.Name & ") from " & link & " doesn't match the specified checksum.")
+                    Log("Checksum of downloaded file (" & file.Name & ") from " & link.Link & " doesn't match the specified checksum.")
                     Continue For
                 End If
 

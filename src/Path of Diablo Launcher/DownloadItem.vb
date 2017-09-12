@@ -4,7 +4,7 @@
     Private filecrc As String = ""
     Private restartReq As Boolean = False
     Private linkDialog As Boolean = False
-    Private dllinks As System.Collections.Generic.LinkedList(Of String) = New System.Collections.Generic.LinkedList(Of String)
+    Private dllinks As System.Collections.Generic.LinkedList(Of NamedLink) = New System.Collections.Generic.LinkedList(Of NamedLink)
 
     Property Name As String
         Get
@@ -42,13 +42,13 @@
         End Set
     End Property
 
-    ReadOnly Property Links As System.Collections.Generic.LinkedList(Of String)
+    ReadOnly Property Links As System.Collections.Generic.LinkedList(Of NamedLink)
         Get
             Return dllinks
         End Get
     End Property
 
-    Public Sub AddLink(ByVal link As String)
+    Public Sub AddLink(ByVal link As NamedLink)
         dllinks.AddLast(link)
     End Sub
 
