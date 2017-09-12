@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("Path of Diablo Launcher")>
-<Assembly: AssemblyCopyright("")>
+<Assembly: AssemblyCopyright("OpenSource")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

@@ -336,7 +336,7 @@ Partial Class Form1
         Me.lootfilterurl.Name = "lootfilterurl"
         Me.lootfilterurl.Size = New System.Drawing.Size(191, 20)
         Me.lootfilterurl.TabIndex = 22
-        Me.lootfilterurl.Text = "http://pathofdiablo.com/item.filter"
+        Me.lootfilterurl.Text = "https://pathofdiablo.com/item.filter"
         '
         'GroupBox1
         '
