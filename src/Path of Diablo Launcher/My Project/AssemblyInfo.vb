@@ -11,8 +11,8 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("Path of Diablo Launcher")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("Path of Diablo Launcher")> 
-<Assembly: AssemblyCopyright("Deleter")> 
+<Assembly: AssemblyProduct("Path of Diablo Launcher")>
+<Assembly: AssemblyCopyright("")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

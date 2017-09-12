@@ -421,7 +421,7 @@ Public Class Form1
         Dim localCrc As String = GetCRC32(file.Name)
         If file.Crc.Equals(localCrc) And Not uptodate Then
             Log("File " & file.Name & " is up-to-date")
-            uptodate = True
+            Return 0
         End If
 
         If Not uptodate Then
@@ -446,7 +446,6 @@ Public Class Form1
                     LinkChooser.ShowDialog()
 
                     link = LinkChooser.Links.Items.Item(LinkChooser.Links.SelectedIndex)
-
                 End If
 
                 Log("Downloading file " & file.Name & " from " & link)
