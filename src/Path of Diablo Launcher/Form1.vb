@@ -324,108 +324,54 @@ Public Class Form1
         Dim reader As Xml.XmlTextReader = New Xml.XmlTextReader(file)
 
         Dim restartRequired As Boolean = False
-        Dim nUpdates As Integer = 0
+
+        Dim files As System.Collections.Generic.LinkedList(Of DownloadItem) = New System.Collections.Generic.LinkedList(Of DownloadItem)
 
         Do While reader.Read()
             Select Case reader.NodeType
                 Case Xml.XmlNodeType.Element
-                    If reader.Name.Equals("file") Then
-                        Dim name As String = ""
-                        Dim crc As String = ""
-                        Dim restart As Boolean = False
 
-                        'read name and crc (ignore all other attributes)
+                    If reader.Name.Equals("file") Then
+
+                        Dim dlme As DownloadItem = New DownloadItem
+
+                        'read attributes
                         If reader.AttributeCount > 0 Then
                             While reader.MoveToNextAttribute
                                 If reader.Name.Equals("name") Then
-                                    name = reader.Value
+                                    dlme.Name = reader.Value
                                 ElseIf reader.Name.Equals("crc") Then
-                                    crc = reader.Value
+                                    dlme.Crc = reader.Value
                                 ElseIf reader.Name.Equals("restartRequired") Then
                                     If reader.Value.Equals("true") Then
-                                        restart = True
+                                        dlme.RestartRequired = True
+                                    End If
+                                ElseIf reader.Name.Equals("showDialog") Then
+                                    If reader.Value.Equals("true") Then
+                                        dlme.ShowDialog = True
                                     End If
                                 End If
                             End While
                         End If
 
-                        If name.Equals("") Then
-                            Log("Malformed " & file & ". Notifiy GreenDude!")
-                            Exit Sub
-                        End If
-
-                        Dim uptodate As Boolean = False
-
-                        'crc = "" -> only check if file exists, don't actually check the crc
-                        If crc.Equals("") Then
-                            If IO.File.Exists(name) Then
-                                Log("File " & name & " already exists, no need to download again.")
-                                uptodate = True
-                            Else
-                                crc = "-1"
-                            End If
-                        End If
-
-                        'no need to update if file has same crc as the servers file
-                        Dim localCrc As String = GetCRC32(name)
-                        If crc.Equals(localCrc) And Not uptodate Then
-                            Log("File " & name & " is up-to-date")
-                            uptodate = True
-                        End If
-
-                        'read links
+                        'read links (reads until end of 
                         While reader.Read()
                             Select Case reader.NodeType
                                 Case Xml.XmlNodeType.Element
-                                    If Not uptodate Then
-                                        If IO.File.Exists(name) Then
-                                            Try
-                                                IO.File.Move(name, "./tmp/" & name)
-                                            Catch ex As Exception
-                                            End Try
-                                        End If
 
-                                        Dim link As String = reader.ReadInnerXml()
-                                        Log("Downloading file " & name & " from " & link)
+                                    Dim link As String = reader.ReadInnerXml()
+                                    dlme.AddLink(link)
 
-                                        dl = New WebClient()
-                                        AddHandler dl.DownloadProgressChanged, AddressOf Downloads_ProgressChanged
-                                        AddHandler dl.DownloadFileCompleted, AddressOf Downloads_DownloadCompleted
-
-                                        Try
-                                            Dim myLock As Object = New Object()
-                                            SyncLock myLock
-                                                stopwatch.Start()
-                                                dl.DownloadFileAsync(New Uri(link), name, myLock)
-                                                Monitor.Wait(myLock)
-                                            End SyncLock
-                                        Catch ex As Exception
-                                            Log("An error occured while downloading file " & name & " from " & link)
-                                            Continue While
-                                        End Try
-                                        Log("Successfully downloaded file " & name & " from " & link)
-
-                                        localCrc = GetCRC32(name)
-                                        If Not crc.Equals("-1") And Not crc.Equals(localCrc) Then
-                                            Log("Checksum of downloaded file (" & name & ") from " & link & " doesn't match the specified checksum. Please try again later.")
-                                            Exit Sub
-                                        End If
-
-                                        uptodate = True
-                                        If restart Then
-                                            restartRequired = True
-                                        End If
-                                    End If
                                 Case Xml.XmlNodeType.EndElement
-                                    Exit While
+
+                                    If reader.Name.Equals("file") Then
+                                        files.AddLast(dlme)
+                                        Exit While
+                                    End If
+
                             End Select
                         End While
 
-                        nUpdates = nUpdates + 1
-                        If Not uptodate Then
-                            Log("An error occured while updating file " & name & ". Please restart and try again.")
-                            Exit Sub
-                        End If
                     End If
 
             End Select
@@ -433,7 +379,17 @@ Public Class Form1
 
         reader.Close()
 
-        Log("Finished checking " & nUpdates & " file(s) for updates")
+        For Each dlme As DownloadItem In files
+            Dim i As Integer = DownloadFile(dlme)
+            If i = 1 Then
+                restartRequired = True
+            ElseIf i = -1 Then
+                'problem detected, just exit. there should be something in the logs
+                Exit Sub
+            End If
+        Next
+
+        Log("Finished checking " & files.Count & " file(s) for updates")
 
         'restart if needed
         If restartRequired Then
@@ -446,6 +402,79 @@ Public Class Form1
         SetEnabled(downloadcfg, True)
 
     End Sub
+
+    Private Function DownloadFile(ByRef file As DownloadItem) As Integer
+
+        Dim uptodate As Boolean = False
+
+        'crc = "" -> only check if file exists, don't actually check the crc
+        If file.Crc.Equals("") Then
+            If IO.File.Exists(file.Name) Then
+                Log("File " & file.Name & " already exists, no need to download again.")
+                uptodate = True
+            Else
+                file.Crc = "-1"
+            End If
+        End If
+
+        'no need to update if file has same crc as the servers file
+        Dim localCrc As String = GetCRC32(file.Name)
+        If file.Crc.Equals(localCrc) And Not uptodate Then
+            Log("File " & file.Name & " is up-to-date")
+            uptodate = True
+        End If
+
+        If Not uptodate Then
+            If IO.File.Exists(file.Name) Then
+                Try
+                    IO.File.Move(file.Name, "./tmp/" & file.Name)
+                Catch ex As Exception
+                End Try
+            End If
+
+            For Each link As String In file.Links
+                Log("Downloading file " & file.Name & " from " & link)
+
+                Dim dl As WebClient = New WebClient()
+                AddHandler dl.DownloadProgressChanged, AddressOf Downloads_ProgressChanged
+                AddHandler dl.DownloadFileCompleted, AddressOf Downloads_DownloadCompleted
+
+                Try
+                    Dim myLock As Object = New Object()
+                    SyncLock myLock
+                        stopwatch.Start()
+                        dl.DownloadFileAsync(New Uri(link), file.Name, myLock)
+                        Monitor.Wait(myLock)
+                    End SyncLock
+                Catch ex As Exception
+                    Log("An error occured while downloading file " & file.Name & " from " & link)
+                    Continue For
+                End Try
+                Log("Successfully downloaded file " & file.Name & " from " & link)
+
+                localCrc = GetCRC32(file.Name)
+                If Not file.Crc.Equals("-1") And Not file.Crc.Equals(localCrc) Then
+                    Log("Checksum of downloaded file (" & file.Name & ") from " & link & " doesn't match the specified checksum.")
+                    Continue For
+                End If
+
+                uptodate = True
+                Exit For
+            Next
+
+        End If
+
+        If Not uptodate Then
+            Log("An error occured while updating file " & file.Name & ". Please restart and try again.")
+            Return -1
+        End If
+
+        If file.RestartRequired Then
+            Return 1
+        Else
+            Return 0
+        End If
+    End Function
 
     Private Sub advancedChk_CheckedChanged(sender As Object, e As EventArgs) Handles advancedChk.CheckedChanged
         If advancedChk.Checked Then
