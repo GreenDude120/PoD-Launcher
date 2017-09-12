@@ -433,6 +433,22 @@ Public Class Form1
             End If
 
             For Each link As String In file.Links
+                If file.ShowDialog Then
+                    LinkChooser.Links.Items.Clear()
+
+                    For Each l As String In file.Links
+                        LinkChooser.Links.Items.Add(l)
+                    Next
+
+                    LinkChooser.Links.SelectedIndex = 0
+                    LinkChooser.File.Text = "File: " & file.Name
+
+                    LinkChooser.ShowDialog()
+
+                    link = LinkChooser.Links.Items.Item(LinkChooser.Links.SelectedIndex)
+
+                End If
+
                 Log("Downloading file " & file.Name & " from " & link)
 
                 Dim dl As WebClient = New WebClient()
