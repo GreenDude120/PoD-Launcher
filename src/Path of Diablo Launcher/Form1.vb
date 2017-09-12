@@ -361,6 +361,8 @@ Public Class Form1
                             If IO.File.Exists(name) Then
                                 Log("File " & name & " already exists, no need to download again.")
                                 uptodate = True
+                            Else
+                                crc = "-1"
                             End If
                         End If
 
@@ -404,7 +406,7 @@ Public Class Form1
                                         Log("Successfully downloaded file " & name & " from " & link)
 
                                         localCrc = GetCRC32(name)
-                                        If Not crc.Equals(localCrc) Then
+                                        If Not crc.Equals("-1") And Not crc.Equals(localCrc) Then
                                             Log("Checksum of downloaded file (" & name & ") from " & link & " doesn't match the specified checksum. Please try again later.")
                                             Exit Sub
                                         End If
