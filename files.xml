@@ -5,7 +5,7 @@
 		<link name="Washington VA USA Server">https://malphite.tal0ne.co.uk/greendude/patch_d2.mpq</link>
 		<link name="GitHub Worldwide CDN">https://github.com/GreenDude120/PoD-Launcher/releases/download/1/patch_d2.mpq</link>
 	</file>
-	<file name="D2PoDClient.dll" crc="BDAE6641">
+	<file name="D2PoDClient.dll" crc="21477C81">
 		<link>https://s10.seedboxws.com/ddl/sws02233/D2PoDClient.dll</link>
 	</file>
 	<file name="pod.dll" crc="13D59D76">
