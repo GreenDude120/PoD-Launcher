@@ -2,6 +2,7 @@
 <filelist>
 	<file name="patch_d2.mpq" crc="1815CB12" showDialog="true">
 		<link name="France Fast DL Server">https://s10.seedboxws.com/ddl/sws02233/patch_d2.mpq</link>
+		<link name="Washington VA USA Server">https://malphite.tal0ne.co.uk/greendude/patch_d2.mpq</link>
 		<link name="GitHub Worldwide CDN">https://github.com/GreenDude120/PoD-Launcher/releases/download/1/patch_d2.mpq</link>
 	</file>
 	<file name="D2PoDClient.dll" crc="BDAE6641">
@@ -9,9 +10,11 @@
 	</file>
 	<file name="pod.dll" crc="13D59D76">
 		<link>https://s10.seedboxws.com/ddl/sws02233/pod.dll</link>
+		<link>https://malphite.tal0ne.co.uk/greendude/pod.dll</link>
 	</file>
 	<file name="Path of Diablo Launcher.exe" crc="300C8760" restartRequired="true">
 		<link>https://s10.seedboxws.com/ddl/sws02233/Path of Diablo Launcher.exe</link>
+		<link>https://malphite.tal0ne.co.uk/greendude/Path%20of%20Diablo%20Launcher.exe</link>
 	</file>
 	
 	<file name="D2Client.dll" crc="EAABD1BB">
@@ -76,6 +79,7 @@
 	</file>
 	<file name="D2VidTst.exe" crc="703A2E45">
 		<link>https://s10.seedboxws.com/ddl/sws02233/D2VidTst.exe</link>
+		<link>https://malphite.tal0ne.co.uk/greendude/D2VidTst.exe</link>
 	</file>
 	<file name="D2Win.dll" crc="279F3311">
 		<link>https://s10.seedboxws.com/ddl/sws02233/D2Win.dll</link>
@@ -83,24 +87,31 @@
 	</file>
 	<file name="Diablo II.exe" crc="33D0D3EE">
 		<link>https://s10.seedboxws.com/ddl/sws02233/Diablo II.exe</link>
+		<link>https://malphite.tal0ne.co.uk/greendude/Diablo%20II.exe</link>
 	</file>
 	<file name="Fog.dll" crc="C4CB491F">
 		<link>https://s10.seedboxws.com/ddl/sws02233/Fog.dll</link>
+		<link>https://malphite.tal0ne.co.uk/greendude/Fog.dll</link>
 	</file>
 	<file name="Game.exe" crc="B3D69C47">
 		<link>https://s10.seedboxws.com/ddl/sws02233/Game.exe</link>
+		<link>https://malphite.tal0ne.co.uk/greendude/Game.exe</link>
 	</file>
 	<file name="ijl11.dll" crc="C00FE21D">
 		<link>https://s10.seedboxws.com/ddl/sws02233/ijl11.dll</link>
+		<link>https://malphite.tal0ne.co.uk/greendude/ijl11.dll</link>
 	</file>
 	<file name="item.filter">
 		<link>https://s10.seedboxws.com/ddl/sws02233/item.filter</link>
+		<link>https://malphite.tal0ne.co.uk/greendude/item.filter</link>
 	</file>
 	<file name="pod.cfg">
 		<link>https://s10.seedboxws.com/ddl/sws02233/pod.cfg</link>
+		<link>https://malphite.tal0ne.co.uk/greendude/pod.cfg</link>
 	</file>
 	<file name="SmackW32.dll" crc="614A9406">
 		<link>https://s10.seedboxws.com/ddl/sws02233/SmackW32.dll</link>
+		<link>https://malphite.tal0ne.co.uk/greendude/SmackW32.dll</link>
 	</file>
 	<file name="Storm.dll" crc="BDB6784E">
 		<link>https://s10.seedboxws.com/ddl/sws02233/Storm.dll</link>
@@ -108,9 +119,11 @@
 	</file>
 	<file name="UI.ini">
 		<link>https://s10.seedboxws.com/ddl/sws02233/UI.ini</link>
+		<link>https://malphite.tal0ne.co.uk/greendude/UI.ini</link>
 	</file>
 	<file name="binkw32.dll" crc="5934B4A7">
 		<link>https://s10.seedboxws.com/ddl/sws02233/binkw32.dll</link>
+		<link>https://malphite.tal0ne.co.uk/greendude/binkw32.dll</link>
 	</file>
 	<file name="Bnclient.dll" crc="49E0C339">
 		<link>https://s10.seedboxws.com/ddl/sws02233/Bnclient.dll</link>
