@@ -5,9 +5,9 @@ Imports System.Diagnostics
 
 Public Class Form1
 
-    Dim updateAvailable As Boolean = False
-
     Dim stopwatch As Stopwatch = New Stopwatch()
+
+    Dim cmd As CommandLineOptions = New CommandLineOptions()
 
     Public Function GetCRC32(ByVal sFileName As String) As String
         Try
@@ -80,11 +80,15 @@ Public Class Form1
             directcbox.Visible = False
         End If
 
+        cmd.ScanCommandLine(Environment.GetCommandLineArgs())
+
         Log("Welcome to the Path of Diablo Launcher v11")
 
         Dim thread As New Thread(AddressOf UpdaterThread)
         thread.IsBackground = True
         thread.Start()
+
+
     End Sub
 
     Private Sub playBtn_Click(sender As Object, e As EventArgs) Handles playBtn.Click
@@ -262,7 +266,7 @@ Public Class Form1
     End Sub
 
     Delegate Sub LogDelegate(ByVal text As String)
-    Private Sub Log(ByVal text As String)
+    Public Sub Log(ByVal text As String)
         If LogBox.InvokeRequired Then
             LogBox.Invoke(New LogDelegate(AddressOf Log), {text})
             Return
@@ -310,109 +314,117 @@ Public Class Form1
         SetText(playBtn, "Updating...")
         Log("Searching for updates...")
 
-        Dim file As String = "./tmp/files.xml"
+        If Not cmd.NoUpdate Then
+            Dim file As String = "./tmp/files.xml"
 
-        Dim xmlLink As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/files.xml"
-        Dim dl As WebClient = New WebClient()
-        Try
-            dl.DownloadFile(xmlLink, file)
-        Catch ex As Exception
-            SetText(playBtn, "Error!")
-            Log("An error occured checking for updates. Please try again later.")
-            Exit Sub
-        End Try
+            Dim xmlLink As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/files.xml"
+            Dim dl As WebClient = New WebClient()
+            Try
+                dl.DownloadFile(xmlLink, file)
+            Catch ex As Exception
+                SetText(playBtn, "Error!")
+                Log("An error occured checking for updates. Please try again later.")
+                Exit Sub
+            End Try
 
-        Dim reader As Xml.XmlTextReader = New Xml.XmlTextReader(file)
+            Dim reader As Xml.XmlTextReader = New Xml.XmlTextReader(file)
 
-        Dim restartRequired As Boolean = False
+            Dim restartRequired As Boolean = False
 
-        Dim files As System.Collections.Generic.LinkedList(Of DownloadItem) = New System.Collections.Generic.LinkedList(Of DownloadItem)
+            Dim files As System.Collections.Generic.LinkedList(Of DownloadItem) = New System.Collections.Generic.LinkedList(Of DownloadItem)
 
-        Do While reader.Read()
-            Select Case reader.NodeType
-                Case Xml.XmlNodeType.Element
+            Do While reader.Read()
+                Select Case reader.NodeType
+                    Case Xml.XmlNodeType.Element
 
-                    If reader.Name.Equals("file") Then
+                        If reader.Name.Equals("file") Then
 
-                        Dim dlme As DownloadItem = New DownloadItem
+                            Dim dlme As DownloadItem = New DownloadItem
 
-                        'read attributes
-                        If reader.AttributeCount > 0 Then
-                            While reader.MoveToNextAttribute
-                                If reader.Name.Equals("name") Then
-                                    dlme.Name = reader.Value
-                                ElseIf reader.Name.Equals("crc") Then
-                                    dlme.Crc = reader.Value
-                                ElseIf reader.Name.Equals("restartRequired") Then
-                                    If reader.Value.Equals("true") Then
-                                        dlme.RestartRequired = True
+                            'read attributes
+                            If reader.AttributeCount > 0 Then
+                                While reader.MoveToNextAttribute
+                                    If reader.Name.Equals("name") Then
+                                        dlme.Name = reader.Value
+                                    ElseIf reader.Name.Equals("crc") Then
+                                        dlme.Crc = reader.Value
+                                    ElseIf reader.Name.Equals("restartRequired") Then
+                                        If reader.Value.Equals("true") Then
+                                            dlme.RestartRequired = True
+                                        End If
+                                    ElseIf reader.Name.Equals("showDialog") Then
+                                        If reader.Value.Equals("true") Then
+                                            dlme.ShowDialog = True
+                                        End If
                                     End If
-                                ElseIf reader.Name.Equals("showDialog") Then
-                                    If reader.Value.Equals("true") Then
-                                        dlme.ShowDialog = True
-                                    End If
-                                End If
+                                End While
+                            End If
+
+                            'read links (reads until end of 
+                            While reader.Read()
+                                Select Case reader.NodeType
+                                    Case Xml.XmlNodeType.Element
+
+                                        Dim link As NamedLink = New NamedLink
+                                        'read attributes
+                                        If reader.AttributeCount > 0 Then
+                                            While reader.MoveToNextAttribute
+                                                If reader.Name.Equals("name") Then
+                                                    link.Name = reader.Value
+                                                End If
+                                            End While
+
+                                            reader.MoveToContent()
+                                        End If
+
+                                        link.Link = reader.ReadInnerXml()
+                                        dlme.AddLink(link)
+
+                                    Case Xml.XmlNodeType.EndElement
+
+                                        If reader.Name.Equals("file") Then
+                                            files.AddLast(dlme)
+                                            Exit While
+                                        End If
+
+                                End Select
                             End While
+
                         End If
 
-                        'read links (reads until end of 
-                        While reader.Read()
-                            Select Case reader.NodeType
-                                Case Xml.XmlNodeType.Element
+                End Select
+            Loop
 
-                                    Dim link As NamedLink = New NamedLink
-                                    'read attributes
-                                    If reader.AttributeCount > 0 Then
-                                        While reader.MoveToNextAttribute
-                                            If reader.Name.Equals("name") Then
-                                                link.Name = reader.Value
-                                            End If
-                                        End While
+            reader.Close()
 
-                                        reader.MoveToContent()
-                                    End If
+            For Each dlme As DownloadItem In files
+                Dim i As Integer = DownloadFile(dlme)
+                If i = 1 Then
+                    restartRequired = True
+                ElseIf i = -1 Then
+                    'problem detected, just exit. there should be something in the logs
+                    Exit Sub
+                End If
+            Next
 
-                                    link.Link = reader.ReadInnerXml()
-                                    dlme.AddLink(link)
+            Log("Finished checking " & files.Count & " file(s) for updates")
 
-                                Case Xml.XmlNodeType.EndElement
-
-                                    If reader.Name.Equals("file") Then
-                                        files.AddLast(dlme)
-                                        Exit While
-                                    End If
-
-                            End Select
-                        End While
-
-                    End If
-
-            End Select
-        Loop
-
-        reader.Close()
-
-        For Each dlme As DownloadItem In files
-            Dim i As Integer = DownloadFile(dlme)
-            If i = 1 Then
-                restartRequired = True
-            ElseIf i = -1 Then
-                'problem detected, just exit. there should be something in the logs
-                Exit Sub
+            'restart if needed
+            If restartRequired Then
+                MsgBox("An updated file requires the Launcher to restart to function correctly. Restarting Now!")
+                Application.Restart()
             End If
-        Next
-
-        Log("Finished checking " & files.Count & " file(s) for updates")
-
-        'restart if needed
-        If restartRequired Then
-            MsgBox("An updated file requires the Launcher to restart to function correctly. Restarting Now!")
-            Application.Restart()
+        Else
+            Log("Updates disabled!")
         End If
 
         SetText(playBtn, "Play")
         SetEnabled(playBtn, True)
         SetEnabled(downloadcfg, True)
+
+        If cmd.StartOnUpdateSuccess Then
+            playBtn.PerformClick()
+        End If
 
     End Sub
 
