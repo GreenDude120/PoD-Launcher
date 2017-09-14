@@ -60,9 +60,9 @@ Public Class Form1
         If Not My.Computer.FileSystem.DirectoryExists("./config") Then
             My.Computer.FileSystem.CreateDirectory("./config")
         End If
-        If Not My.Computer.FileSystem.DirectoryExists("./filter") Then
-            My.Computer.FileSystem.CreateDirectory("./filter")
-        End If
+        'If Not My.Computer.FileSystem.DirectoryExists("./filter") Then
+        '    My.Computer.FileSystem.CreateDirectory("./filter")
+        'End If
 
         'clear "tmp" on load
         For Each file As String In My.Computer.FileSystem.GetFiles("./tmp/", FileIO.SearchOption.SearchAllSubDirectories, "*.*")
@@ -231,7 +231,8 @@ Public Class Form1
 
         Try
             Dim dl As WebClient = New WebClient()
-            dl.DownloadFile(url, "./filter/" & name)
+            'dl.DownloadFile(url, "./filter/" & name)
+            dl.DownloadFile(url, name)
 
             Log("Successfully downloaded loot filter " & name & " from " & url)
         Catch ex As Exception
