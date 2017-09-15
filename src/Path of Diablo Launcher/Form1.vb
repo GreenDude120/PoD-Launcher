@@ -63,6 +63,9 @@ Public Class Form1
         'If Not My.Computer.FileSystem.DirectoryExists("./filter") Then
         '    My.Computer.FileSystem.CreateDirectory("./filter")
         'End If
+        If Not My.Computer.FileSystem.DirectoryExists("./Save") Then
+            My.Computer.FileSystem.CreateDirectory("./Save")
+        End If
 
         'clear "tmp" on load
         For Each file As String In My.Computer.FileSystem.GetFiles("./tmp/", FileIO.SearchOption.SearchAllSubDirectories, "*.*")
