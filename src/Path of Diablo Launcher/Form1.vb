@@ -106,31 +106,40 @@ Public Class Form1
             Me.Close()
         End Try
 
-
-        d2.Arguments = ""
-
-        If wChk.Checked = True Then
-            d2.Arguments = d2.Arguments & "-w "
+        If cmd.Passthrough Then
+            d2.Arguments = cmd.PassthroughArgs
+        Else
+            d2.Arguments = ""
         End If
 
-        If skipChk.Checked = True Then
-            d2.Arguments = d2.Arguments & "-skiptobnet "
+        Const argWindowed As String = "-w"
+        If wChk.Checked = True And d2.Arguments.IndexOf(argWindowed) = -1 Then
+            d2.Arguments = d2.Arguments & argWindowed & " "
         End If
 
-        If nsChk.Checked = True Then
-            d2.Arguments = d2.Arguments & "-ns "
+        Const argSkipToBnet As String = "-skiptobnet"
+        If skipChk.Checked = True And d2.Arguments.IndexOf(argSkipToBnet) = -1 Then
+            d2.Arguments = d2.Arguments & argSkipToBnet & " "
         End If
 
-        If dfxChk.Checked = True Then
-            d2.Arguments = d2.Arguments & "-3dfx "
+        Const argNoSound As String = "-ns"
+        If nsChk.Checked = True And d2.Arguments.IndexOf(argNoSound) = -1 Then
+            d2.Arguments = d2.Arguments & argNoSound & " "
         End If
 
-        If directcbox.Checked = True Then
-            d2.Arguments = d2.Arguments & "-direct "
+        Const argGlide As String = "-3dfx"
+        If dfxChk.Checked = True And d2.Arguments.IndexOf(argGlide) = -1 Then
+            d2.Arguments = d2.Arguments & argGlide & " "
         End If
 
-        If aspectChk.Checked = True Then
-            d2.Arguments = d2.Arguments & "-nofixaspect "
+        Const argDirect As String = "-direct"
+        If directcbox.Checked = True And d2.Arguments.IndexOf(argDirect) = -1 Then
+            d2.Arguments = d2.Arguments & argDirect & " "
+        End If
+
+        Const argNoFixAspect As String = "-nofixaspect"
+        If aspectChk.Checked = True And d2.Arguments.IndexOf(argNoFixAspect) = -1 Then
+            d2.Arguments = d2.Arguments & argNoFixAspect & " "
         End If
 
         Me.Hide()                           'hide window, so that it doesn't look like it doesn't respond anymore
