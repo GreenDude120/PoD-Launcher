@@ -128,4 +128,21 @@
 		<link>https://s10.seedboxws.com/ddl/sws02233/Bnclient.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/Bnclient.dll</link>
 	</file>
+	
+	<file name="glide3x.dll">
+		<link>https://s10.seedboxws.com/ddl/sws02233/glide3x.dll</link>
+		<link>https://s8.seedboxws.com/ddl/wsbox00075/glide3x.dll</link>
+	</file>
+	<file name="glide-init.exe">
+		<link>https://s10.seedboxws.com/ddl/sws02233/glide-init.exe</link>
+		<link>https://s8.seedboxws.com/ddl/wsbox00075/glide-init.exe</link>
+	</file>
+	<file name="glide-liesmich.txt">
+		<link>https://s10.seedboxws.com/ddl/sws02233/glide-liesmich.txt</link>
+		<link>https://s8.seedboxws.com/ddl/wsbox00075/glide-liesmich.txt</link>
+	</file>
+	<file name="glide-readme.txt">
+		<link>https://s10.seedboxws.com/ddl/sws02233/glide-readme.txt</link>
+		<link>https://s8.seedboxws.com/ddl/wsbox00075/glide-readme.txt</link>
+	</file>
 </filelist>
