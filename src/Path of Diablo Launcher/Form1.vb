@@ -87,10 +87,13 @@ Public Class Form1
 
         Log("Welcome to the Path of Diablo Launcher v11")
 
+        If CheckParentInstallation() = 0 Then
+            Exit Sub
+        End If
+
         Dim thread As New Thread(AddressOf UpdaterThread)
         thread.IsBackground = True
         thread.Start()
-
 
     End Sub
 
@@ -538,5 +541,39 @@ Public Class Form1
             directcbox.Visible = False
         End If
     End Sub
+
+    Private Function CheckParentInstallation() As Integer
+
+        SetEnabled(playBtn, False)
+        SetEnabled(downloadcfg, False)
+        SetText(playBtn, "Checking...")
+        Log("Checking Installation...")
+
+        Dim files As String() = New String() {
+            "D2.LNG",
+            "d2char.mpq",
+            "d2data.mpq",
+            "d2exp.mpq",
+            "d2music.mpq",
+            "d2sfx.mpq",
+            "d2speech.mpq",
+            "d2video.mpq",
+            "d2xmusic.mpq",
+            "d2xtalk.mpq",
+            "d2xvideo.mpq"
+        }
+
+        For Each f In files
+            If Not IO.File.Exists("..\\" & f) Then
+                SetText(playBtn, "FAILED")
+                Log("Some or more files are missing from your parent D2 installation.")
+                Return 0
+            End If
+        Next
+
+        Log("Parent Installation verified correctly.")
+        Return 1
+
+    End Function
 
 End Class

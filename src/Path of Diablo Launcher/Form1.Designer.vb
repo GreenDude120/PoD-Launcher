@@ -279,6 +279,7 @@ Partial Class Form1
         '
         'downloadcfg
         '
+        Me.downloadcfg.Enabled = False
         Me.downloadcfg.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.downloadcfg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.downloadcfg.ForeColor = System.Drawing.SystemColors.InactiveCaption
