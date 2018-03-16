@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <filelist>
-	<file name="patch_d2.mpq" crc="34C9FF0E" showDialog="true">
+	<file name="patch_d2.mpq" crc="C215F84B" showDialog="true">
 		<link name="France DL Server">https://s65.seedboxws.com/ddl/sws02233/patch_d2.mpq</link>
 		<link name="Canada East Server">https://s8.seedboxws.com/ddl/wsbox00075/patch_d2.mpq</link>
 		<link name="GitHub Worldwide CDN">https://github.com/GreenDude120/PoD-Launcher/releases/download/1/patch_d2.mpq</link>
