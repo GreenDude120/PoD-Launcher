@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <filelist>
 	<file name="patch_d2.mpq" crc="D7F201FB" showDialog="true">
-		<link name="France DL Server">https://s65.seedboxws.com/ddl/sws02233/patch_d2.mpq</link>
-		<link name="Canada East Server">https://s8.seedboxws.com/ddl/wsbox00075/patch_d2.mpq</link>
-		<link name="GitHub Worldwide CDN">https://github.com/GreenDude120/PoD-Launcher/releases/download/1/patch_d2.mpq</link>
+		<link name="Download patch from France">https://s65.seedboxws.com/ddl/sws02233/patch_d2.mpq</link>
+		<link name="Download patch Canada East">https://s8.seedboxws.com/ddl/wsbox00075/patch_d2.mpq</link>
 	</file>
 	<file name="D2PoDClient.dll" crc="21477C81">
 		<link>https://s65.seedboxws.com/ddl/sws02233/D2PoDClient.dll</link>
