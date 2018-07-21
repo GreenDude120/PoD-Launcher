@@ -1,42 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <filelist>
-	<file name="patch_d2.mpq" crc="614F12F2" showDialog="true">
+	<file name="patch_d2.mpq" crc="15A357F2" showDialog="true">
 		<link name="Download patch from France">https://s65.seedboxws.com/ddl/sws02233/patch_d2.mpq</link>
-		<link name="Download patch Canada East">https://s8.seedboxws.com/ddl/wsbox00075/patch_d2.mpq</link>
+		<link name="Download patch from Canada East">https://s8.seedboxws.com/ddl/wsbox00075/patch_d2.mpq</link>
+		<link name="Download patch from Temporary Server">http://pathofdiablo.com/patch_d2.mpq</link>
 	</file>
-	<file name="D2PoDClient.dll" crc="21477C81">
+	<file name="D2PoDClient.dll" crc="21477C81" showDialog="true">
+		<link>http://pathofdiablo.com/D2PoDClient.dll</link>
 		<link>https://s65.seedboxws.com/ddl/sws02233/D2PoDClient.dll</link>
 		<link>https://s8.seedboxws.com/ddl/wsbox00075/D2PoDClient.dll</link>
 	</file>
 	<file name="pod.dll" crc="5FAB85D">
+		<link>http://pathofdiablo.com/pod.dll</link>
 		<link>https://s8.seedboxws.com/ddl/wsbox00075/pod.dll</link>
 	</file>
 	<file name="Path of Diablo Launcher.exe" crc="179E28FF" restartRequired="true">
+		<link>http://pathofdiablo.com/Path of Diablo Launcher.exe</link
 		<link>https://s8.seedboxws.com/ddl/wsbox00075/Path of Diablo Launcher.exe</link>
 	</file>	
 	<file name="D2Client.dll" crc="EAABD1BB">
-		<link>https://s65.seedboxws.com/ddl/sws02233/D2Client.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Client.dll</link>
+		<link>https://s65.seedboxws.com/ddl/sws02233/D2Client.dll</link>
 	</file>
 	<file name="D2CMP.dll" crc="BBD202E2">
-		<link>https://s65.seedboxws.com/ddl/sws02233/D2CMP.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2CMP.dll</link>
+		<link>https://s65.seedboxws.com/ddl/sws02233/D2CMP.dll</link>
 	</file>
 	<file name="D2Common.dll" crc="6B3D9AB3">
-		<link>https://s65.seedboxws.com/ddl/sws02233/D2Common.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Common.dll</link>
+		<link>https://s65.seedboxws.com/ddl/sws02233/D2Common.dll</link>
 	</file>
 	<file name="D2DDraw.dll" crc="7E0B4D39">
-		<link>https://s65.seedboxws.com/ddl/sws02233/D2DDraw.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2DDraw.dll</link>
+		<link>https://s65.seedboxws.com/ddl/sws02233/D2DDraw.dll</link>
 	</file>
 	<file name="D2Direct3D.dll" crc="1F7A2A57">
-		<link>https://s65.seedboxws.com/ddl/sws02233/D2Direct3D.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Direct3D.dll</link>
+		<link>https://s65.seedboxws.com/ddl/sws02233/D2Direct3D.dll</link>
 	</file>
 	<file name="D2Game.dll" crc="DC1A5A2B">
-		<link>https://s65.seedboxws.com/ddl/sws02233/D2Game.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Game.dll</link>
+		<link>https://s65.seedboxws.com/ddl/sws02233/D2Game.dll</link>
 	</file>
 	<file name="D2Gdi.dll" crc="160627C2">
 		<link>https://s65.seedboxws.com/ddl/sws02233/D2Gdi.dll</link>
