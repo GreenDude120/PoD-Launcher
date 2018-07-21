@@ -5,7 +5,7 @@
 		<link name="Download patch from Canada East">https://s8.seedboxws.com/ddl/wsbox00075/patch_d2.mpq</link>
 		<link name="Download patch from Temporary Server">http://pathofdiablo.com/patch_d2.mpq</link>
 	</file>
-	<file name="D2PoDClient.dll" crc="21477C81" showDialog="true">
+	<file name="D2PoDClient.dll" crc="21477C81">
 		<link>http://pathofdiablo.com/D2PoDClient.dll</link>
 		<link>https://s65.seedboxws.com/ddl/sws02233/D2PoDClient.dll</link>
 		<link>https://s8.seedboxws.com/ddl/wsbox00075/D2PoDClient.dll</link>
