@@ -127,8 +127,8 @@
 		<link>https://s8.seedboxws.com/ddl/wsbox00075/binkw32.dll</link>
 	</file>
 	<file name="Bnclient.dll" crc="49E0C339">
-		<link>https://s65.seedboxws.com/ddl/sws02233/Bnclient.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/Bnclient.dll</link>
+		<link>https://s65.seedboxws.com/ddl/sws02233/Bnclient.dll</link>
 	</file>
 	
 	<file name="glide3x.dll">
