@@ -4,7 +4,7 @@
 		<link name="Download patch from France">https://s65.seedboxws.com/ddl/sws02233/patch_d2.mpq</link>
 		<link name="Download patch Canada East">https://s8.seedboxws.com/ddl/wsbox00075/patch_d2.mpq</link>
 	</file>
-	<file name="D2PoDClient.dll" crc="614F12F2">
+	<file name="D2PoDClient.dll" crc="39EC3E30">
 		<link>https://s65.seedboxws.com/ddl/sws02233/D2PoDClient.dll</link>
 		<link>https://s8.seedboxws.com/ddl/wsbox00075/D2PoDClient.dll</link>
 	</file>
