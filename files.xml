@@ -3,19 +3,19 @@
 	<file name="patch_d2.mpq" crc="15A357F2" showDialog="true">
 		<link name="Download patch from France">https://s65.seedboxws.com/ddl/sws02233/patch_d2.mpq</link>
 		<link name="Download patch from Canada East">https://s8.seedboxws.com/ddl/wsbox00075/patch_d2.mpq</link>
-		<link name="Download patch from Temporary Server">http://pathofdiablo.com/patch_d2.mpq</link>
+		<link name="Download patch from Temporary Server">https://pathofdiablo.com/patch_d2.mpq</link>
 	</file>
 	<file name="D2PoDClient.dll" crc="21477C81">
-		<link>http://pathofdiablo.com/D2PoDClient.dll</link>
+		<link>https://pathofdiablo.com/D2PoDClient.dll</link>
 		<link>https://s65.seedboxws.com/ddl/sws02233/D2PoDClient.dll</link>
 		<link>https://s8.seedboxws.com/ddl/wsbox00075/D2PoDClient.dll</link>
 	</file>
 	<file name="pod.dll" crc="5FAB85D">
-		<link>http://pathofdiablo.com/pod.dll</link>
+		<link>https://pathofdiablo.com/pod.dll</link>
 		<link>https://s8.seedboxws.com/ddl/wsbox00075/pod.dll</link>
 	</file>
 	<file name="Path of Diablo Launcher.exe" crc="179E28FF" restartRequired="true">
-		<link>http://pathofdiablo.com/Path of Diablo Launcher.exe</link
+		<link>https://pathofdiablo.com/Path of Diablo Launcher.exe</link
 		<link>https://s8.seedboxws.com/ddl/wsbox00075/Path of Diablo Launcher.exe</link>
 	</file>	
 	<file name="D2Client.dll" crc="EAABD1BB">
