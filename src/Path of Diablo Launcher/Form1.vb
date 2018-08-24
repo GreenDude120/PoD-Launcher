@@ -91,8 +91,11 @@ Public Class Form1
         d2.FileName = "Game.exe"
         Try
             My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ DisableNXShowUI RUNASADMIN")
-        Catch ex As Exception
+        Catch ex As System.Security.SecurityException
             MsgBox("You don't have the required admin rights. Run the launcher as admin and try again!")
+            Me.Close()
+        Catch ex As Exception
+            MsgBox("Unexpected registry error.")
             Me.Close()
         End Try
 
