@@ -313,9 +313,18 @@ Public Class Form1
         Dim dl As WebClient = New WebClient()
         Try
             dl.DownloadFile(xmlLink, file)
+        Catch ex As WebException
+            SetText(playBtn, "Error!")
+            If ex.Status = WebExceptionStatus.ProtocolError Then
+                Dim res As HttpWebResponse = ex.Response
+                Log("An error occurred checking for updates. HTTP error: " & res.StatusCode & " " & res.StatusDescription)
+            Else
+                Log("An error occurred checking for updates. WebExceptionStatus: " & ex.Status.ToString())
+            End If
+            Exit Sub
         Catch ex As Exception
             SetText(playBtn, "Error!")
-            Log("An error occured checking for updates. Please try again later.")
+            Log("An unexpected error occurred checking for updates. Please try again later.")
             Exit Sub
         End Try
 
