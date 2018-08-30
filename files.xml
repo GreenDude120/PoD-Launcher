@@ -5,9 +5,8 @@
 		<link name="Download patch from USA East (America)">https://pathofdiablo.com/patch_d2.mpq</link>
 		<link name="Download patch from USA East2 (America)">http://198.98.51.238:8080/public/patch_d2.mpq</link>
 	</file>
-	<file name="D2PoDClient.dll" crc="21477C81">
+	<file name="D2PoDClient.dll" crc="D8ABCFC4">
 		<link>https://s0.seedboxws.com/ddl/sws02233/D2PoDClient.dll</link>
-		<link>http://198.98.51.238:8080/public/D2PoDClient.dll</link>
 	</file>
 	<file name="pod.dll" crc="66261D3">
 		<link>http://198.98.51.238:8080/public/pod.dll</link>
