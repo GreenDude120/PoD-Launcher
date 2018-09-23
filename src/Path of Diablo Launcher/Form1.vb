@@ -91,8 +91,11 @@ Public Class Form1
         d2.FileName = "Game.exe"
         Try
             My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ DisableNXShowUI RUNASADMIN")
-        Catch ex As Exception
+        Catch ex As System.Security.SecurityException
             MsgBox("You don't have the required admin rights. Run the launcher as admin and try again!")
+            Me.Close()
+        Catch ex As Exception
+            MsgBox("Unexpected registry error.")
             Me.Close()
         End Try
 
@@ -310,9 +313,18 @@ Public Class Form1
         Dim dl As WebClient = New WebClient()
         Try
             dl.DownloadFile(xmlLink, file)
+        Catch ex As WebException
+            SetText(playBtn, "Error!")
+            If ex.Status = WebExceptionStatus.ProtocolError Then
+                Dim res As HttpWebResponse = ex.Response
+                Log("An error occurred checking for updates. HTTP error: " & res.StatusCode & " " & res.StatusDescription)
+            Else
+                Log("An error occurred checking for updates. WebExceptionStatus: " & ex.Status.ToString())
+            End If
+            Exit Sub
         Catch ex As Exception
             SetText(playBtn, "Error!")
-            Log("An error occured checking for updates. Please try again later.")
+            Log("An unexpected error occurred checking for updates. Please try again later.")
             Exit Sub
         End Try
 
