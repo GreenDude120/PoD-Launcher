@@ -25,20 +25,20 @@
 		<link>https://s0.seedboxws.com/ddl/sws02233/D2CMP.dll</link>
 	</file>
 	<file name="D2Common.dll" crc="6B3D9AB3">
-		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Common.dll</link>
 		<link>https://s0.seedboxws.com/ddl/sws02233/D2Common.dll</link>
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Common.dll</link>
 	</file>
 	<file name="D2DDraw.dll" crc="7E0B4D39">
-		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2DDraw.dll</link>
 		<link>https://s0.seedboxws.com/ddl/sws02233/D2DDraw.dll</link>
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2DDraw.dll</link>
 	</file>
 	<file name="D2Direct3D.dll" crc="1F7A2A57">
-		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Direct3D.dll</link>
 		<link>https://s0.seedboxws.com/ddl/sws02233/D2Direct3D.dll</link>
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Direct3D.dll</link>
 	</file>
 	<file name="D2Game.dll" crc="DC1A5A2B">
-		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Game.dll</link>
 		<link>https://s0.seedboxws.com/ddl/sws02233/D2Game.dll</link>
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Game.dll</link>
 	</file>
 	<file name="D2Gdi.dll" crc="160627C2">
 		<link>https://s0.seedboxws.com/ddl/sws02233/D2Gdi.dll</link>
@@ -125,10 +125,9 @@
 		<link>ftp://198.98.51.238/binkw32.dll</link>
 	</file>
 	<file name="Bnclient.dll" crc="49E0C339">
-		<link>http://cdn.pvpgn.pro/diablo2/1.13d/Bnclient.dll</link>
 		<link>https://s65.seedboxws.com/ddl/sws02233/Bnclient.dll</link>
+		<link>http://cdn.pvpgn.pro/diablo2/1.13d/Bnclient.dll</link>
 	</file>
-	
 	<file name="glide3x.dll">
 		<link>https://s0.seedboxws.com/ddl/sws02233/glide3x.dll</link>
 		<link>http://198.98.51.238:8080/public/glide3x.dll</link>
