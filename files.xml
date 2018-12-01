@@ -98,7 +98,7 @@
 	</file>
 	<file name="ijl11.dll" crc="C00FE21D">
 		<link>https://s0.seedboxws.com/ddl/sws02233/ijl11.dll</link>
-		<link>http://198.98.51.238/ijl11.dll</link>
+		<link>http://198.98.51.238:8080/public/ijl11.dll</link>
 	</file>
 	<file name="item.filter">
 		<link>https://s0.seedboxws.com/ddl/sws02233/item.filter</link>
@@ -122,7 +122,7 @@
 	</file>
 	<file name="binkw32.dll" crc="5934B4A7">
 		<link>https://s0.seedboxws.com/ddl/sws02233/binkw32.dll</link>
-		<link>http://198.98.51.238/binkw32.dll</link>
+		<link>http://198.98.51.238:8080/public/binkw32.dll</link>
 	</file>
 	<file name="Bnclient.dll" crc="49E0C339">
 		<link>https://s65.seedboxws.com/ddl/sws02233/Bnclient.dll</link>
