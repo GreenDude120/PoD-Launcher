@@ -148,6 +148,11 @@ Public Class Form1
             d2.Arguments = d2.Arguments & argNoFixAspect & " "
         End If
 
+        Const argSndBkg As String = "-sndbkg"
+        If sndbkgChk.Checked = True And d2.Arguments.IndexOf(argSndBkg) = -1 Then
+            d2.Arguments = d2.Arguments & argSndBkg & " "
+        End If
+
         Me.Hide()                           'hide window, so that it doesn't look like it doesn't respond anymore
         Dim p As New Process
         p.StartInfo = d2
