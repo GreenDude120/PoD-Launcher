@@ -4,11 +4,11 @@
 		<link name="Download patch from France North (Europe)">https://s0.seedboxws.com/ddl/sws02233/patch_d2.mpq</link>
 		<link name="Download patch from USA East (America)">http://198.98.51.238:8080/public/patch_d2.mpq</link>
 	</file>
-	<file name="D2PoDClient.dll" crc="D8ABCFC4">
+	<file name="D2PoDClient.dll" crc="901D13B2">
 		<link>https://s0.seedboxws.com/ddl/sws02233/D2PoDClient.dll</link>
 		<link>http://198.98.51.238:8080/public/D2PoDClient.dll</link>
 	</file>
-	<file name="pod.dll" crc="66261D3">
+	<file name="pod.dll" crc="5456D070">
 		<link>https://s0.seedboxws.com/ddl/sws02233/pod.dll</link>
 		<link>http://198.98.51.238:8080/public/pod.dll</link>
 	</file>
