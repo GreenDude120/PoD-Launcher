@@ -4,7 +4,7 @@
 		<link name="Download patch from France North (Europe)">https://s0.seedboxws.com/ddl/sws02233/patch_d2.mpq</link>
 		<link name="Download patch from USA East (America)">http://198.98.51.238:8080/public/patch_d2.mpq</link>
 	</file>
-	<file name="D2PoDClient.dll" crc="901D13B2">
+	<file name="D2PoDClient.dll" crc="21477C81">
 		<link>https://s0.seedboxws.com/ddl/sws02233/D2PoDClient.dll</link>
 		<link>http://198.98.51.238:8080/public/D2PoDClient.dll</link>
 	</file>
