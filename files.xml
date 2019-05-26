@@ -5,47 +5,47 @@
 		<link name="Download patch from New-York-Backup-Server">http://198.98.51.238:8080/public/patch_d2.mpq</link>
 	</file>
 	<file name="D2PoDClient.dll" crc="21477C81">
-		<link>https://beta.pathofdiablo.com/files/D2PoDClient.dll</link>
+		<link>https://pathofdiablo.com/D2PoDClient.dll</link>
 		<link>http://198.98.51.238:8080/public/D2PoDClient.dll</link>
 	</file>
 	<file name="pod.dll" crc="5456D070">
-		<link>https://beta.pathofdiablo.com/files/pod.dll</link>
+		<link>https://pathofdiablo.com/pod.dll</link>
 		<link>http://198.98.51.238:8080/public/pod.dll</link>
 	</file>
 	<file name="Path of Diablo Launcher.exe" crc="179E28FF" restartRequired="true">
-		<link>https://beta.pathofdiablo.com/files/Path%20of%20Diablo%20Launcher.exe</link>
+		<link>https://pathofdiablo.com/Path%20of%20Diablo%20Launcher.exe</link>
 		<link>http://198.98.51.238:8080/public/Path%20of%20Diablo%20Launcher.exe</link>
 	</file>	
 	<file name="D2Client.dll" crc="EAABD1BB">
-		<link>https://beta.pathofdiablo.com/files/D2Client.dll</link>
+		<link>https://pathofdiablo.com/D2Client.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Client.dll</link>
 	</file>
 	<file name="D2CMP.dll" crc="BBD202E2">
-		<link>https://beta.pathofdiablo.com/files/D2CMP.dll</link>
+		<link>https://pathofdiablo.com/D2CMP.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2CMP.dll</link>
 	</file>
 	<file name="D2Common.dll" crc="6B3D9AB3">
-		<link>https://beta.pathofdiablo.com/files/D2Common.dll</link>
+		<link>https://pathofdiablo.com/D2Common.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Common.dll</link>
 	</file>
 	<file name="D2DDraw.dll" crc="7E0B4D39">
-		<link>https://beta.pathofdiablo.com/files/D2DDraw.dll</link>
+		<link>https://pathofdiablo.com/D2DDraw.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2DDraw.dll</link>
 	</file>
 	<file name="D2Direct3D.dll" crc="1F7A2A57">
-		<link>https://beta.pathofdiablo.com/files/D2Direct3D.dll</link>
+		<link>https://pathofdiablo.com/D2Direct3D.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Direct3D.dll</link>
 	</file>
 	<file name="D2Game.dll" crc="DC1A5A2B">
-		<link>https://beta.pathofdiablo.com/files/D2Game.dll</link>
+		<link>https://pathofdiablo.com/D2Game.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Game.dll</link>
 	</file>
 	<file name="D2Gdi.dll" crc="160627C2">
-		<link>https://beta.pathofdiablo.com/files/D2Gdi.dll</link>
+		<link>https://pathofdiablo.com/D2Gdi.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Gdi.dll</link>
 	</file>
 	<file name="D2gfx.dll" crc="3263964D">
-		<link>https://beta.pathofdiablo.com/files/D2gfx.dll</link>
+		<link>https://pathofdiablo.com/D2gfx.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2gfx.dll</link>
 	</file>
 	<file name="D2Glide.dll" crc="D7D481A3">
@@ -70,18 +70,18 @@
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2sound.dll</link>
 	</file>
 	<file name="D2VidTst.exe" crc="703A2E45">
-		<link>https://beta.pathofdiablo.com/files/D2VidTst.exe</link>
+		<link>https://pathofdiablo.com/D2VidTst.exe</link>
 		<link>http://198.98.51.238:8080/public/D2VidTst.exe</link>
 	</file>
 	<file name="D2Win.dll" crc="279F3311">
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Win.dll</link>
 	</file>
 	<file name="Diablo II.exe" crc="33D0D3EE">
-		<link>https://beta.pathofdiablo.com/files/Diablo%20II.exe</link>
+		<link>https://pathofdiablo.com/Diablo%20II.exe</link>
 		<link>http://198.98.51.238:8080/public/Diablo%20II.exe</link>
 	</file>
 	<file name="Fog.dll" crc="C4CB491F">>
-		<link>https://beta.pathofdiablo.com/files/Fog.dll</link>
+		<link>https://pathofdiablo.com/Fog.dll</link>
 		<link>http://198.98.51.238:8080/public/Fog.dll</link>
 	</file>
 	<file name="Game.exe" crc="B3D69C47">
@@ -89,7 +89,7 @@
 		<link>http://198.98.51.238:8080/public/Game.exe</link>
 	</file>
 	<file name="ijl11.dll" crc="C00FE21D">
-		<link>https://beta.pathofdiablo.com/files/ijl11.dll</link>
+		<link>https://pathofdiablo.com/ijl11.dll</link>
 		<link>http://198.98.51.238:8080/public/ijl11.dll</link>
 	</file>
 	<file name="item.filter">
@@ -97,43 +97,43 @@
 		<link>http://198.98.51.238:8080/public/item.filter</link>
 	</file>
 	<file name="pod.cfg">
-		<link>https://beta.pathofdiablo.com/files/pod.cfg</link>
+		<link>https://pathofdiablo.com/pod.cfg</link>
 		<link>http://198.98.51.238:8080/public/pod.cfg</link>
 	</file>
 	<file name="SmackW32.dll" crc="614A9406">
-		<link>https://beta.pathofdiablo.com/files/SmackW32.dll</link>
+		<link>https://pathofdiablo.com/SmackW32.dll</link>
 		<link>http://198.98.51.238:8080/public/SmackW32.dll</link>
 	</file>
 	<file name="Storm.dll" crc="BDB6784E">
-		<link>https://beta.pathofdiablo.com/files/Storm.dll</link>
+		<link>https://pathofdiablo.com/Storm.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/Storm.dll</link>
 	</file>
 	<file name="UI.ini">
-		<link>https://beta.pathofdiablo.com/files/UI.ini</link>
+		<link>https://pathofdiablo.com/UI.ini</link>
 		<link>http://198.98.51.238:8080/public/UI.ini</link>
 	</file>
 	<file name="binkw32.dll" crc="5934B4A7">
-		<link>https://beta.pathofdiablo.com/files/binkw32.dll</link>
+		<link>https://pathofdiablo.com/binkw32.dll</link>
 		<link>http://198.98.51.238:8080/public/binkw32.dll</link>
 	</file>
 	<file name="Bnclient.dll" crc="49E0C339">
-		<link>https://beta.pathofdiablo.com/files/Bnclient.dll</link>
+		<link>https://pathofdiablo.com/Bnclient.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/Bnclient.dll</link>
 	</file>
 	<file name="glide3x.dll">
-		<link>https://beta.pathofdiablo.com/files/glide3x.dll</link>
+		<link>https://pathofdiablo.com/glide3x.dll</link>
 		<link>http://198.98.51.238:8080/public/glide3x.dll</link>
 	</file>
 	<file name="glide-init.exe">
-		<link>https://beta.pathofdiablo.com/files/glide-init.exe</link>
+		<link>https://pathofdiablo.com/glide-init.exe</link>
 		<link>http://198.98.51.238:8080/public/glide-init.exe</link>
 	</file>
 	<file name="glide-liesmich.txt">
-		<link>https://beta.pathofdiablo.com/files/glide-liesmich.txt</link>
+		<link>https://pathofdiablo.com/glide-liesmich.txt</link>
 		<link>http://198.98.51.238:8080/public/glide-liesmich.txt</link>
 	</file>
 	<file name="glide-readme.txt">
-		<link>https://beta.pathofdiablo.com/files/glide-readme.txt</link>
+		<link>https://pathofdiablo.com/glide-readme.txt</link>
 		<link>http://198.98.51.238:8080/public/glide-readme.txt</link>
 	</file>
 </filelist>
