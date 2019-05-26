@@ -85,7 +85,7 @@
 		<link>http://198.98.51.238:8080/public/Fog.dll</link>
 	</file>
 	<file name="Game.exe" crc="B3D69C47">
-		<link>https://beta.pathofdiablo.com/files/Game.exe</link>
+		<link>https://pathofdiablo.com/Game.exe</link>
 		<link>http://198.98.51.238:8080/public/Game.exe</link>
 	</file>
 	<file name="ijl11.dll" crc="C00FE21D">
@@ -93,7 +93,7 @@
 		<link>http://198.98.51.238:8080/public/ijl11.dll</link>
 	</file>
 	<file name="item.filter">
-		<link>https://beta.pathofdiablo.com/files/item.filter</link>
+		<link>https://pathofdiablo.com/item.filter</link>
 		<link>http://198.98.51.238:8080/public/item.filter</link>
 	</file>
 	<file name="pod.cfg">
