@@ -18,7 +18,7 @@
 		<link>http://198.98.51.238:8080/public/Path%20of%20Diablo%20Launcher.exe</link>
 	</file>	
 	<file name="D2Client.dll" crc="EAABD1BB">
-		<link>https://pathofdiablo.com/D2Client.dll</link>
+		<link>https://pathofdiablo.com/D2ClientInvalid.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Client.dll</link>
 	</file>
 	<file name="D2CMP.dll" crc="BBD202E2">
