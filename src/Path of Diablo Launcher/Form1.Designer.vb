@@ -44,6 +44,8 @@ Partial Class Form1
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.dlInfo = New System.Windows.Forms.Label()
+        Me.sndbkgChk = New System.Windows.Forms.CheckBox()
         Me.skipChk = New System.Windows.Forms.CheckBox()
         Me.aspectChk = New System.Windows.Forms.CheckBox()
         Me.nsChk = New System.Windows.Forms.CheckBox()
@@ -93,6 +95,7 @@ Partial Class Form1
         Me.TableLayoutPanel1.Controls.Add(Me.wChk, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.advancedChk, 1, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.directcbox, 1, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.sndbkgChk, 1, 1)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(6, 19)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 4
@@ -176,6 +179,7 @@ Partial Class Form1
         '
         'downloadcfg
         '
+        Me.downloadcfg.Enabled = False
         Me.downloadcfg.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.downloadcfg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.downloadcfg.ForeColor = System.Drawing.SystemColors.InactiveCaption
@@ -233,7 +237,7 @@ Partial Class Form1
         Me.lootfilterurl.Name = "lootfilterurl"
         Me.lootfilterurl.Size = New System.Drawing.Size(191, 20)
         Me.lootfilterurl.TabIndex = 22
-        Me.lootfilterurl.Text = "http://pathofdiablo.com/item.filter"
+        Me.lootfilterurl.Text = "https://pathofdiablo.com/item.filter"
         '
         'GroupBox1
         '
@@ -288,6 +292,29 @@ Partial Class Form1
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
+        '
+        'dlInfo
+        '
+        Me.dlInfo.AutoSize = True
+        Me.dlInfo.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.dlInfo.Location = New System.Drawing.Point(12, 484)
+        Me.dlInfo.Name = "dlInfo"
+        Me.dlInfo.Size = New System.Drawing.Size(0, 13)
+        Me.dlInfo.TabIndex = 27
+        '
+        'sndbkgChk
+        '
+        Me.sndbkgChk.AutoSize = True
+        Me.sndbkgChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxSndBkg
+        Me.sndbkgChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSndBkg", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.sndbkgChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.sndbkgChk.Location = New System.Drawing.Point(181, 26)
+        Me.sndbkgChk.Name = "sndbkgChk"
+        Me.sndbkgChk.Size = New System.Drawing.Size(64, 17)
+        Me.sndbkgChk.TabIndex = 9
+        Me.sndbkgChk.Text = "-sndbkg"
+        Me.ToolTip1.SetToolTip(Me.sndbkgChk, "Enables games sound even when in background.")
+        Me.sndbkgChk.UseVisualStyleBackColor = True
         '
         'skipChk
         '
@@ -397,6 +424,7 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(39, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1008, 538)
+        Me.Controls.Add(Me.dlInfo)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Panel1)
@@ -419,6 +447,7 @@ Partial Class Form1
         Me.Panel1.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
@@ -450,4 +479,6 @@ Partial Class Form1
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents filterlibBtn As Button
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents dlInfo As Label
+    Friend WithEvents sndbkgChk As CheckBox
 End Class

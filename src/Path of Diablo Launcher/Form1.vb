@@ -1,10 +1,14 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Threading
+Imports System.Diagnostics
+Imports System.ComponentModel
 
 Public Class Form1
 
-    Dim updateAvailable As Boolean = False
+    Dim stopwatch As Stopwatch = New Stopwatch()
+
+    Dim cmd As CommandLineOptions = New CommandLineOptions()
 
     Public Function GetCRC32(ByVal sFileName As String) As String
         Try
@@ -60,6 +64,9 @@ Public Class Form1
         If Not My.Computer.FileSystem.DirectoryExists("./filter") Then
             My.Computer.FileSystem.CreateDirectory("./filter")
         End If
+        If Not My.Computer.FileSystem.DirectoryExists("./Save") Then
+            My.Computer.FileSystem.CreateDirectory("./Save")
+        End If
 
         'clear "tmp" on load
         For Each file As String In My.Computer.FileSystem.GetFiles("./tmp/", FileIO.SearchOption.SearchAllSubDirectories, "*.*")
@@ -77,11 +84,18 @@ Public Class Form1
             directcbox.Visible = False
         End If
 
-        Log("Welcome to the Path of Diablo Launcher v11")
+        cmd.ScanCommandLine(Environment.GetCommandLineArgs())
+
+        Log("Welcome to the Path of Diablo Launcher v12")
+
+        If CheckParentInstallation() = 0 Then
+            Exit Sub
+        End If
 
         Dim thread As New Thread(AddressOf UpdaterThread)
         thread.IsBackground = True
         thread.Start()
+
     End Sub
 
     Private Sub playBtn_Click(sender As Object, e As EventArgs) Handles playBtn.Click
@@ -99,31 +113,45 @@ Public Class Form1
             Me.Close()
         End Try
 
-
-        d2.Arguments = ""
-
-        If wChk.Checked = True Then
-            d2.Arguments = d2.Arguments & "-w "
+        If cmd.Passthrough Then
+            d2.Arguments = cmd.PassthroughArgs
+        Else
+            d2.Arguments = ""
         End If
 
-        If skipChk.Checked = True Then
-            d2.Arguments = d2.Arguments & "-skiptobnet "
+        Const argWindowed As String = "-w"
+        If wChk.Checked = True And d2.Arguments.IndexOf(argWindowed) = -1 Then
+            d2.Arguments = d2.Arguments & argWindowed & " "
         End If
 
-        If nsChk.Checked = True Then
-            d2.Arguments = d2.Arguments & "-ns "
+        Const argSkipToBnet As String = "-skiptobnet"
+        If skipChk.Checked = True And d2.Arguments.IndexOf(argSkipToBnet) = -1 Then
+            d2.Arguments = d2.Arguments & argSkipToBnet & " "
         End If
 
-        If dfxChk.Checked = True Then
-            d2.Arguments = d2.Arguments & "-3dfx "
+        Const argNoSound As String = "-ns"
+        If nsChk.Checked = True And d2.Arguments.IndexOf(argNoSound) = -1 Then
+            d2.Arguments = d2.Arguments & argNoSound & " "
         End If
 
-        If directcbox.Checked = True Then
-            d2.Arguments = d2.Arguments & "-direct "
+        Const argGlide As String = "-3dfx"
+        If dfxChk.Checked = True And d2.Arguments.IndexOf(argGlide) = -1 Then
+            d2.Arguments = d2.Arguments & argGlide & " "
         End If
 
-        If aspectChk.Checked = True Then
-            d2.Arguments = d2.Arguments & "-nofixaspect "
+        Const argDirect As String = "-direct"
+        If directcbox.Checked = True And d2.Arguments.IndexOf(argDirect) = -1 Then
+            d2.Arguments = d2.Arguments & argDirect & " "
+        End If
+
+        Const argNoFixAspect As String = "-nofixaspect"
+        If aspectChk.Checked = True And d2.Arguments.IndexOf(argNoFixAspect) = -1 Then
+            d2.Arguments = d2.Arguments & argNoFixAspect & " "
+        End If
+
+        Const argSndBkg As String = "-sndbkg"
+        If sndbkgChk.Checked = True And d2.Arguments.IndexOf(argSndBkg) = -1 Then
+            d2.Arguments = d2.Arguments & argSndBkg & " "
         End If
 
         Me.Hide()                           'hide window, so that it doesn't look like it doesn't respond anymore
@@ -221,6 +249,13 @@ Public Class Form1
         '    Exit Sub
         'End If
 
+        Dim tmp As String() = lootfilterurl.Text.Split(New Char() {"/"})
+        If File.Exists("./filter" & tmp(tmp.Count - 1)) Then
+            Log("Custom filter installed. You must enable it In-game via Settings button To activate.")
+            MsgBox("Custom filter installed. You must enable it In-game via Settings button To activate.")
+            Exit Sub
+        End If
+
         SetEnabled(playBtn, False)
         SetEnabled(downloadcfg, False)
 
@@ -232,6 +267,7 @@ Public Class Form1
         Try
             Dim dl As WebClient = New WebClient()
             dl.DownloadFile(url, "./filter/" & name)
+            'dl.DownloadFile(url, name)
 
             Log("Successfully downloaded loot filter " & name & " from " & url)
         Catch ex As Exception
@@ -261,7 +297,7 @@ Public Class Form1
     End Sub
 
     Delegate Sub LogDelegate(ByVal text As String)
-    Private Sub Log(ByVal text As String)
+    Public Sub Log(ByVal text As String)
         If LogBox.InvokeRequired Then
             LogBox.Invoke(New LogDelegate(AddressOf Log), {text})
             Return
@@ -279,21 +315,27 @@ Public Class Form1
             ProgressBar.Invoke(New SetProgressDelegate(AddressOf SetProgress), {progress})
             Return
         End If
-        ProgressBar.Value = progress
+        Try
+            ProgressBar.Value = progress
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
     End Sub
-
-
 
     Private Sub Downloads_ProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs)
         Dim bytesIn As Double = Double.Parse(e.BytesReceived.ToString())
         Dim totalBytes As Double = Double.Parse(e.TotalBytesToReceive.ToString())
         Dim percentage As Double = bytesIn / totalBytes * 100
 
+        SetText(dlInfo, String.Format("Downloading at {0} kb/s", (e.BytesReceived / 1024D / stopwatch.Elapsed.TotalSeconds).ToString("0.00")))
+
         SetProgress(Int32.Parse(Math.Truncate(percentage).ToString()))
     End Sub
 
     Private Sub Downloads_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
         SetProgress(0)
+        stopwatch.Reset()
+        SetText(dlInfo, "")
         SyncLock e.UserState
             'release block
             Monitor.Pulse(e.UserState)
@@ -307,149 +349,220 @@ Public Class Form1
         SetText(playBtn, "Updating...")
         Log("Searching for updates...")
 
-        Dim file As String = "./tmp/files.xml"
+        If Not cmd.NoUpdate Then
+            Dim file As String = "./tmp/files.xml"
 
-        Dim xmlLink As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/files.xml"
-        Dim dl As WebClient = New WebClient()
-        Try
-            dl.DownloadFile(xmlLink, file)
-        Catch ex As WebException
-            SetText(playBtn, "Error!")
-            If ex.Status = WebExceptionStatus.ProtocolError Then
-                Dim res As HttpWebResponse = ex.Response
-                Log("An error occurred checking for updates. HTTP error: " & res.StatusCode & " " & res.StatusDescription)
-            Else
-                Log("An error occurred checking for updates. WebExceptionStatus: " & ex.Status.ToString())
-            End If
-            Exit Sub
-        Catch ex As Exception
-            SetText(playBtn, "Error!")
-            Log("An unexpected error occurred checking for updates. Please try again later.")
-            Exit Sub
-        End Try
+            Dim xmlLink As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/files.xml"
+            Dim dl As WebClient = New WebClient()
+            Try
+                dl.DownloadFile(xmlLink, file)
+            Catch ex As WebException
+                SetText(playBtn, "Error!")
+                If ex.Status = WebExceptionStatus.ProtocolError Then
+                    Dim res As HttpWebResponse = ex.Response
+                    Log("An error occurred checking for updates. HTTP error: " & res.StatusCode & " " & res.StatusDescription)
+                Else
+                    Log("An error occurred checking for updates. WebExceptionStatus: " & ex.Status.ToString())
+                End If
+                Exit Sub
+            Catch ex As Exception
+                SetText(playBtn, "Error!")
+                Log("An unexpected error occurred checking for updates. Please try again later.")
+                Exit Sub
+            End Try
 
-        Dim reader As Xml.XmlTextReader = New Xml.XmlTextReader(file)
+            Dim reader As Xml.XmlTextReader = New Xml.XmlTextReader(file)
 
-        Dim restartRequired As Boolean = False
-        Dim nUpdates As Integer = 0
+            Dim restartRequired As Boolean = False
 
-        Do While reader.Read()
-            Select Case reader.NodeType
-                Case Xml.XmlNodeType.Element
-                    If reader.Name.Equals("file") Then
-                        Dim name As String = ""
-                        Dim crc As String = ""
-                        Dim restart As Boolean = False
+            Dim files As System.Collections.Generic.LinkedList(Of DownloadItem) = New System.Collections.Generic.LinkedList(Of DownloadItem)
 
-                        'read name and crc (ignore all other attributes)
-                        If reader.AttributeCount > 0 Then
-                            While reader.MoveToNextAttribute
-                                If reader.Name.Equals("name") Then
-                                    name = reader.Value
-                                ElseIf reader.Name.Equals("crc") Then
-                                    crc = reader.Value
-                                ElseIf reader.Name.Equals("restartRequired") Then
-                                    If reader.Value.Equals("true") Then
-                                        restart = True
+            Do While reader.Read()
+                Select Case reader.NodeType
+                    Case Xml.XmlNodeType.Element
+
+                        If reader.Name.Equals("file") Then
+
+                            Dim dlme As DownloadItem = New DownloadItem
+
+                            'read attributes
+                            If reader.AttributeCount > 0 Then
+                                While reader.MoveToNextAttribute
+                                    If reader.Name.Equals("name") Then
+                                        dlme.Name = reader.Value
+                                    ElseIf reader.Name.Equals("crc") Then
+                                        dlme.Crc = reader.Value
+                                    ElseIf reader.Name.Equals("restartRequired") Then
+                                        If reader.Value.Equals("true") Then
+                                            dlme.RestartRequired = True
+                                        End If
+                                    ElseIf reader.Name.Equals("showDialog") Then
+                                        If reader.Value.Equals("true") Then
+                                            dlme.ShowDialog = True
+                                        End If
                                     End If
-                                End If
-                            End While
-                        End If
-
-                        If name.Equals("") Then
-                            Log("Malformed " & file & ". Notifiy GreenDude!")
-                            Exit Sub
-                        End If
-
-                        Dim uptodate As Boolean = False
-
-                        'crc = "" -> only check if file exists, don't actually check the crc
-                        If crc.Equals("") Then
-                            If IO.File.Exists(name) Then
-                                Log("File " & name & " already exists, no need to download again.")
-                                uptodate = True
+                                End While
                             End If
-                        End If
 
-                        'no need to update if file has same crc as the servers file
-                        Dim localCrc As String = GetCRC32(name)
-                        If crc.Equals(localCrc) And Not uptodate Then
-                            Log("File " & name & " is up-to-date")
-                            uptodate = True
-                        End If
+                            'read links (reads until end of 
+                            While reader.Read()
+                                Select Case reader.NodeType
+                                    Case Xml.XmlNodeType.Element
 
-                        'read links
-                        While reader.Read()
-                            Select Case reader.NodeType
-                                Case Xml.XmlNodeType.Element
-                                    If Not uptodate Then
-                                        If IO.File.Exists(name) Then
-                                            Try
-                                                IO.File.Move(name, "./tmp/" & name)
-                                            Catch ex As Exception
-                                            End Try
+                                        Dim link As NamedLink = New NamedLink
+                                        'read attributes
+                                        If reader.AttributeCount > 0 Then
+                                            While reader.MoveToNextAttribute
+                                                If reader.Name.Equals("name") Then
+                                                    link.Name = reader.Value
+                                                End If
+                                            End While
+
+                                            reader.MoveToContent()
                                         End If
 
-                                        Dim link As String = reader.ReadInnerXml()
-                                        Log("Downloading file " & name & " from " & link)
+                                        link.Link = reader.ReadInnerXml()
+                                        dlme.AddLink(link)
 
-                                        dl = New WebClient()
-                                        AddHandler dl.DownloadProgressChanged, AddressOf Downloads_ProgressChanged
-                                        AddHandler dl.DownloadFileCompleted, AddressOf Downloads_DownloadCompleted
+                                    Case Xml.XmlNodeType.EndElement
 
-                                        Try
-                                            Dim myLock As Object = New Object()
-                                            SyncLock myLock
-                                                dl.DownloadFileAsync(New Uri(link), name, myLock)
-                                                Monitor.Wait(myLock)
-                                            End SyncLock
-                                        Catch ex As Exception
-                                            Log("An error occured while downloading file " & name & " from " & link)
-                                            Continue While
-                                        End Try
-                                        Log("Successfully downloaded file " & name & " from " & link)
-
-                                        localCrc = GetCRC32(name)
-                                        If Not crc.Equals(localCrc) Then
-                                            Log("Checksum of downloaded file (" & name & ") from " & link & " doesn't match the specified checksum. Please try again later.")
-                                            Exit Sub
+                                        If reader.Name.Equals("file") Then
+                                            files.AddLast(dlme)
+                                            Exit While
                                         End If
 
-                                        uptodate = True
-                                        If restart Then
-                                            restartRequired = True
-                                        End If
-                                    End If
-                                Case Xml.XmlNodeType.EndElement
-                                    Exit While
-                            End Select
-                        End While
+                                End Select
+                            End While
 
-                        nUpdates = nUpdates + 1
-                        If Not uptodate Then
-                            Log("An error occured while updating file " & name & ". Please restart and try again.")
-                            Exit Sub
                         End If
-                    End If
 
-            End Select
-        Loop
+                End Select
+            Loop
 
-        reader.Close()
+            reader.Close()
 
-        Log("Finished checking " & nUpdates & " file(s) for updates")
+            For Each dlme As DownloadItem In files
+                Dim i As Integer = DownloadFile(dlme)
+                If i = 1 Then
+                    restartRequired = True
+                ElseIf i = -1 Then
+                    'problem detected, just exit. there should be something in the logs
+                    Exit Sub
+                End If
+            Next
 
-        'restart if needed
-        If restartRequired Then
-            MsgBox("An updated file requires the Launcher to restart to function correctly. Restarting Now!")
-            Application.Restart()
+            Log("Finished checking " & files.Count & " file(s) for updates")
+
+            'restart if needed
+            If restartRequired Then
+                MsgBox("An updated file requires the Launcher to restart to function correctly. Restarting Now!")
+                'Application.Restart()
+            End If
+        Else
+            Log("Updates disabled!")
         End If
 
         SetText(playBtn, "Play")
         SetEnabled(playBtn, True)
         SetEnabled(downloadcfg, True)
 
+        If cmd.StartOnUpdateSuccess Then
+            playBtn.PerformClick()
+        End If
+
     End Sub
+
+    Private Function DownloadFile(ByRef file As DownloadItem) As Integer
+
+        Dim uptodate As Boolean = False
+
+        'crc = "" -> only check if file exists, don't actually check the crc
+        If file.Crc.Equals("") Then
+            If IO.File.Exists(file.Name) Then
+                Log("File " & file.Name & " already exists, no need to download again.")
+                uptodate = True
+            Else
+                file.Crc = "-1"
+            End If
+        End If
+
+        'no need to update if file has same crc as the servers file
+        Dim localCrc As String = GetCRC32(file.Name)
+        If file.Crc.Equals(localCrc) And Not uptodate Then
+            Log("File " & file.Name & " is up-to-date")
+            Return 0
+        End If
+
+        If Not uptodate Then
+            If IO.File.Exists(file.Name) Then
+                Try
+                    IO.File.Move(file.Name, "./tmp/" & file.Name)
+                Catch ex As Exception
+                End Try
+            End If
+
+            For Each link As NamedLink In file.Links
+                If file.ShowDialog Then
+                    LinkChooser.Links.Items.Clear()
+
+                    For Each l As NamedLink In file.Links
+                        If Not l.Name Is Nothing Then
+                            LinkChooser.Links.Items.Add(l.Name)
+                        Else
+                            LinkChooser.Links.Items.Add(l.Link)
+                        End If
+                    Next
+
+                    LinkChooser.Links.SelectedIndex = 0
+
+                    LinkChooser.ShowDialog()
+
+                    link = file.Links.ElementAt(LinkChooser.Links.SelectedIndex)
+                End If
+
+                Log("Downloading file " & file.Name & " from " & link.Link)
+                'Console.WriteLine("Downloading file " & file.Name & " from " & link.Link)
+
+                Dim dl As WebClient = New WebClient()
+                AddHandler dl.DownloadProgressChanged, AddressOf Downloads_ProgressChanged
+                AddHandler dl.DownloadFileCompleted, AddressOf Downloads_DownloadCompleted
+
+                Try
+                    Dim myLock As Object = New Object()
+                    SyncLock myLock
+                        stopwatch.Start()
+                        dl.DownloadFileAsync(New Uri(link.Link), file.Name, myLock)
+                        Monitor.Wait(myLock)
+                    End SyncLock
+                Catch ex As Exception
+                    Log("An error occured while downloading file " & file.Name & " from " & link.Link)
+                    Continue For
+                End Try
+                Log("Successfully downloaded file " & file.Name & " from " & link.Link)
+
+                localCrc = GetCRC32(file.Name)
+                If Not file.Crc.Equals("-1") And Not file.Crc.Equals(localCrc) Then
+                    Log("Checksum of downloaded file (" & file.Name & ") from " & link.Link & " doesn't match the specified checksum.")
+                    Continue For
+                End If
+
+                uptodate = True
+                Exit For
+            Next
+
+        End If
+
+        If Not uptodate Then
+            Log("An error occured while updating file " & file.Name & ". Please restart and try again.")
+            Return -1
+        End If
+
+        If file.RestartRequired Then
+            Return 1
+        Else
+            Return 0
+        End If
+    End Function
 
     Private Sub advancedChk_CheckedChanged(sender As Object, e As EventArgs) Handles advancedChk.CheckedChanged
         If advancedChk.Checked Then
@@ -459,4 +572,60 @@ Public Class Form1
         End If
     End Sub
 
+    Private Function CheckParentInstallation() As Integer
+
+        SetEnabled(playBtn, False)
+        SetEnabled(downloadcfg, False)
+        SetText(playBtn, "Checking...")
+        Log("Checking Installation...")
+
+        'Dim files As String() = New String() {
+        '    "D2.LNG",
+        '    "d2char.mpq",
+        '    "d2data.mpq",
+        '    "d2exp.mpq",
+        '    "d2music.mpq",
+        '    "d2sfx.mpq",
+        '    "d2speech.mpq",
+        '    "d2video.mpq",
+        '    "d2xmusic.mpq",
+        '    "d2xtalk.mpq",
+        '    "d2xvideo.mpq"
+        '}
+        Dim files As String() = New String() {
+            "d2char.mpq",
+            "d2data.mpq",
+            "d2exp.mpq",
+            "d2music.mpq",
+            "d2sfx.mpq",
+            "d2speech.mpq",
+            "d2video.mpq",
+            "d2xmusic.mpq",
+            "d2xtalk.mpq",
+            "d2xvideo.mpq"
+        }
+
+        For Each f In files
+            If Not IO.File.Exists("./" & f) Then
+                SetText(playBtn, "FAILED")
+                Log("Please reinstall PoD and this time select your D2 installation path during the installation process.")
+                Return 0
+            End If
+        Next
+
+        Log("Parent Installation verified correctly.")
+        Return 1
+
+    End Function
+
+    Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        'clear "tmp" on exit
+        For Each file As String In My.Computer.FileSystem.GetFiles("./tmp/", FileIO.SearchOption.SearchAllSubDirectories, "*.*")
+            Try
+                My.Computer.FileSystem.DeleteFile(file, FileIO.UIOption.OnlyErrorDialogs, FileIO.RecycleOption.DeletePermanently)
+            Catch ex As Exception
+                'do nothing, just continue
+            End Try
+        Next
+    End Sub
 End Class
