@@ -253,11 +253,11 @@ Public Class Form1
         'End If
 
         Dim tmp As String() = lootfilterurl.Text.Split(New Char() {"/"})
-        If File.Exists("./filter" & tmp(tmp.Count - 1)) Then
-            Log("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
-            MsgBox("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
-            Exit Sub
-        End If
+        'If File.Exists("./filter" & tmp(tmp.Count - 1)) Then
+        'Log("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
+        'MsgBox("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
+        'Exit Sub
+        'End If
 
         SetEnabled(playBtn, False)
         SetEnabled(downloadcfg, False)
@@ -269,10 +269,12 @@ Public Class Form1
 
         Try
             Dim dl As WebClient = New WebClient()
-            dl.DownloadFile(url, "./filter/" & name)
+            dl.DownloadFile(url, "./" & name)
             'dl.DownloadFile(url, name)
 
             Log("Successfully downloaded loot filter " & name & " from " & url)
+            Log("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
+            MsgBox("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
         Catch ex As Exception
             Log("An error occured while downloading loot filter " & name & " from " & url)
         End Try
@@ -459,7 +461,7 @@ Public Class Form1
             'restart if needed
             If restartRequired Then
                 MsgBox("An updated file requires the Launcher to restart to function correctly. Restarting Now!")
-                'Application.Restart()
+                Application.Restart()
             End If
         Else
             Log("Updates disabled!")
