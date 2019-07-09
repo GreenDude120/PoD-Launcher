@@ -210,7 +210,7 @@ Public Class Form1
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        System.Diagnostics.Process.Start("http://pathofdiablo.com/donate")
+        System.Diagnostics.Process.Start("https://pathofdiablo.com/donate")
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -218,19 +218,22 @@ Public Class Form1
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        System.Diagnostics.Process.Start("http://pathofdiablo.com/wiki")
+        System.Diagnostics.Process.Start("https://pathofdiablo.com/wiki")
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        System.Diagnostics.Process.Start("https://www.reddit.com/r/pathofdiablo/wiki/rules")
+        System.Diagnostics.Process.Start("https://pathofdiablo.com/rules")
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        System.Diagnostics.Process.Start("http://pathofdiablo.com/servers")
+        System.Diagnostics.Process.Start("https://pathofdiablo.com/servers")
+    End Sub
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        System.Diagnostics.Process.Start("https://discordapp.com/invite/0cUlOSBTPbtjahc5")
     End Sub
 
     Private Sub filterlibBtn_Click(sender As Object, e As EventArgs) Handles filterlibBtn.Click
-        System.Diagnostics.Process.Start("http://pathofdiablo.com/filters")
+        System.Diagnostics.Process.Start("https://pathofdiablo.com/filters")
     End Sub
 
     Private Sub downloadcfg_Click(sender As Object, e As EventArgs) Handles downloadcfg.Click
@@ -251,8 +254,8 @@ Public Class Form1
 
         Dim tmp As String() = lootfilterurl.Text.Split(New Char() {"/"})
         If File.Exists("./filter" & tmp(tmp.Count - 1)) Then
-            Log("Custom filter installed. You must enable it In-game via Settings button To activate.")
-            MsgBox("Custom filter installed. You must enable it In-game via Settings button To activate.")
+            Log("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
+            MsgBox("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
             Exit Sub
         End If
 
@@ -580,7 +583,6 @@ Public Class Form1
         Log("Checking Installation...")
 
         'Dim files As String() = New String() {
-        '    "D2.LNG",
         '    "d2char.mpq",
         '    "d2data.mpq",
         '    "d2exp.mpq",
@@ -606,9 +608,9 @@ Public Class Form1
         }
 
         For Each f In files
-            If Not IO.File.Exists("./" & f) Then
+            If Not IO.File.Exists("..\\" & f) Then
                 SetText(playBtn, "FAILED")
-                Log("Please reinstall PoD and this time select your D2 installation path during the installation process.")
+                Log("ERROR: Cannot find a D2 installation in the parent(previous) folder. Reinstall PoD but make sure to select your D2 installation path during the PoD installation process.")
                 Return 0
             End If
         Next

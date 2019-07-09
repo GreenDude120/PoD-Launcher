@@ -50,6 +50,7 @@ Partial Class LinkChooser
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.Label1.Location = New System.Drawing.Point(13, 13)
         Me.Label1.Name = "Label1"
@@ -63,6 +64,7 @@ Partial Class LinkChooser
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(39, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.BackgroundImage = Global.Path_of_Diablo_Launcher.My.Resources.Resources.wallpaper
         Me.ClientSize = New System.Drawing.Size(350, 262)
         Me.ControlBox = False
         Me.Controls.Add(Me.Label1)

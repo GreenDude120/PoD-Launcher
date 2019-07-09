@@ -27,12 +27,15 @@ Partial Class Form1
         Me.playBtn = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.skipChk = New System.Windows.Forms.CheckBox()
+        Me.aspectChk = New System.Windows.Forms.CheckBox()
+        Me.nsChk = New System.Windows.Forms.CheckBox()
+        Me.dfxChk = New System.Windows.Forms.CheckBox()
+        Me.wChk = New System.Windows.Forms.CheckBox()
+        Me.advancedChk = New System.Windows.Forms.CheckBox()
+        Me.directcbox = New System.Windows.Forms.CheckBox()
+        Me.sndbkgChk = New System.Windows.Forms.CheckBox()
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
         Me.downloadcfg = New System.Windows.Forms.Button()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.filterlibBtn = New System.Windows.Forms.Button()
@@ -42,17 +45,15 @@ Partial Class Form1
         Me.LogBox = New System.Windows.Forms.ListBox()
         Me.ProgressBar = New System.Windows.Forms.ProgressBar()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.dlInfo = New System.Windows.Forms.Label()
-        Me.sndbkgChk = New System.Windows.Forms.CheckBox()
-        Me.skipChk = New System.Windows.Forms.CheckBox()
-        Me.aspectChk = New System.Windows.Forms.CheckBox()
-        Me.nsChk = New System.Windows.Forms.CheckBox()
-        Me.dfxChk = New System.Windows.Forms.CheckBox()
-        Me.wChk = New System.Windows.Forms.CheckBox()
-        Me.advancedChk = New System.Windows.Forms.CheckBox()
-        Me.directcbox = New System.Windows.Forms.CheckBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.GroupBox3.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -105,216 +106,6 @@ Partial Class Form1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(356, 92)
         Me.TableLayoutPanel1.TabIndex = 31
-        '
-        'WebBrowser1
-        '
-        Me.WebBrowser1.IsWebBrowserContextMenuEnabled = False
-        Me.WebBrowser1.Location = New System.Drawing.Point(12, 155)
-        Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.WebBrowser1.Name = "WebBrowser1"
-        Me.WebBrowser1.ScriptErrorsSuppressed = True
-        Me.WebBrowser1.Size = New System.Drawing.Size(609, 278)
-        Me.WebBrowser1.TabIndex = 9
-        Me.WebBrowser1.Url = New System.Uri("https://pathofdiablo.com/p/?getnewsembed", System.UriKind.Absolute)
-        '
-        'Button1
-        '
-        Me.Button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Button1.Location = New System.Drawing.Point(3, 19)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(140, 23)
-        Me.Button1.TabIndex = 11
-        Me.Button1.Text = "Donate"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Button2.Location = New System.Drawing.Point(149, 19)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(140, 23)
-        Me.Button2.TabIndex = 12
-        Me.Button2.Text = "Forums"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Button3.Location = New System.Drawing.Point(295, 19)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(140, 23)
-        Me.Button3.TabIndex = 13
-        Me.Button3.Text = "Wiki"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        Me.Button4.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Button4.Location = New System.Drawing.Point(587, 19)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(140, 23)
-        Me.Button4.TabIndex = 14
-        Me.Button4.Text = "Server List"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button5
-        '
-        Me.Button5.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button5.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Button5.Location = New System.Drawing.Point(441, 19)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(140, 23)
-        Me.Button5.TabIndex = 15
-        Me.Button5.Text = "Rules"
-        Me.Button5.UseVisualStyleBackColor = True
-        '
-        'downloadcfg
-        '
-        Me.downloadcfg.Enabled = False
-        Me.downloadcfg.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.downloadcfg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.downloadcfg.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.downloadcfg.Location = New System.Drawing.Point(241, 15)
-        Me.downloadcfg.Name = "downloadcfg"
-        Me.downloadcfg.Size = New System.Drawing.Size(90, 25)
-        Me.downloadcfg.TabIndex = 21
-        Me.downloadcfg.Text = "Download"
-        Me.downloadcfg.UseVisualStyleBackColor = True
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.filterlibBtn)
-        Me.GroupBox5.Controls.Add(Me.Label3)
-        Me.GroupBox5.Controls.Add(Me.lootfilterurl)
-        Me.GroupBox5.Controls.Add(Me.downloadcfg)
-        Me.GroupBox5.ForeColor = System.Drawing.Color.White
-        Me.GroupBox5.Location = New System.Drawing.Point(627, 278)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(368, 49)
-        Me.GroupBox5.TabIndex = 22
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Loot Filter"
-        '
-        'filterlibBtn
-        '
-        Me.filterlibBtn.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.filterlibBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.filterlibBtn.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.filterlibBtn.Location = New System.Drawing.Point(337, 15)
-        Me.filterlibBtn.Name = "filterlibBtn"
-        Me.filterlibBtn.Size = New System.Drawing.Size(25, 25)
-        Me.filterlibBtn.TabIndex = 24
-        Me.filterlibBtn.Text = "+"
-        Me.ToolTip1.SetToolTip(Me.filterlibBtn, "Opens up a new tab in your internet browser" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for you to browse the filter library" &
-        ".")
-        Me.filterlibBtn.UseVisualStyleBackColor = True
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 21)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(32, 13)
-        Me.Label3.TabIndex = 23
-        Me.Label3.Text = "URL:"
-        '
-        'lootfilterurl
-        '
-        Me.lootfilterurl.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(62, Byte), Integer))
-        Me.lootfilterurl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lootfilterurl.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lootfilterurl.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.lootfilterurl.Location = New System.Drawing.Point(44, 19)
-        Me.lootfilterurl.Name = "lootfilterurl"
-        Me.lootfilterurl.Size = New System.Drawing.Size(191, 20)
-        Me.lootfilterurl.TabIndex = 22
-        Me.lootfilterurl.Text = "https://pathofdiablo.com/item.filter"
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.LogBox)
-        Me.GroupBox1.ForeColor = System.Drawing.Color.White
-        Me.GroupBox1.Location = New System.Drawing.Point(627, 333)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(368, 100)
-        Me.GroupBox1.TabIndex = 25
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Event Log"
-        '
-        'LogBox
-        '
-        Me.LogBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(62, Byte), Integer))
-        Me.LogBox.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.LogBox.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.LogBox.FormattingEnabled = True
-        Me.LogBox.HorizontalScrollbar = True
-        Me.LogBox.Location = New System.Drawing.Point(6, 16)
-        Me.LogBox.Name = "LogBox"
-        Me.LogBox.Size = New System.Drawing.Size(356, 78)
-        Me.LogBox.TabIndex = 0
-        '
-        'ProgressBar
-        '
-        Me.ProgressBar.Location = New System.Drawing.Point(3, 61)
-        Me.ProgressBar.Name = "ProgressBar"
-        Me.ProgressBar.Size = New System.Drawing.Size(978, 23)
-        Me.ProgressBar.TabIndex = 26
-        '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.Button4)
-        Me.Panel1.Controls.Add(Me.Button5)
-        Me.Panel1.Controls.Add(Me.playBtn)
-        Me.Panel1.Controls.Add(Me.ProgressBar)
-        Me.Panel1.Controls.Add(Me.Button3)
-        Me.Panel1.Controls.Add(Me.Button1)
-        Me.Panel1.Controls.Add(Me.Button2)
-        Me.Panel1.Location = New System.Drawing.Point(12, 439)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(984, 87)
-        Me.Panel1.TabIndex = 28
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.banner2
-        Me.PictureBox1.Location = New System.Drawing.Point(12, 12)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(983, 137)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
-        '
-        'dlInfo
-        '
-        Me.dlInfo.AutoSize = True
-        Me.dlInfo.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.dlInfo.Location = New System.Drawing.Point(12, 484)
-        Me.dlInfo.Name = "dlInfo"
-        Me.dlInfo.Size = New System.Drawing.Size(0, 13)
-        Me.dlInfo.TabIndex = 27
-        '
-        'sndbkgChk
-        '
-        Me.sndbkgChk.AutoSize = True
-        Me.sndbkgChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxSndBkg
-        Me.sndbkgChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSndBkg", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.sndbkgChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.sndbkgChk.Location = New System.Drawing.Point(181, 26)
-        Me.sndbkgChk.Name = "sndbkgChk"
-        Me.sndbkgChk.Size = New System.Drawing.Size(64, 17)
-        Me.sndbkgChk.TabIndex = 9
-        Me.sndbkgChk.Text = "-sndbkg"
-        Me.ToolTip1.SetToolTip(Me.sndbkgChk, "Enables games sound even when in background.")
-        Me.sndbkgChk.UseVisualStyleBackColor = True
         '
         'skipChk
         '
@@ -418,6 +209,241 @@ Partial Class Form1
         Me.directcbox.UseVisualStyleBackColor = True
         Me.directcbox.Visible = False
         '
+        'sndbkgChk
+        '
+        Me.sndbkgChk.AutoSize = True
+        Me.sndbkgChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxSndBkg
+        Me.sndbkgChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSndBkg", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.sndbkgChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.sndbkgChk.Location = New System.Drawing.Point(181, 26)
+        Me.sndbkgChk.Name = "sndbkgChk"
+        Me.sndbkgChk.Size = New System.Drawing.Size(64, 17)
+        Me.sndbkgChk.TabIndex = 9
+        Me.sndbkgChk.Text = "-sndbkg"
+        Me.ToolTip1.SetToolTip(Me.sndbkgChk, "Enables games sound even when in background.")
+        Me.sndbkgChk.UseVisualStyleBackColor = True
+        '
+        'WebBrowser1
+        '
+        Me.WebBrowser1.IsWebBrowserContextMenuEnabled = False
+        Me.WebBrowser1.Location = New System.Drawing.Point(12, 155)
+        Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.WebBrowser1.Name = "WebBrowser1"
+        Me.WebBrowser1.ScriptErrorsSuppressed = True
+        Me.WebBrowser1.Size = New System.Drawing.Size(609, 278)
+        Me.WebBrowser1.TabIndex = 9
+        Me.WebBrowser1.Url = New System.Uri("https://pathofdiablo.com/p/?getnewsembed", System.UriKind.Absolute)
+        '
+        'downloadcfg
+        '
+        Me.downloadcfg.Enabled = False
+        Me.downloadcfg.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.downloadcfg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.downloadcfg.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.downloadcfg.Location = New System.Drawing.Point(252, 15)
+        Me.downloadcfg.Name = "downloadcfg"
+        Me.downloadcfg.Size = New System.Drawing.Size(79, 25)
+        Me.downloadcfg.TabIndex = 21
+        Me.downloadcfg.Text = "Download"
+        Me.downloadcfg.UseVisualStyleBackColor = True
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.filterlibBtn)
+        Me.GroupBox5.Controls.Add(Me.Label3)
+        Me.GroupBox5.Controls.Add(Me.lootfilterurl)
+        Me.GroupBox5.Controls.Add(Me.downloadcfg)
+        Me.GroupBox5.ForeColor = System.Drawing.Color.White
+        Me.GroupBox5.Location = New System.Drawing.Point(627, 278)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(368, 49)
+        Me.GroupBox5.TabIndex = 22
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Loot Filter Downloader"
+        '
+        'filterlibBtn
+        '
+        Me.filterlibBtn.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.filterlibBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.filterlibBtn.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.filterlibBtn.Location = New System.Drawing.Point(337, 15)
+        Me.filterlibBtn.Name = "filterlibBtn"
+        Me.filterlibBtn.Size = New System.Drawing.Size(25, 25)
+        Me.filterlibBtn.TabIndex = 24
+        Me.filterlibBtn.Text = "+"
+        Me.ToolTip1.SetToolTip(Me.filterlibBtn, "Opens up a new tab in your internet browser" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for you to browse the filter library" &
+        ".")
+        Me.filterlibBtn.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(6, 21)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(32, 13)
+        Me.Label3.TabIndex = 23
+        Me.Label3.Text = "URL:"
+        '
+        'lootfilterurl
+        '
+        Me.lootfilterurl.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(62, Byte), Integer))
+        Me.lootfilterurl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lootfilterurl.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lootfilterurl.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.lootfilterurl.Location = New System.Drawing.Point(44, 19)
+        Me.lootfilterurl.Name = "lootfilterurl"
+        Me.lootfilterurl.Size = New System.Drawing.Size(202, 20)
+        Me.lootfilterurl.TabIndex = 22
+        Me.lootfilterurl.Text = "example: http://website.com/item.filter"
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.LogBox)
+        Me.GroupBox1.ForeColor = System.Drawing.Color.White
+        Me.GroupBox1.Location = New System.Drawing.Point(627, 333)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(368, 100)
+        Me.GroupBox1.TabIndex = 25
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Event Log"
+        '
+        'LogBox
+        '
+        Me.LogBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(62, Byte), Integer))
+        Me.LogBox.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.LogBox.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.LogBox.FormattingEnabled = True
+        Me.LogBox.HorizontalScrollbar = True
+        Me.LogBox.Location = New System.Drawing.Point(6, 16)
+        Me.LogBox.Name = "LogBox"
+        Me.LogBox.Size = New System.Drawing.Size(356, 78)
+        Me.LogBox.TabIndex = 0
+        '
+        'ProgressBar
+        '
+        Me.ProgressBar.Location = New System.Drawing.Point(3, 61)
+        Me.ProgressBar.Name = "ProgressBar"
+        Me.ProgressBar.Size = New System.Drawing.Size(978, 23)
+        Me.ProgressBar.TabIndex = 26
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.Button6)
+        Me.Panel1.Controls.Add(Me.Button4)
+        Me.Panel1.Controls.Add(Me.Button5)
+        Me.Panel1.Controls.Add(Me.playBtn)
+        Me.Panel1.Controls.Add(Me.ProgressBar)
+        Me.Panel1.Controls.Add(Me.Button3)
+        Me.Panel1.Controls.Add(Me.Button1)
+        Me.Panel1.Controls.Add(Me.Button2)
+        Me.Panel1.Location = New System.Drawing.Point(12, 439)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(984, 87)
+        Me.Panel1.TabIndex = 28
+        '
+        'dlInfo
+        '
+        Me.dlInfo.AutoSize = True
+        Me.dlInfo.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.dlInfo.Location = New System.Drawing.Point(12, 484)
+        Me.dlInfo.Name = "dlInfo"
+        Me.dlInfo.Size = New System.Drawing.Size(0, 13)
+        Me.dlInfo.TabIndex = 27
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.banner2
+        Me.PictureBox1.Location = New System.Drawing.Point(12, 12)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(983, 137)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox1.TabIndex = 0
+        Me.PictureBox1.TabStop = False
+        '
+        'Button6
+        '
+        Me.Button6.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button6.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Button6.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.discord
+        Me.Button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button6.Location = New System.Drawing.Point(633, 19)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(120, 27)
+        Me.Button6.TabIndex = 27
+        Me.Button6.Text = "Discord"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button4.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Button4.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources._70
+        Me.Button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button4.Location = New System.Drawing.Point(129, 19)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(120, 27)
+        Me.Button4.TabIndex = 14
+        Me.Button4.Text = "Servers List"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button5.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Button5.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources._90
+        Me.Button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button5.Location = New System.Drawing.Point(381, 19)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(120, 27)
+        Me.Button5.TabIndex = 15
+        Me.Button5.Text = "Rules"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Button3.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources._43
+        Me.Button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button3.Location = New System.Drawing.Point(255, 19)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(120, 27)
+        Me.Button3.TabIndex = 13
+        Me.Button3.Text = "Wiki"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Button1.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources._84
+        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button1.Location = New System.Drawing.Point(3, 19)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(120, 27)
+        Me.Button1.TabIndex = 11
+        Me.Button1.Text = "Donate"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Button2.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.reddit
+        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button2.Location = New System.Drawing.Point(507, 19)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(120, 27)
+        Me.Button2.TabIndex = 12
+        Me.Button2.Text = "Reddit"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -481,4 +507,5 @@ Partial Class Form1
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents dlInfo As Label
     Friend WithEvents sndbkgChk As CheckBox
+    Friend WithEvents Button6 As Button
 End Class
