@@ -590,9 +590,8 @@ Public Class Form1
         '    "d2sfx.mpq",
         '    "d2speech.mpq",
         '    "d2video.mpq",
-        '    "d2xmusic.mpq",
+        '    "d2xmusic.mpq", required cinematics? shouldnt check for it
         '    "d2xtalk.mpq",
-        '    "d2xvideo.mpq"
         '}
         Dim files As String() = New String() {
             "d2char.mpq",
@@ -600,11 +599,8 @@ Public Class Form1
             "d2exp.mpq",
             "d2music.mpq",
             "d2sfx.mpq",
-            "d2speech.mpq",
-            "d2video.mpq",
-            "d2xmusic.mpq",
-            "d2xtalk.mpq",
-            "d2xvideo.mpq"
+            "Game.exe",
+            "d2speech.mpq"
         }
 
         For Each f In files
