@@ -119,7 +119,7 @@ Partial Class Form1
         Me.skipChk.Size = New System.Drawing.Size(78, 17)
         Me.skipChk.TabIndex = 1
         Me.skipChk.Text = "-skiptobnet"
-        Me.ToolTip1.SetToolTip(Me.skipChk, "Starts the game and directly connects to Battle.Net.")
+        Me.ToolTip1.SetToolTip(Me.skipChk, "Game opens straight into online multiplayer & skips cutscenes")
         Me.skipChk.UseVisualStyleBackColor = True
         '
         'aspectChk
@@ -133,8 +133,8 @@ Partial Class Form1
         Me.aspectChk.Size = New System.Drawing.Size(83, 17)
         Me.aspectChk.TabIndex = 4
         Me.aspectChk.Text = "-nofixaspect"
-        Me.ToolTip1.SetToolTip(Me.aspectChk, "Allows you to stretch the game to any size in windowed mode," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "instead of keeing t" &
-        "he 4:3 aspect ratio.")
+        Me.ToolTip1.SetToolTip(Me.aspectChk, "Window will stretch to whatever aspect ratio you use," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "instead of keeing " &
+        "the 4:3 aspect ratio.")
         Me.aspectChk.UseVisualStyleBackColor = True
         '
         'nsChk
@@ -162,8 +162,8 @@ Partial Class Form1
         Me.dfxChk.Size = New System.Drawing.Size(49, 17)
         Me.dfxChk.TabIndex = 3
         Me.dfxChk.Text = "-3dfx"
-        Me.ToolTip1.SetToolTip(Me.dfxChk, "VideoMode: Glide" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Checks if you have the glide wrapper installed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If not, the la" &
-        "uncher will download it for you.")
+        Me.ToolTip1.SetToolTip(Me.dfxChk, "VideoMode: Glide" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Ignores -w launch flag." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Must open glide-init.exe" &
+        " in PoD folder to configure glide settings")
         Me.dfxChk.UseVisualStyleBackColor = True
         '
         'wChk
@@ -220,7 +220,7 @@ Partial Class Form1
         Me.sndbkgChk.Size = New System.Drawing.Size(64, 17)
         Me.sndbkgChk.TabIndex = 9
         Me.sndbkgChk.Text = "-sndbkg"
-        Me.ToolTip1.SetToolTip(Me.sndbkgChk, "Enables games sound even when in background.")
+        Me.ToolTip1.SetToolTip(Me.sndbkgChk, "Enables game sounds even when game is minimized.")
         Me.sndbkgChk.UseVisualStyleBackColor = True
         '
         'WebBrowser1
@@ -271,7 +271,7 @@ Partial Class Form1
         Me.filterlibBtn.Size = New System.Drawing.Size(25, 25)
         Me.filterlibBtn.TabIndex = 24
         Me.filterlibBtn.Text = "+"
-        Me.ToolTip1.SetToolTip(Me.filterlibBtn, "Opens up a new tab in your internet browser" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for you to browse the filter library" &
+        Me.ToolTip1.SetToolTip(Me.filterlibBtn, "Opens loot filters library" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for you to browse pre-made filters" &
         ".")
         Me.filterlibBtn.UseVisualStyleBackColor = True
         '
