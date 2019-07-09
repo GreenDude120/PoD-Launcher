@@ -610,7 +610,7 @@ Public Class Form1
         For Each f In files
             If Not IO.File.Exists("..\\" & f) Then
                 SetText(playBtn, "FAILED")
-                Log("ERROR: Cannot find a D2 installation in the parent(previous) folder. Reinstall PoD but make sure to select your D2 installation path during the PoD installation process.")
+                Log("Can't find D2 installation in the parent(previous) folder. Reinstall PoD but make sure to select your D2 installation path during the PoD installation process.")
                 Return 0
             End If
         Next
