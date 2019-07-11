@@ -4,6 +4,7 @@
 		<link name="Download patch from Global-Discord-CDN-Servers">https://cdn.discordapp.com/attachments/328215984613621761/588283865068470272/patch_d2.mpq</link>
 		<link name="Download patch from New-York-Download-Server">https://pathofdiablo.com/public/patch_d2.mpq</link>
 		<link name="Download patch from New-York-Backup-Server">http://198.98.51.238:8080/public/patch_d2.mpq</link>
+		<link name="Download patch from Luxembourg-Download-Server">https://d2.lc/patch_d2.mpq</link>
 	</file>
 	<file name="D2PoDClient.dll" crc="21477C81">
 		<link>https://pathofdiablo.com/D2PoDClient.dll</link>
@@ -15,7 +16,7 @@
 	</file>
 	<file name="Path of Diablo Launcher.exe" crc="B6EA5894" restartRequired="true">
 		<link>https://pathofdiablo.com/Path%20of%20Diablo%20Launcher.exe</link>
-		<link>http://198.98.51.238:8080/public/Path%20of%20Diablo%20Launcher.exe</link>
+		<link>https://d2.lc/Path%20of%20Diablo%20Launcher.exe</link>
 	</file>	
 	<file name="D2Client.dll" crc="EAABD1BB">
 		<link>https://pathofdiablo.com/D2Client.dll</link>
@@ -50,24 +51,31 @@
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2gfx.dll</link>
 	</file>
 	<file name="D2Glide.dll" crc="D7D481A3">
+		<link>https://d2.lc/D2Glide.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Glide.dll</link>
 	</file>
 	<file name="D2Lang.dll" crc="48EB7ED0">
+		<link>https://d2.lc/D2Lang.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Lang.dll</link>
 	</file>
 	<file name="D2Launch.dll" crc="394806ED">
+		<link>https://d2.lc/D2Launch.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Launch.dll</link>
 	</file>
 	<file name="D2MCPClient.dll" crc="82000E02">
+		<link>https://d2.lc/D2MCPClient.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2MCPClient.dll</link>
 	</file>
 	<file name="D2Multi.dll" crc="3CE07ED6">
+		<link>https://d2.lc/D2Multi.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Multi.dll</link>
 	</file>
 	<file name="D2Net.dll" crc="565E0370">
+		<link>https://d2.lc/D2Net.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Net.dll</link>
 	</file>
 	<file name="D2Sound.dll" crc="82699D49">
+		<link>https://d2.lc/D2Sound.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2sound.dll</link>
 	</file>
 	<file name="D2VidTst.exe" crc="703A2E45">
@@ -75,6 +83,7 @@
 		<link>http://198.98.51.238:8080/public/D2VidTst.exe</link>
 	</file>
 	<file name="D2Win.dll" crc="279F3311">
+		<link>https://d2.lc/D2Win.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Win.dll</link>
 	</file>
 	<file name="Diablo II.exe" crc="33D0D3EE">
