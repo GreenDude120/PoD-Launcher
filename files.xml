@@ -105,8 +105,8 @@
 		<link>http://198.98.51.238:8080/public/item.filter</link>
 	</file>
 	<file name="pod.cfg">
+		<link>https://d2.lc/pod.cfg</link>
 		<link>https://pathofdiablo.com/pod.cfg</link>
-		<link>http://198.98.51.238:8080/public/pod.cfg</link>
 	</file>
 	<file name="SmackW32.dll" crc="614A9406">
 		<link>https://pathofdiablo.com/SmackW32.dll</link>
@@ -117,8 +117,8 @@
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/Storm.dll</link>
 	</file>
 	<file name="UI.ini">
+		<link>https://d2.lc/UI.ini</link>
 		<link>https://pathofdiablo.com/UI.ini</link>
-		<link>http://198.98.51.238:8080/public/UI.ini</link>
 	</file>
 	<file name="binkw32.dll" crc="5934B4A7">
 		<link>https://pathofdiablo.com/binkw32.dll</link>
@@ -129,19 +129,19 @@
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/Bnclient.dll</link>
 	</file>
 	<file name="glide3x.dll">
+		<link>https://d2.lc/glide3x.dll</link>
 		<link>https://pathofdiablo.com/glide3x.dll</link>
-		<link>http://198.98.51.238:8080/public/glide3x.dll</link>
 	</file>
 	<file name="glide-init.exe">
+		<link>https://d2.lc/glide-init.exe</link>
 		<link>https://pathofdiablo.com/glide-init.exe</link>
-		<link>http://198.98.51.238:8080/public/glide-init.exe</link>
 	</file>
 	<file name="glide-liesmich.txt">
+		<link>https://d2.lc/glide-liesmich.txt</link>
 		<link>https://pathofdiablo.com/glide-liesmich.txt</link>
-		<link>http://198.98.51.238:8080/public/glide-liesmich.txt</link>
 	</file>
 	<file name="glide-readme.txt">
+		<link>https://d2.lc/glide-readme.txt</link>
 		<link>https://pathofdiablo.com/glide-readme.txt</link>
-		<link>http://198.98.51.238:8080/public/glide-readme.txt</link>
 	</file>
 </filelist>
