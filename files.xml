@@ -5,7 +5,7 @@
 		<link name="Download patch from Luxembourg-Download-Server">https://d2.lc/patch_d2.mpq</link>
 	</file>
 	<file name="D2PoDClient.dll" crc="21477C81">
-		<link>https://pathofdiablo.com/D2PoDClient.dll</link>
+		<link>htts://d2.lc/D2PoDClient.dll</link>
 		<link>http://198.98.51.238:8080/public/D2PoDClient.dll</link>
 	</file>
 	<file name="pod.dll" crc="5456D070">
@@ -17,35 +17,35 @@
 		<link>https://d2.lc/Path%20of%20Diablo%20Launcher.exe</link>
 	</file>	
 	<file name="D2Client.dll" crc="EAABD1BB">
-		<link>https://pathofdiablo.com/D2Client.dll</link>
+		<link>https://d2.lc/D2Client.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Client.dll</link>
 	</file>
 	<file name="D2CMP.dll" crc="BBD202E2">
-		<link>https://pathofdiablo.com/D2CMP.dll</link>
+		<link>https://d2.lc/D2CMP.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2CMP.dll</link>
 	</file>
 	<file name="D2Common.dll" crc="6B3D9AB3">
-		<link>https://pathofdiablo.com/D2Common.dll</link>
+		<link>https://d2.lc/D2Common.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Common.dll</link>
 	</file>
 	<file name="D2DDraw.dll" crc="7E0B4D39">
-		<link>https://pathofdiablo.com/D2DDraw.dll</link>
+		<link>https://d2.lc/D2DDraw.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2DDraw.dll</link>
 	</file>
 	<file name="D2Direct3D.dll" crc="1F7A2A57">
-		<link>https://pathofdiablo.com/D2Direct3D.dll</link>
+		<link>https://d2.lc/D2Direct3D.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Direct3D.dll</link>
 	</file>
 	<file name="D2Game.dll" crc="DC1A5A2B">
-		<link>https://pathofdiablo.com/D2Game.dll</link>
+		<link>https://d2.lc/D2Game.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Game.dll</link>
 	</file>
 	<file name="D2Gdi.dll" crc="160627C2">
-		<link>https://pathofdiablo.com/D2Gdi.dll</link>
+		<link>https://d2.lc/D2Gdi.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Gdi.dll</link>
 	</file>
 	<file name="D2gfx.dll" crc="3263964D">
-		<link>https://pathofdiablo.com/D2gfx.dll</link>
+		<link>https://d2.lc/D2gfx.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2gfx.dll</link>
 	</file>
 	<file name="D2Glide.dll" crc="D7D481A3">
@@ -77,7 +77,7 @@
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2sound.dll</link>
 	</file>
 	<file name="D2VidTst.exe" crc="703A2E45">
-		<link>https://pathofdiablo.com/D2VidTst.exe</link>
+		<link>https://d2.lc/D2VidTst.exe</link>
 		<link>http://198.98.51.238:8080/public/D2VidTst.exe</link>
 	</file>
 	<file name="D2Win.dll" crc="279F3311">
@@ -85,23 +85,23 @@
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Win.dll</link>
 	</file>
 	<file name="Diablo II.exe" crc="33D0D3EE">
-		<link>https://pathofdiablo.com/Diablo%20II.exe</link>
+		<link>https://d2.lc/Diablo%20II.exe</link>
 		<link>http://198.98.51.238:8080/public/Diablo%20II.exe</link>
 	</file>
 	<file name="Fog.dll" crc="C4CB491F">>
-		<link>https://pathofdiablo.com/Fog.dll</link>
+		<link>https://d2.lc/Fog.dll</link>
 		<link>http://198.98.51.238:8080/public/Fog.dll</link>
 	</file>
 	<file name="Game.exe" crc="B3D69C47">
-		<link>https://pathofdiablo.com/Game.exe</link>
+		<link>https://d2.lc/Game.exe</link>
 		<link>http://198.98.51.238:8080/public/Game.exe</link>
 	</file>
 	<file name="ijl11.dll" crc="C00FE21D">
-		<link>https://pathofdiablo.com/ijl11.dll</link>
+		<link>https://d2.lc/ijl11.dll</link>
 		<link>http://198.98.51.238:8080/public/ijl11.dll</link>
 	</file>
 	<file name="item.filter">
-		<link>https://pathofdiablo.com/item.filter</link>
+		<link>https://d2.lc/item.filter</link>
 		<link>http://198.98.51.238:8080/public/item.filter</link>
 	</file>
 	<file name="pod.cfg">
@@ -109,11 +109,11 @@
 		<link>https://pathofdiablo.com/pod.cfg</link>
 	</file>
 	<file name="SmackW32.dll" crc="614A9406">
-		<link>https://pathofdiablo.com/SmackW32.dll</link>
+		<link>https://d2.lc/SmackW32.dll</link>
 		<link>http://198.98.51.238:8080/public/SmackW32.dll</link>
 	</file>
 	<file name="Storm.dll" crc="BDB6784E">
-		<link>https://pathofdiablo.com/Storm.dll</link>
+		<link>https://d2.lc/Storm.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/Storm.dll</link>
 	</file>
 	<file name="UI.ini">
@@ -121,11 +121,11 @@
 		<link>https://pathofdiablo.com/UI.ini</link>
 	</file>
 	<file name="binkw32.dll" crc="5934B4A7">
-		<link>https://pathofdiablo.com/binkw32.dll</link>
+		<link>https://d2.lc/binkw32.dll</link>
 		<link>http://198.98.51.238:8080/public/binkw32.dll</link>
 	</file>
 	<file name="Bnclient.dll" crc="49E0C339">
-		<link>https://pathofdiablo.com/Bnclient.dll</link>
+		<link>https://d2.lc/Bnclient.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/Bnclient.dll</link>
 	</file>
 	<file name="glide3x.dll">
