@@ -26,5 +26,8 @@
     <Setting Name="chkboxSndBkg" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="txtboxLootFilter" Type="System.String" Scope="User">
+      <Value Profile="(Default)">example: http://website.com/item.filter</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

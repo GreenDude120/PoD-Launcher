@@ -53,6 +53,7 @@ Public Class Form1
     End Function
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lootfilterurl.Text = My.Settings.txtboxLootFilter
 
         'check and create needed directories
         If Not My.Computer.FileSystem.DirectoryExists("./tmp") Then
@@ -237,6 +238,8 @@ Public Class Form1
     End Sub
 
     Private Sub downloadcfg_Click(sender As Object, e As EventArgs) Handles downloadcfg.Click
+        My.Settings.txtboxLootFilter = lootfilterurl.Text
+        My.Settings.Save()
         Dim thread As New Thread(AddressOf LootFilterDownloaderThread)
         thread.IsBackground = True
         thread.Start()
