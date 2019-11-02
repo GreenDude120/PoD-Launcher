@@ -3,14 +3,15 @@
 	<file name="patch_d2.mpq" crc="2D64BE46" showDialog="true">
 		<link name="Download patch from Global-Discord-CDN-Server">https://cdn.discordapp.com/attachments/602662727961542696/612009341880369162/patch_d2.mpq</link>
 		<link name="Download patch from Luxembourg-Download-Server">https://d2.lc/patch_d2.mpq</link>
+		<link name="Download patch from Las-Vegas-Download-Server">https://greendu.de/index.php/s/OrMBQOFbn4C5IxZ/download?path=%2F&files=D2PoDClient.dll</link>
 	</file>
 	<file name="D2PoDClient.dll" crc="21477C81">
 		<link>htts://d2.lc/D2PoDClient.dll</link>
-		<link>http://198.98.51.238:8080/public/D2PoDClient.dll</link>
+		<link>https://greendu.de/index.php/s/OrMBQOFbn4C5IxZ/download?path=%2F&files=D2PoDClient.dll</link>
 	</file>
 	<file name="pod.dll" crc="5456D070">
-		<link>https://cdn.discordapp.com/attachments/328215984613621761/588282729762914304/pod.dll</link>
-		<link>http://198.98.51.238:8080/public/pod.dll</link>
+		<link>https://d2.lc/pod.dll</link>
+		<link>https://greendu.de/index.php/s/OrMBQOFbn4C5IxZ/download?path=%2F&files=pod.dll</link>
 	</file>
 	<file name="Path of Diablo Launcher.exe" crc="B6EA5894" restartRequired="true">
 		<link>https://pathofdiablo.com/Path%20of%20Diablo%20Launcher.exe</link>
