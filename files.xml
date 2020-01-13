@@ -4,7 +4,7 @@
 		<link name="Download patch from Global-Discord-CDN-Server">https://cdn.discordapp.com/attachments/602662727961542696/665963873819426846/patch_d2.mpq</link>
 		<link name="Download patch from Luxembourg-Download-Server">https://d2.lc/patch_d2.mpq</link>
 	</file>
-	<file name="D2PoDClient.dll" crc="B7F05E77">
+	<file name="D2PoDClient.dll" crc="4A60CA4E">
 		<link>https://d2.lc/D2PoDClient.dll</link>
 		<link>http://198.98.51.238:8080/public/D2PoDClient.dll</link>
 	</file>
@@ -60,7 +60,7 @@
 		<link>https://d2.lc/D2Launch.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Launch.dll</link>
 	</file>
-	<file name="podws.dll" crc="1630514F">
+	<file name="podws.dll" crc="C59E241B">
 		<link>https://d2.lc/podws.dll</link>
 		<link>http://198.98.51.238:8080/public/podws.dll</link>
 	</file>
