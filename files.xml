@@ -124,9 +124,9 @@
 		<link>https://d2.lc/UI.ini</link>
 		<link>https://pathofdiablo.com/UI.ini</link>
 	</file>
-	<file name="credits.md">
-		<link>https://pathofdiablo.com/credits.md</link>
-		<link>http://198.98.51.238:8080/public/credits.md</link>
+	<file name="license.md">
+		<link>https://pathofdiablo.com/license.md</link>
+		<link>http://198.98.51.238:8080/public/license.md</link>
 	</file>
 	<file name="binkw32.dll" crc="5934B4A7">
 		<link>https://d2.lc/binkw32.dll</link>
