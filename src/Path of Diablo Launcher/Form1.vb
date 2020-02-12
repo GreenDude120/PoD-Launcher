@@ -10,6 +10,8 @@ Public Class Form1
 
     Dim cmd As CommandLineOptions = New CommandLineOptions()
 
+    Dim isUpdateClicked As Boolean = False
+
     Public Function GetCRC32(ByVal sFileName As String) As String
         Try
             Dim FS As FileStream = New FileStream(sFileName, FileMode.Open, FileAccess.Read, FileShare.Read, 8192)
@@ -103,6 +105,7 @@ Public Class Form1
         Dim d2 As New ProcessStartInfo
 
         d2.FileName = "Game.exe"
+        Global.Path_of_Diablo_Launcher.My.MySettings.Default.stringLootLink = Me.lootfilterurl.Text
         Try
             My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ DisableNXShowUI RUNASADMIN")
         Catch ex As System.Security.SecurityException
@@ -154,12 +157,24 @@ Public Class Form1
             d2.Arguments = d2.Arguments & argSndBkg & " "
         End If
 
-        Me.Hide()                           'hide window, so that it doesn't look like it doesn't respond anymore
+        Const argWideScreen As String = "-widescreen"
+        If widescreenChk.Checked = True And d2.Arguments.IndexOf(argWideScreen) = -1 Then
+            d2.Arguments = d2.Arguments & argWideScreen & " "
+        End If
+
+        Const argCpuFix As String = "-cpufix"
+        If cpufixChk.Checked = True And d2.Arguments.IndexOf(argCpuFix) = -1 Then
+            d2.Arguments = d2.Arguments & argCpuFix & " "
+        End If
+
         Dim p As New Process
         p.StartInfo = d2
         p.Start()
 
-        Me.Close()
+        If playCloseChk.Checked Then
+            Me.Hide() 'hide window, so that it doesn't look like it doesn't respond anymore
+            Me.Close()
+        End If
 
     End Sub
 
@@ -239,6 +254,7 @@ Public Class Form1
     Private Sub downloadcfg_Click(sender As Object, e As EventArgs) Handles downloadcfg.Click
         Dim thread As New Thread(AddressOf LootFilterDownloaderThread)
         thread.IsBackground = True
+        isUpdateClicked = True
         thread.Start()
     End Sub
 
@@ -273,8 +289,14 @@ Public Class Form1
             'dl.DownloadFile(url, name)
 
             Log("Successfully downloaded loot filter " & name & " from " & url)
-            Log("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
-            MsgBox("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
+
+            If isUpdateClicked Then
+                Log("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
+                MsgBox("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
+            End If
+
+
+            Global.Path_of_Diablo_Launcher.My.MySettings.Default.stringLootLink = url
         Catch ex As Exception
             Log("An error occured while downloading loot filter " & name & " from " & url)
         End Try
@@ -355,6 +377,19 @@ Public Class Form1
         Log("Searching for updates...")
 
         If Not cmd.NoUpdate Then
+
+            Dim p1() As Process
+            Dim p2() As Process
+            p1 = Process.GetProcessesByName("diablo2")
+            p2 = Process.GetProcessesByName("game")
+            If p1.Count > 0 Then
+                MsgBox("diablo2.exe is running, press ok to close this process and continue.")
+                p1(0).Kill()
+            ElseIf p2.Count > 0 Then
+                MsgBox("game.exe is running, press ok to close this process and continue.")
+                p2(0).Kill()
+            End If
+
             Dim file As String = "./tmp/files.xml"
 
             Dim xmlLink As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/files.xml"
@@ -466,6 +501,14 @@ Public Class Form1
         Else
             Log("Updates disabled!")
         End If
+
+        If autoLootChk.Checked Then
+            Dim thread As New Thread(AddressOf LootFilterDownloaderThread)
+            thread.IsBackground = True
+            isUpdateClicked = False
+            thread.Start()
+        End If
+
 
         SetText(playBtn, "Play")
         SetEnabled(playBtn, True)
@@ -628,4 +671,5 @@ Public Class Form1
             End Try
         Next
     End Sub
+
 End Class
