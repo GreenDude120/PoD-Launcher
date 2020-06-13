@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Threading
+Imports System.Timers
 Imports System.Diagnostics
 Imports System.ComponentModel
 
@@ -101,6 +102,10 @@ Public Class Form1
     End Sub
 
     Private Sub playBtn_Click(sender As Object, e As EventArgs) Handles playBtn.Click
+        With playBtn
+            .Enabled = False
+            .Refresh()
+        End With
 
         Dim d2 As New ProcessStartInfo
 
@@ -176,6 +181,27 @@ Public Class Form1
             Me.Close()
         End If
 
+        Const FiveHundredMillisecondInterval As Short = 500
+        Dim playButtonTimer As System.Timers.Timer = New System.Timers.Timer(FiveHundredMillisecondInterval)
+        AddHandler playButtonTimer.Elapsed, AddressOf AllowPlayButtonAfterDelay
+        playButtonTimer.AutoReset = True
+        playButtonTimer.Start()
+    End Sub
+
+    Private Sub AllowPlayButtonAfterDelay(sourceTimer As System.Timers.Timer, e As ElapsedEventArgs)
+        Const threeSeconds As Short = 3000
+        Static secondsSincePlayButtonWasPressed As Decimal = 500
+        Dim game() As Process
+        game = Process.GetProcessesByName("game")
+        If game.Count > 0 Or secondsSincePlayButtonWasPressed > threeSeconds Then
+            With playBtn
+                .Enabled = True
+                .Refresh()
+            End With
+            sourceTimer.Stop()
+        Else
+            secondsSincePlayButtonWasPressed += sourceTimer.Interval
+        End If
     End Sub
 
     'Private Sub DEP_Only_Click(sender As Object, e As EventArgs)
