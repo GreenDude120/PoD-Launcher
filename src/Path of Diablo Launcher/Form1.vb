@@ -121,6 +121,9 @@ Public Class Form1
             Me.Close()
         End Try
 
+        'run D2 as administrator
+        d2.Verb = "runas"
+
         If cmd.Passthrough Then
             d2.Arguments = cmd.PassthroughArgs
         Else
