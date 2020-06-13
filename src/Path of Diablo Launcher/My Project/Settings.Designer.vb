@@ -149,6 +149,66 @@ Namespace My
                 Me("chkboxSndBkg") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property chkboxWidescreen() As Boolean
+            Get
+                Return CType(Me("chkboxWidescreen"),Boolean)
+            End Get
+            Set
+                Me("chkboxWidescreen") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property chkboxCpufix() As Boolean
+            Get
+                Return CType(Me("chkboxCpufix"),Boolean)
+            End Get
+            Set
+                Me("chkboxCpufix") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property chkboxPlayClose() As Boolean
+            Get
+                Return CType(Me("chkboxPlayClose"),Boolean)
+            End Get
+            Set
+                Me("chkboxPlayClose") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property chkboxAutoUpdate() As Boolean
+            Get
+                Return CType(Me("chkboxAutoUpdate"),Boolean)
+            End Get
+            Set
+                Me("chkboxAutoUpdate") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property stringLootLink() As String
+            Get
+                Return CType(Me("stringLootLink"),String)
+            End Get
+            Set
+                Me("stringLootLink") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
