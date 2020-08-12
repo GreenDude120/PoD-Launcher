@@ -6,11 +6,9 @@
 	</file>
 	<file name="D2PoDClient.dll" crc="55B16A0C">
 		<link>https://d2.lc/D2PoDClient.dll</link>
-		<link>http://198.98.51.238:8080/public/D2PoDClient.dll</link>
 	</file>
 	<file name="pod.dll" crc="CCD77B3F">
 		<link>https://d2.lc/pod.dll</link>
-		<link>http://198.98.51.238:8080/public/pod.dll</link>
 	</file>
 	<file name="Path of Diablo Launcher.exe" crc="74AF2AC6" restartRequired="true">
 		<link>https://d2.lc/Path%20of%20Diablo%20Launcher.exe</link>
@@ -62,7 +60,6 @@
 	</file>
 	<file name="podws.dll" crc="C20857D4">
 		<link>https://d2.lc/podws.dll</link>
-		<link>http://198.98.51.238:8080/public/podws.dll</link>
 	</file>
 	<file name="D2MCPClient.dll" crc="82000E02">
 		<link>https://d2.lc/D2MCPClient.dll</link>
@@ -82,7 +79,6 @@
 	</file>
 	<file name="D2VidTst.exe" crc="703A2E45">
 		<link>https://d2.lc/D2VidTst.exe</link>
-		<link>http://198.98.51.238:8080/public/D2VidTst.exe</link>
 	</file>
 	<file name="D2Win.dll" crc="279F3311">
 		<link>https://d2.lc/D2Win.dll</link>
@@ -90,11 +86,9 @@
 	</file>
 	<file name="Diablo II.exe" crc="33D0D3EE">
 		<link>https://d2.lc/Diablo%20II.exe</link>
-		<link>http://198.98.51.238:8080/public/Diablo%20II.exe</link>
 	</file>
 	<file name="Fog.dll" crc="C4CB491F">>
 		<link>https://d2.lc/Fog.dll</link>
-		<link>http://198.98.51.238:8080/public/Fog.dll</link>
 	</file>
 	<file name="Game.exe" crc="B3D69C47">
 		<link>https://d2.lc/Game.exe</link>
@@ -102,11 +96,9 @@
 	</file>
 	<file name="ijl11.dll" crc="C00FE21D">
 		<link>https://d2.lc/ijl11.dll</link>
-		<link>http://198.98.51.238:8080/public/ijl11.dll</link>
 	</file>
 	<file name="item.filter">
 		<link>https://d2.lc/item.filter</link>
-		<link>http://198.98.51.238:8080/public/item.filter</link>
 	</file>
 	<file name="pod.cfg">
 		<link>https://d2.lc/pod.cfg</link>
@@ -114,7 +106,6 @@
 	</file>
 	<file name="SmackW32.dll" crc="614A9406">
 		<link>https://d2.lc/SmackW32.dll</link>
-		<link>http://198.98.51.238:8080/public/SmackW32.dll</link>
 	</file>
 	<file name="Storm.dll" crc="BDB6784E">
 		<link>https://d2.lc/Storm.dll</link>
@@ -126,11 +117,9 @@
 	</file>
 	<file name="license.md">
 		<link>https://pathofdiablo.com/license.md</link>
-		<link>http://198.98.51.238:8080/public/license.md</link>
 	</file>
 	<file name="binkw32.dll" crc="5934B4A7">
 		<link>https://d2.lc/binkw32.dll</link>
-		<link>http://198.98.51.238:8080/public/binkw32.dll</link>
 	</file>
 	<file name="Bnclient.dll" crc="49E0C339">
 		<link>https://d2.lc/Bnclient.dll</link>
@@ -154,10 +143,8 @@
 	</file>
 		<file name="carlzalph.dll">
 		<link>https://d2.lc/carlzalph.dll</link>
-		<link>http://198.98.51.238:8080/public/carlzalph.dll</link>
 	</file>
 	<file name="000DEP.bat">
 		<link>https://d2.lc/000DEP.bat</link>
-		<link>http://198.98.51.238:8080/public/000DEP.bat</link>
 	</file>
 </filelist>
