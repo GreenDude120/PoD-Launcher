@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <filelist>
 	<file name="patch_d2.mpq" crc="E592B59F" showDialog="true">
-		<link name="Download patch from Global-Discord-CDN-Server">https://cdn.discordapp.com/attachments/602662727961542696/743147203500966028/patch_d2.mpq</link>
+		<link name="Download patch from Global-Discord-CDN-Server">https://cdn.discordapp.com/attachments/602662727961542696/743164082269716610/patch_d2.mpq</link>
 		<link name="Download patch from Luxembourg-Download-Server">https://d2.lc/patch_d2.mpq</link>
 	</file>
 	<file name="D2PoDClient.dll" crc="8EE64F3D">
