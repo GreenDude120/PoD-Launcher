@@ -175,6 +175,11 @@ Public Class Form1
             d2.Arguments = d2.Arguments & argCpuFix & " "
         End If
 
+        Const argDdraw As String = "-ddraw"
+        If ddrawChk.Checked = True And d2.Arguments.IndexOf(argDdraw) = -1 Then
+            d2.Arguments = d2.Arguments & argDdraw & " "
+        End If
+
         Dim p As New Process
         p.StartInfo = d2
         p.Start()
@@ -248,6 +253,15 @@ Public Class Form1
     '    End Try
 
     'End Sub
+
+    Private Sub VideoMode_Changed(sender As Object, e As EventArgs) Handles ddrawChk.CheckedChanged, dfxChk.CheckedChanged, d3dChk.CheckedChanged
+        My.MySettings.Default.chkboxD3d = False
+        My.MySettings.Default.chkboxDdraw = False
+        My.MySettings.Default.chkbox3dfx = False
+        If (d3dChk.Checked) Then My.MySettings.Default.chkboxD3d = True
+        If (ddrawChk.Checked) Then My.MySettings.Default.chkboxDdraw = True
+        If (dfxChk.Checked) Then My.MySettings.Default.chkbox3dfx = True
+    End Sub
 
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
         System.Diagnostics.Process.Start("https://pathofdiablo.com/p/")
@@ -640,6 +654,14 @@ Public Class Form1
             Return 0
         End If
     End Function
+
+    Private Sub d3dChk_CheckedChanged(sender As Object, e As EventArgs) Handles d3dChk.CheckedChanged
+        If d3dChk.Checked Then
+            wChk.Visible = True
+        Else
+            wChk.Visible = False
+        End If
+    End Sub
 
     Private Sub advancedChk_CheckedChanged(sender As Object, e As EventArgs) Handles advancedChk.CheckedChanged
         If advancedChk.Checked Then
