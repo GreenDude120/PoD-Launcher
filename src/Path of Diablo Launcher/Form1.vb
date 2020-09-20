@@ -131,7 +131,7 @@ Public Class Form1
         End If
 
         Const argWindowed As String = "-w"
-        If wChk.Checked = True And d2.Arguments.IndexOf(argWindowed) = -1 Then
+        If d3dChk.Checked = True AndAlso wChk.Checked = True And d2.Arguments.IndexOf(argWindowed) = -1 Then
             d2.Arguments = d2.Arguments & argWindowed & " "
         End If
 
