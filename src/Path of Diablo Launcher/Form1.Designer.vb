@@ -31,14 +31,14 @@ Partial Class Form1
         Me.aspectChk = New System.Windows.Forms.CheckBox()
         Me.nsChk = New System.Windows.Forms.CheckBox()
         Me.dfxChk = New System.Windows.Forms.RadioButton()
-        Me.wChk = New System.Windows.Forms.CheckBox()
+        Me.wChk = New System.Windows.Forms.RadioButton()
         Me.advancedChk = New System.Windows.Forms.CheckBox()
         Me.directcbox = New System.Windows.Forms.CheckBox()
         Me.sndbkgChk = New System.Windows.Forms.CheckBox()
         Me.widescreenChk = New System.Windows.Forms.CheckBox()
         Me.cpufixChk = New System.Windows.Forms.CheckBox()
         Me.ddrawChk = New System.Windows.Forms.RadioButton()
-        Me.d3dChk = New System.Windows.Forms.RadioButton()
+        Me.vidTestChk = New System.Windows.Forms.RadioButton()
         Me.playCloseChk = New System.Windows.Forms.CheckBox()
         Me.autoLootChk = New System.Windows.Forms.CheckBox()
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
@@ -93,18 +93,18 @@ Partial Class Form1
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 3
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.skipChk, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.aspectChk, 2, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.nsChk, 2, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.dfxChk, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.wChk, 0, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.wChk, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.sndbkgChk, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.cpufixChk, 1, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.ddrawChk, 0, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.d3dChk, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.vidTestChk, 0, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.widescreenChk, 1, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.directcbox, 2, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.advancedChk, 2, 2)
@@ -171,7 +171,7 @@ Partial Class Form1
         Me.dfxChk.Name = "dfxChk"
         Me.dfxChk.Size = New System.Drawing.Size(49, 17)
         Me.dfxChk.TabIndex = 1
-        Me.dfxChk.Text = "-3dfx"
+        Me.dfxChk.Text = "-3dfx (Glide)"
         Me.ToolTip1.SetToolTip(Me.dfxChk, "VideoMode: Glide" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Must open glide-init.exe in PoD folder to configure glide settings")
         Me.dfxChk.UseVisualStyleBackColor = True
         '
@@ -179,17 +179,14 @@ Partial Class Form1
         '
         Me.wChk.AutoSize = True
         Me.wChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
-        Me.wChk.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.wChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxW", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.wChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.wChk.Location = New System.Drawing.Point(3, 3)
         Me.wChk.Name = "wChk"
         Me.wChk.Size = New System.Drawing.Size(37, 17)
         Me.wChk.TabIndex = 3
-        Me.wChk.Text = "-w"
-        Me.ToolTip1.SetToolTip(Me.wChk, "Run the game in windowed mode.")
+        Me.wChk.Text = "-w (Direct3D)"
+        Me.ToolTip1.SetToolTip(Me.wChk, "VideoMode: Direct3D" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Runs the game in windowed mode.")
         Me.wChk.UseVisualStyleBackColor = True
-        Me.wChk.Visible = False
         '
         'advancedChk
         '
@@ -263,18 +260,18 @@ Partial Class Form1
         Me.ToolTip1.SetToolTip(Me.cpufixChk, "Fix for cpu.")
         Me.cpufixChk.UseVisualStyleBackColor = True
         '
-        'd3dChk
+        'vidTestChk
         '
-        Me.d3dChk.AutoSize = True
-        Me.d3dChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxD3d
-        Me.d3dChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.d3dChk.Location = New System.Drawing.Point(3, 30)
-        Me.d3dChk.Name = "d3dChk"
-        Me.d3dChk.Size = New System.Drawing.Size(55, 17)
-        Me.d3dChk.TabIndex = 0
-        Me.d3dChk.Text = "-d3d"
-        Me.ToolTip1.SetToolTip(Me.d3dChk, "VideoMode: Direct 3D")
-        Me.d3dChk.UseVisualStyleBackColor = True
+        Me.vidTestChk.AutoSize = True
+        Me.vidTestChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxVidTest
+        Me.vidTestChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.vidTestChk.Location = New System.Drawing.Point(3, 30)
+        Me.vidTestChk.Name = "vidTestChk"
+        Me.vidTestChk.Size = New System.Drawing.Size(55, 17)
+        Me.vidTestChk.TabIndex = 0
+        Me.vidTestChk.Text = "D2VidTst Setting"
+        Me.ToolTip1.SetToolTip(Me.vidTestChk, "Use the config set by D2VidTst.exe")
+        Me.vidTestChk.UseVisualStyleBackColor = True
         '
         'ddrawChk
         '
@@ -285,8 +282,8 @@ Partial Class Form1
         Me.ddrawChk.Name = "ddrawChk"
         Me.ddrawChk.Size = New System.Drawing.Size(55, 17)
         Me.ddrawChk.TabIndex = 2
-        Me.ddrawChk.Text = "-ddraw"
-        Me.ToolTip1.SetToolTip(Me.ddrawChk, "VideoMode: Direct Draw")
+        Me.ddrawChk.Text = "-ddraw (DirectDraw)"
+        Me.ToolTip1.SetToolTip(Me.ddrawChk, "VideoMode: DirectDraw")
         Me.ddrawChk.UseVisualStyleBackColor = True
         '
         'playCloseChk
@@ -579,11 +576,11 @@ Partial Class Form1
     Friend WithEvents directcbox As System.Windows.Forms.CheckBox
     Friend WithEvents directChk As System.Windows.Forms.CheckBox
     Friend WithEvents skipChk As System.Windows.Forms.CheckBox
-    Friend WithEvents wChk As System.Windows.Forms.CheckBox
+    Friend WithEvents wChk As System.Windows.Forms.RadioButton
     Friend WithEvents widescreenChk As System.Windows.Forms.CheckBox
     Friend WithEvents cpufixChk As System.Windows.Forms.CheckBox
     Friend WithEvents ddrawChk As System.Windows.Forms.RadioButton
-    Friend WithEvents d3dChk As System.Windows.Forms.RadioButton
+    Friend WithEvents vidTestChk As System.Windows.Forms.RadioButton
     Friend WithEvents playCloseChk As System.Windows.Forms.CheckBox
     Friend WithEvents WebBrowser1 As WebBrowser
     Friend WithEvents Button1 As Button

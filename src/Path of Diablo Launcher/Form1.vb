@@ -131,7 +131,7 @@ Public Class Form1
         End If
 
         Const argWindowed As String = "-w"
-        If d3dChk.Checked = True AndAlso wChk.Checked = True And d2.Arguments.IndexOf(argWindowed) = -1 Then
+        If wChk.Checked = True And d2.Arguments.IndexOf(argWindowed) = -1 Then
             d2.Arguments = d2.Arguments & argWindowed & " "
         End If
 
@@ -254,11 +254,13 @@ Public Class Form1
 
     'End Sub
 
-    Private Sub VideoMode_Changed(sender As Object, e As EventArgs) Handles ddrawChk.CheckedChanged, dfxChk.CheckedChanged, d3dChk.CheckedChanged
-        My.MySettings.Default.chkboxD3d = False
+    Private Sub VideoMode_Changed(sender As Object, e As EventArgs) Handles ddrawChk.CheckedChanged, dfxChk.CheckedChanged, vidTestChk.CheckedChanged, wChk.CheckedChanged
+        My.MySettings.Default.chkboxW = False
+        My.MySettings.Default.chkboxVidTest = False
         My.MySettings.Default.chkboxDdraw = False
         My.MySettings.Default.chkbox3dfx = False
-        If (d3dChk.Checked) Then My.MySettings.Default.chkboxD3d = True
+        If (wChk.Checked) Then My.MySettings.Default.chkboxW = True
+        If (vidTestChk.Checked) Then My.MySettings.Default.chkboxVidTest = True
         If (ddrawChk.Checked) Then My.MySettings.Default.chkboxDdraw = True
         If (dfxChk.Checked) Then My.MySettings.Default.chkbox3dfx = True
     End Sub
@@ -654,14 +656,6 @@ Public Class Form1
             Return 0
         End If
     End Function
-
-    Private Sub d3dChk_CheckedChanged(sender As Object, e As EventArgs) Handles d3dChk.CheckedChanged
-        If d3dChk.Checked Then
-            wChk.Visible = True
-        Else
-            wChk.Visible = False
-        End If
-    End Sub
 
     Private Sub advancedChk_CheckedChanged(sender As Object, e As EventArgs) Handles advancedChk.CheckedChanged
         If advancedChk.Checked Then

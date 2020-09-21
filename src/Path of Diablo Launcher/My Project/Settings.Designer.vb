@@ -224,13 +224,13 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property chkboxD3d() As Boolean
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property chkboxVidTest() As Boolean
             Get
-                Return CType(Me("chkboxD3d"),Boolean)
+                Return CType(Me("chkboxVidTest"),Boolean)
             End Get
             Set
-                Me("chkboxD3d") = value
+                Me("chkboxVidTest") = value
             End Set
         End Property
     End Class
