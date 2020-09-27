@@ -265,6 +265,15 @@ Public Class Form1
         If (dfxChk.Checked) Then My.MySettings.Default.chkbox3dfx = True
     End Sub
 
+    Private Sub dfxConfigButton_Click(sender As Object, e As EventArgs) Handles dfxConfigButton.Click
+        Dim glideInit As New ProcessStartInfo
+        glideInit.FileName = "glide-init.exe"
+        glideInit.Verb = "runas" 'run as administrator
+        Dim p As New Process
+        p.StartInfo = glideInit
+        p.Start()
+    End Sub
+
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
         System.Diagnostics.Process.Start("https://pathofdiablo.com/p/")
     End Sub

@@ -31,6 +31,7 @@ Partial Class Form1
         Me.aspectChk = New System.Windows.Forms.CheckBox()
         Me.nsChk = New System.Windows.Forms.CheckBox()
         Me.dfxChk = New System.Windows.Forms.RadioButton()
+        Me.dfxConfigButton = New System.Windows.Forms.Button()
         Me.wChk = New System.Windows.Forms.RadioButton()
         Me.advancedChk = New System.Windows.Forms.CheckBox()
         Me.directcbox = New System.Windows.Forms.CheckBox()
@@ -92,19 +93,24 @@ Partial Class Form1
         '
         'TableLayoutPanel1
         '
-        Me.TableLayoutPanel1.ColumnCount = 3
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
+        Me.TableLayoutPanel1.ColumnCount = 4
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.skipChk, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.aspectChk, 2, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.nsChk, 2, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.nsChk, 3, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.dfxChk, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.dfxConfigButton, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.wChk, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.sndbkgChk, 1, 1)
+        Me.TableLayoutPanel1.SetColumnSpan(Me.wChk, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.sndbkgChk, 2, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.cpufixChk, 1, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.ddrawChk, 0, 2)
+        Me.TableLayoutPanel1.SetColumnSpan(Me.ddrawChk, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.vidTestChk, 0, 3)
+        Me.TableLayoutPanel1.SetColumnSpan(Me.vidTestChk, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.widescreenChk, 1, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.directcbox, 2, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.advancedChk, 2, 2)
@@ -172,8 +178,21 @@ Partial Class Form1
         Me.dfxChk.Size = New System.Drawing.Size(49, 17)
         Me.dfxChk.TabIndex = 1
         Me.dfxChk.Text = "-3dfx (Glide)"
-        Me.ToolTip1.SetToolTip(Me.dfxChk, "VideoMode: Glide" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Must open glide-init.exe in PoD folder to configure glide settings")
+        Me.ToolTip1.SetToolTip(Me.dfxChk, "VideoMode: Glide" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Click the cog icon to configure glide settings")
         Me.dfxChk.UseVisualStyleBackColor = True
+        '
+        'dfxConfigButton
+        '
+        Me.dfxConfigButton.FlatAppearance.BorderSize = 0
+        Me.dfxConfigButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.dfxConfigButton.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.dfxConfigButton.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.cog
+        Me.dfxConfigButton.ImageAlign = System.Drawing.ContentAlignment.BottomLeft
+        Me.dfxConfigButton.Name = "dfxConfigButton"
+        Me.dfxConfigButton.Size = New System.Drawing.Size(25, 20)
+        Me.dfxConfigButton.TabIndex = 1
+        Me.ToolTip1.SetToolTip(Me.dfxConfigButton, "Configure glide settings")
+        Me.dfxConfigButton.UseVisualStyleBackColor = True
         '
         'wChk
         '
@@ -571,6 +590,7 @@ Partial Class Form1
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents aspectChk As System.Windows.Forms.CheckBox
     Friend WithEvents dfxChk As System.Windows.Forms.RadioButton
+    Friend WithEvents dfxConfigButton As Button
     Friend WithEvents nsChk As System.Windows.Forms.CheckBox
     Friend WithEvents txtChk As System.Windows.Forms.CheckBox
     Friend WithEvents directcbox As System.Windows.Forms.CheckBox
