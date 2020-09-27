@@ -184,8 +184,8 @@ Partial Class Form1
         Me.wChk.Name = "wChk"
         Me.wChk.Size = New System.Drawing.Size(37, 17)
         Me.wChk.TabIndex = 3
-        Me.wChk.Text = "-w (Direct3D)"
-        Me.ToolTip1.SetToolTip(Me.wChk, "VideoMode: Direct3D" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Runs the game in windowed mode.")
+        Me.wChk.Text = "-w (GDI+)"
+        Me.ToolTip1.SetToolTip(Me.wChk, "VideoMode: GDI+" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Runs the game in windowed mode.")
         Me.wChk.UseVisualStyleBackColor = True
         '
         'advancedChk
