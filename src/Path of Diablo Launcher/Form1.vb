@@ -175,6 +175,11 @@ Public Class Form1
             d2.Arguments = d2.Arguments & argCpuFix & " "
         End If
 
+        Const argDdraw As String = "-ddraw"
+        If ddrawChk.Checked = True And d2.Arguments.IndexOf(argDdraw) = -1 Then
+            d2.Arguments = d2.Arguments & argDdraw & " "
+        End If
+
         Dim p As New Process
         p.StartInfo = d2
         p.Start()
@@ -248,6 +253,26 @@ Public Class Form1
     '    End Try
 
     'End Sub
+
+    Private Sub VideoMode_Changed(sender As Object, e As EventArgs) Handles ddrawChk.CheckedChanged, dfxChk.CheckedChanged, vidTestChk.CheckedChanged, wChk.CheckedChanged
+        My.MySettings.Default.chkboxW = False
+        My.MySettings.Default.chkboxVidTest = False
+        My.MySettings.Default.chkboxDdraw = False
+        My.MySettings.Default.chkbox3dfx = False
+        If (wChk.Checked) Then My.MySettings.Default.chkboxW = True
+        If (vidTestChk.Checked) Then My.MySettings.Default.chkboxVidTest = True
+        If (ddrawChk.Checked) Then My.MySettings.Default.chkboxDdraw = True
+        If (dfxChk.Checked) Then My.MySettings.Default.chkbox3dfx = True
+    End Sub
+
+    Private Sub dfxConfigButton_Click(sender As Object, e As EventArgs) Handles dfxConfigButton.Click
+        Dim glideInit As New ProcessStartInfo
+        glideInit.FileName = "glide-init.exe"
+        glideInit.Verb = "runas" 'run as administrator
+        Dim p As New Process
+        p.StartInfo = glideInit
+        p.Start()
+    End Sub
 
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
         System.Diagnostics.Process.Start("https://pathofdiablo.com/p/")
