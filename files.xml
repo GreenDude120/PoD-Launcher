@@ -164,7 +164,7 @@
 		<link>https://pathofdiablo.com/ddraw.ini</link>
 		<link>http://198.98.51.238:8080/public/ddraw.ini</link>
 	</file>
-	<file name="jinc2-sharper.glsl">
+	<file name="jinc2-sharper.glsl" crc="BC6EC0A0">
 		<link>https://pathofdiablo.com/jinc2-sharper.glsl</link>
 		<link>http://198.98.51.238:8080/public/jinc2-sharper.glsl</link>
 	</file>
