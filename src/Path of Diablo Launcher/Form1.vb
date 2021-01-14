@@ -424,6 +424,14 @@ Public Class Form1
     End Sub
 
     Private Sub UpdaterThread()
+        'Allow additional ssl connection protocols
+        Try
+            ServicePointManager.SecurityProtocol += SecurityProtocolType.Tls11
+            ServicePointManager.SecurityProtocol += SecurityProtocolType.Tls12
+            ServicePointManager.SecurityProtocol += 12288 'Tls 1.3 not available in the SecurityProtocolType enum
+        Catch ex As Exception
+            'Attempt to continue if protocol not available
+        End Try
 
         SetEnabled(playBtn, False)
         SetEnabled(downloadcfg, False)
