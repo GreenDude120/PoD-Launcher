@@ -455,18 +455,25 @@ Public Class Form1
             Dim file As String = "./tmp/files.xml"
 
             Dim xmlLink As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/files.xml"
+            Dim xmlLinkFallback As String = "https://d2.lc/files.xml"
             Dim dl As WebClient = New WebClient()
             Try
                 dl.DownloadFile(xmlLink, file)
             Catch ex As WebException
-                SetText(playBtn, "Error!")
-                If ex.Status = WebExceptionStatus.ProtocolError Then
-                    Dim res As HttpWebResponse = ex.Response
-                    Log("An error occurred checking for updates. HTTP error: " & res.StatusCode & " " & res.StatusDescription)
-                Else
-                    Log("An error occurred checking for updates. WebExceptionStatus: " & ex.Status.ToString())
-                End If
-                Exit Sub
+                'Use fallback url if github is down or client doesn't support tls 1.2
+                Log("Using fallback files.xml")
+                Try
+                    dl.DownloadFile(xmlLinkFallback, file)
+                Catch ex2 As WebException
+                    SetText(playBtn, "Error!")
+                    If ex2.Status = WebExceptionStatus.ProtocolError Then
+                        Dim res As HttpWebResponse = ex2.Response
+                        Log("An error occurred checking for updates. HTTP error: " & res.StatusCode & " " & res.StatusDescription)
+                    Else
+                        Log("An error occurred checking for updates. WebExceptionStatus: " & ex2.Status.ToString())
+                    End If
+                    Exit Sub
+                End Try
             Catch ex As Exception
                 SetText(playBtn, "Error!")
                 Log("An unexpected error occurred checking for updates. Please try again later.")
