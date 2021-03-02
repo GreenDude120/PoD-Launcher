@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <filelist>
-	<file name="patch_d2.mpq" crc="8C85EB03" showDialog="true">
+	<file name="patch_d2.mpq" crc="1B486516" showDialog="true">
 		<link name="Download patch from Global-Discord-CDN-Server">https://cdn.discordapp.com/attachments/602662727961542696/816340795841708062/patch_d2.mpq</link>
 	</file>
-	<file name="D2PoDClient.dll" crc="AA9C116F">
+	<file name="D2PoDClient.dll" crc="6514E607">
 		<link>https://d2.lc/D2PoDClient.dll</link>
 	</file>
 	<file name="pod.dll" crc="CCD77B3F">
