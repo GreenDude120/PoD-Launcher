@@ -57,7 +57,7 @@
 		<link>https://d2.lc/D2Launch.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Launch.dll</link>
 	</file>
-	<file name="podws.dll" crc="C20857D4">
+	<file name="podws.dll" crc="4C9F0498">
 		<link>https://d2.lc/podws.dll</link>
 		<link>http://198.98.51.238:8080/public/podws.dll</link>
 	</file>
