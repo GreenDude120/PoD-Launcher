@@ -10,9 +10,8 @@
 	<file name="pod.dll" crc="CCD77B3F">
 		<link>https://d2.lc/pod.dll</link>
 	</file>
-	<file name="Path of Diablo Launcher.exe" crc="8D1D3062" restartRequired="true">
-		<link>https://d2.lc/Path%20of%20Diablo%20Launcher.exe</link>
-		<link>https://pathofdiablo.com/Path%20of%20Diablo%20Launcher.exe</link>
+	<file name="Path of Diablo Launcher.exe" crc="D51D2AB9" restartRequired="true">
+		<link>https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/Path%20of%20Diablo%20Launcher.exe</link>
 	</file>	
 	<file name="D2Client.dll" crc="EAABD1BB">
 		<link>https://d2.lc/D2Client.dll</link>
