@@ -339,8 +339,7 @@ Public Class Form1
 
         Try
             Dim dl As WebClient = New WebClient()
-            dl.DownloadFile(url, "./" & name)
-            'dl.DownloadFile(url, name)
+            dl.DownloadFile(url, "./filter/" & name)
 
             Log("Successfully downloaded loot filter " & name & " from " & url)
 
