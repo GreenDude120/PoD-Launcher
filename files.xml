@@ -4,8 +4,8 @@
 		<link name="Download patch from Global-Discord-CDN-Server">https://cdn.discordapp.com/attachments/602662727961542696/817497680384622633/patch_d2.mpq</link>
 		<link name="Download patch from Luxembourg-Server">https://d2.lc/patch_d2.mpq</link>
 	</file>
-	<file name="D2PoDClient.dll" crc="3F11F4B4">
-		<link>https://cdn.discordapp.com/attachments/334985759146901507/818340437889908736/D2PoDClient.dll</link>
+	<file name="D2PoDClient.dll" crc="1D34305F">
+		<link>https://cdn.discordapp.com/attachments/334985759146901507/818645216168902717/D2PoDClient.dll</link>
 	</file>
 	<file name="pod.dll" crc="CCD77B3F">
 		<link>https://d2.lc/pod.dll</link>
