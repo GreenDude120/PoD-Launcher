@@ -149,16 +149,19 @@
 		<link>https://d2.lc/glide-readme.txt</link>
 		<link>https://pathofdiablo.com/glide-readme.txt</link>
 	</file>
-	<file name="ddraw.dll" crc="EB05FFF7">	
-		<link>https://pathofdiablo.com/ddraw.dll</link>
+	<file name="ddraw.dll" crc="BA968562">	
+		<link>https://d2.lc/ddraw.dll</link>
 	</file>	
 	<file name="ddraw.ini">	
 		<link>https://pathofdiablo.com/ddraw.ini</link>
 	</file>	
-	<file name="jinc2-sharper.glsl" crc="BC6EC0A0">	
+	<file name="jinc2-sharper.glsl">	
 		<link>https://pathofdiablo.com/jinc2-sharper.glsl</link>
 	</file>	
 	<file name="6xbrz.glsl">	
 		<link>https://pathofdiablo.com/6xbrz.glsl</link>
+	</file>
+	<file name="2xbr-hybrid-v5-gamma.glsl">	
+		<link>https://pathofdiablo.com/2xbr-hybrid-v5-gamma.glsl</link>
 	</file>
 </filelist>
