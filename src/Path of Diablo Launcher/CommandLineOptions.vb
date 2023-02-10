@@ -38,14 +38,12 @@
         End Get
     End Property
 
-
-
     Public Sub ScanCommandLine(ByRef args As String())
         For Each arg As String In args
             Select Case arg
-                Case "-no_update"
+                Case "-noupdate"
                     NoUpdate_ = True
-                Case "-start_on_update_success"
+                Case "-autostart"
                     StartOnUpdateSuccess_ = True
                 Case Else
                     Const lead As String = "-passthrough("
