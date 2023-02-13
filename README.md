@@ -1,5 +1,5 @@
 # Path-of-Diablo-Launcher
 A tool for downloading, updating and playing the Diablo II LoD Mod "Path of Diablo"
 
-![Screenshot:](https://user-images.githubusercontent.com/7547212/28561147-7dbdf476-711d-11e7-8478-28abbac36aa5.png)
+![Screenshot:](https://github.com/GreenDude120/PoD-Launcher/blob/5b9af00a7aad30b86150bf64d587667475ca284e/github.png)
 
