@@ -43,7 +43,7 @@
             Select Case arg
                 Case "-noupdate"
                     NoUpdate_ = True
-                Case "-autostart"
+                Case "-autoplay"
                     StartOnUpdateSuccess_ = True
                 Case Else
                     Const lead As String = "-passthrough("

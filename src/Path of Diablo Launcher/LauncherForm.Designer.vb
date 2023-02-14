@@ -29,6 +29,7 @@ Partial Class LauncherForm
         Me.ProgressBarDownload = New System.Windows.Forms.ProgressBar()
         Me.PanelBottom = New System.Windows.Forms.Panel()
         Me.ButtonDiscord = New System.Windows.Forms.Button()
+        Me.LabelDownloadStatus = New System.Windows.Forms.Label()
         Me.ButtonServerList = New System.Windows.Forms.Button()
         Me.ButtonRules = New System.Windows.Forms.Button()
         Me.ButtonWiki = New System.Windows.Forms.Button()
@@ -39,7 +40,7 @@ Partial Class LauncherForm
         Me.aspectChk = New System.Windows.Forms.CheckBox()
         Me.nsChk = New System.Windows.Forms.CheckBox()
         Me.dfxChk = New System.Windows.Forms.RadioButton()
-        Me.dfxConfigButton = New System.Windows.Forms.Button()
+        Me.ButtonGlideConfig = New System.Windows.Forms.Button()
         Me.wChk = New System.Windows.Forms.RadioButton()
         Me.sndbkgChk = New System.Windows.Forms.CheckBox()
         Me.cpufixChk = New System.Windows.Forms.CheckBox()
@@ -51,7 +52,7 @@ Partial Class LauncherForm
         Me.idsoundChk = New System.Windows.Forms.CheckBox()
         Me.ButtonSelectFilter = New System.Windows.Forms.Button()
         Me.CheckAutoUpdateFilter = New System.Windows.Forms.CheckBox()
-        Me.LabelDownloadStatus = New System.Windows.Forms.Label()
+        Me.ButtonDDrawConfig = New System.Windows.Forms.Button()
         Me.LauncherBanner = New System.Windows.Forms.PictureBox()
         Me.PanelMain = New System.Windows.Forms.Panel()
         Me.GroupBoxLaunchFlags = New System.Windows.Forms.GroupBox()
@@ -123,7 +124,7 @@ Partial Class LauncherForm
         Me.PanelBottom.Controls.Add(Me.ButtonDonate)
         Me.PanelBottom.Controls.Add(Me.CheckCloseOnPlay)
         Me.PanelBottom.Controls.Add(Me.ButtonReddit)
-        Me.PanelBottom.Location = New System.Drawing.Point(11, 516)
+        Me.PanelBottom.Location = New System.Drawing.Point(12, 512)
         Me.PanelBottom.Name = "PanelBottom"
         Me.PanelBottom.Size = New System.Drawing.Size(984, 94)
         Me.PanelBottom.TabIndex = 28
@@ -142,6 +143,18 @@ Partial Class LauncherForm
         Me.ButtonDiscord.TabIndex = 27
         Me.ButtonDiscord.Text = "Discord"
         Me.ButtonDiscord.UseVisualStyleBackColor = True
+        '
+        'LabelDownloadStatus
+        '
+        Me.LabelDownloadStatus.AutoSize = True
+        Me.LabelDownloadStatus.BackColor = System.Drawing.Color.Transparent
+        Me.LabelDownloadStatus.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.LabelDownloadStatus.Location = New System.Drawing.Point(3, 79)
+        Me.LabelDownloadStatus.Name = "LabelDownloadStatus"
+        Me.LabelDownloadStatus.Size = New System.Drawing.Size(88, 13)
+        Me.LabelDownloadStatus.TabIndex = 27
+        Me.LabelDownloadStatus.Text = "Download Status"
+        Me.LabelDownloadStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ButtonServerList
         '
@@ -224,7 +237,7 @@ Partial Class LauncherForm
         Me.skipChk.CheckState = System.Windows.Forms.CheckState.Checked
         Me.skipChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSkipToBnet", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.skipChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.skipChk.Location = New System.Drawing.Point(143, 3)
+        Me.skipChk.Location = New System.Drawing.Point(159, 3)
         Me.skipChk.Name = "skipChk"
         Me.skipChk.Size = New System.Drawing.Size(78, 17)
         Me.skipChk.TabIndex = 4
@@ -238,7 +251,7 @@ Partial Class LauncherForm
         Me.aspectChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxNoFixAspect
         Me.aspectChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxNoFixAspect", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.aspectChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.aspectChk.Location = New System.Drawing.Point(250, 3)
+        Me.aspectChk.Location = New System.Drawing.Point(259, 3)
         Me.aspectChk.Name = "aspectChk"
         Me.aspectChk.Size = New System.Drawing.Size(83, 17)
         Me.aspectChk.TabIndex = 8
@@ -253,7 +266,7 @@ Partial Class LauncherForm
         Me.nsChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxNs
         Me.nsChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxNs", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.nsChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.nsChk.Location = New System.Drawing.Point(250, 26)
+        Me.nsChk.Location = New System.Drawing.Point(259, 27)
         Me.nsChk.Name = "nsChk"
         Me.nsChk.Size = New System.Drawing.Size(40, 17)
         Me.nsChk.TabIndex = 9
@@ -266,7 +279,8 @@ Partial Class LauncherForm
         Me.dfxChk.AutoSize = True
         Me.dfxChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkbox3dfx
         Me.dfxChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.dfxChk.Location = New System.Drawing.Point(3, 26)
+        Me.dfxChk.Location = New System.Drawing.Point(3, 27)
+        Me.dfxChk.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
         Me.dfxChk.Name = "dfxChk"
         Me.dfxChk.Size = New System.Drawing.Size(81, 17)
         Me.dfxChk.TabIndex = 1
@@ -274,27 +288,27 @@ Partial Class LauncherForm
         Me.ToolTip1.SetToolTip(Me.dfxChk, "VideoMode: Glide" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Click the cog icon to configure glide settings")
         Me.dfxChk.UseVisualStyleBackColor = True
         '
-        'dfxConfigButton
+        'ButtonGlideConfig
         '
-        Me.dfxConfigButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.dfxConfigButton.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.dfxConfigButton.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.dfxConfigButton.FlatAppearance.BorderSize = 0
-        Me.dfxConfigButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.dfxConfigButton.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.dfxConfigButton.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.cog
-        Me.dfxConfigButton.Location = New System.Drawing.Point(123, 26)
-        Me.dfxConfigButton.Name = "dfxConfigButton"
-        Me.dfxConfigButton.Size = New System.Drawing.Size(14, 17)
-        Me.dfxConfigButton.TabIndex = 1
-        Me.ToolTip1.SetToolTip(Me.dfxConfigButton, "Configure glide settings")
-        Me.dfxConfigButton.UseVisualStyleBackColor = False
+        Me.ButtonGlideConfig.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.ButtonGlideConfig.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ButtonGlideConfig.Dock = System.Windows.Forms.DockStyle.Left
+        Me.ButtonGlideConfig.FlatAppearance.BorderSize = 0
+        Me.ButtonGlideConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonGlideConfig.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.ButtonGlideConfig.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.cog
+        Me.ButtonGlideConfig.Location = New System.Drawing.Point(91, 27)
+        Me.ButtonGlideConfig.Name = "ButtonGlideConfig"
+        Me.ButtonGlideConfig.Size = New System.Drawing.Size(14, 18)
+        Me.ButtonGlideConfig.TabIndex = 1
+        Me.ToolTip1.SetToolTip(Me.ButtonGlideConfig, "Configure glide settings")
+        Me.ButtonGlideConfig.UseVisualStyleBackColor = False
         '
         'wChk
         '
         Me.wChk.AutoSize = True
         Me.wChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
-        Me.TableLayoutConfigOptions.SetColumnSpan(Me.wChk, 2)
+        Me.TableLayoutConfigOptions.SetColumnSpan(Me.wChk, 3)
         Me.wChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.wChk.Location = New System.Drawing.Point(3, 3)
         Me.wChk.Name = "wChk"
@@ -311,7 +325,7 @@ Partial Class LauncherForm
         Me.sndbkgChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxSndBkg
         Me.sndbkgChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSndBkg", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.sndbkgChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.sndbkgChk.Location = New System.Drawing.Point(143, 26)
+        Me.sndbkgChk.Location = New System.Drawing.Point(159, 27)
         Me.sndbkgChk.Name = "sndbkgChk"
         Me.sndbkgChk.Size = New System.Drawing.Size(64, 17)
         Me.sndbkgChk.TabIndex = 5
@@ -326,7 +340,7 @@ Partial Class LauncherForm
         Me.cpufixChk.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cpufixChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxCpufix", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.cpufixChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.cpufixChk.Location = New System.Drawing.Point(143, 49)
+        Me.cpufixChk.Location = New System.Drawing.Point(159, 51)
         Me.cpufixChk.Name = "cpufixChk"
         Me.cpufixChk.Size = New System.Drawing.Size(57, 17)
         Me.cpufixChk.TabIndex = 6
@@ -340,21 +354,22 @@ Partial Class LauncherForm
         Me.ddrawChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxDdraw
         Me.TableLayoutConfigOptions.SetColumnSpan(Me.ddrawChk, 2)
         Me.ddrawChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.ddrawChk.Location = New System.Drawing.Point(3, 49)
+        Me.ddrawChk.Location = New System.Drawing.Point(3, 51)
+        Me.ddrawChk.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
         Me.ddrawChk.Name = "ddrawChk"
         Me.ddrawChk.Size = New System.Drawing.Size(119, 17)
         Me.ddrawChk.TabIndex = 2
         Me.ddrawChk.Text = "-ddraw (DirectDraw)"
-        Me.ToolTip1.SetToolTip(Me.ddrawChk, "VideoMode: DirectDraw")
+        Me.ToolTip1.SetToolTip(Me.ddrawChk, "VideoMode: DirectDraw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Click the cog icon to configure ddraw settings")
         Me.ddrawChk.UseVisualStyleBackColor = True
         '
         'vidTestChk
         '
         Me.vidTestChk.AutoSize = True
         Me.vidTestChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxVidTest
-        Me.TableLayoutConfigOptions.SetColumnSpan(Me.vidTestChk, 2)
+        Me.TableLayoutConfigOptions.SetColumnSpan(Me.vidTestChk, 3)
         Me.vidTestChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.vidTestChk.Location = New System.Drawing.Point(3, 72)
+        Me.vidTestChk.Location = New System.Drawing.Point(3, 75)
         Me.vidTestChk.Name = "vidTestChk"
         Me.vidTestChk.Size = New System.Drawing.Size(105, 17)
         Me.vidTestChk.TabIndex = 0
@@ -369,7 +384,7 @@ Partial Class LauncherForm
         Me.widescreenChk.CheckState = System.Windows.Forms.CheckState.Checked
         Me.widescreenChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxWidescreen", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.widescreenChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.widescreenChk.Location = New System.Drawing.Point(143, 72)
+        Me.widescreenChk.Location = New System.Drawing.Point(159, 75)
         Me.widescreenChk.Name = "widescreenChk"
         Me.widescreenChk.Size = New System.Drawing.Size(83, 17)
         Me.widescreenChk.TabIndex = 7
@@ -383,7 +398,7 @@ Partial Class LauncherForm
         Me.PTRchk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
         Me.PTRchk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxPTR", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.PTRchk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.PTRchk.Location = New System.Drawing.Point(143, 95)
+        Me.PTRchk.Location = New System.Drawing.Point(159, 99)
         Me.PTRchk.Name = "PTRchk"
         Me.PTRchk.Size = New System.Drawing.Size(41, 17)
         Me.PTRchk.TabIndex = 12
@@ -397,7 +412,7 @@ Partial Class LauncherForm
         Me.advancedChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxAdvanced
         Me.advancedChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxAdvanced", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.advancedChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.advancedChk.Location = New System.Drawing.Point(250, 72)
+        Me.advancedChk.Location = New System.Drawing.Point(259, 75)
         Me.advancedChk.Name = "advancedChk"
         Me.advancedChk.Size = New System.Drawing.Size(75, 17)
         Me.advancedChk.TabIndex = 10
@@ -411,7 +426,7 @@ Partial Class LauncherForm
         Me.idsoundChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
         Me.idsoundChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxIdSound", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.idsoundChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.idsoundChk.Location = New System.Drawing.Point(250, 49)
+        Me.idsoundChk.Location = New System.Drawing.Point(259, 51)
         Me.idsoundChk.Name = "idsoundChk"
         Me.idsoundChk.Size = New System.Drawing.Size(66, 17)
         Me.idsoundChk.TabIndex = 13
@@ -445,17 +460,21 @@ Partial Class LauncherForm
         Me.ToolTip1.SetToolTip(Me.CheckAutoUpdateFilter, "Update the loot filter when you open the game.")
         Me.CheckAutoUpdateFilter.UseVisualStyleBackColor = True
         '
-        'LabelDownloadStatus
+        'ButtonDDrawConfig
         '
-        Me.LabelDownloadStatus.AutoSize = True
-        Me.LabelDownloadStatus.BackColor = System.Drawing.Color.Transparent
-        Me.LabelDownloadStatus.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.LabelDownloadStatus.Location = New System.Drawing.Point(3, 79)
-        Me.LabelDownloadStatus.Name = "LabelDownloadStatus"
-        Me.LabelDownloadStatus.Size = New System.Drawing.Size(88, 13)
-        Me.LabelDownloadStatus.TabIndex = 27
-        Me.LabelDownloadStatus.Text = "Download Status"
-        Me.LabelDownloadStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ButtonDDrawConfig.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.ButtonDDrawConfig.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ButtonDDrawConfig.Dock = System.Windows.Forms.DockStyle.Left
+        Me.ButtonDDrawConfig.FlatAppearance.BorderSize = 0
+        Me.ButtonDDrawConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonDDrawConfig.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.ButtonDDrawConfig.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.cog
+        Me.ButtonDDrawConfig.Location = New System.Drawing.Point(125, 51)
+        Me.ButtonDDrawConfig.Name = "ButtonDDrawConfig"
+        Me.ButtonDDrawConfig.Size = New System.Drawing.Size(14, 18)
+        Me.ButtonDDrawConfig.TabIndex = 15
+        Me.ToolTip1.SetToolTip(Me.ButtonDDrawConfig, "Configure ddraw settings")
+        Me.ButtonDDrawConfig.UseVisualStyleBackColor = False
         '
         'LauncherBanner
         '
@@ -463,7 +482,7 @@ Partial Class LauncherForm
         Me.LauncherBanner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LauncherBanner.Cursor = System.Windows.Forms.Cursors.Hand
         Me.LauncherBanner.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.banner2
-        Me.LauncherBanner.Location = New System.Drawing.Point(11, 12)
+        Me.LauncherBanner.Location = New System.Drawing.Point(13, 14)
         Me.LauncherBanner.Name = "LauncherBanner"
         Me.LauncherBanner.Size = New System.Drawing.Size(984, 137)
         Me.LauncherBanner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -477,55 +496,56 @@ Partial Class LauncherForm
         Me.PanelMain.Controls.Add(Me.GroupBoxEventLog)
         Me.PanelMain.Controls.Add(Me.GroupBoxLootFilter)
         Me.PanelMain.Controls.Add(Me.WebBrowserNews)
-        Me.PanelMain.Location = New System.Drawing.Point(11, 155)
+        Me.PanelMain.Location = New System.Drawing.Point(13, 155)
         Me.PanelMain.Name = "PanelMain"
-        Me.PanelMain.Size = New System.Drawing.Size(984, 355)
+        Me.PanelMain.Size = New System.Drawing.Size(984, 351)
         Me.PanelMain.TabIndex = 29
         '
         'GroupBoxLaunchFlags
         '
-        Me.GroupBoxLaunchFlags.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.GroupBoxLaunchFlags.Controls.Add(Me.TableLayoutConfigOptions)
         Me.GroupBoxLaunchFlags.ForeColor = System.Drawing.Color.White
-        Me.GroupBoxLaunchFlags.Location = New System.Drawing.Point(616, 2)
+        Me.GroupBoxLaunchFlags.Location = New System.Drawing.Point(616, 0)
         Me.GroupBoxLaunchFlags.Name = "GroupBoxLaunchFlags"
-        Me.GroupBoxLaunchFlags.Size = New System.Drawing.Size(368, 133)
+        Me.GroupBoxLaunchFlags.Size = New System.Drawing.Size(368, 143)
         Me.GroupBoxLaunchFlags.TabIndex = 30
         Me.GroupBoxLaunchFlags.TabStop = False
         Me.GroupBoxLaunchFlags.Text = "Launch Flags"
         '
         'TableLayoutConfigOptions
         '
-        Me.TableLayoutConfigOptions.ColumnCount = 4
-        Me.TableLayoutConfigOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.97123!))
-        Me.TableLayoutConfigOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutConfigOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.01439!))
-        Me.TableLayoutConfigOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.01439!))
-        Me.TableLayoutConfigOptions.Controls.Add(Me.skipChk, 1, 0)
-        Me.TableLayoutConfigOptions.Controls.Add(Me.aspectChk, 2, 0)
-        Me.TableLayoutConfigOptions.Controls.Add(Me.nsChk, 3, 1)
+        Me.TableLayoutConfigOptions.ColumnCount = 5
+        Me.TableLayoutConfigOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutConfigOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 34.0!))
+        Me.TableLayoutConfigOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 34.0!))
+        Me.TableLayoutConfigOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutConfigOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutConfigOptions.Controls.Add(Me.skipChk, 2, 0)
+        Me.TableLayoutConfigOptions.Controls.Add(Me.aspectChk, 3, 0)
+        Me.TableLayoutConfigOptions.Controls.Add(Me.nsChk, 4, 1)
         Me.TableLayoutConfigOptions.Controls.Add(Me.dfxChk, 0, 1)
-        Me.TableLayoutConfigOptions.Controls.Add(Me.dfxConfigButton, 1, 1)
         Me.TableLayoutConfigOptions.Controls.Add(Me.wChk, 0, 0)
-        Me.TableLayoutConfigOptions.Controls.Add(Me.sndbkgChk, 2, 1)
-        Me.TableLayoutConfigOptions.Controls.Add(Me.cpufixChk, 1, 2)
+        Me.TableLayoutConfigOptions.Controls.Add(Me.sndbkgChk, 3, 1)
         Me.TableLayoutConfigOptions.Controls.Add(Me.ddrawChk, 0, 2)
         Me.TableLayoutConfigOptions.Controls.Add(Me.vidTestChk, 0, 3)
-        Me.TableLayoutConfigOptions.Controls.Add(Me.widescreenChk, 1, 3)
-        Me.TableLayoutConfigOptions.Controls.Add(Me.PTRchk, 2, 4)
-        Me.TableLayoutConfigOptions.Controls.Add(Me.directcbox, 3, 4)
-        Me.TableLayoutConfigOptions.Controls.Add(Me.advancedChk, 3, 3)
-        Me.TableLayoutConfigOptions.Controls.Add(Me.idsoundChk, 3, 2)
+        Me.TableLayoutConfigOptions.Controls.Add(Me.widescreenChk, 2, 3)
+        Me.TableLayoutConfigOptions.Controls.Add(Me.PTRchk, 3, 4)
+        Me.TableLayoutConfigOptions.Controls.Add(Me.directcbox, 4, 4)
+        Me.TableLayoutConfigOptions.Controls.Add(Me.advancedChk, 4, 3)
+        Me.TableLayoutConfigOptions.Controls.Add(Me.idsoundChk, 4, 2)
+        Me.TableLayoutConfigOptions.Controls.Add(Me.ButtonGlideConfig, 1, 1)
+        Me.TableLayoutConfigOptions.Controls.Add(Me.cpufixChk, 3, 2)
+        Me.TableLayoutConfigOptions.Controls.Add(Me.ButtonDDrawConfig, 2, 2)
         Me.TableLayoutConfigOptions.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize
         Me.TableLayoutConfigOptions.Location = New System.Drawing.Point(6, 17)
         Me.TableLayoutConfigOptions.Name = "TableLayoutConfigOptions"
         Me.TableLayoutConfigOptions.RowCount = 5
-        Me.TableLayoutConfigOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutConfigOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutConfigOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutConfigOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutConfigOptions.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutConfigOptions.Size = New System.Drawing.Size(356, 109)
+        Me.TableLayoutConfigOptions.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutConfigOptions.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutConfigOptions.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutConfigOptions.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutConfigOptions.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutConfigOptions.Size = New System.Drawing.Size(356, 120)
         Me.TableLayoutConfigOptions.TabIndex = 31
         '
         'directcbox
@@ -534,7 +554,7 @@ Partial Class LauncherForm
         Me.directcbox.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxDirect
         Me.directcbox.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxDirect", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.directcbox.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.directcbox.Location = New System.Drawing.Point(250, 95)
+        Me.directcbox.Location = New System.Drawing.Point(259, 99)
         Me.directcbox.Name = "directcbox"
         Me.directcbox.Size = New System.Drawing.Size(55, 17)
         Me.directcbox.TabIndex = 11
@@ -544,12 +564,13 @@ Partial Class LauncherForm
         '
         'GroupBoxEventLog
         '
-        Me.GroupBoxEventLog.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.GroupBoxEventLog.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.GroupBoxEventLog.Controls.Add(Me.LogBoxEventLog)
         Me.GroupBoxEventLog.ForeColor = System.Drawing.Color.White
-        Me.GroupBoxEventLog.Location = New System.Drawing.Point(616, 227)
+        Me.GroupBoxEventLog.Location = New System.Drawing.Point(616, 234)
         Me.GroupBoxEventLog.Name = "GroupBoxEventLog"
-        Me.GroupBoxEventLog.Size = New System.Drawing.Size(368, 125)
+        Me.GroupBoxEventLog.Size = New System.Drawing.Size(368, 114)
         Me.GroupBoxEventLog.TabIndex = 33
         Me.GroupBoxEventLog.TabStop = False
         Me.GroupBoxEventLog.Text = "Event Log"
@@ -564,21 +585,20 @@ Partial Class LauncherForm
         Me.LogBoxEventLog.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.LogBoxEventLog.FormattingEnabled = True
         Me.LogBoxEventLog.HorizontalScrollbar = True
-        Me.LogBoxEventLog.Location = New System.Drawing.Point(6, 14)
+        Me.LogBoxEventLog.Location = New System.Drawing.Point(6, 19)
         Me.LogBoxEventLog.Name = "LogBoxEventLog"
-        Me.LogBoxEventLog.Size = New System.Drawing.Size(356, 104)
+        Me.LogBoxEventLog.Size = New System.Drawing.Size(356, 91)
         Me.LogBoxEventLog.TabIndex = 0
         '
         'GroupBoxLootFilter
         '
-        Me.GroupBoxLootFilter.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.GroupBoxLootFilter.Controls.Add(Me.ButtonSelectFilter)
         Me.GroupBoxLootFilter.Controls.Add(Me.LabelLootFilterURL)
         Me.GroupBoxLootFilter.Controls.Add(Me.TextBoxLootFilterURL)
         Me.GroupBoxLootFilter.Controls.Add(Me.ButtonDownloadFilter)
         Me.GroupBoxLootFilter.Controls.Add(Me.CheckAutoUpdateFilter)
         Me.GroupBoxLootFilter.ForeColor = System.Drawing.Color.White
-        Me.GroupBoxLootFilter.Location = New System.Drawing.Point(616, 141)
+        Me.GroupBoxLootFilter.Location = New System.Drawing.Point(616, 149)
         Me.GroupBoxLootFilter.Name = "GroupBoxLootFilter"
         Me.GroupBoxLootFilter.Size = New System.Drawing.Size(368, 79)
         Me.GroupBoxLootFilter.TabIndex = 32
@@ -628,7 +648,7 @@ Partial Class LauncherForm
         Me.WebBrowserNews.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowserNews.Name = "WebBrowserNews"
         Me.WebBrowserNews.ScriptErrorsSuppressed = True
-        Me.WebBrowserNews.Size = New System.Drawing.Size(609, 350)
+        Me.WebBrowserNews.Size = New System.Drawing.Size(609, 346)
         Me.WebBrowserNews.TabIndex = 31
         Me.WebBrowserNews.Url = New System.Uri("https://pathofdiablo.com/p/?getnewsembed", System.UriKind.Absolute)
         '
@@ -637,7 +657,7 @@ Partial Class LauncherForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(39, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1006, 611)
+        Me.ClientSize = New System.Drawing.Size(1009, 610)
         Me.Controls.Add(Me.PanelMain)
         Me.Controls.Add(Me.LauncherBanner)
         Me.Controls.Add(Me.PanelBottom)
@@ -683,7 +703,7 @@ Partial Class LauncherForm
     Friend WithEvents aspectChk As CheckBox
     Friend WithEvents nsChk As CheckBox
     Friend WithEvents dfxChk As RadioButton
-    Friend WithEvents dfxConfigButton As Button
+    Friend WithEvents ButtonGlideConfig As Button
     Friend WithEvents wChk As RadioButton
     Friend WithEvents sndbkgChk As CheckBox
     Friend WithEvents cpufixChk As CheckBox
@@ -703,4 +723,5 @@ Partial Class LauncherForm
     Friend WithEvents ButtonDownloadFilter As Button
     Friend WithEvents CheckAutoUpdateFilter As CheckBox
     Friend WithEvents WebBrowserNews As WebBrowser
+    Friend WithEvents ButtonDDrawConfig As Button
 End Class

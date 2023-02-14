@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="chkboxW" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="chkboxSkipToBnet" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -45,6 +45,12 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="chkboxVidTest" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="chkboxIdSound" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="chkboxPTR" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

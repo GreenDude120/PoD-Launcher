@@ -320,7 +320,7 @@ Public Class LauncherForm
         If (dfxChk.Checked) Then My.MySettings.Default.chkbox3dfx = True
     End Sub
 
-    Private Sub dfxConfigButton_Click(sender As Object, e As EventArgs)
+    Private Sub dfxConfigButton_Click(sender As Object, e As EventArgs) Handles ButtonGlideConfig.Click
         Dim glideInit As New ProcessStartInfo
         glideInit.FileName = "glide-init.exe"
         glideInit.Verb = "runas" 'run as administrator
@@ -333,38 +333,38 @@ Public Class LauncherForm
         End Try
     End Sub
 
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles LauncherBanner.Click
+    Private Sub Banner_Click(sender As Object, e As EventArgs) Handles LauncherBanner.Click
         Process.Start("https://pathofdiablo.com/p/")
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles ButtonDonate.Click
+    Private Sub Donate_Click(sender As Object, e As EventArgs) Handles ButtonDonate.Click
         Process.Start("https://pathofdiablo.com/donate")
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles ButtonReddit.Click
+    Private Sub Reddit_Click(sender As Object, e As EventArgs) Handles ButtonReddit.Click
         Process.Start("https://www.reddit.com/r/pathofdiablo")
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles ButtonWiki.Click
+    Private Sub Wiki_Click(sender As Object, e As EventArgs) Handles ButtonWiki.Click
         Process.Start("https://pathofdiablo.com/wiki")
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles ButtonRules.Click
+    Private Sub Rules_Click(sender As Object, e As EventArgs) Handles ButtonRules.Click
         Process.Start("https://pathofdiablo.com/rules")
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles ButtonServerList.Click
+    Private Sub ServerList_Click(sender As Object, e As EventArgs) Handles ButtonServerList.Click
         Process.Start("https://pathofdiablo.com/servers")
     End Sub
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles ButtonDiscord.Click
+    Private Sub Discord_Click(sender As Object, e As EventArgs) Handles ButtonDiscord.Click
         Process.Start("https://discordapp.com/invite/0cUlOSBTPbtjahc5")
     End Sub
 
-    Private Sub filterlibBtn_Click(sender As Object, e As EventArgs)
+    Private Sub SelectFilter_Click(sender As Object, e As EventArgs) Handles ButtonSelectFilter.Click
         Process.Start("https://pathofdiablo.com/filters")
     End Sub
 
-    Private Sub downloadcfg_Click(sender As Object, e As EventArgs)
+    Private Sub dDownloadFilter_Click(sender As Object, e As EventArgs) Handles ButtonDownloadFilter.Click
         Dim thread As New Thread(AddressOf LootFilterDownloaderThread)
         thread.IsBackground = True
         isUpdateClicked = True
@@ -892,7 +892,7 @@ Public Class LauncherForm
 
     End Function
 
-    Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+    Private Sub Form_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         'clear "tmp" on exit
         For Each file As String In My.Computer.FileSystem.GetFiles("./tmp/", FileIO.SearchOption.SearchAllSubDirectories, "*.*")
             Try
@@ -903,11 +903,26 @@ Public Class LauncherForm
         Next
     End Sub
 
-    Private Sub advancedChk_CheckedChanged_1(sender As Object, e As EventArgs) Handles advancedChk.CheckedChanged
+    Private Sub advancedChk_CheckedChanged(sender As Object, e As EventArgs) Handles advancedChk.CheckedChanged
         If advancedChk.Checked Then
             directcbox.Visible = True
         Else
             directcbox.Visible = False
         End If
+    End Sub
+
+    Private Sub ButtonDDrawConfig_Click(sender As Object, e As EventArgs) Handles ButtonDDrawConfig.Click
+        Dim ddrawIni As New ProcessStartInfo
+        ddrawIni.FileName = "notepad.exe"
+        ddrawIni.Arguments = "ddraw.ini"
+        ddrawIni.UseShellExecute = True
+        ddrawIni.Verb = "runas" 'run as administrator
+        Dim p As New Process
+        p.StartInfo = ddrawIni
+        Try
+            p.Start()
+        Catch ex As Exception
+            MessageBox.Show("Unable to open ddraw.ini", "Path of Diablo Launcher", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 End Class
