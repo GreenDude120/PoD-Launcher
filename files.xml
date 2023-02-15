@@ -167,7 +167,7 @@
 	<file name="2xbr-hybrid-v5-gamma.glsl" crc="A1D844F6">
 		<link>https://pathofdiablo.com/2xbr-hybrid-v5-gamma.glsl</link>
 	</file>
-	<file name="dsound.dll">	
+	<file name="idsound.dll">	
 		<link>https://d2.lc/dsound.dll</link>
 	</file>	
 	<file name="dsound.ini">	
