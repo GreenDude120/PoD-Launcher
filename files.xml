@@ -168,7 +168,7 @@
 		<link>https://pathofdiablo.com/2xbr-hybrid-v5-gamma.glsl</link>
 	</file>
 	<file name="idsound.dll">	
-		<link>https://d2.lc/dsound.dll</link>
+		<link>https://d2.lc/idsound.dll</link>
 	</file>	
 	<file name="dsound.ini">	
 		<link>https://d2.lc/dsound.ini</link>
