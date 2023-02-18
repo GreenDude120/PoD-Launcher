@@ -13,7 +13,7 @@
 	<file name="pod.dll" crc="CCD77B3F">
 		<link>https://d2.lc/pod.dll</link>
 	</file>
-	<file name="Path of Diablo Launcher.exe" crc="5DFF64CC" restartRequired="true">
+	<file name="Path of Diablo Launcher.exe" crc="19F7BA07" restartRequired="true">
 		<link>https://d2.lc/Path%20of%20Diablo%20Launcher.exe</link>
 	</file>	
 	<file name="D2Client.dll" crc="EAABD1BB">
@@ -167,8 +167,8 @@
 	<file name="2xbr-hybrid-v5-gamma.glsl" crc="A1D844F6">
 		<link>https://pathofdiablo.com/2xbr-hybrid-v5-gamma.glsl</link>
 	</file>
-	<file name="dsound.dll">	
-		<link>https://d2.lc/dsound.dll</link>
+	<file name="idsound.dll">	
+		<link>https://d2.lc/idsound.dll</link>
 	</file>	
 	<file name="dsound.ini">	
 		<link>https://d2.lc/dsound.ini</link>
