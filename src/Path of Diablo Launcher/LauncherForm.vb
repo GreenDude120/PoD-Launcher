@@ -176,7 +176,7 @@ Public Class LauncherForm
         End If
 
         Const argWindowed As String = "-w"
-        If wChk.Checked = True And d2.Arguments.IndexOf(argWindowed) = -1 Then
+        If radioGDI.Checked = True And d2.Arguments.IndexOf(argWindowed) = -1 Then
             d2.Arguments = d2.Arguments & argWindowed & " "
         End If
 
@@ -191,7 +191,7 @@ Public Class LauncherForm
         End If
 
         Const argGlide As String = "-3dfx"
-        If dfxChk.Checked = True And d2.Arguments.IndexOf(argGlide) = -1 Then
+        If radio3DFX.Checked = True And d2.Arguments.IndexOf(argGlide) = -1 Then
             d2.Arguments = d2.Arguments & argGlide & " "
         End If
 
@@ -221,7 +221,7 @@ Public Class LauncherForm
         End If
 
         Const argDdraw As String = "-ddraw"
-        If ddrawChk.Checked = True And d2.Arguments.IndexOf(argDdraw) = -1 Then
+        If radioDDraw.Checked = True And d2.Arguments.IndexOf(argDdraw) = -1 Then
             d2.Arguments = d2.Arguments & argDdraw & " "
         End If
 
@@ -309,15 +309,15 @@ Public Class LauncherForm
 
     'End Sub
 
-    Private Sub VideoMode_Changed(sender As Object, e As EventArgs)
+    Private Sub VideoMode_Changed(sender As Object, e As EventArgs) Handles radio3DFX.CheckedChanged, radioDDraw.CheckedChanged, radioGDI.CheckedChanged, radioVidTest.CheckedChanged
         My.MySettings.Default.chkboxW = False
         My.MySettings.Default.chkboxVidTest = False
         My.MySettings.Default.chkboxDdraw = False
         My.MySettings.Default.chkbox3dfx = False
-        If (wChk.Checked) Then My.MySettings.Default.chkboxW = True
-        If (vidTestChk.Checked) Then My.MySettings.Default.chkboxVidTest = True
-        If (ddrawChk.Checked) Then My.MySettings.Default.chkboxDdraw = True
-        If (dfxChk.Checked) Then My.MySettings.Default.chkbox3dfx = True
+        If (radioGDI.Checked) Then My.MySettings.Default.chkboxW = True
+        If (radioVidTest.Checked) Then My.MySettings.Default.chkboxVidTest = True
+        If (radioDDraw.Checked) Then My.MySettings.Default.chkboxDdraw = True
+        If (radio3DFX.Checked) Then My.MySettings.Default.chkbox3dfx = True
     End Sub
 
     Private Sub dfxConfigButton_Click(sender As Object, e As EventArgs) Handles ButtonGlideConfig.Click
