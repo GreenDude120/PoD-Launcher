@@ -200,6 +200,11 @@ Public Class LauncherForm
             d2.Arguments = d2.Arguments & argDirect & " "
         End If
 
+        Const argD2GL As String = "-d2gl"
+        If radioD2GL.Checked = True And d2.Arguments.IndexOf(argD2GL) = -1 Then
+            d2.Arguments = d2.Arguments & argD2GL & " "
+        End If
+
         Const argNoFixAspect As String = "-nofixaspect"
         If aspectChk.Checked = True And d2.Arguments.IndexOf(argNoFixAspect) = -1 Then
             d2.Arguments = d2.Arguments & argNoFixAspect & " "
@@ -314,10 +319,12 @@ Public Class LauncherForm
         My.MySettings.Default.chkboxVidTest = False
         My.MySettings.Default.chkboxDdraw = False
         My.MySettings.Default.chkbox3dfx = False
+        My.MySettings.Default.chkboxD2GL = False
         If (radioGDI.Checked) Then My.MySettings.Default.chkboxW = True
         If (radioVidTest.Checked) Then My.MySettings.Default.chkboxVidTest = True
         If (radioDDraw.Checked) Then My.MySettings.Default.chkboxDdraw = True
         If (radio3DFX.Checked) Then My.MySettings.Default.chkbox3dfx = True
+        If (radioD2GL.Checked) Then My.MySettings.Default.chkboxD2GL = True
     End Sub
 
     Private Sub dfxConfigButton_Click(sender As Object, e As EventArgs) Handles ButtonGlideConfig.Click

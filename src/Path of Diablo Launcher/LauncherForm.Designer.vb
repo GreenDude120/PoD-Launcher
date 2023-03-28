@@ -40,17 +40,6 @@ Partial Class LauncherForm
         Me.ButtonSelectFilter = New System.Windows.Forms.Button()
         Me.CheckAutoUpdateFilter = New System.Windows.Forms.CheckBox()
         Me.ButtonDDrawConfig = New System.Windows.Forms.Button()
-        Me.LauncherBanner = New System.Windows.Forms.PictureBox()
-        Me.PanelMain = New System.Windows.Forms.Panel()
-        Me.GroupBoxLaunchFlags = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutConfigOptions = New System.Windows.Forms.TableLayoutPanel()
-        Me.GroupBoxEventLog = New System.Windows.Forms.GroupBox()
-        Me.LogBoxEventLog = New System.Windows.Forms.ListBox()
-        Me.GroupBoxLootFilter = New System.Windows.Forms.GroupBox()
-        Me.LabelLootFilterURL = New System.Windows.Forms.Label()
-        Me.TextBoxLootFilterURL = New System.Windows.Forms.TextBox()
-        Me.ButtonDownloadFilter = New System.Windows.Forms.Button()
-        Me.WebBrowserNews = New System.Windows.Forms.WebBrowser()
         Me.skipChk = New System.Windows.Forms.CheckBox()
         Me.aspectChk = New System.Windows.Forms.CheckBox()
         Me.nsChk = New System.Windows.Forms.CheckBox()
@@ -61,10 +50,22 @@ Partial Class LauncherForm
         Me.radioVidTest = New System.Windows.Forms.RadioButton()
         Me.widescreenChk = New System.Windows.Forms.CheckBox()
         Me.PTRchk = New System.Windows.Forms.CheckBox()
-        Me.directcbox = New System.Windows.Forms.CheckBox()
         Me.advancedChk = New System.Windows.Forms.CheckBox()
         Me.idsoundChk = New System.Windows.Forms.CheckBox()
         Me.cpufixChk = New System.Windows.Forms.CheckBox()
+        Me.LauncherBanner = New System.Windows.Forms.PictureBox()
+        Me.PanelMain = New System.Windows.Forms.Panel()
+        Me.GroupBoxLaunchFlags = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutConfigOptions = New System.Windows.Forms.TableLayoutPanel()
+        Me.directcbox = New System.Windows.Forms.CheckBox()
+        Me.GroupBoxEventLog = New System.Windows.Forms.GroupBox()
+        Me.LogBoxEventLog = New System.Windows.Forms.ListBox()
+        Me.GroupBoxLootFilter = New System.Windows.Forms.GroupBox()
+        Me.LabelLootFilterURL = New System.Windows.Forms.Label()
+        Me.TextBoxLootFilterURL = New System.Windows.Forms.TextBox()
+        Me.ButtonDownloadFilter = New System.Windows.Forms.Button()
+        Me.WebBrowserNews = New System.Windows.Forms.WebBrowser()
+        Me.radioD2GL = New System.Windows.Forms.RadioButton()
         Me.PanelBottom.SuspendLayout()
         CType(Me.LauncherBanner, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelMain.SuspendLayout()
@@ -240,7 +241,7 @@ Partial Class LauncherForm
         Me.ButtonGlideConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonGlideConfig.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.ButtonGlideConfig.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.cog
-        Me.ButtonGlideConfig.Location = New System.Drawing.Point(91, 27)
+        Me.ButtonGlideConfig.Location = New System.Drawing.Point(123, 27)
         Me.ButtonGlideConfig.Name = "ButtonGlideConfig"
         Me.ButtonGlideConfig.Size = New System.Drawing.Size(14, 18)
         Me.ButtonGlideConfig.TabIndex = 1
@@ -282,12 +283,199 @@ Partial Class LauncherForm
         Me.ButtonDDrawConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonDDrawConfig.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.ButtonDDrawConfig.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.cog
-        Me.ButtonDDrawConfig.Location = New System.Drawing.Point(125, 51)
+        Me.ButtonDDrawConfig.Location = New System.Drawing.Point(157, 51)
         Me.ButtonDDrawConfig.Name = "ButtonDDrawConfig"
         Me.ButtonDDrawConfig.Size = New System.Drawing.Size(14, 18)
         Me.ButtonDDrawConfig.TabIndex = 15
         Me.ToolTip1.SetToolTip(Me.ButtonDDrawConfig, "Configure ddraw settings")
         Me.ButtonDDrawConfig.UseVisualStyleBackColor = False
+        '
+        'skipChk
+        '
+        Me.skipChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxSkipToBnet
+        Me.skipChk.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.skipChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSkipToBnet", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.skipChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.skipChk.Location = New System.Drawing.Point(191, 3)
+        Me.skipChk.Name = "skipChk"
+        Me.skipChk.Size = New System.Drawing.Size(78, 17)
+        Me.skipChk.TabIndex = 4
+        Me.skipChk.Text = "-skiptobnet"
+        Me.ToolTip1.SetToolTip(Me.skipChk, "Game opens straight into online multiplayer & skips cutscenes")
+        Me.skipChk.UseVisualStyleBackColor = True
+        '
+        'aspectChk
+        '
+        Me.aspectChk.AutoSize = True
+        Me.aspectChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxNoFixAspect
+        Me.aspectChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxNoFixAspect", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.aspectChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.aspectChk.Location = New System.Drawing.Point(275, 3)
+        Me.aspectChk.Name = "aspectChk"
+        Me.aspectChk.Size = New System.Drawing.Size(78, 17)
+        Me.aspectChk.TabIndex = 8
+        Me.aspectChk.Text = "-nofixaspect"
+        Me.ToolTip1.SetToolTip(Me.aspectChk, "Window will stretch to whatever aspect ratio you use," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "instead of keeing the 4:3 " &
+        "aspect ratio.")
+        Me.aspectChk.UseVisualStyleBackColor = True
+        '
+        'nsChk
+        '
+        Me.nsChk.AutoSize = True
+        Me.nsChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxNs
+        Me.nsChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxNs", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.nsChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.nsChk.Location = New System.Drawing.Point(275, 27)
+        Me.nsChk.Name = "nsChk"
+        Me.nsChk.Size = New System.Drawing.Size(40, 17)
+        Me.nsChk.TabIndex = 9
+        Me.nsChk.Text = "-ns"
+        Me.ToolTip1.SetToolTip(Me.nsChk, "Disables the in-game sound.")
+        Me.nsChk.UseVisualStyleBackColor = True
+        '
+        'radio3DFX
+        '
+        Me.radio3DFX.AutoSize = True
+        Me.radio3DFX.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkbox3dfx
+        Me.radio3DFX.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.radio3DFX.Location = New System.Drawing.Point(3, 27)
+        Me.radio3DFX.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
+        Me.radio3DFX.Name = "radio3DFX"
+        Me.radio3DFX.Size = New System.Drawing.Size(81, 17)
+        Me.radio3DFX.TabIndex = 1
+        Me.radio3DFX.Text = "-3dfx (Glide)"
+        Me.ToolTip1.SetToolTip(Me.radio3DFX, "VideoMode: Glide" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Click the cog icon to configure glide settings")
+        Me.radio3DFX.UseVisualStyleBackColor = True
+        '
+        'radioGDI
+        '
+        Me.radioGDI.AutoSize = True
+        Me.radioGDI.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
+        Me.TableLayoutConfigOptions.SetColumnSpan(Me.radioGDI, 3)
+        Me.radioGDI.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.radioGDI.Location = New System.Drawing.Point(3, 3)
+        Me.radioGDI.Name = "radioGDI"
+        Me.radioGDI.Size = New System.Drawing.Size(70, 17)
+        Me.radioGDI.TabIndex = 3
+        Me.radioGDI.TabStop = True
+        Me.radioGDI.Text = "-w (GDI+)"
+        Me.ToolTip1.SetToolTip(Me.radioGDI, "VideoMode: GDI+" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Runs the game in windowed mode.")
+        Me.radioGDI.UseVisualStyleBackColor = True
+        '
+        'sndbkgChk
+        '
+        Me.sndbkgChk.AutoSize = True
+        Me.sndbkgChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxSndBkg
+        Me.sndbkgChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSndBkg", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.sndbkgChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.sndbkgChk.Location = New System.Drawing.Point(191, 27)
+        Me.sndbkgChk.Name = "sndbkgChk"
+        Me.sndbkgChk.Size = New System.Drawing.Size(64, 17)
+        Me.sndbkgChk.TabIndex = 5
+        Me.sndbkgChk.Text = "-sndbkg"
+        Me.ToolTip1.SetToolTip(Me.sndbkgChk, "Enables game sounds even when game is minimized.")
+        Me.sndbkgChk.UseVisualStyleBackColor = True
+        '
+        'radioDDraw
+        '
+        Me.radioDDraw.AutoSize = True
+        Me.radioDDraw.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxDdraw
+        Me.TableLayoutConfigOptions.SetColumnSpan(Me.radioDDraw, 2)
+        Me.radioDDraw.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.radioDDraw.Location = New System.Drawing.Point(3, 51)
+        Me.radioDDraw.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
+        Me.radioDDraw.Name = "radioDDraw"
+        Me.radioDDraw.Size = New System.Drawing.Size(119, 17)
+        Me.radioDDraw.TabIndex = 2
+        Me.radioDDraw.Text = "-ddraw (DirectDraw)"
+        Me.ToolTip1.SetToolTip(Me.radioDDraw, "VideoMode: DirectDraw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Click the cog icon to configure ddraw settings")
+        Me.radioDDraw.UseVisualStyleBackColor = True
+        '
+        'radioVidTest
+        '
+        Me.radioVidTest.AutoSize = True
+        Me.radioVidTest.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxVidTest
+        Me.TableLayoutConfigOptions.SetColumnSpan(Me.radioVidTest, 3)
+        Me.radioVidTest.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.radioVidTest.Location = New System.Drawing.Point(3, 75)
+        Me.radioVidTest.Name = "radioVidTest"
+        Me.radioVidTest.Size = New System.Drawing.Size(105, 17)
+        Me.radioVidTest.TabIndex = 0
+        Me.radioVidTest.Text = "D2VidTst Setting"
+        Me.ToolTip1.SetToolTip(Me.radioVidTest, "Use the config set by D2VidTst.exe")
+        Me.radioVidTest.UseVisualStyleBackColor = True
+        '
+        'widescreenChk
+        '
+        Me.widescreenChk.AutoSize = True
+        Me.widescreenChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
+        Me.widescreenChk.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.widescreenChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxWidescreen", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.widescreenChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.widescreenChk.Location = New System.Drawing.Point(191, 75)
+        Me.widescreenChk.Name = "widescreenChk"
+        Me.widescreenChk.Size = New System.Drawing.Size(78, 17)
+        Me.widescreenChk.TabIndex = 7
+        Me.widescreenChk.Text = "-widescreen"
+        Me.ToolTip1.SetToolTip(Me.widescreenChk, "Run the game in wide screen mode.")
+        Me.widescreenChk.UseVisualStyleBackColor = True
+        '
+        'PTRchk
+        '
+        Me.PTRchk.AutoSize = True
+        Me.PTRchk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
+        Me.PTRchk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxPTR", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.PTRchk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.PTRchk.Location = New System.Drawing.Point(191, 99)
+        Me.PTRchk.Name = "PTRchk"
+        Me.PTRchk.Size = New System.Drawing.Size(41, 17)
+        Me.PTRchk.TabIndex = 12
+        Me.PTRchk.Text = "-ptr"
+        Me.ToolTip1.SetToolTip(Me.PTRchk, "Connect to the Public Test Realm.")
+        Me.PTRchk.UseVisualStyleBackColor = True
+        '
+        'advancedChk
+        '
+        Me.advancedChk.AutoSize = True
+        Me.advancedChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxAdvanced
+        Me.advancedChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxAdvanced", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.advancedChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.advancedChk.Location = New System.Drawing.Point(275, 75)
+        Me.advancedChk.Name = "advancedChk"
+        Me.advancedChk.Size = New System.Drawing.Size(75, 17)
+        Me.advancedChk.TabIndex = 10
+        Me.advancedChk.Text = "Advanced"
+        Me.ToolTip1.SetToolTip(Me.advancedChk, "Show advanced options." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Use at your own risk!")
+        Me.advancedChk.UseVisualStyleBackColor = True
+        '
+        'idsoundChk
+        '
+        Me.idsoundChk.AutoSize = True
+        Me.idsoundChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
+        Me.idsoundChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxIdSound", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.idsoundChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.idsoundChk.Location = New System.Drawing.Point(275, 51)
+        Me.idsoundChk.Name = "idsoundChk"
+        Me.idsoundChk.Size = New System.Drawing.Size(66, 17)
+        Me.idsoundChk.TabIndex = 13
+        Me.idsoundChk.Text = "-idsound"
+        Me.ToolTip1.SetToolTip(Me.idsoundChk, "Run the game with IndirectSound.")
+        Me.idsoundChk.UseVisualStyleBackColor = True
+        '
+        'cpufixChk
+        '
+        Me.cpufixChk.AutoSize = True
+        Me.cpufixChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
+        Me.cpufixChk.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cpufixChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxCpufix", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.cpufixChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.cpufixChk.Location = New System.Drawing.Point(191, 51)
+        Me.cpufixChk.Name = "cpufixChk"
+        Me.cpufixChk.Size = New System.Drawing.Size(57, 17)
+        Me.cpufixChk.TabIndex = 6
+        Me.cpufixChk.Text = "-cpufix"
+        Me.ToolTip1.SetToolTip(Me.cpufixChk, "Fix for cpu.")
+        Me.cpufixChk.UseVisualStyleBackColor = True
         '
         'LauncherBanner
         '
@@ -349,6 +537,7 @@ Partial Class LauncherForm
         Me.TableLayoutConfigOptions.Controls.Add(Me.ButtonGlideConfig, 1, 1)
         Me.TableLayoutConfigOptions.Controls.Add(Me.cpufixChk, 3, 2)
         Me.TableLayoutConfigOptions.Controls.Add(Me.ButtonDDrawConfig, 2, 2)
+        Me.TableLayoutConfigOptions.Controls.Add(Me.radioD2GL, 0, 4)
         Me.TableLayoutConfigOptions.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize
         Me.TableLayoutConfigOptions.Location = New System.Drawing.Point(6, 17)
         Me.TableLayoutConfigOptions.Name = "TableLayoutConfigOptions"
@@ -360,6 +549,20 @@ Partial Class LauncherForm
         Me.TableLayoutConfigOptions.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
         Me.TableLayoutConfigOptions.Size = New System.Drawing.Size(356, 120)
         Me.TableLayoutConfigOptions.TabIndex = 31
+        '
+        'directcbox
+        '
+        Me.directcbox.AutoSize = True
+        Me.directcbox.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxDirect
+        Me.directcbox.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxDirect", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.directcbox.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.directcbox.Location = New System.Drawing.Point(275, 99)
+        Me.directcbox.Name = "directcbox"
+        Me.directcbox.Size = New System.Drawing.Size(55, 17)
+        Me.directcbox.TabIndex = 11
+        Me.directcbox.Text = "-direct"
+        Me.directcbox.UseVisualStyleBackColor = True
+        Me.directcbox.Visible = False
         '
         'GroupBoxEventLog
         '
@@ -451,206 +654,20 @@ Partial Class LauncherForm
         Me.WebBrowserNews.TabIndex = 31
         Me.WebBrowserNews.Url = New System.Uri("https://pathofdiablo.com/p/?getnewsembed", System.UriKind.Absolute)
         '
-        'skipChk
+        'radioD2GL
         '
-        Me.skipChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxSkipToBnet
-        Me.skipChk.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.skipChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSkipToBnet", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.skipChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.skipChk.Location = New System.Drawing.Point(159, 3)
-        Me.skipChk.Name = "skipChk"
-        Me.skipChk.Size = New System.Drawing.Size(78, 17)
-        Me.skipChk.TabIndex = 4
-        Me.skipChk.Text = "-skiptobnet"
-        Me.ToolTip1.SetToolTip(Me.skipChk, "Game opens straight into online multiplayer & skips cutscenes")
-        Me.skipChk.UseVisualStyleBackColor = True
-        '
-        'aspectChk
-        '
-        Me.aspectChk.AutoSize = True
-        Me.aspectChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxNoFixAspect
-        Me.aspectChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxNoFixAspect", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.aspectChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.aspectChk.Location = New System.Drawing.Point(259, 3)
-        Me.aspectChk.Name = "aspectChk"
-        Me.aspectChk.Size = New System.Drawing.Size(83, 17)
-        Me.aspectChk.TabIndex = 8
-        Me.aspectChk.Text = "-nofixaspect"
-        Me.ToolTip1.SetToolTip(Me.aspectChk, "Window will stretch to whatever aspect ratio you use," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "instead of keeing the 4:3 " &
-        "aspect ratio.")
-        Me.aspectChk.UseVisualStyleBackColor = True
-        '
-        'nsChk
-        '
-        Me.nsChk.AutoSize = True
-        Me.nsChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxNs
-        Me.nsChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxNs", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.nsChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.nsChk.Location = New System.Drawing.Point(259, 27)
-        Me.nsChk.Name = "nsChk"
-        Me.nsChk.Size = New System.Drawing.Size(40, 17)
-        Me.nsChk.TabIndex = 9
-        Me.nsChk.Text = "-ns"
-        Me.ToolTip1.SetToolTip(Me.nsChk, "Disables the in-game sound.")
-        Me.nsChk.UseVisualStyleBackColor = True
-        '
-        'radio3DFX
-        '
-        Me.radio3DFX.AutoSize = True
-        Me.radio3DFX.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkbox3dfx
-        Me.radio3DFX.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.radio3DFX.Location = New System.Drawing.Point(3, 27)
-        Me.radio3DFX.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
-        Me.radio3DFX.Name = "radio3DFX"
-        Me.radio3DFX.Size = New System.Drawing.Size(81, 17)
-        Me.radio3DFX.TabIndex = 1
-        Me.radio3DFX.Text = "-3dfx (Glide)"
-        Me.ToolTip1.SetToolTip(Me.radio3DFX, "VideoMode: Glide" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Click the cog icon to configure glide settings")
-        Me.radio3DFX.UseVisualStyleBackColor = True
-        '
-        'radioGDI
-        '
-        Me.radioGDI.AutoSize = True
-        Me.radioGDI.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
-        Me.TableLayoutConfigOptions.SetColumnSpan(Me.radioGDI, 3)
-        Me.radioGDI.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.radioGDI.Location = New System.Drawing.Point(3, 3)
-        Me.radioGDI.Name = "radioGDI"
-        Me.radioGDI.Size = New System.Drawing.Size(70, 17)
-        Me.radioGDI.TabIndex = 3
-        Me.radioGDI.TabStop = True
-        Me.radioGDI.Text = "-w (GDI+)"
-        Me.ToolTip1.SetToolTip(Me.radioGDI, "VideoMode: GDI+" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Runs the game in windowed mode.")
-        Me.radioGDI.UseVisualStyleBackColor = True
-        '
-        'sndbkgChk
-        '
-        Me.sndbkgChk.AutoSize = True
-        Me.sndbkgChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxSndBkg
-        Me.sndbkgChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSndBkg", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.sndbkgChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.sndbkgChk.Location = New System.Drawing.Point(159, 27)
-        Me.sndbkgChk.Name = "sndbkgChk"
-        Me.sndbkgChk.Size = New System.Drawing.Size(64, 17)
-        Me.sndbkgChk.TabIndex = 5
-        Me.sndbkgChk.Text = "-sndbkg"
-        Me.ToolTip1.SetToolTip(Me.sndbkgChk, "Enables game sounds even when game is minimized.")
-        Me.sndbkgChk.UseVisualStyleBackColor = True
-        '
-        'radioDDraw
-        '
-        Me.radioDDraw.AutoSize = True
-        Me.radioDDraw.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxDdraw
-        Me.TableLayoutConfigOptions.SetColumnSpan(Me.radioDDraw, 2)
-        Me.radioDDraw.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.radioDDraw.Location = New System.Drawing.Point(3, 51)
-        Me.radioDDraw.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
-        Me.radioDDraw.Name = "radioDDraw"
-        Me.radioDDraw.Size = New System.Drawing.Size(119, 17)
-        Me.radioDDraw.TabIndex = 2
-        Me.radioDDraw.Text = "-ddraw (DirectDraw)"
-        Me.ToolTip1.SetToolTip(Me.radioDDraw, "VideoMode: DirectDraw" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Click the cog icon to configure ddraw settings")
-        Me.radioDDraw.UseVisualStyleBackColor = True
-        '
-        'radioVidTest
-        '
-        Me.radioVidTest.AutoSize = True
-        Me.radioVidTest.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxVidTest
-        Me.TableLayoutConfigOptions.SetColumnSpan(Me.radioVidTest, 3)
-        Me.radioVidTest.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.radioVidTest.Location = New System.Drawing.Point(3, 75)
-        Me.radioVidTest.Name = "radioVidTest"
-        Me.radioVidTest.Size = New System.Drawing.Size(105, 17)
-        Me.radioVidTest.TabIndex = 0
-        Me.radioVidTest.Text = "D2VidTst Setting"
-        Me.ToolTip1.SetToolTip(Me.radioVidTest, "Use the config set by D2VidTst.exe")
-        Me.radioVidTest.UseVisualStyleBackColor = True
-        '
-        'widescreenChk
-        '
-        Me.widescreenChk.AutoSize = True
-        Me.widescreenChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
-        Me.widescreenChk.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.widescreenChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxWidescreen", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.widescreenChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.widescreenChk.Location = New System.Drawing.Point(159, 75)
-        Me.widescreenChk.Name = "widescreenChk"
-        Me.widescreenChk.Size = New System.Drawing.Size(83, 17)
-        Me.widescreenChk.TabIndex = 7
-        Me.widescreenChk.Text = "-widescreen"
-        Me.ToolTip1.SetToolTip(Me.widescreenChk, "Run the game in wide screen mode.")
-        Me.widescreenChk.UseVisualStyleBackColor = True
-        '
-        'PTRchk
-        '
-        Me.PTRchk.AutoSize = True
-        Me.PTRchk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
-        Me.PTRchk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxPTR", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.PTRchk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.PTRchk.Location = New System.Drawing.Point(159, 99)
-        Me.PTRchk.Name = "PTRchk"
-        Me.PTRchk.Size = New System.Drawing.Size(41, 17)
-        Me.PTRchk.TabIndex = 12
-        Me.PTRchk.Text = "-ptr"
-        Me.ToolTip1.SetToolTip(Me.PTRchk, "Connect to the Public Test Realm.")
-        Me.PTRchk.UseVisualStyleBackColor = True
-        '
-        'directcbox
-        '
-        Me.directcbox.AutoSize = True
-        Me.directcbox.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxDirect
-        Me.directcbox.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxDirect", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.directcbox.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.directcbox.Location = New System.Drawing.Point(259, 99)
-        Me.directcbox.Name = "directcbox"
-        Me.directcbox.Size = New System.Drawing.Size(55, 17)
-        Me.directcbox.TabIndex = 11
-        Me.directcbox.Text = "-direct"
-        Me.directcbox.UseVisualStyleBackColor = True
-        Me.directcbox.Visible = False
-        '
-        'advancedChk
-        '
-        Me.advancedChk.AutoSize = True
-        Me.advancedChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxAdvanced
-        Me.advancedChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxAdvanced", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.advancedChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.advancedChk.Location = New System.Drawing.Point(259, 75)
-        Me.advancedChk.Name = "advancedChk"
-        Me.advancedChk.Size = New System.Drawing.Size(75, 17)
-        Me.advancedChk.TabIndex = 10
-        Me.advancedChk.Text = "Advanced"
-        Me.ToolTip1.SetToolTip(Me.advancedChk, "Show advanced options." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Use at your own risk!")
-        Me.advancedChk.UseVisualStyleBackColor = True
-        '
-        'idsoundChk
-        '
-        Me.idsoundChk.AutoSize = True
-        Me.idsoundChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
-        Me.idsoundChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxIdSound", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.idsoundChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.idsoundChk.Location = New System.Drawing.Point(259, 51)
-        Me.idsoundChk.Name = "idsoundChk"
-        Me.idsoundChk.Size = New System.Drawing.Size(66, 17)
-        Me.idsoundChk.TabIndex = 13
-        Me.idsoundChk.Text = "-idsound"
-        Me.ToolTip1.SetToolTip(Me.idsoundChk, "Run the game with IndirectSound.")
-        Me.idsoundChk.UseVisualStyleBackColor = True
-        '
-        'cpufixChk
-        '
-        Me.cpufixChk.AutoSize = True
-        Me.cpufixChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
-        Me.cpufixChk.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.cpufixChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxCpufix", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.cpufixChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.cpufixChk.Location = New System.Drawing.Point(159, 51)
-        Me.cpufixChk.Name = "cpufixChk"
-        Me.cpufixChk.Size = New System.Drawing.Size(57, 17)
-        Me.cpufixChk.TabIndex = 6
-        Me.cpufixChk.Text = "-cpufix"
-        Me.ToolTip1.SetToolTip(Me.cpufixChk, "Fix for cpu.")
-        Me.cpufixChk.UseVisualStyleBackColor = True
+        Me.radioD2GL.AutoSize = True
+        Me.radioD2GL.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkbox3dfx
+        Me.radioD2GL.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.radioD2GL.Location = New System.Drawing.Point(3, 99)
+        Me.radioD2GL.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
+        Me.radioD2GL.Name = "radioD2GL"
+        Me.radioD2GL.Size = New System.Drawing.Size(117, 17)
+        Me.radioD2GL.TabIndex = 16
+        Me.radioD2GL.Text = "-d2gl (Experimental)"
+        Me.ToolTip1.SetToolTip(Me.radioD2GL, "VideoMode: D2GL Glide" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Configure via Ctrl+O in-game." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WARNING: This mode is exper" &
+        "imental, requires OpenGL 3.3 support." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
+        Me.radioD2GL.UseVisualStyleBackColor = True
         '
         'LauncherForm
         '
@@ -724,4 +741,5 @@ Partial Class LauncherForm
     Friend WithEvents CheckAutoUpdateFilter As CheckBox
     Friend WithEvents WebBrowserNews As WebBrowser
     Friend WithEvents ButtonDDrawConfig As Button
+    Friend WithEvents radioD2GL As RadioButton
 End Class
