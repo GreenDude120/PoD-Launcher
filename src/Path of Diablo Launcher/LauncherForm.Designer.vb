@@ -40,7 +40,6 @@ Partial Class LauncherForm
         Me.ButtonSelectFilter = New System.Windows.Forms.Button()
         Me.CheckAutoUpdateFilter = New System.Windows.Forms.CheckBox()
         Me.ButtonDDrawConfig = New System.Windows.Forms.Button()
-        Me.skipChk = New System.Windows.Forms.CheckBox()
         Me.aspectChk = New System.Windows.Forms.CheckBox()
         Me.nsChk = New System.Windows.Forms.CheckBox()
         Me.radio3DFX = New System.Windows.Forms.RadioButton()
@@ -53,6 +52,9 @@ Partial Class LauncherForm
         Me.advancedChk = New System.Windows.Forms.CheckBox()
         Me.idsoundChk = New System.Windows.Forms.CheckBox()
         Me.cpufixChk = New System.Windows.Forms.CheckBox()
+        Me.radioD2GL = New System.Windows.Forms.RadioButton()
+        Me.ButtonD2VidTestConfig = New System.Windows.Forms.Button()
+        Me.skipChk = New System.Windows.Forms.CheckBox()
         Me.LauncherBanner = New System.Windows.Forms.PictureBox()
         Me.PanelMain = New System.Windows.Forms.Panel()
         Me.GroupBoxLaunchFlags = New System.Windows.Forms.GroupBox()
@@ -65,7 +67,6 @@ Partial Class LauncherForm
         Me.TextBoxLootFilterURL = New System.Windows.Forms.TextBox()
         Me.ButtonDownloadFilter = New System.Windows.Forms.Button()
         Me.WebBrowserNews = New System.Windows.Forms.WebBrowser()
-        Me.radioD2GL = New System.Windows.Forms.RadioButton()
         Me.PanelBottom.SuspendLayout()
         CType(Me.LauncherBanner, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelMain.SuspendLayout()
@@ -241,7 +242,7 @@ Partial Class LauncherForm
         Me.ButtonGlideConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonGlideConfig.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.ButtonGlideConfig.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.cog
-        Me.ButtonGlideConfig.Location = New System.Drawing.Point(123, 27)
+        Me.ButtonGlideConfig.Location = New System.Drawing.Point(91, 27)
         Me.ButtonGlideConfig.Name = "ButtonGlideConfig"
         Me.ButtonGlideConfig.Size = New System.Drawing.Size(14, 18)
         Me.ButtonGlideConfig.TabIndex = 1
@@ -283,26 +284,12 @@ Partial Class LauncherForm
         Me.ButtonDDrawConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonDDrawConfig.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.ButtonDDrawConfig.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.cog
-        Me.ButtonDDrawConfig.Location = New System.Drawing.Point(157, 51)
+        Me.ButtonDDrawConfig.Location = New System.Drawing.Point(125, 51)
         Me.ButtonDDrawConfig.Name = "ButtonDDrawConfig"
         Me.ButtonDDrawConfig.Size = New System.Drawing.Size(14, 18)
         Me.ButtonDDrawConfig.TabIndex = 15
         Me.ToolTip1.SetToolTip(Me.ButtonDDrawConfig, "Configure ddraw settings")
         Me.ButtonDDrawConfig.UseVisualStyleBackColor = False
-        '
-        'skipChk
-        '
-        Me.skipChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxSkipToBnet
-        Me.skipChk.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.skipChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSkipToBnet", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.skipChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.skipChk.Location = New System.Drawing.Point(191, 3)
-        Me.skipChk.Name = "skipChk"
-        Me.skipChk.Size = New System.Drawing.Size(78, 17)
-        Me.skipChk.TabIndex = 4
-        Me.skipChk.Text = "-skiptobnet"
-        Me.ToolTip1.SetToolTip(Me.skipChk, "Game opens straight into online multiplayer & skips cutscenes")
-        Me.skipChk.UseVisualStyleBackColor = True
         '
         'aspectChk
         '
@@ -310,9 +297,9 @@ Partial Class LauncherForm
         Me.aspectChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxNoFixAspect
         Me.aspectChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxNoFixAspect", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.aspectChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.aspectChk.Location = New System.Drawing.Point(275, 3)
+        Me.aspectChk.Location = New System.Drawing.Point(259, 3)
         Me.aspectChk.Name = "aspectChk"
-        Me.aspectChk.Size = New System.Drawing.Size(78, 17)
+        Me.aspectChk.Size = New System.Drawing.Size(83, 17)
         Me.aspectChk.TabIndex = 8
         Me.aspectChk.Text = "-nofixaspect"
         Me.ToolTip1.SetToolTip(Me.aspectChk, "Window will stretch to whatever aspect ratio you use," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "instead of keeing the 4:3 " &
@@ -325,7 +312,7 @@ Partial Class LauncherForm
         Me.nsChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxNs
         Me.nsChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxNs", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.nsChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.nsChk.Location = New System.Drawing.Point(275, 27)
+        Me.nsChk.Location = New System.Drawing.Point(259, 27)
         Me.nsChk.Name = "nsChk"
         Me.nsChk.Size = New System.Drawing.Size(40, 17)
         Me.nsChk.TabIndex = 9
@@ -368,7 +355,7 @@ Partial Class LauncherForm
         Me.sndbkgChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxSndBkg
         Me.sndbkgChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSndBkg", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.sndbkgChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.sndbkgChk.Location = New System.Drawing.Point(191, 27)
+        Me.sndbkgChk.Location = New System.Drawing.Point(159, 27)
         Me.sndbkgChk.Name = "sndbkgChk"
         Me.sndbkgChk.Size = New System.Drawing.Size(64, 17)
         Me.sndbkgChk.TabIndex = 5
@@ -395,13 +382,13 @@ Partial Class LauncherForm
         '
         Me.radioVidTest.AutoSize = True
         Me.radioVidTest.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxVidTest
-        Me.TableLayoutConfigOptions.SetColumnSpan(Me.radioVidTest, 3)
+        Me.TableLayoutConfigOptions.SetColumnSpan(Me.radioVidTest, 2)
         Me.radioVidTest.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.radioVidTest.Location = New System.Drawing.Point(3, 75)
         Me.radioVidTest.Name = "radioVidTest"
-        Me.radioVidTest.Size = New System.Drawing.Size(105, 17)
+        Me.radioVidTest.Size = New System.Drawing.Size(111, 17)
         Me.radioVidTest.TabIndex = 0
-        Me.radioVidTest.Text = "D2VidTst Setting"
+        Me.radioVidTest.Text = "D2VidTest Setting"
         Me.ToolTip1.SetToolTip(Me.radioVidTest, "Use the config set by D2VidTst.exe")
         Me.radioVidTest.UseVisualStyleBackColor = True
         '
@@ -412,9 +399,9 @@ Partial Class LauncherForm
         Me.widescreenChk.CheckState = System.Windows.Forms.CheckState.Checked
         Me.widescreenChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxWidescreen", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.widescreenChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.widescreenChk.Location = New System.Drawing.Point(191, 75)
+        Me.widescreenChk.Location = New System.Drawing.Point(159, 75)
         Me.widescreenChk.Name = "widescreenChk"
-        Me.widescreenChk.Size = New System.Drawing.Size(78, 17)
+        Me.widescreenChk.Size = New System.Drawing.Size(83, 17)
         Me.widescreenChk.TabIndex = 7
         Me.widescreenChk.Text = "-widescreen"
         Me.ToolTip1.SetToolTip(Me.widescreenChk, "Run the game in wide screen mode.")
@@ -426,7 +413,7 @@ Partial Class LauncherForm
         Me.PTRchk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
         Me.PTRchk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxPTR", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.PTRchk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.PTRchk.Location = New System.Drawing.Point(191, 99)
+        Me.PTRchk.Location = New System.Drawing.Point(159, 99)
         Me.PTRchk.Name = "PTRchk"
         Me.PTRchk.Size = New System.Drawing.Size(41, 17)
         Me.PTRchk.TabIndex = 12
@@ -440,7 +427,7 @@ Partial Class LauncherForm
         Me.advancedChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxAdvanced
         Me.advancedChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxAdvanced", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.advancedChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.advancedChk.Location = New System.Drawing.Point(275, 75)
+        Me.advancedChk.Location = New System.Drawing.Point(259, 75)
         Me.advancedChk.Name = "advancedChk"
         Me.advancedChk.Size = New System.Drawing.Size(75, 17)
         Me.advancedChk.TabIndex = 10
@@ -454,7 +441,7 @@ Partial Class LauncherForm
         Me.idsoundChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxW
         Me.idsoundChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxIdSound", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.idsoundChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.idsoundChk.Location = New System.Drawing.Point(275, 51)
+        Me.idsoundChk.Location = New System.Drawing.Point(259, 51)
         Me.idsoundChk.Name = "idsoundChk"
         Me.idsoundChk.Size = New System.Drawing.Size(66, 17)
         Me.idsoundChk.TabIndex = 13
@@ -469,13 +456,60 @@ Partial Class LauncherForm
         Me.cpufixChk.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cpufixChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxCpufix", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.cpufixChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.cpufixChk.Location = New System.Drawing.Point(191, 51)
+        Me.cpufixChk.Location = New System.Drawing.Point(159, 51)
         Me.cpufixChk.Name = "cpufixChk"
         Me.cpufixChk.Size = New System.Drawing.Size(57, 17)
         Me.cpufixChk.TabIndex = 6
         Me.cpufixChk.Text = "-cpufix"
         Me.ToolTip1.SetToolTip(Me.cpufixChk, "Fix for cpu.")
         Me.cpufixChk.UseVisualStyleBackColor = True
+        '
+        'radioD2GL
+        '
+        Me.radioD2GL.AutoSize = True
+        Me.radioD2GL.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxD2GL
+        Me.TableLayoutConfigOptions.SetColumnSpan(Me.radioD2GL, 3)
+        Me.radioD2GL.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.radioD2GL.Location = New System.Drawing.Point(3, 99)
+        Me.radioD2GL.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
+        Me.radioD2GL.Name = "radioD2GL"
+        Me.radioD2GL.Size = New System.Drawing.Size(148, 17)
+        Me.radioD2GL.TabIndex = 16
+        Me.radioD2GL.Text = "-d2gl (D2GL Experimental)"
+        Me.ToolTip1.SetToolTip(Me.radioD2GL, "VideoMode: D2GL Glide" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Configure via Ctrl+O in-game." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WARNING: This mode is exper" &
+        "imental, requires OpenGL 3.3+ support." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
+        Me.radioD2GL.UseVisualStyleBackColor = True
+        '
+        'ButtonD2VidTestConfig
+        '
+        Me.ButtonD2VidTestConfig.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.ButtonD2VidTestConfig.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ButtonD2VidTestConfig.Dock = System.Windows.Forms.DockStyle.Left
+        Me.ButtonD2VidTestConfig.FlatAppearance.BorderSize = 0
+        Me.ButtonD2VidTestConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonD2VidTestConfig.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.ButtonD2VidTestConfig.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.cog
+        Me.ButtonD2VidTestConfig.Location = New System.Drawing.Point(125, 75)
+        Me.ButtonD2VidTestConfig.Name = "ButtonD2VidTestConfig"
+        Me.ButtonD2VidTestConfig.Size = New System.Drawing.Size(14, 18)
+        Me.ButtonD2VidTestConfig.TabIndex = 17
+        Me.ToolTip1.SetToolTip(Me.ButtonD2VidTestConfig, "Configure D2VidTest settings")
+        Me.ButtonD2VidTestConfig.UseVisualStyleBackColor = False
+        '
+        'skipChk
+        '
+        Me.skipChk.AutoSize = True
+        Me.skipChk.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxSkipToBnet
+        Me.skipChk.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.skipChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSkipToBnet", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.skipChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.skipChk.Location = New System.Drawing.Point(159, 3)
+        Me.skipChk.Name = "skipChk"
+        Me.skipChk.Size = New System.Drawing.Size(78, 17)
+        Me.skipChk.TabIndex = 4
+        Me.skipChk.Text = "-skiptobnet"
+        Me.ToolTip1.SetToolTip(Me.skipChk, "Game opens straight into online multiplayer & skips cutscenes")
+        Me.skipChk.UseVisualStyleBackColor = True
         '
         'LauncherBanner
         '
@@ -521,7 +555,8 @@ Partial Class LauncherForm
         Me.TableLayoutConfigOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 34.0!))
         Me.TableLayoutConfigOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutConfigOptions.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutConfigOptions.Controls.Add(Me.skipChk, 2, 0)
+        Me.TableLayoutConfigOptions.Controls.Add(Me.ButtonD2VidTestConfig, 2, 3)
+        Me.TableLayoutConfigOptions.Controls.Add(Me.skipChk, 1, 0)
         Me.TableLayoutConfigOptions.Controls.Add(Me.aspectChk, 3, 0)
         Me.TableLayoutConfigOptions.Controls.Add(Me.nsChk, 4, 1)
         Me.TableLayoutConfigOptions.Controls.Add(Me.radio3DFX, 0, 1)
@@ -529,7 +564,7 @@ Partial Class LauncherForm
         Me.TableLayoutConfigOptions.Controls.Add(Me.sndbkgChk, 3, 1)
         Me.TableLayoutConfigOptions.Controls.Add(Me.radioDDraw, 0, 2)
         Me.TableLayoutConfigOptions.Controls.Add(Me.radioVidTest, 0, 3)
-        Me.TableLayoutConfigOptions.Controls.Add(Me.widescreenChk, 2, 3)
+        Me.TableLayoutConfigOptions.Controls.Add(Me.widescreenChk, 3, 3)
         Me.TableLayoutConfigOptions.Controls.Add(Me.PTRchk, 3, 4)
         Me.TableLayoutConfigOptions.Controls.Add(Me.directcbox, 4, 4)
         Me.TableLayoutConfigOptions.Controls.Add(Me.advancedChk, 4, 3)
@@ -556,7 +591,7 @@ Partial Class LauncherForm
         Me.directcbox.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxDirect
         Me.directcbox.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxDirect", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.directcbox.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.directcbox.Location = New System.Drawing.Point(275, 99)
+        Me.directcbox.Location = New System.Drawing.Point(259, 99)
         Me.directcbox.Name = "directcbox"
         Me.directcbox.Size = New System.Drawing.Size(55, 17)
         Me.directcbox.TabIndex = 11
@@ -654,21 +689,6 @@ Partial Class LauncherForm
         Me.WebBrowserNews.TabIndex = 31
         Me.WebBrowserNews.Url = New System.Uri("https://pathofdiablo.com/p/?getnewsembed", System.UriKind.Absolute)
         '
-        'radioD2GL
-        '
-        Me.radioD2GL.AutoSize = True
-        Me.radioD2GL.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkbox3dfx
-        Me.radioD2GL.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.radioD2GL.Location = New System.Drawing.Point(3, 99)
-        Me.radioD2GL.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
-        Me.radioD2GL.Name = "radioD2GL"
-        Me.radioD2GL.Size = New System.Drawing.Size(117, 17)
-        Me.radioD2GL.TabIndex = 16
-        Me.radioD2GL.Text = "-d2gl (Experimental)"
-        Me.ToolTip1.SetToolTip(Me.radioD2GL, "VideoMode: D2GL Glide" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Configure via Ctrl+O in-game." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WARNING: This mode is exper" &
-        "imental, requires OpenGL 3.3 support." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
-        Me.radioD2GL.UseVisualStyleBackColor = True
-        '
         'LauncherForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -716,7 +736,6 @@ Partial Class LauncherForm
     Friend WithEvents PanelMain As Panel
     Friend WithEvents GroupBoxLaunchFlags As GroupBox
     Friend WithEvents TableLayoutConfigOptions As TableLayoutPanel
-    Friend WithEvents skipChk As CheckBox
     Friend WithEvents aspectChk As CheckBox
     Friend WithEvents nsChk As CheckBox
     Friend WithEvents radio3DFX As RadioButton
@@ -742,4 +761,6 @@ Partial Class LauncherForm
     Friend WithEvents WebBrowserNews As WebBrowser
     Friend WithEvents ButtonDDrawConfig As Button
     Friend WithEvents radioD2GL As RadioButton
+    Friend WithEvents ButtonD2VidTestConfig As Button
+    Friend WithEvents skipChk As CheckBox
 End Class

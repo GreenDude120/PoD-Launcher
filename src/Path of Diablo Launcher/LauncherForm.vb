@@ -202,7 +202,7 @@ Public Class LauncherForm
 
         Const argD2GL As String = "-d2gl"
         If radioD2GL.Checked = True And d2.Arguments.IndexOf(argD2GL) = -1 Then
-            d2.Arguments = d2.Arguments & argD2GL & " "
+            d2.Arguments = d2.Arguments & argGlide & " " & argD2GL & " "
         End If
 
         Const argNoFixAspect As String = "-nofixaspect"
@@ -314,7 +314,7 @@ Public Class LauncherForm
 
     'End Sub
 
-    Private Sub VideoMode_Changed(sender As Object, e As EventArgs) Handles radio3DFX.CheckedChanged, radioDDraw.CheckedChanged, radioGDI.CheckedChanged, radioVidTest.CheckedChanged
+    Private Sub VideoMode_Changed(sender As Object, e As EventArgs) Handles radio3DFX.CheckedChanged, radioDDraw.CheckedChanged, radioGDI.CheckedChanged, radioVidTest.CheckedChanged, radioD2GL.CheckedChanged
         My.MySettings.Default.chkboxW = False
         My.MySettings.Default.chkboxVidTest = False
         My.MySettings.Default.chkboxDdraw = False
@@ -930,6 +930,21 @@ Public Class LauncherForm
             p.Start()
         Catch ex As Exception
             MessageBox.Show("Unable to open ddraw.ini", "Path of Diablo Launcher", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub ButtonD2VidTestConfig_Click(sender As Object, e As EventArgs) Handles ButtonD2VidTestConfig.Click
+        Dim ddrawIni As New ProcessStartInfo
+        ddrawIni.FileName = "D2VidTest.exe"
+        ddrawIni.Arguments = ""
+        ddrawIni.UseShellExecute = True
+        ddrawIni.Verb = "runas" 'run as administrator
+        Dim p As New Process
+        p.StartInfo = ddrawIni
+        Try
+            p.Start()
+        Catch ex As Exception
+            MessageBox.Show("Unable to open D2VidTest", "Path of Diablo Launcher", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 End Class
