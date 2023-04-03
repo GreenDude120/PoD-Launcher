@@ -138,9 +138,8 @@
 		<link>https://d2.lc/Bnclient.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/Bnclient.dll</link>
 	</file>
-	<file name="glide3x.dll">
+	<file name="glide3x.dll" crc="F36AE7D3">
 		<link>https://d2.lc/glide3x.dll</link>
-		<link>https://pathofdiablo.com/glide3x.dll</link>
 	</file>
 	<file name="glide-init.exe">
 		<link>https://d2.lc/glide-init.exe</link>
