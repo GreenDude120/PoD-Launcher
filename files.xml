@@ -163,6 +163,9 @@
 	<file name="glide4x.dll" crc="36C38CBF">	
 		<link>https://d2.lc/glide4x.dll</link>
 	</file>	
+	<file name="D2OpenGL.dll" crc="E509DDDF">	
+		<link>https://d2.lc/D2OpenGL.dll</link>
+	</file>	
 	<file name="ddraw.ini">	
 		<link>https://pathofdiablo.com/ddraw.ini</link>
 	</file>	
