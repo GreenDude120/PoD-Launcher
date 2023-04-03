@@ -4,19 +4,19 @@
 		<link name="Download patch from Global-Discord-CDN-Server">https://cdn.discordapp.com/attachments/602662727961542696/824965561326370836/patch_d2.mpq</link>
 		<link name="Download patch from Luxembourg-Server">https://d2.lc/patch_d2.mpq</link>
 	</file>
-	<file name="PoDPTR.mpq" crc="D83E08FB">
+	<file name="PoDPTR.mpq" crc="C45BAD39">
 		<link>https://d2.lc/PoDPTR.mpq</link>
 	</file>
 	<file name="D2PoDClient.dll" crc="E6AE52AF">
 		<link>https://d2.lc/D2PoDClient.dll</link>
 	</file>
-	<file name="D2PoDClient_ptr.dll" crc="EF12B574">
+	<file name="D2PoDClient_ptr.dll" crc="CF8BA5EB">
 		<link>https://d2.lc/D2PoDClient_ptr.dll</link>
 	</file>
 	<file name="pod.dll" crc="CCD77B3F">
 		<link>https://d2.lc/pod.dll</link>
 	</file>
-	<file name="Path of Diablo Launcher.exe" crc="81080DCC" restartRequired="true">
+	<file name="Path of Diablo Launcher.exe" crc="F918569E" restartRequired="true">
 		<link>https://d2.lc/Path%20of%20Diablo%20Launcher.exe</link>
 	</file>	
 	<file name="D2Client.dll" crc="EAABD1BB">
@@ -63,9 +63,8 @@
 		<link>https://d2.lc/D2Launch.dll</link>
 		<link>http://cdn.pvpgn.pro/diablo2/1.13d/D2Launch.dll</link>
 	</file>
-	<file name="podws.dll" crc="4C9F0498">
+	<file name="podws.dll" crc="14F66CC6">
 		<link>https://d2.lc/podws.dll</link>
-		<link>http://198.98.51.238:8080/public/podws.dll</link>
 	</file>
 	<file name="D2MCPClient.dll" crc="82000E02">
 		<link>https://d2.lc/D2MCPClient.dll</link>
@@ -158,8 +157,17 @@
 	<file name="ddraw.dll" crc="C63646F0">	
 		<link>https://d2.lc/ddraw.dll</link>
 	</file>	
+	<file name="d2gl.mpq" crc="4361FAFD">	
+		<link>https://d2.lc/d2gl.mpq</link>
+	</file>	
+	<file name="glide4x.dll" crc="36C38CBF">	
+		<link>https://d2.lc/glide4x.dll</link>
+	</file>	
 	<file name="ddraw.ini">	
 		<link>https://pathofdiablo.com/ddraw.ini</link>
+	</file>	
+	<file name="d2gl.ini">	
+		<link>https://pathofdiablo.com/d2gl.ini</link>
 	</file>	
 	<file name="jinc2-sharper.glsl">	
 		<link>https://pathofdiablo.com/jinc2-sharper.glsl</link>
