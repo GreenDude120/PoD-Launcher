@@ -386,10 +386,10 @@ Partial Class LauncherForm
         Me.radioVidTest.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.radioVidTest.Location = New System.Drawing.Point(3, 75)
         Me.radioVidTest.Name = "radioVidTest"
-        Me.radioVidTest.Size = New System.Drawing.Size(111, 17)
+        Me.radioVidTest.Size = New System.Drawing.Size(105, 17)
         Me.radioVidTest.TabIndex = 0
-        Me.radioVidTest.Text = "D2VidTest Setting"
-        Me.ToolTip1.SetToolTip(Me.radioVidTest, "Use the config set by D2VidTst.exe")
+        Me.radioVidTest.Text = "D2VidTst Setting"
+        Me.ToolTip1.SetToolTip(Me.radioVidTest, "Use the config set by D2VidTst.exe" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Click the cog icon to run D2VidTst.")
         Me.radioVidTest.UseVisualStyleBackColor = True
         '
         'widescreenChk
@@ -493,7 +493,7 @@ Partial Class LauncherForm
         Me.ButtonD2VidTestConfig.Name = "ButtonD2VidTestConfig"
         Me.ButtonD2VidTestConfig.Size = New System.Drawing.Size(14, 18)
         Me.ButtonD2VidTestConfig.TabIndex = 17
-        Me.ToolTip1.SetToolTip(Me.ButtonD2VidTestConfig, "Configure D2VidTest settings")
+        Me.ToolTip1.SetToolTip(Me.ButtonD2VidTestConfig, "Run D2VidTst")
         Me.ButtonD2VidTestConfig.UseVisualStyleBackColor = False
         '
         'skipChk
