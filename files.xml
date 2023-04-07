@@ -10,7 +10,7 @@
 	<file name="D2PoDClient.dll" crc="E6AE52AF">
 		<link>https://d2.lc/D2PoDClient.dll</link>
 	</file>
-	<file name="D2PoDClient_ptr.dll" crc="CF8BA5EB">
+	<file name="D2PoDClient_ptr.dll" crc="8ED065F5">
 		<link>https://d2.lc/D2PoDClient_ptr.dll</link>
 	</file>
 	<file name="pod.dll" crc="CCD77B3F">
@@ -159,7 +159,7 @@
 	<file name="d2gl.mpq" crc="4361FAFD">	
 		<link>https://d2.lc/d2gl.mpq</link>
 	</file>	
-	<file name="glide4x.dll" crc="36C38CBF">	
+	<file name="glide4x.dll" crc="CE6F5798">	
 		<link>https://d2.lc/glide4x.dll</link>
 	</file>	
 	<file name="D2OpenGL.dll" crc="E509DDDF">	
@@ -171,10 +171,10 @@
 	<file name="d2gl.ini">	
 		<link>https://d2.lc/d2gl.ini</link>
 	</file>	
-	<file name="jinc2-sharper.glsl">	
+	<file name="jinc2-sharper.glsl">
 		<link>https://pathofdiablo.com/jinc2-sharper.glsl</link>
 	</file>	
-	<file name="6xbrz.glsl">	
+	<file name="6xbrz.glsl">
 		<link>https://pathofdiablo.com/6xbrz.glsl</link>
 	</file>
 	<file name="2xbr-hybrid-v5-gamma.glsl" crc="A1D844F6">
