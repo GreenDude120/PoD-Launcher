@@ -522,6 +522,7 @@ Partial Class LauncherForm
         Me.directChk.Size = New System.Drawing.Size(55, 17)
         Me.directChk.TabIndex = 11
         Me.directChk.Text = "-direct"
+        Me.directChk.Visible = False
         Me.ToolTip1.SetToolTip(Me.directChk, "Advanced: Stream files from disk first then MPQs")
         Me.directChk.UseVisualStyleBackColor = True
         '

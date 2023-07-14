@@ -188,10 +188,10 @@ Public Class LauncherForm
             d2.Arguments = d2.Arguments & argGlide & " "
         End If
 
-        Const argDirect As String = "-direct"
-        If directChk.Checked = True And d2.Arguments.IndexOf(argDirect) = -1 Then
-            d2.Arguments = d2.Arguments & argDirect & " "
-        End If
+        'Const argDirect As String = "-direct"
+        'If directChk.Checked = True And d2.Arguments.IndexOf(argDirect) = -1 Then
+        'd2.Arguments = d2.Arguments & argDirect & " "
+        'End If
 
         Const argD2GL As String = "-d2gl"
         If radioD2GL.Checked = True And d2.Arguments.IndexOf(argD2GL) = -1 Then
