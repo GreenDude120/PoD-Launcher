@@ -83,13 +83,6 @@ Public Class LauncherForm
             End Try
         Next
 
-        'show/hide advanced options
-        If advancedChk.Checked Then
-            directcbox.Visible = True
-        Else
-            directcbox.Visible = False
-        End If
-
         cmd.ScanCommandLine(Environment.GetCommandLineArgs())
 
         Log("Welcome to the Path of Diablo Launcher v13")
@@ -150,7 +143,7 @@ Public Class LauncherForm
             .Refresh()
         End With
 
-        UpdateFogDllName(PTRchk.Checked)
+        UpdateFogDllName(ptrChk.Checked)
 
         Dim d2 As New ProcessStartInfo
 
@@ -196,7 +189,7 @@ Public Class LauncherForm
         End If
 
         Const argDirect As String = "-direct"
-        If directcbox.Checked = True And d2.Arguments.IndexOf(argDirect) = -1 Then
+        If directChk.Checked = True And d2.Arguments.IndexOf(argDirect) = -1 Then
             d2.Arguments = d2.Arguments & argDirect & " "
         End If
 
@@ -231,13 +224,18 @@ Public Class LauncherForm
         End If
 
         Const argPtr As String = "-ptr"
-        If PTRchk.Checked = True And d2.Arguments.IndexOf(argPtr) = -1 Then
+        If ptrChk.Checked = True And d2.Arguments.IndexOf(argPtr) = -1 Then
             d2.Arguments = d2.Arguments & argPtr & " "
         End If
 
         Const argIdSound As String = "-idsound"
         If idsoundChk.Checked = True And d2.Arguments.IndexOf(argIdSound) = -1 Then
             d2.Arguments = d2.Arguments & argIdSound & " "
+        End If
+
+        Const argDSOAL As String = "-dsoal"
+        If idsoundChk.Checked = True And d2.Arguments.IndexOf(argDSOAL) = -1 Then
+            d2.Arguments = d2.Arguments & argDSOAL & " "
         End If
 
         Dim p As New Process
@@ -498,7 +496,7 @@ Public Class LauncherForm
         SetProgress(Int32.Parse(Math.Truncate(percentage).ToString()))
     End Sub
 
-    Private Sub Downloads_DownloadCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
+    Private Sub Downloads_DownloadCompleted(ByVal sender As Object, ByVal e As AsyncCompletedEventArgs)
         SetProgress(0)
         stopwatch.Reset()
         SetText(LabelDownloadStatus, "Complete!")
@@ -580,7 +578,7 @@ Public Class LauncherForm
 
             Dim restartRequired As Boolean = False
 
-            Dim files As System.Collections.Generic.LinkedList(Of DownloadItem) = New System.Collections.Generic.LinkedList(Of DownloadItem)
+            Dim files As LinkedList(Of DownloadItem) = New LinkedList(Of DownloadItem)
 
             Do While reader.Read()
                 Select Case reader.NodeType
@@ -910,11 +908,17 @@ Public Class LauncherForm
         Next
     End Sub
 
-    Private Sub advancedChk_CheckedChanged(sender As Object, e As EventArgs) Handles advancedChk.CheckedChanged
-        If advancedChk.Checked Then
-            directcbox.Visible = True
-        Else
-            directcbox.Visible = False
+    Private Sub dsoalChk_CheckedChanged(sender As Object, e As EventArgs) Handles dsoalChk.CheckedChanged
+        If dsoalChk.Checked And idsoundChk.Checked Then
+            idsoundChk.Checked = False
+            dsoalChk.Checked = True
+        End If
+    End Sub
+
+    Private Sub idsoundChk_CheckedChanged(sender As Object, e As EventArgs) Handles idsoundChk.CheckedChanged
+        If idsoundChk.Checked And dsoalChk.Checked Then
+            dsoalChk.Checked = False
+            idsoundChk.Checked = True
         End If
     End Sub
 

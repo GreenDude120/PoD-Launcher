@@ -129,18 +129,6 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property chkboxAdvanced() As Boolean
-            Get
-                Return CType(Me("chkboxAdvanced"),Boolean)
-            End Get
-            Set
-                Me("chkboxAdvanced") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property chkboxSndBkg() As Boolean
             Get
                 Return CType(Me("chkboxSndBkg"),Boolean)
@@ -267,6 +255,18 @@ Namespace My
             End Get
             Set
                 Me("chkboxD2GL") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property chkboxDSOAL() As Boolean
+            Get
+                Return CType(Me("chkboxDSOAL"),Boolean)
+            End Get
+            Set
+                Me("chkboxDSOAL") = value
             End Set
         End Property
     End Class
