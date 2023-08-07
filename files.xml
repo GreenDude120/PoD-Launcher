@@ -10,7 +10,7 @@
 	<file name="D2PoDClient.dll" crc="E6AE52AF">
 		<link>https://d2.lc/D2PoDClient.dll</link>
 	</file>
-	<file name="D2PoDClient_ptr.dll" crc="C7B0CF72">
+	<file name="D2PoDClient_ptr.dll" crc="6ABC2383">
 		<link>https://d2.lc/D2PoDClient_ptr.dll</link>
 	</file>
 	<file name="pod.dll" crc="CCD77B3F">
@@ -159,7 +159,7 @@
 	<file name="d2gl.mpq" crc="D79FE96F">	
 		<link>https://d2.lc/d2gl.mpq</link>
 	</file>	
-	<file name="glide4x.dll" crc="30F58FD6">	
+	<file name="glide4x.dll" crc="280FF2A5">	
 		<link>https://d2.lc/glide4x.dll</link>
 	</file>	
 	<file name="D2OpenGL.dll" crc="E509DDDF">	
