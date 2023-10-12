@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <filelist>
-	<file name="Path of Diablo Launcher.exe" crc="9E0401D9" restartRequired="true">
+	<file name="Path of Diablo Launcher.exe" crc="2C6BB58B" restartRequired="true">
 		<link>https://d2.lc/Path%20of%20Diablo%20Launcher.exe</link>
 	</file>
 	<file name="patch_d2.mpq" crc="1AAC2CBD" showDialog="true">
 		<link name="Download patch from Global-Discord-CDN-Server">https://cdn.discordapp.com/attachments/602662727961542696/824965561326370836/patch_d2.mpq</link>
 		<link name="Download patch from Luxembourg-Server">https://d2.lc/patch_d2.mpq</link>
 	</file>
-	<file name="PoDPTR.mpq" crc="0A85E6AB">
+	<file name="PoDPTR.mpq" crc="04649DA6">
 		<link>https://d2.lc/PoDPTR.mpq</link>
 	</file>
 	<file name="D2PoDClient.dll" crc="E6AE52AF">
 		<link>https://d2.lc/D2PoDClient.dll</link>
 	</file>
-	<file name="D2PoDClient_ptr.dll" crc="6ABC2383">
+	<file name="D2PoDClient_ptr.dll" crc="56D3B7CF">
 		<link>https://d2.lc/D2PoDClient_ptr.dll</link>
 	</file>
 	<file name="pod.dll" crc="CCD77B3F">
@@ -159,7 +159,7 @@
 	<file name="d2gl.mpq" crc="491C4F22">	
 		<link>https://d2.lc/d2gl.mpq</link>
 	</file>	
-	<file name="glide4x.dll" crc="280FF2A5">	
+	<file name="glide4x.dll" crc="5E73E4BD">	
 		<link>https://d2.lc/glide4x.dll</link>
 	</file>	
 	<file name="D2OpenGL.dll" crc="E509DDDF">	
