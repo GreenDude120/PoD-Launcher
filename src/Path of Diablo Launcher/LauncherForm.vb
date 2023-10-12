@@ -4,6 +4,7 @@ Imports System.Threading
 Imports System.Timers
 Imports System.Diagnostics
 Imports System.ComponentModel
+Imports System.IO.Compression
 
 Public Class LauncherForm
 
@@ -603,6 +604,12 @@ Public Class LauncherForm
                                         If reader.Value.Equals("true") Then
                                             dlme.ShowDialog = True
                                         End If
+                                    ElseIf reader.Name.Equals("path") Then
+                                        dlme.Path = reader.Value
+                                    ElseIf reader.Name.Equals("unzip") Then
+                                        If reader.Value.Equals("true") Then
+                                            dlme.Unzip = True
+                                        End If
                                     End If
                                 End While
                             End If
@@ -689,10 +696,10 @@ Public Class LauncherForm
     Private Function DownloadFile(ByRef file As DownloadItem) As Integer
 
         Dim uptodate As Boolean = False
-
+        Dim fullpath As String = Path.Combine(file.Path, file.Name)
         'crc = "" -> only check if file exists, don't actually check the crc
         If file.Crc.Equals("") Then
-            If IO.File.Exists(file.Name) Then
+            If IO.File.Exists(fullpath) Then
                 Log("File " & file.Name & " already exists, no need to download again.")
                 uptodate = True
             Else
@@ -701,18 +708,20 @@ Public Class LauncherForm
         End If
 
         'no need to update if file has same crc as the servers file
-        Dim localCrc As String = GetCRC32(file.Name)
+        Dim localCrc As String = GetCRC32(fullpath)
         If file.Crc.Equals(localCrc) And Not uptodate Then
             Log("File " & file.Name & " is up-to-date")
             Return 0
         End If
 
         If Not uptodate Then
-            If IO.File.Exists(file.Name) Then
+            If IO.File.Exists(fullpath) Then
                 Try
-                    IO.File.Move(file.Name, "./tmp/" & file.Name)
+                    IO.File.Move(file.Name, Path.Combine(Environment.CurrentDirectory, "tmp", file.Path, file.Name))
                 Catch ex As Exception
                 End Try
+            ElseIf Not String.IsNullOrEmpty(file.Path) Then
+                Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory, file.Path))
             End If
 
             For Each link As NamedLink In file.Links
@@ -745,19 +754,26 @@ Public Class LauncherForm
                     Dim myLock As Object = New Object()
                     SyncLock myLock
                         stopwatch.Start()
-                        dl.DownloadFileAsync(New Uri(link.Link), file.Name, myLock)
+                        dl.DownloadFileAsync(New Uri(link.Link), fullpath, myLock)
                         Monitor.Wait(myLock)
                     End SyncLock
                 Catch ex As Exception
                     Log("An error occured while downloading file " & file.Name & " from " & link.Link)
                     Continue For
                 End Try
+
                 Log("Successfully downloaded file " & file.Name & " from " & link.Link)
 
-                localCrc = GetCRC32(file.Name)
+                localCrc = GetCRC32(fullpath)
                 If Not file.Crc.Equals("-1") And Not file.Crc.Equals(localCrc) Then
                     Log("Checksum of downloaded file (" & file.Name & ") from " & link.Link & " doesn't match the specified checksum.")
                     Continue For
+                ElseIf file.Unzip Then
+                    Try
+                        ZipFile.ExtractToDirectory(fullpath, Environment.CurrentDirectory)
+                    Catch ex As Exception
+                        Log("Failed to extract archive (" & file.Name & ")")
+                    End Try
                 End If
 
                 uptodate = True

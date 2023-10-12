@@ -2,8 +2,10 @@
 
     Private filename As String = ""
     Private filecrc As String = ""
+    Private filepath As String = ""
     Private restartReq As Boolean = False
     Private linkDialog As Boolean = False
+    Private extract As Boolean = False
     Private dllinks As System.Collections.Generic.LinkedList(Of NamedLink) = New System.Collections.Generic.LinkedList(Of NamedLink)
 
     Property Name As String
@@ -12,6 +14,15 @@
         End Get
         Set(value As String)
             filename = value
+        End Set
+    End Property
+
+    Property Path As String
+        Get
+            Return filepath
+        End Get
+        Set(value As String)
+            filepath = value
         End Set
     End Property
 
@@ -39,6 +50,15 @@
         End Get
         Set(value As Boolean)
             linkDialog = value
+        End Set
+    End Property
+
+    Property Unzip As Boolean
+        Get
+            Return extract
+        End Get
+        Set(value As Boolean)
+            extract = value
         End Set
     End Property
 
