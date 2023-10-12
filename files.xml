@@ -7,13 +7,13 @@
 		<link name="Download patch from Global-Discord-CDN-Server">https://cdn.discordapp.com/attachments/602662727961542696/824965561326370836/patch_d2.mpq</link>
 		<link name="Download patch from Luxembourg-Server">https://d2.lc/patch_d2.mpq</link>
 	</file>
-	<file name="PoDPTR.mpq" crc="04649DA6">
+	<file name="PoDPTR.mpq" crc="13FC4AD0">
 		<link>https://d2.lc/PoDPTR.mpq</link>
 	</file>
 	<file name="D2PoDClient.dll" crc="E6AE52AF">
 		<link>https://d2.lc/D2PoDClient.dll</link>
 	</file>
-	<file name="D2PoDClient_ptr.dll" crc="56D3B7CF">
+	<file name="D2PoDClient_ptr.dll" crc="93BD1837">
 		<link>https://d2.lc/D2PoDClient_ptr.dll</link>
 	</file>
 	<file name="pod.dll" crc="CCD77B3F">
@@ -159,7 +159,7 @@
 	<file name="d2gl.mpq" crc="491C4F22">	
 		<link>https://d2.lc/d2gl.mpq</link>
 	</file>	
-	<file name="glide4x.dll" crc="5E73E4BD">	
+	<file name="glide4x.dll" crc="B219C6C0">	
 		<link>https://d2.lc/glide4x.dll</link>
 	</file>	
 	<file name="D2OpenGL.dll" crc="E509DDDF">	
@@ -191,5 +191,26 @@
 	</file>	
 	<file name="dsoal-aldrv.dll">	
 		<link>https://d2.lc/dsoal-aldrv.dll</link>
+	</file>
+	<file name="aa+rcas.slangp" path="data\shaders\custom">	
+		<link>https://d2.lc/aa+rcas.slangp</link>
+	</file>
+	<file name="aa+uniform-nn+rcas.slangp" path="data\shaders\custom">	
+		<link>https://d2.lc/aa+uniform-nn+rcas.slangp</link>
+	</file>
+	<file name="aa-shader-4.0.slang" path="data\shaders\custom">	
+		<link>https://d2.lc/aa-shader-4.0.slang</link>
+	</file>
+	<file name="fsr-easu+rcas.slangp" path="data\shaders\custom">	
+		<link>https://d2.lc/fsr-easu+rcas.slangp</link>
+	</file>
+	<file name="rcas.slang" path="data\shaders\custom">
+		<link>https://d2.lc/rcas.slang</link>
+	</file>
+	<file name="uniform-nearest.slang" path="data\shaders\custom">
+		<link>https://d2.lc/uniform-nearest.slang</link>
+	</file>
+	<file name="user-shaders.txt" path="data\shaders">
+		<link>https://d2.lc/user-shaders.txt</link>
 	</file>
 </filelist>
