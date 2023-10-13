@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <filelist>
-	<file name="Path of Diablo Launcher.exe" crc="2C6BB58B" restartRequired="true">
+	<file name="Path of Diablo Launcher.exe" crc="6E413AC5" restartRequired="true">
 		<link>https://d2.lc/Path%20of%20Diablo%20Launcher.exe</link>
 	</file>
 	<file name="patch_d2.mpq" crc="1AAC2CBD" showDialog="true">
