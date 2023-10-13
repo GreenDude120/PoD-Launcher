@@ -970,5 +970,11 @@ Public Class LauncherForm
 
     Private Sub ptrChk_CheckedChanged(sender As Object, e As EventArgs) Handles ptrChk.CheckedChanged
         radioD2GL.Enabled = ptrChk.Checked
+        If Not ptrChk.Checked Then
+            If radioD2GL.Checked Then
+                radioD2GL.Checked = False
+                radioDDraw.Checked = True
+            End If
+        End If
     End Sub
 End Class
