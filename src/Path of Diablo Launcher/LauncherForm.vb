@@ -967,4 +967,8 @@ Public Class LauncherForm
             MessageBox.Show("Unable to open D2VidTest", "Path of Diablo Launcher", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+    Private Sub ptrChk_CheckedChanged(sender As Object, e As EventArgs) Handles ptrChk.CheckedChanged
+        radioD2GL.Enabled = ptrChk.Checked
+    End Sub
 End Class
