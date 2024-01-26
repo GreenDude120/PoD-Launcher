@@ -603,6 +603,7 @@ Partial Class LauncherForm
         Me.LogBoxEventLog.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.LogBoxEventLog.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.LogBoxEventLog.FormattingEnabled = True
+        Me.LogBoxEventLog.HorizontalScrollbar = True
         Me.LogBoxEventLog.Location = New System.Drawing.Point(6, 19)
         Me.LogBoxEventLog.Name = "LogBoxEventLog"
         Me.LogBoxEventLog.Size = New System.Drawing.Size(356, 65)

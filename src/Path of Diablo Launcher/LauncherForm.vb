@@ -86,9 +86,17 @@ Public Class LauncherForm
             End Try
         Next
 
+        radioD2GL.Enabled = ptrChk.Checked
+        If Not ptrChk.Checked Then
+            If radioD2GL.Checked Then
+                radioD2GL.Checked = False
+                radioDDraw.Checked = True
+            End If
+        End If
+
         cmd.ScanCommandLine(Environment.GetCommandLineArgs())
 
-        Log("Welcome to the Path of Diablo Launcher v13")
+        Log("Welcome to the Path of Diablo Launcher v14")
 
         If Not CheckDependancies() Then
             Log("Missing MSVC 10 runtime, installing")
@@ -148,7 +156,13 @@ Public Class LauncherForm
         Dim d2 As New ProcessStartInfo
 
         d2.FileName = If(ptrChk.Checked, "Path of Diablo.exe", "Game.exe")
-        Global.Path_of_Diablo_Launcher.My.MySettings.Default.stringLootLink = Me.TextBoxLootFilterURL.Text
+        If Not File.Exists(d2.FileName) Then
+            MsgBox("Unable to find: " & d2.FileName & ". Make sure your launcher is up-to-date.")
+            Return
+        End If
+
+        My.MySettings.Default.stringLootLink = Me.TextBoxLootFilterURL.Text
+
         Try
             My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ DisableNXShowUI RUNASADMIN")
         Catch ex As System.Security.SecurityException
@@ -161,12 +175,7 @@ Public Class LauncherForm
 
         'run D2 as administrator
         d2.Verb = "runas"
-
-        If cmd.Passthrough Then
-            d2.Arguments = cmd.PassthroughArgs
-        Else
-            d2.Arguments = ""
-        End If
+        d2.Arguments = If(cmd.Passthrough, cmd.PassthroughArgs, "")
 
         Const argWindowed As String = "-w"
         If radioGDI.Checked = True And d2.Arguments.IndexOf(argWindowed) = -1 Then
@@ -247,20 +256,20 @@ Public Class LauncherForm
             Me.Close()
         Else
             playButtonCounter = 0
-            Dim playButtonTimer As System.Timers.Timer = New System.Timers.Timer(1000)
-            AddHandler playButtonTimer.Elapsed, AddressOf AllowPlayButtonAfterDelay
+            Dim playButtonTimer As Timers.Timer = New Timers.Timer(500)
+            AddHandler playButtonTimer.Elapsed, Sub(timer, timerEvent) AllowPlayButtonAfterDelay(timer, timerEvent, p)
             playButtonTimer.AutoReset = True
             playButtonTimer.Start()
         End If
     End Sub
 
-    Private Sub AllowPlayButtonAfterDelay(sourceTimer As System.Timers.Timer, e As ElapsedEventArgs)
-        Dim gameInstances() As Process = Process.GetProcessesByName("path of diablo").Concat(Process.GetProcessesByName("game"))
-        If gameInstances.Count > 0 Or playButtonCounter > 3000 Then
+    Private Sub AllowPlayButtonAfterDelay(sourceTimer As Timers.Timer, e As ElapsedEventArgs, p As Process)
+        If p.HasExited Or playButtonCounter >= 3000 Then
             With ButtonPlay
                 .Enabled = True
                 .Refresh()
             End With
+
             sourceTimer.Stop()
         Else
             playButtonCounter += sourceTimer.Interval
