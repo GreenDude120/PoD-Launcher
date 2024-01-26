@@ -16,6 +16,8 @@ Public Class LauncherForm
 
     Dim isPlayAvailable = False
 
+    Dim playButtonCounter As Double = 0
+
     Public Function GetCRC32(ByVal sFileName As String) As String
         Try
             Dim FS As FileStream = New FileStream(sFileName, FileMode.Open, FileAccess.Read, FileShare.Read, 8192)
@@ -107,22 +109,19 @@ Public Class LauncherForm
         Const fileName As String = "fog.dll"
         Const fileOffset As Long = &H24CF1
 
-        Const ptrDllName = "D2PoDClient_PTR.dll"
         Const DllName = "D2PoDClient.dll"
+
+        If isPTR Then
+            Return False
+        End If
 
         Dim fileStream As IO.FileStream = New IO.FileStream(fileName, IO.FileMode.Open)
         Try
             fileStream.Seek(fileOffset, IO.SeekOrigin.Begin)
 
-            If isPTR Then
-                For Each c As Char In ptrDllName
-                    fileStream.WriteByte(Asc(c))
-                Next
-            Else
-                For Each c As Char In DllName
-                    fileStream.WriteByte(Asc(c))
-                Next
-            End If
+            For Each c As Char In DllName
+                fileStream.WriteByte(Asc(c))
+            Next
 
             fileStream.WriteByte(0)
         Catch
@@ -144,11 +143,11 @@ Public Class LauncherForm
             .Refresh()
         End With
 
-        UpdateFogDllName(ptrChk.Checked)
+        'UpdateFogDllName(ptrChk.Checked)
 
         Dim d2 As New ProcessStartInfo
 
-        d2.FileName = "Game.exe"
+        d2.FileName = If(ptrChk.Checked, "Path of Diablo.exe", "Game.exe")
         Global.Path_of_Diablo_Launcher.My.MySettings.Default.stringLootLink = Me.TextBoxLootFilterURL.Text
         Try
             My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ DisableNXShowUI RUNASADMIN")
@@ -189,10 +188,10 @@ Public Class LauncherForm
             d2.Arguments = d2.Arguments & argGlide & " "
         End If
 
-        'Const argDirect As String = "-direct"
-        'If directChk.Checked = True And d2.Arguments.IndexOf(argDirect) = -1 Then
-        'd2.Arguments = d2.Arguments & argDirect & " "
-        'End If
+        Const argDirect As String = "-direct"
+        If directChk.Checked = True And d2.Arguments.IndexOf(argDirect) = -1 Then
+            d2.Arguments = d2.Arguments & argDirect & " "
+        End If
 
         Const argD2GL As String = "-d2gl"
         If radioD2GL.Checked = True And d2.Arguments.IndexOf(argD2GL) = -1 Then
@@ -246,28 +245,25 @@ Public Class LauncherForm
         If CheckCloseOnPlay.Checked Then
             Me.Hide() 'hide window, so that it doesn't look like it doesn't respond anymore
             Me.Close()
+        Else
+            playButtonCounter = 0
+            Dim playButtonTimer As System.Timers.Timer = New System.Timers.Timer(1000)
+            AddHandler playButtonTimer.Elapsed, AddressOf AllowPlayButtonAfterDelay
+            playButtonTimer.AutoReset = True
+            playButtonTimer.Start()
         End If
-
-        Const FiveHundredMillisecondInterval As Short = 500
-        Dim playButtonTimer As System.Timers.Timer = New System.Timers.Timer(FiveHundredMillisecondInterval)
-        AddHandler playButtonTimer.Elapsed, AddressOf AllowPlayButtonAfterDelay
-        playButtonTimer.AutoReset = True
-        playButtonTimer.Start()
     End Sub
 
     Private Sub AllowPlayButtonAfterDelay(sourceTimer As System.Timers.Timer, e As ElapsedEventArgs)
-        Const threeSeconds As Short = 3000
-        Static secondsSincePlayButtonWasPressed As Decimal = 500
-        Dim game() As Process
-        game = Process.GetProcessesByName("game")
-        If game.Count > 0 Or secondsSincePlayButtonWasPressed > threeSeconds Then
+        Dim gameInstances() As Process = Process.GetProcessesByName("path of diablo").Concat(Process.GetProcessesByName("game"))
+        If gameInstances.Count > 0 Or playButtonCounter > 3000 Then
             With ButtonPlay
                 .Enabled = True
                 .Refresh()
             End With
             sourceTimer.Stop()
         Else
-            secondsSincePlayButtonWasPressed += sourceTimer.Interval
+            playButtonCounter += sourceTimer.Interval
         End If
     End Sub
 
@@ -398,6 +394,7 @@ Public Class LauncherForm
         SetEnabled(ButtonDownloadFilter, False)
         isPlayAvailable = False
 
+        'TODO zip file handling for filters with custom sounds
         Dim name As String = "item.filter"      'lootfiltername.Text
         Dim url As String = TextBoxLootFilterURL.Text
 
@@ -529,13 +526,21 @@ Public Class LauncherForm
 
             Dim p1() As Process
             Dim p2() As Process
+            Dim p3() As Process
+
             p1 = Process.GetProcessesByName("diablo2")
             p2 = Process.GetProcessesByName("game")
+            p3 = Process.GetProcessesByName("path of diablo")
             If p1.Count > 0 Then
                 MsgBox("diablo2.exe is running, press ok to close this process and continue.")
                 p1(0).Kill()
-            ElseIf p2.Count > 0 Then
+            End If
+            If p2.Count > 0 Then
                 MsgBox("game.exe is running, press ok to close this process and continue.")
+                p2(0).Kill()
+            End If
+            If p2.Count > 0 Then
+                MsgBox("Path of Diablo.exe is running, press ok to close this process and continue.")
                 p2(0).Kill()
             End If
 
