@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <filelist>
-	<file name="Path of Diablo Launcher.exe" crc="5FD78ADF" restartRequired="true">
+	<file name="Path of Diablo Launcher.exe" crc="5C73A646" restartRequired="true">
 		<link>https://d2.lc/Path%20of%20Diablo%20Launcher.exe</link>
 	</file>
 	<file name="patch_d2.mpq" crc="1AAC2CBD" showDialog="true">
 		<link name="Download patch from Global-Discord-CDN-Server">https://cdn.discordapp.com/attachments/602662727961542696/824965561326370836/patch_d2.mpq</link>
 		<link name="Download patch from Luxembourg-Server">https://d2.lc/patch_d2.mpq</link>
 	</file>
-	<file name="PoDPTR.mpq" crc="638F47FD">
+	<file name="PoDPTR.mpq" crc="883C8FD8">
 		<link>https://d2.lc/PoDPTR.mpq</link>
 	</file>
 	<file name="D2PoDClient.dll" crc="E6AE52AF">
