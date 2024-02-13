@@ -95,8 +95,8 @@
 		<link>http://198.98.51.238:8080/public/Diablo%20II.exe</link>
 	</file>
 	<file name="Fog.dll" crc="C4CB491F">>
-		<link>https://pathofdiablo.com/Fog.dll</link>
 		<link>https://d2.lc/Fog.dll</link>
+		<link>https://pathofdiablo.com/Fog.dll</link>
 	</file>
 	<file name="Path of Diablo.exe" crc="48AE650B">
 		<link>https://d2.lc/Path%20of%20Diablo.exe</link>
@@ -169,15 +169,18 @@
 		<link>https://d2.lc/D2OpenGL.dll</link>
 	</file>	
 	<file name="ddraw.ini">	
+		<link>https://d2.lc/ddraw.ini</link>
 		<link>https://pathofdiablo.com/ddraw.ini</link>
 	</file>	
 	<file name="d2gl.json">	
 		<link>https://d2.lc/d2gl.json</link>
 	</file>	
 	<file name="jinc2-sharper.glsl">
+		<link>https://d2.lc/jinc2-sharper.glsl</link>
 		<link>https://pathofdiablo.com/jinc2-sharper.glsl</link>
 	</file>	
 	<file name="6xbrz.glsl">
+		<link>https://d2.lc/6xbrz.glsl</link>
 		<link>https://pathofdiablo.com/6xbrz.glsl</link>
 	</file>
 	<file name="2xbr-hybrid-v5-gamma.glsl" crc="A1D844F6">
