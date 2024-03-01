@@ -431,7 +431,7 @@ Partial Class LauncherForm
         Me.radioD2GL.AutoSize = True
         Me.radioD2GL.Checked = Global.Path_of_Diablo_Launcher.My.MySettings.Default.chkboxD2GL
         Me.TableLayoutConfigOptions.SetColumnSpan(Me.radioD2GL, 3)
-        Me.radioD2GL.Enabled = False
+        Me.radioD2GL.Enabled = True
         Me.radioD2GL.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.radioD2GL.Location = New System.Drawing.Point(3, 99)
         Me.radioD2GL.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
