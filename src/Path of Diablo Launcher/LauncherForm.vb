@@ -86,14 +86,6 @@ Public Class LauncherForm
             End Try
         Next
 
-        radioD2GL.Enabled = ptrChk.Checked
-        If Not ptrChk.Checked Then
-            If radioD2GL.Checked Then
-                radioD2GL.Checked = False
-                radioDDraw.Checked = True
-            End If
-        End If
-
         cmd.ScanCommandLine(Environment.GetCommandLineArgs())
 
         Log("Welcome to the Path of Diablo Launcher v14")
@@ -113,34 +105,6 @@ Public Class LauncherForm
 
     End Sub
 
-    Private Function UpdateFogDllName(isPTR As Boolean) As Boolean
-        Const fileName As String = "fog.dll"
-        Const fileOffset As Long = &H24CF1
-
-        Const DllName = "D2PoDClient.dll"
-
-        If isPTR Then
-            Return False
-        End If
-
-        Dim fileStream As IO.FileStream = New IO.FileStream(fileName, IO.FileMode.Open)
-        Try
-            fileStream.Seek(fileOffset, IO.SeekOrigin.Begin)
-
-            For Each c As Char In DllName
-                fileStream.WriteByte(Asc(c))
-            Next
-
-            fileStream.WriteByte(0)
-        Catch
-            Return False
-        Finally
-            fileStream.Close()
-        End Try
-
-        Return True
-    End Function
-
     Private Sub playBtn_Click(sender As Object, e As EventArgs) Handles ButtonPlay.Click
         If Not isPlayAvailable Then
             Return
@@ -151,11 +115,9 @@ Public Class LauncherForm
             .Refresh()
         End With
 
-        'UpdateFogDllName(ptrChk.Checked)
-
         Dim d2 As New ProcessStartInfo
 
-        d2.FileName = If(ptrChk.Checked, "Path of Diablo.exe", "Game.exe")
+        d2.FileName = "PoD.exe"
         If Not File.Exists(d2.FileName) Then
             MsgBox("Unable to find: " & d2.FileName & ". Make sure your launcher is up-to-date.")
             Return
@@ -233,7 +195,7 @@ Public Class LauncherForm
         End If
 
         Const argPtr As String = "-ptr"
-        If ptrChk.Checked = True And d2.Arguments.IndexOf(argPtr) = -1 Then
+        If ptrChk.Enabled = True And ptrChk.Checked = True And d2.Arguments.IndexOf(argPtr) = -1 Then
             d2.Arguments = d2.Arguments & argPtr & " "
         End If
 
@@ -539,7 +501,7 @@ Public Class LauncherForm
 
             p1 = Process.GetProcessesByName("diablo2")
             p2 = Process.GetProcessesByName("game")
-            p3 = Process.GetProcessesByName("path of diablo")
+            p3 = Process.GetProcessesByName("pod")
             If p1.Count > 0 Then
                 MsgBox("diablo2.exe is running, press ok to close this process and continue.")
                 p1(0).Kill()
@@ -549,7 +511,7 @@ Public Class LauncherForm
                 p2(0).Kill()
             End If
             If p2.Count > 0 Then
-                MsgBox("Path of Diablo.exe is running, press ok to close this process and continue.")
+                MsgBox("PoD.exe is running, press ok to close this process and continue.")
                 p2(0).Kill()
             End If
 
@@ -904,7 +866,6 @@ Public Class LauncherForm
             "d2exp.mpq",
             "d2music.mpq",
             "d2sfx.mpq",
-            "Game.exe",
             "d2speech.mpq"
         }
 
@@ -983,12 +944,6 @@ Public Class LauncherForm
     End Sub
 
     Private Sub ptrChk_CheckedChanged(sender As Object, e As EventArgs) Handles ptrChk.CheckedChanged
-        radioD2GL.Enabled = ptrChk.Checked
-        If Not ptrChk.Checked Then
-            If radioD2GL.Checked Then
-                radioD2GL.Checked = False
-                radioDDraw.Checked = True
-            End If
-        End If
+
     End Sub
 End Class

@@ -436,11 +436,11 @@ Partial Class LauncherForm
         Me.radioD2GL.Location = New System.Drawing.Point(3, 99)
         Me.radioD2GL.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
         Me.radioD2GL.Name = "radioD2GL"
-        Me.radioD2GL.Size = New System.Drawing.Size(148, 17)
+        Me.radioD2GL.Size = New System.Drawing.Size(85, 17)
         Me.radioD2GL.TabIndex = 16
-        Me.radioD2GL.Text = "-d2gl (D2GL Experimental)"
-        Me.ToolTip1.SetToolTip(Me.radioD2GL, "VideoMode: D2GL Glide" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Only Available on PTR)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Configure via Ctrl+O in-game." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WA" &
-        "RNING: This mode is experimental, requires OpenGL 3.3+ support.")
+        Me.radioD2GL.Text = "-d2gl (D2GL)"
+        Me.ToolTip1.SetToolTip(Me.radioD2GL, "VideoMode: D2GL Glide" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Configure via Ctrl+O in-game." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "WARNING: This mode requires" &
+        " OpenGL 3.3+ support.")
         Me.radioD2GL.UseVisualStyleBackColor = True
         '
         'skipChk
