@@ -495,24 +495,10 @@ Public Class LauncherForm
 
         If Not cmd.NoUpdate Then
 
-            Dim p1() As Process
-            Dim p2() As Process
-            Dim p3() As Process
-
-            p1 = Process.GetProcessesByName("diablo2")
-            p2 = Process.GetProcessesByName("game")
-            p3 = Process.GetProcessesByName("pod")
+            Dim p1() As Process = Process.GetProcessesByName("pod")
             If p1.Count > 0 Then
-                MsgBox("diablo2.exe is running, press ok to close this process and continue.")
-                p1(0).Kill()
-            End If
-            If p2.Count > 0 Then
-                MsgBox("game.exe is running, press ok to close this process and continue.")
-                p2(0).Kill()
-            End If
-            If p2.Count > 0 Then
                 MsgBox("PoD.exe is running, press ok to close this process and continue.")
-                p2(0).Kill()
+                p1(0).Kill()
             End If
 
             Dim file As String = "./tmp/files.xml"

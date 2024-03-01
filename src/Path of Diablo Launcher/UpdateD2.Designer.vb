@@ -36,7 +36,7 @@ Partial Class UpdateD2
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(237, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Diablo II Game.exe version is not 1.13c or 1.13d."
+        Me.Label1.Text = "Diablo II Game.exe version is not 1.13d."
         '
         'Label2
         '
