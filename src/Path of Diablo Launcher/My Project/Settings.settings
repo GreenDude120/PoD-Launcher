@@ -39,7 +39,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="chkboxDdraw" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="chkboxVidTest" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -51,7 +51,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="chkboxD2GL" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="chkboxDSOAL" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
