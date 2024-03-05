@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <filelist>
-	<file name="Path of Diablo Launcher.exe" crc="6535647A" restartRequired="true">
+	<file name="Path of Diablo Launcher.exe" crc="CD0673A4" restartRequired="true">
 		<link>https://d2.lc/Path%20of%20Diablo%20Launcher.exe</link>
 	</file>
 	<file name="patch_d2.mpq" crc="1AAC2CBD" showDialog="true">
 		<link name="Download patch from EU-Luxembourg-Server">https://d2.lc/patch_d2.mpq</link>
 		<link name="Download patch from Global-Github-CDN-Server">https://github.com/GreenDude120/PoD-Launcher/releases/download/1/patch_d2.mpq</link>
 	</file>
-	<file name="PoDPTR.mpq" crc="331041C7">
+	<file name="PoDPTR.mpq" crc="A269D35E">
 		<link>https://d2.lc/PoDPTR.mpq</link>
 	</file>
-	<file name="PoDCore.mpq" crc="331041C7">
+	<file name="PoDCore.mpq" crc="82A17E21">
 		<link>https://d2.lc/PoDCore.mpq</link>
 	</file>
-	<file name="PoDPatch.mpq" crc="5D090198">
+	<file name="PoDPatch.mpq" crc="A269D35E">
 		<link>https://d2.lc/PoDPatch.mpq</link>
 	</file>
 	<file name="D2PoDClient.dll" crc="34DFC059">
