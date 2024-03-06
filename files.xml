@@ -7,13 +7,13 @@
 		<link name="Download patch from EU-Luxembourg-Server">https://d2.lc/patch_d2.mpq</link>
 		<link name="Download patch from Global-Github-CDN-Server">https://github.com/GreenDude120/PoD-Launcher/releases/download/1/patch_d2.mpq</link>
 	</file>
-	<file name="PoDPTR.mpq" crc="F67D7F21">
+	<file name="PoDPTR.mpq" crc="557EC96D">
 		<link>https://d2.lc/PoDPTR.mpq</link>
 	</file>
 	<file name="PoDCore.mpq" crc="82A17E21">
 		<link>https://d2.lc/PoDCore.mpq</link>
 	</file>
-	<file name="PoDPatch.mpq" crc="F67D7F21">
+	<file name="PoDPatch.mpq" crc="557EC96D">
 		<link>https://d2.lc/PoDPatch.mpq</link>
 	</file>
 	<file name="D2PoDClient.dll" crc="34DFC059">
