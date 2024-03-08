@@ -221,4 +221,7 @@
 	<file name="user-shaders.txt" path="data\shaders">
 		<link>https://d2.lc/user-shaders.txt</link>
 	</file>
+	<file name="config.cfg" path="config">
+		<link>https://d2.lc/config.cfg</link>
+	</file>
 </filelist>
