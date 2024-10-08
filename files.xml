@@ -9,8 +9,9 @@
 		<link name="Download patch from EU-France-Mirror-Update-Server">https://www.d2.lc/patch_d2.mpq</link>
 		<link name="Download patch from Global-Github-CDN-Servers">https://github.com/GreenDude120/PoD-Launcher/releases/download/1/patch_d2.mpq</link>
 	</file>
-	<file name="PoDPTR.mpq" crc="8C9C1DF1">
+	<file name="PoDPTR.mpq">
 		<link>https://d2.lc/PoDPTR.mpq</link>
+		<link>https://www.d2.lc/PoDPTR.mpq</link>
 	</file>
 	<file name="PoDCore.mpq" crc="30545DD1">
 		<link>https://d2.lc/PoDCore.mpq</link>
@@ -22,12 +23,15 @@
 	</file>
 	<file name="D2PoDClient.dll" crc="B983D30F">
 		<link>https://d2.lc/D2PoDClient.dll</link>
+		<link>https://www.d2.lc/D2PoDClient.dll</link>
 	</file>
-	<file name="D2PoDClient_ptr.dll" crc="BF64FA60">
+	<file name="D2PoDClient_ptr.dll">
 		<link>https://d2.lc/D2PoDClient_ptr.dll</link>
+		<link>https://www.d2.lc/D2PoDClient_ptr.dll</link>
 	</file>
 	<file name="pod.dll" crc="CCD77B3F">
 		<link>https://d2.lc/pod.dll</link>
+		<link>https://www.d2.lc/pod.dll</link>
 	</file>
 	<file name="D2Client.dll" crc="EAABD1BB">
 		<link>https://d2.lc/D2Client.dll</link>
@@ -75,6 +79,7 @@
 	</file>
 	<file name="podws.dll" crc="14F66CC6">
 		<link>https://d2.lc/podws.dll</link>
+		<link>https://www.d2.lc/podws.dll</link>
 	</file>
 	<file name="D2MCPClient.dll" crc="82000E02">
 		<link>https://d2.lc/D2MCPClient.dll</link>
@@ -106,14 +111,15 @@
 	</file>
 	<file name="PoD.exe" crc="36A96C42">
 		<link>https://d2.lc/PoD.exe</link>
+		<link>https://www.d2.lc/PoD.exe</link>
 	</file>
 	<file name="Game.exe" crc="B3D69C47">
 		<link>https://d2.lc/Game.exe</link>
-		<link>http://198.98.51.238:8080/public/Game.exe</link>
+		<link>https://www.d2.lc/Game.exe</link>
 	</file>
 	<file name="ijl11.dll" crc="C00FE21D">
 		<link>https://d2.lc/ijl11.dll</link>
-		<link>http://198.98.51.238:8080/public/ijl11.dll</link>
+		<link>https://www.d2.lc/ijl11.dll</link>
 	</file>
 	<file name="item.filter">
 		<link>https://d2.lc/item.filter</link>
@@ -125,7 +131,7 @@
 	</file>
 	<file name="SmackW32.dll" crc="614A9406">
 		<link>https://d2.lc/SmackW32.dll</link>
-		<link>http://198.98.51.238:8080/public/SmackW32.dll</link>
+		<link>https://www.d2.lc/SmackW32.dll</link>
 	</file>
 	<file name="Storm.dll" crc="BDB6784E">
 		<link>https://d2.lc/Storm.dll</link>
@@ -141,7 +147,7 @@
 	</file>
 	<file name="binkw32.dll" crc="5934B4A7">
 		<link>https://d2.lc/binkw32.dll</link>
-		<link>http://198.98.51.238:8080/public/binkw32.dll</link>
+		<link>https://www.d2.lc/binkw32.dll</link>
 	</file>
 	<file name="Bnclient.dll" crc="49E0C339">
 		<link>https://d2.lc/Bnclient.dll</link>
@@ -149,6 +155,7 @@
 	</file>
 	<file name="glide3x.dll" crc="F36AE7D3">
 		<link>https://d2.lc/glide3x.dll</link>
+		<link>https://www.d2.lc/glide3x.dll</link>
 	</file>
 	<file name="glide-init.exe">
 		<link>https://d2.lc/glide-init.exe</link>
@@ -164,6 +171,7 @@
 	</file>
 	<file name="ddraw.dll" crc="C63646F0">	
 		<link>https://d2.lc/ddraw.dll</link>
+		<link>https://www.d2.lc/ddraw.dll</link>
 	</file>	
 	<file name="d2gl.mpq" crc="491C4F22">	
 		<link>https://d2.lc/d2gl.mpq</link>
@@ -171,6 +179,7 @@
 	</file>	
 	<file name="glide4x.dll" crc="8849F039">	
 		<link>https://d2.lc/glide4x.dll</link>
+		<link>https://www.d2.lc/glide4x.dll</link>
 	</file>	
 	<file name="D2OpenGL.dll" crc="E509DDDF">	
 		<link>https://d2.lc/D2OpenGL.dll</link>
