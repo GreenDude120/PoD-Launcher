@@ -143,7 +143,6 @@
 	</file>
 	<file name="license.md">
 		<link>https://pathofdiablo.com/license.md</link>
-		<link>http://198.98.51.238:8080/public/license.md</link>
 	</file>
 	<file name="binkw32.dll" crc="5934B4A7">
 		<link>https://d2.lc/binkw32.dll</link>
@@ -183,6 +182,7 @@
 	</file>	
 	<file name="D2OpenGL.dll" crc="E509DDDF">	
 		<link>https://d2.lc/D2OpenGL.dll</link>
+		<link>https://www.d2.lc/D2OpenGL.dll</link>
 	</file>	
 	<file name="ddraw.ini">	
 		<link>https://d2.lc/ddraw.ini</link>
