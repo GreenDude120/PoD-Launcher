@@ -9,7 +9,7 @@
 		<link name="Download file patch_d2.mpq from EU-France-Mirror-Update-Server">https://www.d2.lc/patch_d2.mpq</link>
 		<link name="Download file patch_d2.mpq from Global-Github-CDN-Servers">https://github.com/GreenDude120/PoD-Launcher/releases/download/1/patch_d2.mpq</link>
 	</file>
-	<file name="PoDPTR.mpq" crc="21E35DC6" showDialog="true">
+	<file name="PoDPTR.mpq" crc="37418A82" showDialog="true">
 		<link>https://d2.lc/PoDPTR.mpq</link>
 		<link>https://www.d2.lc/PoDPTR.mpq</link>
 	</file>
@@ -25,7 +25,7 @@
 		<link>https://d2.lc/D2PoDClient.dll</link>
 		<link>https://www.d2.lc/D2PoDClient.dll</link>
 	</file>
-	<file name="D2PoDClient_ptr.dll" crc="86B0FD2F">
+	<file name="D2PoDClient_ptr.dll" crc="DF6ECD9A">
 		<link>https://d2.lc/D2PoDClient_ptr.dll</link>
 		<link>https://www.d2.lc/D2PoDClient_ptr.dll</link>
 	</file>
