@@ -12,11 +12,11 @@
 		<link name="Download file patch_d2.mpq from EU-Luxembourg-Update-Server">https://d2.lc/PoDPTR.mpq</link>
 		<link name="Download file patch_d2.mpq from EU-France-Mirror-Update-Server">https://www.d2.lc/PoDPTR.mpq</link>
 	</file>
-	<file name="PoDCore.mpq" crc="E54CB1D6" showDialog="true">
+	<file name="PoDCore.mpq" crc="5B7E7051" showDialog="true">
 		<link name="Download file PoDCore.mpq from EU-Luxembourg-Update-Server">https://d2.lc/PoDCore.mpq</link>
 		<link name="Download file PoDCore.mpq from EU-France-Mirror-Update-Server">https://www.d2.lc/PoDCore.mpq</link>
 	</file>
-	<file name="PoDPatch.mpq" crc="0080BF8C">
+	<file name="PoDPatch.mpq" crc="F8B2EE30">
 		<link>https://d2.lc/PoDPatch.mpq</link>
 		<link>https://www.d2.lc/PoDPatch.mpq</link>
 	</file>
