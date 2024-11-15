@@ -20,11 +20,11 @@
 		<link>https://d2.lc/PoDPatch.mpq</link>
 		<link>https://www.d2.lc/PoDPatch.mpq</link>
 	</file>
-	<file name="D2PoDClient.dll" crc="B983D30F">
+	<file name="D2PoDClient.dll" crc="A320A5B9">
 		<link>https://d2.lc/D2PoDClient.dll</link>
 		<link>https://www.d2.lc/D2PoDClient.dll</link>
 	</file>
-	<file name="D2PoDClient_ptr.dll" crc="C4A1673A">
+	<file name="D2PoDClient_ptr.dll" crc="A320A5B9">
 		<link>https://d2.lc/D2PoDClient_ptr.dll</link>
 		<link>https://www.d2.lc/D2PoDClient_ptr.dll</link>
 	</file>
@@ -175,7 +175,7 @@
 		<link name="Download file d2gl.mpq from EU-Luxembourg-Update-Server">https://d2.lc/d2gl.mpq</link>
 		<link name="Download file d2gl.mpq from EU-France-Mirror-Update-Server">https://www.d2.lc/d2gl.mpq</link>
 	</file>	
-	<file name="glide4x.dll" crc="8849F039">	
+	<file name="glide4x.dll" crc="D3EFDDED">	
 		<link>https://d2.lc/glide4x.dll</link>
 		<link>https://www.d2.lc/glide4x.dll</link>
 	</file>	
