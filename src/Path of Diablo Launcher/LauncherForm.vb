@@ -1,11 +1,10 @@
-﻿Imports System.ComponentModel
-Imports System.Diagnostics
-Imports System.IO
-Imports System.IO.Compression
+﻿Imports System.IO
 Imports System.Net
-Imports System.Security.Policy
 Imports System.Threading
 Imports System.Timers
+Imports System.Diagnostics
+Imports System.ComponentModel
+Imports System.IO.Compression
 
 Public Class LauncherForm
 
@@ -62,9 +61,6 @@ Public Class LauncherForm
     End Function
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        TextBoxLootFilterURL.Text = My.MySettings.Default.stringLootLink
-        TextBoxLootFilterURLTwo.Text = My.MySettings.Default.stringLootLinkTwo
-        TextBoxLootFilterURLThree.Text = My.MySettings.Default.stringLootLinkThree
         SetText(LabelDownloadStatus, "")
 
         'check and create needed directories
@@ -93,37 +89,6 @@ Public Class LauncherForm
         cmd.ScanCommandLine(Environment.GetCommandLineArgs())
 
         Log("Welcome to the Path of Diablo Launcher v14")
-
-        Dim args() As String = Environment.GetCommandLineArgs()
-        ' DEBUG
-        'MsgBox("Args count: " & args.Length & vbCrLf & String.Join(vbCrLf, args))
-
-        For Each arg As String In args
-            If arg.StartsWith("podlauncher://", StringComparison.OrdinalIgnoreCase) Then
-                Try
-                    Dim uri As New Uri(arg)
-
-                    If uri.Host.Equals("install", StringComparison.OrdinalIgnoreCase) Then
-                        Dim query = uri.Query   ' ?url=...
-
-                        If query.StartsWith("?url=", StringComparison.OrdinalIgnoreCase) Then
-                            Dim filterUrl As String = Uri.UnescapeDataString(query.Substring(5))
-
-                            LootFilterSettingsPanel.Visible = True
-                            Log("Writing into textbox")
-                            TextBoxLootFilterURL.Text = filterUrl
-                            Log("Received filter URL via podlauncher protocol")
-
-                            ' OPTIONAL: auto-start download
-                            ' ButtonDownload.PerformClick()
-                        End If
-                    End If
-
-                Catch ex As Exception
-                    Log("Failed to parse podlauncher URI: " & ex.Message)
-                End Try
-            End If
-        Next
 
         If Not CheckDependancies() Then
             Log("Missing MSVC 10 runtime, installing")
@@ -158,15 +123,7 @@ Public Class LauncherForm
             Return
         End If
 
-        If TextBoxLootFilterURL.Text.Equals("") Then
-            My.MySettings.Default.stringLootLink = Me.TextBoxLootFilterURL.Text
-        End If
-        If TextBoxLootFilterURLTwo.Text.Equals("") Then
-            My.MySettings.Default.stringLootLink = Me.TextBoxLootFilterURLTwo.Text
-        End If
-        If TextBoxLootFilterURLThree.Text.Equals("") Then
-            My.MySettings.Default.stringLootLink = Me.TextBoxLootFilterURLThree.Text
-        End If
+        My.MySettings.Default.stringLootLink = Me.TextBoxLootFilterURL.Text
 
         Try
             My.Computer.Registry.SetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", My.Computer.FileSystem.CurrentDirectory & "\" & d2.FileName, "~ DisableNXShowUI RUNASADMIN")
@@ -350,7 +307,7 @@ Public Class LauncherForm
     End Sub
 
     Private Sub Banner_Click(sender As Object, e As EventArgs) Handles LauncherBanner.Click
-        Process.Start("https://beta.pathofdiablo.com/")
+        Process.Start("https://pathofdiablo.com/p/")
     End Sub
 
     Private Sub Donate_Click(sender As Object, e As EventArgs) Handles ButtonDonate.Click
@@ -380,128 +337,60 @@ Public Class LauncherForm
         Process.Start("https://pathofdiablo.com/filters")
     End Sub
 
-    Private Sub WebBrowserNews_Navigating(sender As Object, e As WebBrowserNavigatingEventArgs) Handles WebBrowserNews.Navigating
-
-        ' Allow the initial embedded page
-        If e.Url.AbsoluteUri = "https://beta.pathofdiablo.com/launcher-embed" Then
-            Exit Sub
-        End If
-
-        ' Stop IE navigation
-        e.Cancel = True
-
-        ' Open link in default browser
-        Process.Start(New ProcessStartInfo With {
-        .FileName = e.Url.AbsoluteUri,
-        .UseShellExecute = True
-    })
-
-    End Sub
-
-    Private Sub WebBrowserNews_NewWindow(sender As Object, e As ComponentModel.CancelEventArgs) Handles WebBrowserNews.NewWindow
-
-        ' Cancel IE opening a new window
-        e.Cancel = True
-
-        ' Get the URL IE wanted to open
-        Dim url As String = WebBrowserNews.StatusText
-
-        If Not String.IsNullOrEmpty(url) Then
-            Process.Start(New ProcessStartInfo With {
-            .FileName = url,
-            .UseShellExecute = True
-        })
-        End If
-    End Sub
     Private Sub dDownloadFilter_Click(sender As Object, e As EventArgs) Handles ButtonDownloadFilter.Click
-        Dim urls() As String = {
-            TextBoxLootFilterURL.Text,
-            TextBoxLootFilterURLTwo.Text,
-            TextBoxLootFilterURLThree.Text
-        }
-        isUpdateClicked = True
-
-        Dim thread As New Thread(Sub() LootFilterDownloaderThread(urls))
+        Dim thread As New Thread(AddressOf LootFilterDownloaderThread)
         thread.IsBackground = True
+        isUpdateClicked = True
         thread.Start()
     End Sub
 
-    Private Async Sub LootFilterDownloaderThread(urls() As String)
+    Private Sub LootFilterDownloaderThread()
+        If TextBoxLootFilterURL.Text.Equals("") Then
+            Log("Please enter a url where the loot filter will be downloaded from.")
+            Exit Sub
+        End If
         'If lootfiltername.Text.Equals("") Then
         '    Log("Please give the loot filter to be downloaded a name.")
         '    Exit Sub
         'End If
-        Invoke(Sub()
-                   Log("AUTO-UPDATE URLS = " &
-        "[" & TextBoxLootFilterURL.Text & "] [" &
-        TextBoxLootFilterURLTwo.Text & "] [" &
-        TextBoxLootFilterURLThree.Text & "]")
-               End Sub)
-        If urls.All(Function(s) String.IsNullOrEmpty(s)) Then
-            Invoke(Sub()
-                       Log("Please enter a url where the loot filter will be downloaded from.")
-                   End Sub)
-            Exit Sub
-        End If
 
-        'SetEnabled(playBtn, False)
-        Invoke(Sub()
-                   SetEnabled(ButtonDownloadFilter, False)
-                   isPlayAvailable = False
-               End Sub)
-
-        Dim dl As WebClient = New WebClient()
-
-        For i As Integer = 0 To urls.Length - 1
-            Dim url As String = urls(i)
-
-            If String.IsNullOrWhiteSpace(url) Then
-                Continue For
-            End If
-
-            Dim filterName As String = ""
-            Try
-                Dim parts As String() = url.Split("/"c)
-                filterName = parts(parts.Length - 1)
-
-                Invoke(Sub() Log("Downloading " & filterName & " from " & url))
-                Await (dl.DownloadFileTaskAsync(url, "./filter/" & filterName))
-                Invoke(Sub() Log("Successfully downloaded loot filter " & filterName & " from " & url))
-
-                If isUpdateClicked Then
-                    Invoke(Sub() Log("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it."))
-                End If
-                'Save the last downloaded URL based on index
-                Invoke(Sub()
-                           Select Case i
-                               Case 0
-                                   Global.Path_of_Diablo_Launcher.My.MySettings.Default.stringLootLink = url
-                               Case 1
-                                   Global.Path_of_Diablo_Launcher.My.MySettings.Default.stringLootLinkTwo = url
-                               Case 2
-                                   Global.Path_of_Diablo_Launcher.My.MySettings.Default.stringLootLinkThree = url
-                           End Select
-                       End Sub)
-            Catch ex As Exception
-                Invoke(Sub()
-                           Log("An error occured while downloading loot filter " & filterName & " from " & url)
-                       End Sub)
-            End Try
-        Next
+        Dim tmp As String() = TextBoxLootFilterURL.Text.Split(New Char() {"/"})
         'If File.Exists("./filter" & tmp(tmp.Count - 1)) Then
         'Log("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
         'MsgBox("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
         'Exit Sub
         'End If
-        My.MySettings.Default.Save()
+
+        'SetEnabled(playBtn, False)
+        SetEnabled(ButtonDownloadFilter, False)
+        isPlayAvailable = False
+
         'TODO zip file handling for filters with custom sounds
-        'Dim url As String = TextBoxLootFilterURL.Text
+        Dim name As String = "item.filter"      'lootfiltername.Text
+        Dim url As String = TextBoxLootFilterURL.Text
+
+        Log("Downloading " & name & " from " & url)
+
+        Try
+            Dim dl As WebClient = New WebClient()
+            dl.DownloadFile(url, "./filter/" & name)
+
+            Log("Successfully downloaded loot filter " & name & " from " & url)
+
+            If isUpdateClicked Then
+                Log("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
+                MsgBox("Custom filter installed. You must enable 'custom filter' in-game via Settings button to activate it.")
+            End If
+
+
+            Global.Path_of_Diablo_Launcher.My.MySettings.Default.stringLootLink = url
+        Catch ex As Exception
+            Log("An error occured while downloading loot filter " & name & " from " & url)
+        End Try
 
         'SetEnabled(playBtn, True)
-        Invoke(Sub()
-                   SetEnabled(ButtonDownloadFilter, True)
-                   isPlayAvailable = True
-               End Sub)
+        SetEnabled(ButtonDownloadFilter, True)
+        isPlayAvailable = True
     End Sub
 
     Delegate Sub SetEnabledDelegate(ByVal ctrl As Control, ByVal bool As Boolean)
@@ -587,9 +476,6 @@ Public Class LauncherForm
     End Sub
 
     Private Sub UpdaterThread()
-        Invoke(Sub()
-                   Log("DEBUG AutoUpdate checkbox = " & CheckAutoUpdateFilter.Checked)
-               End Sub)
         'Allow additional ssl connection protocols
         Try
             ServicePointManager.SecurityProtocol += SecurityProtocolType.Tls11
@@ -618,7 +504,6 @@ Public Class LauncherForm
             Dim file As String = "./tmp/files.xml"
 
             Dim xmlLink As String = "https://raw.githubusercontent.com/GreenDude120/PoD-Launcher/master/files.xml"
-            'Dim xmlLink As String = "https://raw.githubusercontent.com/vileskin/PoD-Launcher/refs/heads/main/files.xml"
             Dim xmlLinkFallback As String = "https://d2.lc/files.xml"
             Dim dl As WebClient = New WebClient()
             Try
@@ -749,14 +634,8 @@ Public Class LauncherForm
             Log("Updates disabled!")
         End If
 
-        If My.Settings.chkboxAutoUpdate Then
-            Dim urls() As String = {
-                My.MySettings.Default.stringLootLink,
-                My.MySettings.Default.stringLootLinkTwo,
-                My.MySettings.Default.stringLootLinkThree
-            }
-
-            Dim thread As New Thread(Sub() LootFilterDownloaderThread(urls))
+        If CheckAutoUpdateFilter.Checked Then
+            Dim thread As New Thread(AddressOf LootFilterDownloaderThread)
             thread.IsBackground = True
             isUpdateClicked = False
             thread.Start()
@@ -1052,82 +931,5 @@ Public Class LauncherForm
 
     Private Sub ptrChk_CheckedChanged(sender As Object, e As EventArgs) Handles ptrChk.CheckedChanged
 
-    End Sub
-
-    Private Sub LootFilerButton_Click(sender As Object, e As EventArgs) Handles LootFilterButton.Click
-        LootFilterSettingsPanel.Visible = True
-    End Sub
-
-    Private Sub LootFilterSettingsPanel_Paint(sender As Object, e As PaintEventArgs) Handles LootFilterSettingsPanel.Paint
-
-    End Sub
-    Private Sub LootFilerSettingsCloseButton_Click(sender As Object, e As EventArgs) Handles LootFilerSettingsCloseButton.Click
-        LootFilterSettingsPanel.Visible = False
-    End Sub
-
-    Private Sub ButtonDeleteFilterOne_Click(sender As Object, e As EventArgs) Handles ButtonDeleteFilterOne.Click
-        Dim url As String = My.MySettings.Default.stringLootLink
-        If String.IsNullOrWhiteSpace(url) Then Return
-
-        Dim filename As String = url.Substring(url.LastIndexOf("/") + 1)
-        Dim filePath As String = System.IO.Path.Combine(Application.StartupPath, "filter", fileName)
-
-        If System.IO.File.Exists(filePath) Then
-            Try
-                System.IO.File.Delete(filePath)
-                MessageBox.Show($"{fileName} deleted successfully.")
-            Catch ex As Exception
-                MessageBox.Show($"Error deleting {fileName}: {ex.Message}")
-            End Try
-        End If
-
-        ' Clear the setting and textbox
-        My.MySettings.Default.stringLootLink = ""
-        TextBoxLootFilterURL.Text = ""
-        My.MySettings.Default.Save()
-    End Sub
-
-    Private Sub ButtonDeleteFilterTwo_Click(sender As Object, e As EventArgs) Handles ButtonDeleteFilterTwo.Click
-        Dim url As String = My.MySettings.Default.stringLootLinkTwo
-        If String.IsNullOrWhiteSpace(url) Then Return
-
-        Dim filename As String = url.Substring(url.LastIndexOf("/") + 1)
-        Dim filePath As String = System.IO.Path.Combine(Application.StartupPath, "filter", fileName)
-
-        If System.IO.File.Exists(filePath) Then
-            Try
-                System.IO.File.Delete(filePath)
-                MessageBox.Show($"{fileName} deleted successfully.")
-            Catch ex As Exception
-                MessageBox.Show($"Error deleting {fileName}: {ex.Message}")
-            End Try
-        End If
-
-        ' Clear the setting and textbox
-        My.MySettings.Default.stringLootLinkTwo = ""
-        TextBoxLootFilterURLTwo.Text = ""
-        My.MySettings.Default.Save()
-    End Sub
-
-    Private Sub ButtonDeleteFilterThree_Click(sender As Object, e As EventArgs) Handles ButtonDeleteFilterThree.Click
-        Dim url As String = My.MySettings.Default.stringLootLinkThree
-        If String.IsNullOrWhiteSpace(url) Then Return
-
-        Dim filename As String = url.Substring(url.LastIndexOf("/") + 1)
-        Dim filePath As String = System.IO.Path.Combine(Application.StartupPath, "filter", fileName)
-
-        If System.IO.File.Exists(filePath) Then
-            Try
-                System.IO.File.Delete(filePath)
-                MessageBox.Show($"{fileName} deleted successfully.")
-            Catch ex As Exception
-                MessageBox.Show($"Error deleting {fileName}: {ex.Message}")
-            End Try
-        End If
-
-        ' Clear the setting and textbox
-        My.MySettings.Default.stringLootLinkThree = ""
-        TextBoxLootFilterURLThree.Text = ""
-        My.MySettings.Default.Save()
     End Sub
 End Class

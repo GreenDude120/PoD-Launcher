@@ -185,43 +185,19 @@ Namespace My
                 Me("chkboxAutoUpdate") = value
             End Set
         End Property
-
+        
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
         Public Property stringLootLink() As String
             Get
-                Return CType(Me("stringLootLink"), String)
+                Return CType(Me("stringLootLink"),String)
             End Get
             Set
                 Me("stringLootLink") = value
             End Set
         End Property
-
-        <Global.System.Configuration.UserScopedSettingAttribute(),
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-         Global.System.Configuration.DefaultSettingValueAttribute("")>
-        Public Property stringLootLinkTwo() As String
-            Get
-                Return CType(Me("stringLootLinkTwo"), String)
-            End Get
-            Set
-                Me("stringLootLinkTwo") = Value
-            End Set
-        End Property
-
-        <Global.System.Configuration.UserScopedSettingAttribute(),
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-         Global.System.Configuration.DefaultSettingValueAttribute("")>
-        Public Property stringLootLinkThree() As String
-            Get
-                Return CType(Me("stringLootLinkThree"), String)
-            End Get
-            Set
-                Me("stringLootLinkThree") = Value
-            End Set
-        End Property
-
+        
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
