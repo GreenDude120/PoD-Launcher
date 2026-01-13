@@ -10,8 +10,9 @@
     <RootNamespace>Path_of_Diablo_Launcher</RootNamespace>
     <AssemblyName>Path of Diablo Launcher</AssemblyName>
     <FileAlignment>512</FileAlignment>
+	<EnableApplicationFramework>true</EnableApplicationFramework>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>

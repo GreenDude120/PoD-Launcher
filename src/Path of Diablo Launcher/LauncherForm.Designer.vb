@@ -62,18 +62,32 @@ Partial Class LauncherForm
         Me.GroupBoxEventLog = New System.Windows.Forms.GroupBox()
         Me.LogBoxEventLog = New System.Windows.Forms.ListBox()
         Me.GroupBoxLootFilter = New System.Windows.Forms.GroupBox()
-        Me.LabelLootFilterURL = New System.Windows.Forms.Label()
-        Me.TextBoxLootFilterURL = New System.Windows.Forms.TextBox()
-        Me.ButtonDownloadFilter = New System.Windows.Forms.Button()
+        Me.LootFilterButton = New System.Windows.Forms.Button()
         Me.WebBrowserNews = New System.Windows.Forms.WebBrowser()
+        Me.LootFilterSettingsPanel = New System.Windows.Forms.Panel()
+        Me.FilterThreeLabel = New System.Windows.Forms.Label()
+        Me.FilterTwoLabel = New System.Windows.Forms.Label()
+        Me.LabelLootFilterURLThree = New System.Windows.Forms.Label()
+        Me.TextBoxLootFilterURLThree = New System.Windows.Forms.TextBox()
+        Me.LabelLootFilterURLTwo = New System.Windows.Forms.Label()
+        Me.TextBoxLootFilterURLTwo = New System.Windows.Forms.TextBox()
+        Me.LootFilerSettingsCloseButton = New System.Windows.Forms.Button()
+        Me.LabelLootFilterURL = New System.Windows.Forms.Label()
+        Me.ButtonDownloadFilter = New System.Windows.Forms.Button()
+        Me.TextBoxLootFilterURL = New System.Windows.Forms.TextBox()
+        Me.FilterOneLabel = New System.Windows.Forms.Label()
         Me.LauncherBanner = New System.Windows.Forms.PictureBox()
         Me.PanelLinks = New System.Windows.Forms.Panel()
+        Me.ButtonDeleteFilterOne = New System.Windows.Forms.Button()
+        Me.ButtonDeleteFilterTwo = New System.Windows.Forms.Button()
+        Me.ButtonDeleteFilterThree = New System.Windows.Forms.Button()
         Me.PanelPlay.SuspendLayout()
         Me.PanelMain.SuspendLayout()
         Me.GroupBoxLaunchFlags.SuspendLayout()
         Me.TableLayoutConfigOptions.SuspendLayout()
         Me.GroupBoxEventLog.SuspendLayout()
         Me.GroupBoxLootFilter.SuspendLayout()
+        Me.LootFilterSettingsPanel.SuspendLayout()
         CType(Me.LauncherBanner, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelLinks.SuspendLayout()
         Me.SuspendLayout()
@@ -85,7 +99,7 @@ Partial Class LauncherForm
         Me.ButtonPlay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.ButtonPlay.ForeColor = System.Drawing.Color.Green
         Me.ButtonPlay.Location = New System.Drawing.Point(682, 6)
-        Me.ButtonPlay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonPlay.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonPlay.Name = "ButtonPlay"
         Me.ButtonPlay.Size = New System.Drawing.Size(266, 45)
         Me.ButtonPlay.TabIndex = 1
@@ -98,7 +112,7 @@ Partial Class LauncherForm
         Me.CheckCloseOnPlay.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxPlayClose", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.CheckCloseOnPlay.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.CheckCloseOnPlay.Location = New System.Drawing.Point(724, 55)
-        Me.CheckCloseOnPlay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.CheckCloseOnPlay.Margin = New System.Windows.Forms.Padding(4)
         Me.CheckCloseOnPlay.Name = "CheckCloseOnPlay"
         Me.CheckCloseOnPlay.Size = New System.Drawing.Size(202, 20)
         Me.CheckCloseOnPlay.TabIndex = 10
@@ -110,7 +124,7 @@ Partial Class LauncherForm
         '
         Me.ProgressBarDownload.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.ProgressBarDownload.Location = New System.Drawing.Point(4, 9)
-        Me.ProgressBarDownload.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ProgressBarDownload.Margin = New System.Windows.Forms.Padding(4)
         Me.ProgressBarDownload.Name = "ProgressBarDownload"
         Me.ProgressBarDownload.Size = New System.Drawing.Size(671, 39)
         Me.ProgressBarDownload.Step = 1
@@ -124,7 +138,7 @@ Partial Class LauncherForm
         Me.PanelPlay.Controls.Add(Me.ProgressBarDownload)
         Me.PanelPlay.Controls.Add(Me.CheckCloseOnPlay)
         Me.PanelPlay.Location = New System.Drawing.Point(15, 499)
-        Me.PanelPlay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelPlay.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelPlay.Name = "PanelPlay"
         Me.PanelPlay.Size = New System.Drawing.Size(952, 79)
         Me.PanelPlay.TabIndex = 28
@@ -151,7 +165,7 @@ Partial Class LauncherForm
         Me.ButtonDiscord.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.discord
         Me.ButtonDiscord.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.ButtonDiscord.Location = New System.Drawing.Point(795, 6)
-        Me.ButtonDiscord.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonDiscord.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonDiscord.Name = "ButtonDiscord"
         Me.ButtonDiscord.Size = New System.Drawing.Size(150, 34)
         Me.ButtonDiscord.TabIndex = 27
@@ -167,7 +181,7 @@ Partial Class LauncherForm
         Me.ButtonServerList.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources._70
         Me.ButtonServerList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.ButtonServerList.Location = New System.Drawing.Point(165, 6)
-        Me.ButtonServerList.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonServerList.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonServerList.Name = "ButtonServerList"
         Me.ButtonServerList.Size = New System.Drawing.Size(150, 34)
         Me.ButtonServerList.TabIndex = 14
@@ -183,7 +197,7 @@ Partial Class LauncherForm
         Me.ButtonRules.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources._90
         Me.ButtonRules.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.ButtonRules.Location = New System.Drawing.Point(480, 6)
-        Me.ButtonRules.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonRules.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonRules.Name = "ButtonRules"
         Me.ButtonRules.Size = New System.Drawing.Size(150, 34)
         Me.ButtonRules.TabIndex = 15
@@ -199,7 +213,7 @@ Partial Class LauncherForm
         Me.ButtonWiki.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources._43
         Me.ButtonWiki.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.ButtonWiki.Location = New System.Drawing.Point(322, 6)
-        Me.ButtonWiki.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonWiki.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonWiki.Name = "ButtonWiki"
         Me.ButtonWiki.Size = New System.Drawing.Size(150, 34)
         Me.ButtonWiki.TabIndex = 13
@@ -215,7 +229,7 @@ Partial Class LauncherForm
         Me.ButtonDonate.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources._84
         Me.ButtonDonate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.ButtonDonate.Location = New System.Drawing.Point(8, 6)
-        Me.ButtonDonate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonDonate.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonDonate.Name = "ButtonDonate"
         Me.ButtonDonate.Size = New System.Drawing.Size(150, 34)
         Me.ButtonDonate.TabIndex = 11
@@ -231,7 +245,7 @@ Partial Class LauncherForm
         Me.ButtonReddit.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.reddit
         Me.ButtonReddit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.ButtonReddit.Location = New System.Drawing.Point(638, 6)
-        Me.ButtonReddit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonReddit.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonReddit.Name = "ButtonReddit"
         Me.ButtonReddit.Size = New System.Drawing.Size(150, 34)
         Me.ButtonReddit.TabIndex = 12
@@ -244,8 +258,8 @@ Partial Class LauncherForm
         Me.ButtonSelectFilter.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.ButtonSelectFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonSelectFilter.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.ButtonSelectFilter.Location = New System.Drawing.Point(421, 22)
-        Me.ButtonSelectFilter.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonSelectFilter.Location = New System.Drawing.Point(346, 36)
+        Me.ButtonSelectFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonSelectFilter.Name = "ButtonSelectFilter"
         Me.ButtonSelectFilter.Size = New System.Drawing.Size(31, 31)
         Me.ButtonSelectFilter.TabIndex = 24
@@ -257,8 +271,8 @@ Partial Class LauncherForm
         '
         Me.CheckAutoUpdateFilter.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxAutoUpdate", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.CheckAutoUpdateFilter.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.CheckAutoUpdateFilter.Location = New System.Drawing.Point(24, 55)
-        Me.CheckAutoUpdateFilter.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.CheckAutoUpdateFilter.Location = New System.Drawing.Point(12, 357)
+        Me.CheckAutoUpdateFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.CheckAutoUpdateFilter.Name = "CheckAutoUpdateFilter"
         Me.CheckAutoUpdateFilter.Size = New System.Drawing.Size(152, 39)
         Me.CheckAutoUpdateFilter.TabIndex = 23
@@ -273,7 +287,7 @@ Partial Class LauncherForm
         Me.aspectChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxNoFixAspect", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.aspectChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.aspectChk.Location = New System.Drawing.Point(322, 4)
-        Me.aspectChk.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.aspectChk.Margin = New System.Windows.Forms.Padding(4)
         Me.aspectChk.Name = "aspectChk"
         Me.aspectChk.Size = New System.Drawing.Size(101, 20)
         Me.aspectChk.TabIndex = 8
@@ -289,7 +303,7 @@ Partial Class LauncherForm
         Me.nsChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxNs", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.nsChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.nsChk.Location = New System.Drawing.Point(322, 34)
-        Me.nsChk.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.nsChk.Margin = New System.Windows.Forms.Padding(4)
         Me.nsChk.Name = "nsChk"
         Me.nsChk.Size = New System.Drawing.Size(47, 20)
         Me.nsChk.TabIndex = 9
@@ -318,7 +332,7 @@ Partial Class LauncherForm
         Me.TableLayoutConfigOptions.SetColumnSpan(Me.radioGDI, 3)
         Me.radioGDI.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.radioGDI.Location = New System.Drawing.Point(4, 4)
-        Me.radioGDI.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.radioGDI.Margin = New System.Windows.Forms.Padding(4)
         Me.radioGDI.Name = "radioGDI"
         Me.radioGDI.Size = New System.Drawing.Size(82, 20)
         Me.radioGDI.TabIndex = 3
@@ -333,7 +347,7 @@ Partial Class LauncherForm
         Me.sndbkgChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSndBkg", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.sndbkgChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.sndbkgChk.Location = New System.Drawing.Point(196, 34)
-        Me.sndbkgChk.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.sndbkgChk.Margin = New System.Windows.Forms.Padding(4)
         Me.sndbkgChk.Name = "sndbkgChk"
         Me.sndbkgChk.Size = New System.Drawing.Size(78, 20)
         Me.sndbkgChk.TabIndex = 5
@@ -363,7 +377,7 @@ Partial Class LauncherForm
         Me.TableLayoutConfigOptions.SetColumnSpan(Me.radioVidTest, 2)
         Me.radioVidTest.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.radioVidTest.Location = New System.Drawing.Point(4, 94)
-        Me.radioVidTest.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.radioVidTest.Margin = New System.Windows.Forms.Padding(4)
         Me.radioVidTest.Name = "radioVidTest"
         Me.radioVidTest.Size = New System.Drawing.Size(128, 20)
         Me.radioVidTest.TabIndex = 0
@@ -379,7 +393,7 @@ Partial Class LauncherForm
         Me.widescreenChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxWidescreen", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.widescreenChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.widescreenChk.Location = New System.Drawing.Point(196, 94)
-        Me.widescreenChk.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.widescreenChk.Margin = New System.Windows.Forms.Padding(4)
         Me.widescreenChk.Name = "widescreenChk"
         Me.widescreenChk.Size = New System.Drawing.Size(102, 20)
         Me.widescreenChk.TabIndex = 7
@@ -394,7 +408,7 @@ Partial Class LauncherForm
         Me.ptrChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxPTR", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.ptrChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.ptrChk.Location = New System.Drawing.Point(196, 124)
-        Me.ptrChk.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ptrChk.Margin = New System.Windows.Forms.Padding(4)
         Me.ptrChk.Name = "ptrChk"
         Me.ptrChk.Size = New System.Drawing.Size(48, 20)
         Me.ptrChk.TabIndex = 12
@@ -409,7 +423,7 @@ Partial Class LauncherForm
         Me.dsoalChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxDSOAL", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.dsoalChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.dsoalChk.Location = New System.Drawing.Point(322, 94)
-        Me.dsoalChk.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dsoalChk.Margin = New System.Windows.Forms.Padding(4)
         Me.dsoalChk.Name = "dsoalChk"
         Me.dsoalChk.Size = New System.Drawing.Size(67, 20)
         Me.dsoalChk.TabIndex = 10
@@ -424,7 +438,7 @@ Partial Class LauncherForm
         Me.idsoundChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxIdSound", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.idsoundChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.idsoundChk.Location = New System.Drawing.Point(322, 64)
-        Me.idsoundChk.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.idsoundChk.Margin = New System.Windows.Forms.Padding(4)
         Me.idsoundChk.Name = "idsoundChk"
         Me.idsoundChk.Size = New System.Drawing.Size(81, 20)
         Me.idsoundChk.TabIndex = 13
@@ -440,7 +454,7 @@ Partial Class LauncherForm
         Me.cpufixChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxCpufix", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.cpufixChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.cpufixChk.Location = New System.Drawing.Point(196, 64)
-        Me.cpufixChk.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cpufixChk.Margin = New System.Windows.Forms.Padding(4)
         Me.cpufixChk.Name = "cpufixChk"
         Me.cpufixChk.Size = New System.Drawing.Size(67, 20)
         Me.cpufixChk.TabIndex = 6
@@ -473,7 +487,7 @@ Partial Class LauncherForm
         Me.skipChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxSkipToBnet", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.skipChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.skipChk.Location = New System.Drawing.Point(196, 4)
-        Me.skipChk.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.skipChk.Margin = New System.Windows.Forms.Padding(4)
         Me.skipChk.Name = "skipChk"
         Me.skipChk.Size = New System.Drawing.Size(95, 20)
         Me.skipChk.TabIndex = 4
@@ -488,7 +502,7 @@ Partial Class LauncherForm
         Me.directChk.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "chkboxDirect", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.directChk.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.directChk.Location = New System.Drawing.Point(322, 124)
-        Me.directChk.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.directChk.Margin = New System.Windows.Forms.Padding(4)
         Me.directChk.Name = "directChk"
         Me.directChk.Size = New System.Drawing.Size(66, 20)
         Me.directChk.TabIndex = 11
@@ -506,7 +520,7 @@ Partial Class LauncherForm
         Me.ButtonD2VidTestConfig.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.ButtonD2VidTestConfig.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.cog
         Me.ButtonD2VidTestConfig.Location = New System.Drawing.Point(154, 94)
-        Me.ButtonD2VidTestConfig.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonD2VidTestConfig.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonD2VidTestConfig.Name = "ButtonD2VidTestConfig"
         Me.ButtonD2VidTestConfig.Size = New System.Drawing.Size(18, 22)
         Me.ButtonD2VidTestConfig.TabIndex = 17
@@ -523,7 +537,7 @@ Partial Class LauncherForm
         Me.ButtonGlideConfig.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.ButtonGlideConfig.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.cog
         Me.ButtonGlideConfig.Location = New System.Drawing.Point(112, 34)
-        Me.ButtonGlideConfig.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonGlideConfig.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonGlideConfig.Name = "ButtonGlideConfig"
         Me.ButtonGlideConfig.Size = New System.Drawing.Size(18, 22)
         Me.ButtonGlideConfig.TabIndex = 1
@@ -540,7 +554,7 @@ Partial Class LauncherForm
         Me.ButtonDDrawConfig.ForeColor = System.Drawing.SystemColors.InactiveCaption
         Me.ButtonDDrawConfig.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.cog
         Me.ButtonDDrawConfig.Location = New System.Drawing.Point(154, 64)
-        Me.ButtonDDrawConfig.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonDDrawConfig.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonDDrawConfig.Name = "ButtonDDrawConfig"
         Me.ButtonDDrawConfig.Size = New System.Drawing.Size(18, 22)
         Me.ButtonDDrawConfig.TabIndex = 15
@@ -555,7 +569,7 @@ Partial Class LauncherForm
         Me.PanelMain.Controls.Add(Me.GroupBoxLootFilter)
         Me.PanelMain.Controls.Add(Me.WebBrowserNews)
         Me.PanelMain.Location = New System.Drawing.Point(15, 85)
-        Me.PanelMain.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelMain.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelMain.Name = "PanelMain"
         Me.PanelMain.Size = New System.Drawing.Size(952, 410)
         Me.PanelMain.TabIndex = 29
@@ -565,9 +579,9 @@ Partial Class LauncherForm
         Me.GroupBoxLaunchFlags.Controls.Add(Me.TableLayoutConfigOptions)
         Me.GroupBoxLaunchFlags.ForeColor = System.Drawing.Color.White
         Me.GroupBoxLaunchFlags.Location = New System.Drawing.Point(491, 4)
-        Me.GroupBoxLaunchFlags.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBoxLaunchFlags.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBoxLaunchFlags.Name = "GroupBoxLaunchFlags"
-        Me.GroupBoxLaunchFlags.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBoxLaunchFlags.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBoxLaunchFlags.Size = New System.Drawing.Size(460, 179)
         Me.GroupBoxLaunchFlags.TabIndex = 30
         Me.GroupBoxLaunchFlags.TabStop = False
@@ -601,7 +615,7 @@ Partial Class LauncherForm
         Me.TableLayoutConfigOptions.Controls.Add(Me.radioD2GL, 0, 4)
         Me.TableLayoutConfigOptions.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize
         Me.TableLayoutConfigOptions.Location = New System.Drawing.Point(8, 21)
-        Me.TableLayoutConfigOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutConfigOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutConfigOptions.Name = "TableLayoutConfigOptions"
         Me.TableLayoutConfigOptions.RowCount = 5
         Me.TableLayoutConfigOptions.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
@@ -619,9 +633,9 @@ Partial Class LauncherForm
         Me.GroupBoxEventLog.Controls.Add(Me.LogBoxEventLog)
         Me.GroupBoxEventLog.ForeColor = System.Drawing.Color.White
         Me.GroupBoxEventLog.Location = New System.Drawing.Point(491, 289)
-        Me.GroupBoxEventLog.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBoxEventLog.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBoxEventLog.Name = "GroupBoxEventLog"
-        Me.GroupBoxEventLog.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBoxEventLog.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBoxEventLog.Size = New System.Drawing.Size(460, 114)
         Me.GroupBoxEventLog.TabIndex = 33
         Me.GroupBoxEventLog.TabStop = False
@@ -639,50 +653,166 @@ Partial Class LauncherForm
         Me.LogBoxEventLog.HorizontalScrollbar = True
         Me.LogBoxEventLog.ItemHeight = 16
         Me.LogBoxEventLog.Location = New System.Drawing.Point(8, 24)
-        Me.LogBoxEventLog.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LogBoxEventLog.Margin = New System.Windows.Forms.Padding(4)
         Me.LogBoxEventLog.Name = "LogBoxEventLog"
         Me.LogBoxEventLog.Size = New System.Drawing.Size(445, 80)
         Me.LogBoxEventLog.TabIndex = 0
         '
         'GroupBoxLootFilter
         '
+        Me.GroupBoxLootFilter.Controls.Add(Me.LootFilterButton)
         Me.GroupBoxLootFilter.Controls.Add(Me.ButtonSelectFilter)
-        Me.GroupBoxLootFilter.Controls.Add(Me.LabelLootFilterURL)
-        Me.GroupBoxLootFilter.Controls.Add(Me.TextBoxLootFilterURL)
-        Me.GroupBoxLootFilter.Controls.Add(Me.ButtonDownloadFilter)
-        Me.GroupBoxLootFilter.Controls.Add(Me.CheckAutoUpdateFilter)
         Me.GroupBoxLootFilter.ForeColor = System.Drawing.Color.White
         Me.GroupBoxLootFilter.Location = New System.Drawing.Point(491, 186)
-        Me.GroupBoxLootFilter.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBoxLootFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBoxLootFilter.Name = "GroupBoxLootFilter"
-        Me.GroupBoxLootFilter.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBoxLootFilter.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBoxLootFilter.Size = New System.Drawing.Size(460, 99)
         Me.GroupBoxLootFilter.TabIndex = 32
         Me.GroupBoxLootFilter.TabStop = False
         Me.GroupBoxLootFilter.Text = "Loot Filter"
         '
+        'LootFilterButton
+        '
+        Me.LootFilterButton.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.LootFilterButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.LootFilterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.LootFilterButton.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.LootFilterButton.Location = New System.Drawing.Point(32, 36)
+        Me.LootFilterButton.Margin = New System.Windows.Forms.Padding(4)
+        Me.LootFilterButton.Name = "LootFilterButton"
+        Me.LootFilterButton.Size = New System.Drawing.Size(265, 31)
+        Me.LootFilterButton.TabIndex = 34
+        Me.LootFilterButton.Text = "Loot Filter Settings"
+        Me.LootFilterButton.UseVisualStyleBackColor = True
+        '
+        'WebBrowserNews
+        '
+        Me.WebBrowserNews.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
+        Me.WebBrowserNews.IsWebBrowserContextMenuEnabled = False
+        Me.WebBrowserNews.Location = New System.Drawing.Point(4, 2)
+        Me.WebBrowserNews.Margin = New System.Windows.Forms.Padding(4)
+        Me.WebBrowserNews.MinimumSize = New System.Drawing.Size(25, 25)
+        Me.WebBrowserNews.Name = "WebBrowserNews"
+        Me.WebBrowserNews.ScriptErrorsSuppressed = True
+        Me.WebBrowserNews.Size = New System.Drawing.Size(481, 404)
+        Me.WebBrowserNews.TabIndex = 31
+        Me.WebBrowserNews.Url = New System.Uri("https://beta.pathofdiablo.com/launcher-embed", System.UriKind.Absolute)
+        '
+        'LootFilterSettingsPanel
+        '
+        Me.LootFilterSettingsPanel.Controls.Add(Me.ButtonDeleteFilterThree)
+        Me.LootFilterSettingsPanel.Controls.Add(Me.ButtonDeleteFilterTwo)
+        Me.LootFilterSettingsPanel.Controls.Add(Me.ButtonDeleteFilterOne)
+        Me.LootFilterSettingsPanel.Controls.Add(Me.FilterThreeLabel)
+        Me.LootFilterSettingsPanel.Controls.Add(Me.FilterTwoLabel)
+        Me.LootFilterSettingsPanel.Controls.Add(Me.LabelLootFilterURLThree)
+        Me.LootFilterSettingsPanel.Controls.Add(Me.TextBoxLootFilterURLThree)
+        Me.LootFilterSettingsPanel.Controls.Add(Me.LabelLootFilterURLTwo)
+        Me.LootFilterSettingsPanel.Controls.Add(Me.TextBoxLootFilterURLTwo)
+        Me.LootFilterSettingsPanel.Controls.Add(Me.CheckAutoUpdateFilter)
+        Me.LootFilterSettingsPanel.Controls.Add(Me.LootFilerSettingsCloseButton)
+        Me.LootFilterSettingsPanel.Controls.Add(Me.LabelLootFilterURL)
+        Me.LootFilterSettingsPanel.Controls.Add(Me.ButtonDownloadFilter)
+        Me.LootFilterSettingsPanel.Controls.Add(Me.TextBoxLootFilterURL)
+        Me.LootFilterSettingsPanel.Controls.Add(Me.FilterOneLabel)
+        Me.LootFilterSettingsPanel.Location = New System.Drawing.Point(506, 82)
+        Me.LootFilterSettingsPanel.Name = "LootFilterSettingsPanel"
+        Me.LootFilterSettingsPanel.Size = New System.Drawing.Size(463, 472)
+        Me.LootFilterSettingsPanel.TabIndex = 35
+        Me.LootFilterSettingsPanel.Visible = False
+        '
+        'FilterThreeLabel
+        '
+        Me.FilterThreeLabel.AutoSize = True
+        Me.FilterThreeLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.FilterThreeLabel.Location = New System.Drawing.Point(230, 230)
+        Me.FilterThreeLabel.Name = "FilterThreeLabel"
+        Me.FilterThreeLabel.Size = New System.Drawing.Size(46, 16)
+        Me.FilterThreeLabel.TabIndex = 31
+        Me.FilterThreeLabel.Text = "Filter 3"
+        '
+        'FilterTwoLabel
+        '
+        Me.FilterTwoLabel.AutoSize = True
+        Me.FilterTwoLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.FilterTwoLabel.Location = New System.Drawing.Point(230, 122)
+        Me.FilterTwoLabel.Name = "FilterTwoLabel"
+        Me.FilterTwoLabel.Size = New System.Drawing.Size(46, 16)
+        Me.FilterTwoLabel.TabIndex = 30
+        Me.FilterTwoLabel.Text = "Filter 2"
+        '
+        'LabelLootFilterURLThree
+        '
+        Me.LabelLootFilterURLThree.AutoSize = True
+        Me.LabelLootFilterURLThree.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.LabelLootFilterURLThree.Location = New System.Drawing.Point(19, 253)
+        Me.LabelLootFilterURLThree.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LabelLootFilterURLThree.Name = "LabelLootFilterURLThree"
+        Me.LabelLootFilterURLThree.Size = New System.Drawing.Size(34, 16)
+        Me.LabelLootFilterURLThree.TabIndex = 29
+        Me.LabelLootFilterURLThree.Text = "URL"
+        '
+        'TextBoxLootFilterURLThree
+        '
+        Me.TextBoxLootFilterURLThree.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(62, Byte), Integer))
+        Me.TextBoxLootFilterURLThree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBoxLootFilterURLThree.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "stringLootLinkThree", True))
+        Me.TextBoxLootFilterURLThree.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBoxLootFilterURLThree.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.TextBoxLootFilterURLThree.Location = New System.Drawing.Point(73, 250)
+        Me.TextBoxLootFilterURLThree.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBoxLootFilterURLThree.Name = "TextBoxLootFilterURLThree"
+        Me.TextBoxLootFilterURLThree.Size = New System.Drawing.Size(372, 23)
+        Me.TextBoxLootFilterURLThree.TabIndex = 28
+        '
+        'LabelLootFilterURLTwo
+        '
+        Me.LabelLootFilterURLTwo.AutoSize = True
+        Me.LabelLootFilterURLTwo.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.LabelLootFilterURLTwo.Location = New System.Drawing.Point(19, 145)
+        Me.LabelLootFilterURLTwo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.LabelLootFilterURLTwo.Name = "LabelLootFilterURLTwo"
+        Me.LabelLootFilterURLTwo.Size = New System.Drawing.Size(34, 16)
+        Me.LabelLootFilterURLTwo.TabIndex = 27
+        Me.LabelLootFilterURLTwo.Text = "URL"
+        '
+        'TextBoxLootFilterURLTwo
+        '
+        Me.TextBoxLootFilterURLTwo.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(62, Byte), Integer))
+        Me.TextBoxLootFilterURLTwo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBoxLootFilterURLTwo.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "stringLootLinkTwo", True))
+        Me.TextBoxLootFilterURLTwo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBoxLootFilterURLTwo.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.TextBoxLootFilterURLTwo.Location = New System.Drawing.Point(73, 142)
+        Me.TextBoxLootFilterURLTwo.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBoxLootFilterURLTwo.Name = "TextBoxLootFilterURLTwo"
+        Me.TextBoxLootFilterURLTwo.Size = New System.Drawing.Size(372, 23)
+        Me.TextBoxLootFilterURLTwo.TabIndex = 26
+        '
+        'LootFilerSettingsCloseButton
+        '
+        Me.LootFilerSettingsCloseButton.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.LootFilerSettingsCloseButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.LootFilerSettingsCloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.LootFilerSettingsCloseButton.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.LootFilerSettingsCloseButton.Location = New System.Drawing.Point(204, 420)
+        Me.LootFilerSettingsCloseButton.Name = "LootFilerSettingsCloseButton"
+        Me.LootFilerSettingsCloseButton.Size = New System.Drawing.Size(80, 30)
+        Me.LootFilerSettingsCloseButton.TabIndex = 24
+        Me.LootFilerSettingsCloseButton.Text = "Close"
+        Me.LootFilerSettingsCloseButton.UseVisualStyleBackColor = True
+        '
         'LabelLootFilterURL
         '
         Me.LabelLootFilterURL.AutoSize = True
-        Me.LabelLootFilterURL.Location = New System.Drawing.Point(5, 30)
+        Me.LabelLootFilterURL.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.LabelLootFilterURL.Location = New System.Drawing.Point(19, 32)
         Me.LabelLootFilterURL.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.LabelLootFilterURL.Name = "LabelLootFilterURL"
         Me.LabelLootFilterURL.Size = New System.Drawing.Size(34, 16)
         Me.LabelLootFilterURL.TabIndex = 23
         Me.LabelLootFilterURL.Text = "URL"
-        '
-        'TextBoxLootFilterURL
-        '
-        Me.TextBoxLootFilterURL.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(62, Byte), Integer))
-        Me.TextBoxLootFilterURL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBoxLootFilterURL.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "stringLootLink", True))
-        Me.TextBoxLootFilterURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBoxLootFilterURL.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.TextBoxLootFilterURL.Location = New System.Drawing.Point(44, 25)
-        Me.TextBoxLootFilterURL.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.TextBoxLootFilterURL.Name = "TextBoxLootFilterURL"
-        Me.TextBoxLootFilterURL.Size = New System.Drawing.Size(372, 23)
-        Me.TextBoxLootFilterURL.TabIndex = 22
         '
         'ButtonDownloadFilter
         '
@@ -691,35 +821,45 @@ Partial Class LauncherForm
         Me.ButtonDownloadFilter.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.ButtonDownloadFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonDownloadFilter.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.ButtonDownloadFilter.Location = New System.Drawing.Point(188, 59)
-        Me.ButtonDownloadFilter.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ButtonDownloadFilter.Location = New System.Drawing.Point(172, 357)
+        Me.ButtonDownloadFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonDownloadFilter.Name = "ButtonDownloadFilter"
         Me.ButtonDownloadFilter.Size = New System.Drawing.Size(265, 31)
         Me.ButtonDownloadFilter.TabIndex = 21
         Me.ButtonDownloadFilter.Text = "Download"
         Me.ButtonDownloadFilter.UseVisualStyleBackColor = True
         '
-        'WebBrowserNews
+        'TextBoxLootFilterURL
         '
-        Me.WebBrowserNews.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
-        Me.WebBrowserNews.IsWebBrowserContextMenuEnabled = False
-        Me.WebBrowserNews.Location = New System.Drawing.Point(4, 2)
-        Me.WebBrowserNews.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.WebBrowserNews.MinimumSize = New System.Drawing.Size(25, 25)
-        Me.WebBrowserNews.Name = "WebBrowserNews"
-        Me.WebBrowserNews.ScriptErrorsSuppressed = True
-        Me.WebBrowserNews.Size = New System.Drawing.Size(481, 404)
-        Me.WebBrowserNews.TabIndex = 31
-        Me.WebBrowserNews.Url = New System.Uri("https://pathofdiablo.com/p/?getnewsembed", System.UriKind.Absolute)
+        Me.TextBoxLootFilterURL.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(62, Byte), Integer))
+        Me.TextBoxLootFilterURL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBoxLootFilterURL.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Path_of_Diablo_Launcher.My.MySettings.Default, "stringLootLink", True))
+        Me.TextBoxLootFilterURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBoxLootFilterURL.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.TextBoxLootFilterURL.Location = New System.Drawing.Point(73, 29)
+        Me.TextBoxLootFilterURL.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBoxLootFilterURL.Name = "TextBoxLootFilterURL"
+        Me.TextBoxLootFilterURL.Size = New System.Drawing.Size(372, 23)
+        Me.TextBoxLootFilterURL.TabIndex = 22
+        '
+        'FilterOneLabel
+        '
+        Me.FilterOneLabel.AutoSize = True
+        Me.FilterOneLabel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.FilterOneLabel.Location = New System.Drawing.Point(230, 7)
+        Me.FilterOneLabel.Name = "FilterOneLabel"
+        Me.FilterOneLabel.Size = New System.Drawing.Size(46, 16)
+        Me.FilterOneLabel.TabIndex = 25
+        Me.FilterOneLabel.Text = "Filter 1"
         '
         'LauncherBanner
         '
         Me.LauncherBanner.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.LauncherBanner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.LauncherBanner.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.LauncherBanner.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.banner_slim
+        Me.LauncherBanner.Image = Global.Path_of_Diablo_Launcher.My.Resources.Resources.banner2
         Me.LauncherBanner.Location = New System.Drawing.Point(0, -6)
-        Me.LauncherBanner.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LauncherBanner.Margin = New System.Windows.Forms.Padding(4)
         Me.LauncherBanner.Name = "LauncherBanner"
         Me.LauncherBanner.Size = New System.Drawing.Size(980, 88)
         Me.LauncherBanner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
@@ -736,10 +876,49 @@ Partial Class LauncherForm
         Me.PanelLinks.Controls.Add(Me.ButtonDonate)
         Me.PanelLinks.Controls.Add(Me.ButtonReddit)
         Me.PanelLinks.Location = New System.Drawing.Point(15, 580)
-        Me.PanelLinks.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelLinks.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelLinks.Name = "PanelLinks"
         Me.PanelLinks.Size = New System.Drawing.Size(952, 46)
         Me.PanelLinks.TabIndex = 30
+        '
+        'ButtonDeleteFilterOne
+        '
+        Me.ButtonDeleteFilterOne.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ButtonDeleteFilterOne.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.ButtonDeleteFilterOne.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonDeleteFilterOne.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.ButtonDeleteFilterOne.Location = New System.Drawing.Point(365, 58)
+        Me.ButtonDeleteFilterOne.Name = "ButtonDeleteFilterOne"
+        Me.ButtonDeleteFilterOne.Size = New System.Drawing.Size(80, 30)
+        Me.ButtonDeleteFilterOne.TabIndex = 32
+        Me.ButtonDeleteFilterOne.Text = "Delete"
+        Me.ButtonDeleteFilterOne.UseVisualStyleBackColor = True
+        '
+        'ButtonDeleteFilterTwo
+        '
+        Me.ButtonDeleteFilterTwo.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ButtonDeleteFilterTwo.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.ButtonDeleteFilterTwo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonDeleteFilterTwo.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.ButtonDeleteFilterTwo.Location = New System.Drawing.Point(365, 172)
+        Me.ButtonDeleteFilterTwo.Name = "ButtonDeleteFilterTwo"
+        Me.ButtonDeleteFilterTwo.Size = New System.Drawing.Size(80, 30)
+        Me.ButtonDeleteFilterTwo.TabIndex = 33
+        Me.ButtonDeleteFilterTwo.Text = "Delete"
+        Me.ButtonDeleteFilterTwo.UseVisualStyleBackColor = True
+        '
+        'ButtonDeleteFilterThree
+        '
+        Me.ButtonDeleteFilterThree.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ButtonDeleteFilterThree.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.ButtonDeleteFilterThree.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonDeleteFilterThree.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.ButtonDeleteFilterThree.Location = New System.Drawing.Point(365, 280)
+        Me.ButtonDeleteFilterThree.Name = "ButtonDeleteFilterThree"
+        Me.ButtonDeleteFilterThree.Size = New System.Drawing.Size(80, 30)
+        Me.ButtonDeleteFilterThree.TabIndex = 34
+        Me.ButtonDeleteFilterThree.Text = "Delete"
+        Me.ButtonDeleteFilterThree.UseVisualStyleBackColor = True
         '
         'LauncherForm
         '
@@ -747,6 +926,7 @@ Partial Class LauncherForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(39, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(980, 629)
+        Me.Controls.Add(Me.LootFilterSettingsPanel)
         Me.Controls.Add(Me.PanelLinks)
         Me.Controls.Add(Me.PanelMain)
         Me.Controls.Add(Me.LauncherBanner)
@@ -754,7 +934,7 @@ Partial Class LauncherForm
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "LauncherForm"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -767,7 +947,8 @@ Partial Class LauncherForm
         Me.TableLayoutConfigOptions.PerformLayout()
         Me.GroupBoxEventLog.ResumeLayout(False)
         Me.GroupBoxLootFilter.ResumeLayout(False)
-        Me.GroupBoxLootFilter.PerformLayout()
+        Me.LootFilterSettingsPanel.ResumeLayout(False)
+        Me.LootFilterSettingsPanel.PerformLayout()
         CType(Me.LauncherBanner, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelLinks.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -817,4 +998,17 @@ Partial Class LauncherForm
     Friend WithEvents ButtonD2VidTestConfig As Button
     Friend WithEvents skipChk As CheckBox
     Friend WithEvents PanelLinks As Panel
+    Friend WithEvents LootFilterButton As Button
+    Friend WithEvents LootFilterSettingsPanel As Panel
+    Friend WithEvents LootFilerSettingsCloseButton As Button
+    Friend WithEvents FilterOneLabel As Label
+    Friend WithEvents FilterThreeLabel As Label
+    Friend WithEvents FilterTwoLabel As Label
+    Friend WithEvents LabelLootFilterURLThree As Label
+    Friend WithEvents TextBoxLootFilterURLThree As TextBox
+    Friend WithEvents LabelLootFilterURLTwo As Label
+    Friend WithEvents TextBoxLootFilterURLTwo As TextBox
+    Friend WithEvents ButtonDeleteFilterTwo As Button
+    Friend WithEvents ButtonDeleteFilterOne As Button
+    Friend WithEvents ButtonDeleteFilterThree As Button
 End Class
