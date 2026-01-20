@@ -6,6 +6,7 @@ Imports System.Net
 Imports System.Security.Policy
 Imports System.Threading
 Imports System.Timers
+Imports Microsoft.Win32
 
 Public Class LauncherForm
 
@@ -62,6 +63,8 @@ Public Class LauncherForm
     End Function
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Make registry entry for podlauncher:// protocol
+        RegisterPodLauncherProtocol()
         TextBoxLootFilterURL.Text = My.MySettings.Default.stringLootLink
         TextBoxLootFilterURLTwo.Text = My.MySettings.Default.stringLootLinkTwo
         TextBoxLootFilterURLThree.Text = My.MySettings.Default.stringLootLinkThree
@@ -97,33 +100,61 @@ Public Class LauncherForm
         Dim args() As String = Environment.GetCommandLineArgs()
         ' DEBUG
         'MsgBox("Args count: " & args.Length & vbCrLf & String.Join(vbCrLf, args))
-
-        For Each arg As String In args
-            If arg.StartsWith("podlauncher://", StringComparison.OrdinalIgnoreCase) Then
-                Try
-                    Dim uri As New Uri(arg)
-
-                    If uri.Host.Equals("install", StringComparison.OrdinalIgnoreCase) Then
-                        Dim query = uri.Query   ' ?url=...
-
-                        If query.StartsWith("?url=", StringComparison.OrdinalIgnoreCase) Then
-                            Dim filterUrl As String = Uri.UnescapeDataString(query.Substring(5))
-
-                            LootFilterSettingsPanel.Visible = True
-                            Log("Writing into textbox")
-                            TextBoxLootFilterURL.Text = filterUrl
-                            Log("Received filter URL via podlauncher protocol")
-
-                            ' OPTIONAL: auto-start download
-                            ' ButtonDownload.PerformClick()
-                        End If
-                    End If
-
-                Catch ex As Exception
-                    Log("Failed to parse podlauncher URI: " & ex.Message)
-                End Try
+        Dim podUrl As String = Nothing
+        For Each a As String In args
+            If a.StartsWith("podlauncher://", StringComparison.OrdinalIgnoreCase) Then
+                podUrl = a
+                Exit For
             End If
         Next
+
+        LootFilterSettingsPanel.Visible = True
+        If podUrl IsNot Nothing Then
+            Try
+                Dim uri As New Uri(podUrl)
+                Dim query = uri.Query
+                If query.StartsWith("?url=", StringComparison.OrdinalIgnoreCase) Then
+                    Dim filterUrl As String = Uri.UnescapeDataString(query.Substring(5))
+
+                    LootFilterSettingsPanel.Visible = True
+                    Dim targetBox As TextBox = Nothing
+                    Dim targetSetting As String = Nothing
+
+                    If String.IsNullOrWhiteSpace(My.MySettings.Default.stringLootLink) Then
+                        targetBox = TextBoxLootFilterURL
+                        targetSetting = "stringLootLink"
+                    ElseIf String.IsNullOrWhiteSpace(My.MySettings.Default.stringLootLinkTwo) Then
+                        targetBox = TextBoxLootFilterURLTwo
+                        targetSetting = "stringLootLinkTwo"
+                    ElseIf String.IsNullOrWhiteSpace(My.MySettings.Default.stringLootLinkThree) Then
+                        targetBox = TextBoxLootFilterURLThree
+                        targetSetting = "stringLootLinkThree"
+                    Else
+                        MsgBox("Too many subscriptions, please delete one!")
+                    End If
+
+                    If targetBox IsNot Nothing Then
+                        ' Assign TextBox first
+                        targetBox.Text = filterUrl
+                        ' Assign the setting
+                        Select Case targetSetting
+                            Case "stringLootLink"
+                                My.MySettings.Default.stringLootLink = filterUrl
+                            Case "stringLootLinkTwo"
+                                My.MySettings.Default.stringLootLinkTwo = filterUrl
+                            Case "stringLootLinkThree"
+                                My.MySettings.Default.stringLootLinkThree = filterUrl
+                        End Select
+                        ' Save immediately
+                        My.MySettings.Default.Save()
+                    End If
+                End If
+            Catch ex As Exception
+                Log("Failed to parse Podlauncher URL: " & ex.Message)
+            End Try
+        End If
+        ' OPTIONAL: auto-start download
+        ' ButtonDownload.PerformClick()
 
         If Not CheckDependancies() Then
             Log("Missing MSVC 10 runtime, installing")
@@ -162,10 +193,10 @@ Public Class LauncherForm
             My.MySettings.Default.stringLootLink = Me.TextBoxLootFilterURL.Text
         End If
         If TextBoxLootFilterURLTwo.Text.Equals("") Then
-            My.MySettings.Default.stringLootLink = Me.TextBoxLootFilterURLTwo.Text
+            My.MySettings.Default.stringLootLinkTwo = Me.TextBoxLootFilterURLTwo.Text
         End If
         If TextBoxLootFilterURLThree.Text.Equals("") Then
-            My.MySettings.Default.stringLootLink = Me.TextBoxLootFilterURLThree.Text
+            My.MySettings.Default.stringLootLinkThree = Me.TextBoxLootFilterURLThree.Text
         End If
 
         Try
@@ -1004,6 +1035,12 @@ Public Class LauncherForm
                 'do nothing, just continue
             End Try
         Next
+        My.MySettings.Default.stringLootLink = TextBoxLootFilterURL.Text
+        My.MySettings.Default.stringLootLinkTwo = TextBoxLootFilterURLTwo.Text
+        My.MySettings.Default.stringLootLinkThree = TextBoxLootFilterURLThree.Text
+
+        ' Persist settings to disk
+        My.MySettings.Default.Save()
     End Sub
 
     Private Sub dsoalChk_CheckedChanged(sender As Object, e As EventArgs) Handles dsoalChk.CheckedChanged
@@ -1062,14 +1099,20 @@ Public Class LauncherForm
 
     End Sub
     Private Sub LootFilerSettingsCloseButton_Click(sender As Object, e As EventArgs) Handles LootFilerSettingsCloseButton.Click
+        My.MySettings.Default.stringLootLink = Me.TextBoxLootFilterURL.Text
+        My.MySettings.Default.stringLootLinkTwo = Me.TextBoxLootFilterURLTwo.Text
+        My.MySettings.Default.stringLootLinkThree = Me.TextBoxLootFilterURLThree.Text
+        My.MySettings.Default.Save()
         LootFilterSettingsPanel.Visible = False
+
     End Sub
 
     Private Sub ButtonDeleteFilterOne_Click(sender As Object, e As EventArgs) Handles ButtonDeleteFilterOne.Click
+
         Dim url As String = My.MySettings.Default.stringLootLink
         If String.IsNullOrWhiteSpace(url) Then Return
 
-        Dim filename As String = url.Substring(url.LastIndexOf("/") + 1)
+        Dim fileName As String = System.IO.Path.GetFileName(url)
         Dim filePath As String = System.IO.Path.Combine(Application.StartupPath, "filter", fileName)
 
         If System.IO.File.Exists(filePath) Then
@@ -1091,7 +1134,7 @@ Public Class LauncherForm
         Dim url As String = My.MySettings.Default.stringLootLinkTwo
         If String.IsNullOrWhiteSpace(url) Then Return
 
-        Dim filename As String = url.Substring(url.LastIndexOf("/") + 1)
+        Dim fileName As String = System.IO.Path.GetFileName(url)
         Dim filePath As String = System.IO.Path.Combine(Application.StartupPath, "filter", fileName)
 
         If System.IO.File.Exists(filePath) Then
@@ -1113,7 +1156,7 @@ Public Class LauncherForm
         Dim url As String = My.MySettings.Default.stringLootLinkThree
         If String.IsNullOrWhiteSpace(url) Then Return
 
-        Dim filename As String = url.Substring(url.LastIndexOf("/") + 1)
+        Dim fileName As String = System.IO.Path.GetFileName(url)
         Dim filePath As String = System.IO.Path.Combine(Application.StartupPath, "filter", fileName)
 
         If System.IO.File.Exists(filePath) Then
@@ -1129,5 +1172,38 @@ Public Class LauncherForm
         My.MySettings.Default.stringLootLinkThree = ""
         TextBoxLootFilterURLThree.Text = ""
         My.MySettings.Default.Save()
+    End Sub
+
+    Sub RegisterPodLauncherProtocol()
+        Try
+            ' Open HKEY_CLASSES_ROOT (requires admin rights for some cases)
+            Using key As RegistryKey = Registry.ClassesRoot.OpenSubKey("podlauncher")
+                If key IsNot Nothing Then
+                    ' Already exists, nothing to do
+                    Return
+                End If
+            End Using
+
+            ' Create the registry tree
+            Using podKey As RegistryKey = Registry.ClassesRoot.CreateSubKey("podlauncher")
+                podKey.SetValue("", "URL:PodLauncher Protocol")
+                podKey.SetValue("URL Protocol", "") ' value must exist but empty
+
+                ' shell\open\command
+                Using shellKey As RegistryKey = podKey.CreateSubKey("shell")
+                    Using openKey As RegistryKey = shellKey.CreateSubKey("open")
+                        Using commandKey As RegistryKey = openKey.CreateSubKey("command")
+                            ' %1 passes the URL to your app
+                            commandKey.SetValue("", """" & Application.ExecutablePath & """ ""%1""")
+                        End Using
+                    End Using
+                End Using
+            End Using
+
+            MessageBox.Show("PodLauncher protocol registered successfully!")
+
+        Catch ex As Exception
+            MessageBox.Show("Failed to register PodLauncher protocol: " & ex.Message)
+        End Try
     End Sub
 End Class
