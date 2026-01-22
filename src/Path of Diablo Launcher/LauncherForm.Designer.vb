@@ -65,6 +65,9 @@ Partial Class LauncherForm
         Me.LootFilterButton = New System.Windows.Forms.Button()
         Me.WebBrowserNews = New System.Windows.Forms.WebBrowser()
         Me.LootFilterSettingsPanel = New System.Windows.Forms.Panel()
+        Me.ButtonDeleteFilterThree = New System.Windows.Forms.Button()
+        Me.ButtonDeleteFilterTwo = New System.Windows.Forms.Button()
+        Me.ButtonDeleteFilterOne = New System.Windows.Forms.Button()
         Me.FilterThreeLabel = New System.Windows.Forms.Label()
         Me.FilterTwoLabel = New System.Windows.Forms.Label()
         Me.LabelLootFilterURLThree = New System.Windows.Forms.Label()
@@ -78,9 +81,6 @@ Partial Class LauncherForm
         Me.FilterOneLabel = New System.Windows.Forms.Label()
         Me.LauncherBanner = New System.Windows.Forms.PictureBox()
         Me.PanelLinks = New System.Windows.Forms.Panel()
-        Me.ButtonDeleteFilterOne = New System.Windows.Forms.Button()
-        Me.ButtonDeleteFilterTwo = New System.Windows.Forms.Button()
-        Me.ButtonDeleteFilterThree = New System.Windows.Forms.Button()
         Me.PanelPlay.SuspendLayout()
         Me.PanelMain.SuspendLayout()
         Me.GroupBoxLaunchFlags.SuspendLayout()
@@ -258,7 +258,7 @@ Partial Class LauncherForm
         Me.ButtonSelectFilter.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.ButtonSelectFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonSelectFilter.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.ButtonSelectFilter.Location = New System.Drawing.Point(346, 36)
+        Me.ButtonSelectFilter.Location = New System.Drawing.Point(365, 36)
         Me.ButtonSelectFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.ButtonSelectFilter.Name = "ButtonSelectFilter"
         Me.ButtonSelectFilter.Size = New System.Drawing.Size(31, 31)
@@ -722,6 +722,45 @@ Partial Class LauncherForm
         Me.LootFilterSettingsPanel.TabIndex = 35
         Me.LootFilterSettingsPanel.Visible = False
         '
+        'ButtonDeleteFilterThree
+        '
+        Me.ButtonDeleteFilterThree.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ButtonDeleteFilterThree.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.ButtonDeleteFilterThree.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonDeleteFilterThree.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.ButtonDeleteFilterThree.Location = New System.Drawing.Point(365, 280)
+        Me.ButtonDeleteFilterThree.Name = "ButtonDeleteFilterThree"
+        Me.ButtonDeleteFilterThree.Size = New System.Drawing.Size(80, 30)
+        Me.ButtonDeleteFilterThree.TabIndex = 34
+        Me.ButtonDeleteFilterThree.Text = "Delete"
+        Me.ButtonDeleteFilterThree.UseVisualStyleBackColor = True
+        '
+        'ButtonDeleteFilterTwo
+        '
+        Me.ButtonDeleteFilterTwo.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ButtonDeleteFilterTwo.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.ButtonDeleteFilterTwo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonDeleteFilterTwo.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.ButtonDeleteFilterTwo.Location = New System.Drawing.Point(365, 172)
+        Me.ButtonDeleteFilterTwo.Name = "ButtonDeleteFilterTwo"
+        Me.ButtonDeleteFilterTwo.Size = New System.Drawing.Size(80, 30)
+        Me.ButtonDeleteFilterTwo.TabIndex = 33
+        Me.ButtonDeleteFilterTwo.Text = "Delete"
+        Me.ButtonDeleteFilterTwo.UseVisualStyleBackColor = True
+        '
+        'ButtonDeleteFilterOne
+        '
+        Me.ButtonDeleteFilterOne.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ButtonDeleteFilterOne.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.ButtonDeleteFilterOne.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonDeleteFilterOne.ForeColor = System.Drawing.SystemColors.InactiveCaption
+        Me.ButtonDeleteFilterOne.Location = New System.Drawing.Point(365, 58)
+        Me.ButtonDeleteFilterOne.Name = "ButtonDeleteFilterOne"
+        Me.ButtonDeleteFilterOne.Size = New System.Drawing.Size(80, 30)
+        Me.ButtonDeleteFilterOne.TabIndex = 32
+        Me.ButtonDeleteFilterOne.Text = "Delete"
+        Me.ButtonDeleteFilterOne.UseVisualStyleBackColor = True
+        '
         'FilterThreeLabel
         '
         Me.FilterThreeLabel.AutoSize = True
@@ -880,45 +919,6 @@ Partial Class LauncherForm
         Me.PanelLinks.Name = "PanelLinks"
         Me.PanelLinks.Size = New System.Drawing.Size(952, 46)
         Me.PanelLinks.TabIndex = 30
-        '
-        'ButtonDeleteFilterOne
-        '
-        Me.ButtonDeleteFilterOne.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ButtonDeleteFilterOne.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.ButtonDeleteFilterOne.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonDeleteFilterOne.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.ButtonDeleteFilterOne.Location = New System.Drawing.Point(365, 58)
-        Me.ButtonDeleteFilterOne.Name = "ButtonDeleteFilterOne"
-        Me.ButtonDeleteFilterOne.Size = New System.Drawing.Size(80, 30)
-        Me.ButtonDeleteFilterOne.TabIndex = 32
-        Me.ButtonDeleteFilterOne.Text = "Delete"
-        Me.ButtonDeleteFilterOne.UseVisualStyleBackColor = True
-        '
-        'ButtonDeleteFilterTwo
-        '
-        Me.ButtonDeleteFilterTwo.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ButtonDeleteFilterTwo.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.ButtonDeleteFilterTwo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonDeleteFilterTwo.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.ButtonDeleteFilterTwo.Location = New System.Drawing.Point(365, 172)
-        Me.ButtonDeleteFilterTwo.Name = "ButtonDeleteFilterTwo"
-        Me.ButtonDeleteFilterTwo.Size = New System.Drawing.Size(80, 30)
-        Me.ButtonDeleteFilterTwo.TabIndex = 33
-        Me.ButtonDeleteFilterTwo.Text = "Delete"
-        Me.ButtonDeleteFilterTwo.UseVisualStyleBackColor = True
-        '
-        'ButtonDeleteFilterThree
-        '
-        Me.ButtonDeleteFilterThree.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.ButtonDeleteFilterThree.FlatAppearance.BorderColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.ButtonDeleteFilterThree.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonDeleteFilterThree.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.ButtonDeleteFilterThree.Location = New System.Drawing.Point(365, 280)
-        Me.ButtonDeleteFilterThree.Name = "ButtonDeleteFilterThree"
-        Me.ButtonDeleteFilterThree.Size = New System.Drawing.Size(80, 30)
-        Me.ButtonDeleteFilterThree.TabIndex = 34
-        Me.ButtonDeleteFilterThree.Text = "Delete"
-        Me.ButtonDeleteFilterThree.UseVisualStyleBackColor = True
         '
         'LauncherForm
         '
