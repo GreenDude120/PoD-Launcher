@@ -108,7 +108,7 @@ Public Class LauncherForm
             End If
         Next
 
-        LootFilterSettingsPanel.Visible = True
+
         If podUrl IsNot Nothing Then
             Try
                 Dim uri As New Uri(podUrl)
